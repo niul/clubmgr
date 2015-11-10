@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:repository="http://www.springframework.org/schema/data/repository"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository-1.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.niulbird.clubmgr"/>
+	<jpa:repositories base-package="com.niulbird.clubmgr.db.repository" />
+	
+	<context:property-placeholder location="classpath:global-test.properties"/>
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    	<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.niulbird.clubmgr.db" />
+		<property name="jpaVendorAdapter">
+        	<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+      	</property>
+      	<property name="jpaProperties">
+        	<props>
+            	<prop key="hibernate.hbm2ddl.auto">validate</prop>
+            	<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.provider_class">net.sf.ehcache.hibernate.SingletonEhCacheProvider</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
+         	</props>
+      	</property>
+   	</bean>
+	
+   	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    	<property name="dataSource" ref="dataSource"/>
+    	<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+     
+	<!-- Datasource -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>

@@ -1,0 +1,59 @@
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+    <!-- Main Page -->
+    <definition name="mainTemplate" template="/WEB-INF/views/mainTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/includes/header.jsp" />
+        <put-attribute name="banner" value="/WEB-INF/views/includes/banner.jsp" />
+        <put-attribute name="content"  value="content" />
+        <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
+    </definition>
+    
+    <!-- Left Panel -->
+    <definition name="rightPanelTemplate" template="/WEB-INF/views/rightPanelTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/includes/header.jsp" />
+        <put-attribute name="rightPanel" value="/WEB-INF/views/includes/rightPanel.jsp" />
+        <put-attribute name="content"  value="content" />
+        <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
+    </definition>
+
+    <!-- application -->
+    <definition name="home"  extends="mainTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/index.jsp"/>
+    </definition>
+
+    <definition name="about"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/about.jsp"/>
+    </definition>
+
+    <definition name="news"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/news.jsp"/>
+    </definition>
+
+    <definition name="contact"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/contact.jsp"/>
+    </definition>
+    
+    <definition name="sponsors"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/sponsors.jsp"/>
+    </definition>
+    
+    <definition name="fixtures"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/fixtures.jsp"/>
+    </definition>
+    
+    <definition name="standings"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/standings.jsp"/>
+    </definition>
+
+    <definition name="post"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/post.jsp"/>
+    </definition>
+	
+	<definition name="page_not_found"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/page_not_found.jsp"/>
+    </definition>
+
+</tiles-definitions>

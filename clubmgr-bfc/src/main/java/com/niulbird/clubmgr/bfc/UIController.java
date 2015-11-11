@@ -17,6 +17,13 @@ public class UIController extends BaseController {
 	private static final Logger log = Logger.getLogger(UIController.class);
 
 	private static final String ABOUT = "about";
+	private static final String BOMBASTIC_MENS = "mens";
+	private static final String BOMBASTIC_MENS_A = "mensA";
+	private static final String BOMBASTIC_MENS_B = "mensB";
+	private static final String BOMBASTIC_MENS_CLASSICS = "mensClassics";
+	private static final String BOMBASTIC_MENS_JURASSIC = "mensJurassic";
+	private static final String BOMBASTIC_WOMENS = "womens";
+	private static final String BOMBASTIC_WOMENS_A = "womensA";
 	private static final String CALENDAR = "calendar";
 	private static final String CONTACT = "contact";
 	private static final String HOME = "home";
@@ -45,6 +52,41 @@ public class UIController extends BaseController {
 	@RequestMapping(value = "/index.html")
 	public ModelAndView home() {
 		return setView(HOME);
+	}
+	
+	@RequestMapping(value = "/mens.html")
+	public ModelAndView mens() {
+		return setView(BOMBASTIC_MENS);
+	}
+	
+	@RequestMapping(value = "/mensA.html")
+	public ModelAndView mensA() {
+		return setView(BOMBASTIC_MENS_A);
+	}
+	
+	@RequestMapping(value = "/mensB.html")
+	public ModelAndView mensB() {
+		return setView(BOMBASTIC_MENS_B);
+	}
+	
+	@RequestMapping(value = "/mensClassics.html")
+	public ModelAndView mensClassics() {
+		return setView(BOMBASTIC_MENS_CLASSICS);
+	}
+	
+	@RequestMapping(value = "/mensJurassic.html")
+	public ModelAndView mensJurassic() {
+		return setView(BOMBASTIC_MENS_JURASSIC);
+	}
+	
+	@RequestMapping(value = "/womens.html")
+	public ModelAndView womens() {
+		return setView(BOMBASTIC_WOMENS);
+	}
+	
+	@RequestMapping(value = "/womensA.html")
+	public ModelAndView womensA() {
+		return setView(BOMBASTIC_WOMENS_A);
 	}
 	
 	@RequestMapping(value = "/sponsors.html")

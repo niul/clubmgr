@@ -40,6 +40,34 @@
         <put-attribute name="content" value="/WEB-INF/views/content/sponsors.jsp"/>
     </definition>
     
+    <definition name="mens"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/mens.jsp"/>
+    </definition>
+    
+    <definition name="mensA"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/mensA.jsp"/>
+    </definition>
+    
+    <definition name="mensB"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/mensB.jsp"/>
+    </definition>
+    
+    <definition name="mensClassics"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/mensClassics.jsp"/>
+    </definition>
+    
+    <definition name="mensJurassic"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/mensJurassic.jsp"/>
+    </definition>
+    
+    <definition name="womens"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/womens.jsp"/>
+    </definition>
+    
+    <definition name="womensA"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/womensA.jsp"/>
+    </definition>
+    
     <definition name="fixtures"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/fixtures.jsp"/>
     </definition>

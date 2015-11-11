@@ -30,6 +30,7 @@ public class TeamController extends BaseController {
 	private static final String FIXTURES = "fixtures";
 	private static final String PAGE = "page";
 	private static final String STANDINGS = "standings";
+	private static final String STANDINGS_FIXTURES = "standings_fixtures";
 	private static final String TEAMSEASONMAP = "teamseasonmap";
 	
 	@Autowired
@@ -79,6 +80,38 @@ public class TeamController extends BaseController {
 		ModelAndView mav = setView(STANDINGS);
 		mav.addObject(TEAMSEASONMAP, teamSeasonMap);
 		mav.addObject(STANDINGS, standings);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/standings_fixtures.html")
+	public ModelAndView standingsFixtures(@RequestParam(value = "team") String teamKey,
+			@RequestParam(value = "season") String seasonKey) {
+		log.debug("Getting Standings for " + teamKey + "/" + seasonKey);
+		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(teamKey, seasonKey);
+		List<Standing> standings = teamService.findStandings(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
+		
+		if (standings.size() == 0 ||
+					new Date().after(new Date((standings.get(0).getCreated().getTime() + DAY_IN_MS)))) {
+				log.debug("Updating Standings: [" + teamKey + "|" + seasonKey +"]");
+				DataManager dataManager = dataManagerFactory.createDataManager(teamKey, seasonKey, "Bombastic");
+				standings = dataManager.updateStandings();
+		}
+		
+		List<Fixture> fixtures = teamService.findFixtures(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
+		
+		if (fixtures.size() == 0 ||
+				new Date().after(new Date((fixtures.get(0).getCreated().getTime() + DAY_IN_MS)))) {
+					log.debug("Updating Fixtures: [" + teamKey + "|" + seasonKey +"]");
+				DataManager dataManager = dataManagerFactory.createDataManager(teamKey, seasonKey, "Bombastic");
+				fixtures = dataManager.updateFixtures();
+		}
+
+		
+		ModelAndView mav = setView(STANDINGS_FIXTURES);
+		mav.addObject(TEAMSEASONMAP, teamSeasonMap);
+		mav.addObject(STANDINGS, standings);
+		mav.addObject(FIXTURES, fixtures);
 		
 		return mav;
 	}

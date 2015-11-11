@@ -79,6 +79,10 @@
     <definition name="standings"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/standings.jsp"/>
     </definition>
+    
+    <definition name="standings_fixtures"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/standings_fixtures.jsp"/>
+    </definition>
 
     <definition name="post"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/post.jsp"/>

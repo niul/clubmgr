@@ -29,29 +29,26 @@
 	            						<li>
 	            							<a href="mensA.html"><f:message key="menu.mens.b1"/></a>
 	            							<ul>
-	            								<li><a href="standings.html?team=BOMBASTIC_MENS_A&season=WINTER_2015"><f:message key="teams.section.standings"/></a></li>
-	            								<li><a href="fixtures.html?team=BOMBASTIC_MENS_A&season=WINTER_2015"><f:message key="teams.section.fixtures"/></a></li>
+	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_A&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
 	            							<a href="mensB.html"><f:message key="menu.mens.b2"/></a>
 	            							<ul>
-	            								<li><a href="standings.html?team=BOMBASTIC_MENS_B&season=WINTER_2015"><f:message key="teams.section.standings"/></a></li>
-	            								<li><a href="fixtures.html?team=BOMBASTIC_MENS_B&season=WINTER_2015"><f:message key="teams.section.fixtures"/></a></li>
+	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_B&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
 	            							<a href="mensClassics.html"><f:message key="menu.mens.b3"/></a>
 	            							<ul>
-	            								<li><a href="standings.html?team=BOMBASTIC_MENS_CLASSICS&season=WINTER_2015"><f:message key="teams.section.standings"/></a></li>
+	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_CLASSICS&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
 	            								<li><a href="fixtures.html?team=BOMBASTIC_MENS_CLASSICS&season=WINTER_2015"><f:message key="teams.section.fixtures"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
 	            							<a href="mensJurassic.html"><f:message key="menu.mens.b4"/></a>
 	            							<ul>
-	            								<li><a href="standings.html?team=BOMBASTIC_MENS_JURASSIC&season=WINTER_2015"><f:message key="teams.section.standings"/></a></li>
-	            								<li><a href="fixtures.html?team=BOMBASTIC_MENS_JURASSIC&season=WINTER_2015"><f:message key="teams.section.fixtures"/></a></li>
+	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_JURASSIC&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	          						</ul>
@@ -62,8 +59,7 @@
 	            						<li>
 	            							<a href="womensA.html"><f:message key="menu.womens.b1"/></a>
 	            							<ul>
-	            								<li><a href="standings.html?team=BOMBASTIC_WOMENS_A&season=WINTER_2015"><f:message key="teams.section.standings"/></a></li>
-	            								<li><a href="fixtures.html?team=BOMBASTIC_WOMENS_A&season=WINTER_2015"><f:message key="teams.section.fixtures"/></a></li>
+	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_WOMENS_A&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	          						</ul>
@@ -81,29 +77,25 @@
 	            						<li>
 	            							<a href="mensA.html"><f:message key="menu.mens.b1"/></a>
 	            							<ul>
-	            								<li><a href="standings.html?team=BOMBASTIC_MENS_A&season=WINTER_2015"><f:message key="teams.section.standings"/></a></li>
-	            								<li><a href="fixtures.html?team=BOMBASTIC_MENS_A&season=WINTER_2015"><f:message key="teams.section.fixtures"/></a></li>
+	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_A&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
 	            							<a href="mensB.html"><f:message key="menu.mens.b2"/></a>
 	            							<ul>
-	            								<li><a href="standings.html?team=BOMBASTIC_MENS_B&season=WINTER_2015"><f:message key="teams.section.standings"/></a></li>
-	            								<li><a href="fixtures.html?team=BOMBASTIC_MENS_B&season=WINTER_2015"><f:message key="teams.section.fixtures"/></a></li>
+	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_B&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
 	            							<a href="mensClassics.html"><f:message key="menu.mens.b3"/></a>
 	            							<ul>
-	            								<li><a href="standings.html?team=BOMBASTIC_MENS_CLASSICS&season=WINTER_2015"><f:message key="teams.section.standings"/></a></li>
-	            								<li><a href="fixtures.html?team=BOMBASTIC_MENS_CLASSICS&season=WINTER_2015"><f:message key="teams.section.fixtures"/></a></li>
+	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_CLASSICS&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
 	            							<a href="mensJurassic.html"><f:message key="menu.mens.b4"/></a>
 	            							<ul>
-	            								<li><a href="standings.html?team=BOMBASTIC_MENS_JURASSIC&season=WINTER_2015"><f:message key="teams.section.standings"/></a></li>
-	            								<li><a href="fixtures.html?team=BOMBASTIC_MENS_JURASSIC&season=WINTER_2015"><f:message key="teams.section.fixtures"/></a></li>
+	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_JURASSIC&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	          						</ul>
@@ -114,8 +106,7 @@
 	            						<li>
 	            							<a href="womensA.html"><f:message key="menu.womens.b1"/></a>
 	            							<ul>
-	            								<li><a href="standings.html?team=BOMBASTIC_WOMENS_A&season=WINTER_2015"><f:message key="teams.section.standings"/></a></li>
-	            								<li><a href="fixtures.html?team=BOMBASTIC_WOMENS_A&season=WINTER_2015"><f:message key="teams.section.fixtures"/></a></li>
+	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_WOMENS_A&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	          						</ul>

@@ -23,4 +23,4 @@
 	  </article>
 	  
 	  </c:forEach>
-	  <a href="news.html?start=${previous}"><f:message key="news.previous"/></a> | <a href="news.html?start=${next}"><f:message key="news.next"/></a>
+	  <a href="news.html?start=${previous}" class="button icon fa-files-o"><f:message key="news.previous"/></a> <a href="news.html?start=${next}" class="button icon fa-files-o"><f:message key="news.next"/></a>

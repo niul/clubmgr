@@ -17,4 +17,4 @@
 		</sup>
 		${post.content}
 	  </article>
-	  <a href="post.html?id=${post.previousId}"><f:message key="post.previous"/></a> | <a href="post.html?id=${post.nextId}"><f:message key="post.next"/></a>
+	  <a href="post.html?id=${post.previousId}" class="button icon fa-file-text-o"><f:message key="post.previous"/></a> <a href="post.html?id=${post.nextId}" class="button icon fa-file-text-o"><f:message key="post.next"/></a>

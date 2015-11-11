@@ -5,7 +5,7 @@
           <h2><f:message key="contact_success.title"/></h2>
 		  <p>
 		  	<f:message key="contact_success.section.main.p1"/> 
-		  		<b>${name}</b>
+		  		<b>${contactData.name}</b>
 		  	<f:message key="contact_success.section.main.p2"/> 
 		  </p>
 		</div>

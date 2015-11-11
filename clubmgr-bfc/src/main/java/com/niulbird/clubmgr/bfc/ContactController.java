@@ -56,7 +56,9 @@ public class ContactController extends BaseController {
 		} else {
 			MailUtil mailUtil = new MailUtil();
 			mailUtil.sendMail(mailSender, mailMessage, contactData.getEmail(), contactData.getName(), contactData.getMessage());
-			return setView(SUCCESS);
+			ModelAndView mav = setView(SUCCESS);
+			mav.addObject("name", contactData.getName());
+			return mav;
 		}
 	}
 	

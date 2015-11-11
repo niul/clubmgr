@@ -35,6 +35,10 @@
     <definition name="contact"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/contact.jsp"/>
     </definition>
+
+    <definition name="contact_success"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/contact_success.jsp"/>
+    </definition>
     
     <definition name="sponsors"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/sponsors.jsp"/>

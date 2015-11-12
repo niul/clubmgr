@@ -21,7 +21,7 @@
         			<c:choose>
 	      			<c:when test="${(page=='teams') || (page=='mensA') || (page=='mensB') || (page=='mensClassic') || (page=='mensJurassic') || (page=='womens') || (page=='womensA') || (page=='standings') || (page=='fixtures')}">
 	        			<li class="current">
-	          				<a href="teams.html"><f:message key="menu.item4"/></a>
+	          				<a href="#"><f:message key="menu.item4"/></a>
 	          				<ul>
 	            				<li>
 	            					<a href="mens.html"><f:message key="teams.section.main.b1"/></a>
@@ -69,7 +69,7 @@
 	      			</c:when>
 	      			<c:otherwise>
 	        			<li>
-	          				<a href="teams.html"><f:message key="menu.item4"/></a>
+	          				<a href="#"><f:message key="menu.item4"/></a>
 	          				<ul>
 	            				<li>
 	            					<a href="mens.html"><f:message key="teams.section.main.b1"/></a>

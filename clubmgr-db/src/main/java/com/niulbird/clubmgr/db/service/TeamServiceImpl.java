@@ -86,7 +86,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public List<Fixture> findFixtures(Team team, Season season) {
-		return fixtureRepository.findByTeamAndSeason(team, season);
+		return fixtureRepository.findByTeamAndSeasonOrderByDateAsc(team, season);
 	}
 
 	@Override

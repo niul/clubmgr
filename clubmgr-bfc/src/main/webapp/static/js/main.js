@@ -44,7 +44,8 @@
 			$('#nav > ul').dropotron({
 				mode: 'fade',
 				noOpenerFade: true,
-				speed: 300
+				speed: 300,
+				offsetX: 3
 			});
 
 		// Off-Canvas Navigation.

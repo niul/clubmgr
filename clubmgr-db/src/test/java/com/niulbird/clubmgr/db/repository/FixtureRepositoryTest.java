@@ -93,7 +93,7 @@ public class FixtureRepositoryTest {
 		club = clubRepository.findByClubKey("FIXTURE_UNIT_TEST");
 		team = teamRepository.findByTeamKey("FIXTURE_UNIT_TEST");
 		season = seasonRepository.findBySeasonKey("FIXTURE_UNIT_TEST");
-		List<Fixture> fixtures = repository.findByTeamAndSeason(team, season);
+		List<Fixture> fixtures = repository.findByTeamAndSeasonOrderByDateAsc(team, season);
 		assertNotNull(fixtures);
 	}
 	

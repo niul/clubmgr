@@ -3,6 +3,7 @@ package com.niulbird.clubmgr.data;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.niulbird.clubmgr.data.util.VMSLUtil;
@@ -12,6 +13,7 @@ import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.service.TeamService;
 
 public class VMSLDataManager extends DataManager {
+	private static Logger logger = Logger.getLogger(VMSLDataManager.class);
 	private VMSLUtil vmslUtil;
 	
 	protected VMSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, 
@@ -23,9 +25,12 @@ public class VMSLDataManager extends DataManager {
 	@Override
 	@Cacheable(value = "vmslFixturesCache")	
 	public List<Fixture> updateFixtures() {
-		System.out.println("*********VMSLFixtures(): " + teamSeasonMap.getTeam());
 		List<Fixture> fixtures = vmslUtil.getFixtures(teamSeasonMap, teamRegExStr);
-		teamService.updateFixtures(teamSeasonMap.getTeam(), teamSeasonMap.getSeason(), fixtures);
+		logger.debug("Got fixtures for " + teamSeasonMap.getTeam().getName() + ": " + fixtures.size());
+		
+		if (fixtures != null && fixtures.size() != 0) {
+			teamService.updateFixtures(teamSeasonMap.getTeam(), teamSeasonMap.getSeason(), fixtures);
+		}
 		return fixtures;
 	}
 
@@ -33,7 +38,11 @@ public class VMSLDataManager extends DataManager {
 	@Cacheable(value = "vmslStandingsCache")	
 	public List<Standing> updateStandings() {
 		List<Standing> standings = vmslUtil.getStandings(teamSeasonMap, teamRegExStr);
-		teamService.updateStandings(teamSeasonMap.getTeam(), teamSeasonMap.getSeason(), standings);
+		logger.debug("Got standings for " + teamSeasonMap.getTeam().getName() + ": " + standings.size());
+
+		if (standings != null && standings.size() != 0) {
+			teamService.updateStandings(teamSeasonMap.getTeam(), teamSeasonMap.getSeason(), standings);
+		}
 		return standings;
 	}
 }

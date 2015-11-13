@@ -6,6 +6,7 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:task="http://www.springframework.org/schema/task"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
@@ -19,6 +20,8 @@
         http://www.springframework.org/schema/cache/spring-cache.xsd
         http://www.springframework.org/schema/data/jpa
     	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+    	http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-4.1.xsd
     	http://www.springframework.org/schema/tx 
     	http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/util 
@@ -30,6 +33,9 @@
 	<context:component-scan base-package="com.niulbird.clubmgr" />
 	<jpa:repositories base-package="com.niulbird.clubmgr.db.repository" />
 	<mvc:annotation-driven />
+	<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
+	<task:executor id="myExecutor" pool-size="5"/>
+	<task:scheduler id="myScheduler" pool-size="10"/>
 	
 	<!-- Message Source -->
     <bean id="messageSource"

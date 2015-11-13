@@ -7,19 +7,22 @@
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
         http://www.springframework.org/schema/cache 
         http://www.springframework.org/schema/cache/spring-cache.xsd
         http://www.springframework.org/schema/data/jpa
     	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
     	http://www.springframework.org/schema/tx 
-    	http://www.springframework.org/schema/tx/spring-tx.xsd">
+    	http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-4.1.xsd">
 
 
 	<!-- Auto scan the components -->
@@ -51,6 +54,7 @@
 	</bean>
     
   	<context:property-placeholder location="classpath:global.properties"/>
+	<util:properties id="props" location="classpath:global.properties" />
  	
     <!-- Spring Mail configuration -->
  	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

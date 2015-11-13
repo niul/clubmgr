@@ -28,7 +28,7 @@ INSERT INTO teams (club_id, name, team_key, created) (
 );
 
 INSERT INTO teams (club_id, name, team_key, created) (
-    SELECT    club_id, 'Womens Jurassic', 'BOMBASTIC_WOMENS_A', CURRENT_TIMESTAMP
+    SELECT    club_id, 'Womens Jurassic', 'BOMBASTIC_WOMENS', CURRENT_TIMESTAMP
     FROM    clubs WHERE club_key = 'BOMBASTIC'
 );
 
@@ -153,5 +153,5 @@ INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtur
     SELECT    team_id, season_id, 'MWSL', 'http://mwsl.com/webapps/spappz_live/team_page_mwsl?id=1920', 'http://mwsl.com/webapps/spappz_live/team_page_mwsl?id=1920', CURRENT_TIMESTAMP
     FROM    teams T
     JOIN    seasons S ON S.season_key = 'WINTER_2015'
-    WHERE    T.team_key = 'BOMBASTIC_WOMENS_A'
+    WHERE    T.team_key = 'BOMBASTIC_WOMENS'
 );

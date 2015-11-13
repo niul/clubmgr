@@ -54,15 +54,10 @@
 	          						</ul>
 	          					</li>
 	            				<li>
-	            					<a href="womens.html"><f:message key="teams.section.main.b2"/></a>
-	          						<ul>
-	            						<li>
-	            							<a href="womensA.html"><f:message key="menu.womens.b1"/></a>
-	            							<ul>
-	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_WOMENS_A&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
-	            							</ul>
-	            						</li>
-	          						</ul>
+	            					<a href="womens.html"><f:message key="menu.womens.b1"/></a>
+	            					<ul>
+	            						<li><a href="standings_fixtures.html?team=BOMBASTIC_WOMENS&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            					</ul>
 	            				</li>
 	          				</ul>
 	        			</li>
@@ -101,15 +96,10 @@
 	          						</ul>
 	          					</li>
 	            				<li>
-	            					<a href="womens.html"><f:message key="teams.section.main.b2"/></a>
-	          						<ul>
-	            						<li>
-	            							<a href="womensA.html"><f:message key="menu.womens.b1"/></a>
-	            							<ul>
-	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_WOMENS_A&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
-	            							</ul>
-	            						</li>
-	          						</ul>
+	            					<a href="womens.html"><f:message key="menu.womens.b1"/></a>
+	            					<ul>
+	            						<li><a href="standings_fixtures.html?team=BOMBASTIC_WOMENS&season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            					</ul>
 	            				</li>
 	          				</ul>
 	        			</li>

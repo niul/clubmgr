@@ -23,7 +23,6 @@ public class UIController extends BaseController {
 	private static final String BOMBASTIC_MENS_CLASSICS = "mensClassics";
 	private static final String BOMBASTIC_MENS_JURASSIC = "mensJurassic";
 	private static final String BOMBASTIC_WOMENS = "womens";
-	private static final String BOMBASTIC_WOMENS_A = "womensA";
 	private static final String CALENDAR = "calendar";
 	private static final String CONTACT = "contact";
 	private static final String HOME = "home";
@@ -82,11 +81,6 @@ public class UIController extends BaseController {
 	@RequestMapping(value = "/womens.html")
 	public ModelAndView womens() {
 		return setView(BOMBASTIC_WOMENS);
-	}
-	
-	@RequestMapping(value = "/womensA.html")
-	public ModelAndView womensA() {
-		return setView(BOMBASTIC_WOMENS_A);
 	}
 	
 	@RequestMapping(value = "/sponsors.html")

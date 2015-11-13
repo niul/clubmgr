@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,7 +24,16 @@ public class VMSLUtil {
 	// Logger for this class and subclasses
     private final Log logger = LogFactory.getLog(getClass());
     
+    private Properties props;
+    
+    public VMSLUtil(Properties props) {
+    	this.props = props;
+    }
+    
 	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
+		String[] uriOverrides = props.getProperty("vmsl.url.override.values").split(",");
+		logger.debug("Found " + uriOverrides.length + " URI Overrides");
+		
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).get();
@@ -46,8 +56,16 @@ public class VMSLUtil {
 					fixture.setAway(columns.get(3).text());
 					fixture.setField(columns.get(4).text());
 					Elements fieldLink = columns.get(4).getElementsByTag("a");
-					if (fieldLink.size() > 0)
-						fixture.setFieldMapUri(fieldLink.get(0).attr("href"));
+					if (fieldLink.size() > 0) {
+						String fieldLinkUri = fieldLink.get(0).attr("href");
+						for (String uriOverride : uriOverrides) {
+							if (fieldLinkUri.contains(uriOverride)) {
+								logger.debug("URI Override: [" + fieldLinkUri +"] to [" + props.getProperty("vmsl.url.override." + uriOverride) + "]");
+								fieldLinkUri = props.getProperty("vmsl.url.override." + uriOverride);
+							}
+						}
+						fixture.setFieldMapUri(fieldLinkUri);
+					}
 					fixture.setTime(convertStringToTime(columns.get(5).text()));
 					fixture.setSeason(teamSeasonMap.getSeason());
 					fixture.setTeam(teamSeasonMap.getTeam());

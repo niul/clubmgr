@@ -1,6 +1,7 @@
 package com.niulbird.clubmgr.data;
 
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.cache.annotation.Cacheable;
 
@@ -13,9 +14,10 @@ import com.niulbird.clubmgr.db.service.TeamService;
 public class VMSLDataManager extends DataManager {
 	private VMSLUtil vmslUtil;
 	
-	protected VMSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, String teamRegExStr) {
-		super(teamService, teamSeasonMap, teamRegExStr);
-		vmslUtil = new VMSLUtil();
+	protected VMSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, 
+			String teamRegExStr, Properties props) {
+		super(teamService, teamSeasonMap, teamRegExStr, props);
+		vmslUtil = new VMSLUtil(props);
 	}
 
 	@Override

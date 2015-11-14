@@ -142,7 +142,13 @@
 			<div class="row">
       			<div class="2u -10u 12u$(medium) 12u$(small)">
       				<f:message key="header.base_url" var="baseUrl"/>
-					<c:set var="url" value="${baseUrl}${requestScope['javax.servlet.forward.request_uri']}" />
+      				<c:set var="params" value="${pageContext.request.queryString}"/>
+      				<c:if test="${empty params}">
+						<c:set var="url" value="${baseUrl}${requestScope['javax.servlet.forward.request_uri']}" />
+					</c:if>
+      				<c:if test="${not empty params}">
+      					<c:set var="url" value="${baseUrl}${requestScope['javax.servlet.forward.request_uri']}?${pageContext.request.queryString}" />
+      				</c:if>
 					
 					<ul class="share-buttons">
   						<li><a href="https://www.facebook.com/sharer/sharer.php?u=${cf:urlEncode(url)}&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(${url}) + '&t=' + encodeURIComponent(${url})); return false;"><img src="static/images/social/share/Facebook.png"></a></li>

@@ -32,6 +32,7 @@ public class TeamController extends BaseController {
 	private static final String STANDINGS = "standings";
 	private static final String STANDINGS_FIXTURES = "standings_fixtures";
 	private static final String TEAMSEASONMAP = "teamseasonmap";
+	private static final String TITLE = "title";
 	
 	@Autowired
 	private WordPressDao wordPressDao;
@@ -50,6 +51,7 @@ public class TeamController extends BaseController {
 		List<Fixture> fixtures = teamService.findFixtures(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
 		
 		ModelAndView mav = setView(FIXTURES);
+		mav.addObject(TITLE, teamSeasonMap.getTeam().getName() + " - " + teamSeasonMap.getSeason().getName());
 		mav.addObject(TEAMSEASONMAP, teamSeasonMap);
 		mav.addObject(FIXTURES, fixtures);
 		
@@ -64,6 +66,7 @@ public class TeamController extends BaseController {
 		List<Standing> standings = teamService.findStandings(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
 		
 		ModelAndView mav = setView(STANDINGS);
+		mav.addObject(TITLE, teamSeasonMap.getTeam().getName() + " - " + teamSeasonMap.getSeason().getName());
 		mav.addObject(TEAMSEASONMAP, teamSeasonMap);
 		mav.addObject(STANDINGS, standings);
 		
@@ -95,6 +98,7 @@ public class TeamController extends BaseController {
 
 		
 		ModelAndView mav = setView(STANDINGS_FIXTURES);
+		mav.addObject(TITLE, teamSeasonMap.getTeam().getName() + " - " + teamSeasonMap.getSeason().getName());
 		mav.addObject(TEAMSEASONMAP, teamSeasonMap);
 		mav.addObject(STANDINGS, standings);
 		mav.addObject(FIXTURES, fixtures);

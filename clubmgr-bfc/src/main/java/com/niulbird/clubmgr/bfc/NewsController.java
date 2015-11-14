@@ -3,14 +3,12 @@ package com.niulbird.clubmgr.bfc;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.ContactData;
-import com.niulbird.clubmgr.bfc.wordpress.WordPressDao;
 import com.niulbird.clubmgr.bfc.wordpress.dao.Post;
 
 @Controller
@@ -20,9 +18,7 @@ public class NewsController extends BaseController {
 	private static final String NEWS = "news";
 	private static final String PAGE = "page";
 	private static final String POST = "post";
-
-	@Autowired
-	private WordPressDao wordPressDao;
+	private static final String TITLE = "title";
 	
 	@RequestMapping(value = "/news.html")
 	public ModelAndView news(@RequestParam(value = "start", defaultValue = "0") int start) {
@@ -31,6 +27,7 @@ public class NewsController extends BaseController {
 		
 		mav.setViewName(NEWS);
 		mav.addObject(PAGE, NEWS);
+		mav.addObject(TITLE, messageSource.getMessage("news.title", null, null));
 
 		ArrayList<Post> posts = wordPressDao.getAllPosts();
 		mav.addObject("previous", ((start - Integer.parseInt(numNewsPosts) < 0 ) ? 0 : start - Integer.parseInt(numNewsPosts)));
@@ -57,6 +54,7 @@ public class NewsController extends BaseController {
 		
 		mav.setViewName(POST);
 		mav.addObject(PAGE, POST);
+		mav.addObject(TITLE, post.getTitle());
 		mav.addObject("post", post);
 
 		ArrayList<Post> posts = wordPressDao.getAllPosts();

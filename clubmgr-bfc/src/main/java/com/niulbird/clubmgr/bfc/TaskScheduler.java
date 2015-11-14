@@ -21,9 +21,9 @@ public class TaskScheduler {
 	
 	@Scheduled(cron="0 0 12 * * *")
     public void cachePosts() {
-		log.debug("Getting Cached Wodpress Posts");
+		log.debug("Getting Cached Wordpress Posts");
 		wordPressDao.getAllPosts();
-		log.debug("Got Cached Wodpress Posts successfully");
+		log.debug("Got Cached Wordpress Posts successfully");
     }
 	
 	@Scheduled(cron="0 30 */3 * * *")

@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.ContactData;
 import com.niulbird.clubmgr.bfc.util.MailUtil;
-import com.niulbird.clubmgr.bfc.wordpress.WordPressDao;
 import com.niulbird.clubmgr.bfc.wordpress.dao.Post;
 
 @Controller
@@ -28,9 +27,7 @@ public class ContactController extends BaseController {
 	private static final String CONTACT = "contact";
 	private static final String SUCCESS = "contact_success";
 	private static final String PAGE = "page";
-
-	@Autowired
-	private WordPressDao wordPressDao;
+	private static final String TITLE = "title";
 	
 	@Autowired
 	private JavaMailSenderImpl mailSender;
@@ -42,7 +39,7 @@ public class ContactController extends BaseController {
 	public ModelAndView contactView(@ModelAttribute("contactData") ContactData contactData) {
 		log.info("Entering contactView(): " + contactData.getName() + "|" 
 				+ contactData.getEmail() + "|" + contactData.getMessage());
-		return setView(CONTACT);
+		return setView(CONTACT, messageSource.getMessage("contact.title", null, null));
 	}	
 	
 	@RequestMapping(value = "/contact.html", method = RequestMethod.POST)
@@ -52,20 +49,21 @@ public class ContactController extends BaseController {
 				+ contactData.getEmail() + "|" + contactData.getMessage());
 		
 		if (result.hasErrors()) {
-			return setView(CONTACT);
+			return setView(CONTACT, messageSource.getMessage("contact.title", null, null));
 		} else {
 			MailUtil mailUtil = new MailUtil();
 			mailUtil.sendMail(mailSender, mailMessage, contactData.getEmail(), contactData.getName(), contactData.getMessage());
-			ModelAndView mav = setView(SUCCESS);
+			ModelAndView mav = setView(SUCCESS, messageSource.getMessage("contact.title", null, null));
 			mav.addObject("contactData", contactData);
 			return mav;
 		}
 	}
 	
-	private ModelAndView setView(String pageName) {
+	private ModelAndView setView(String pageName, String title) {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName(pageName);
+		mav.addObject(TITLE, title);
 		mav.addObject(PAGE, pageName);
 		
 		ArrayList<Post> posts = wordPressDao.getAllPosts();

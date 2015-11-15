@@ -22,7 +22,7 @@ import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 public class MWSLUtil {
     private final Log logger = LogFactory.getLog(getClass());
     
-	private static final String MWSL_URI = "http://www.mwslsoccer.com";
+	private static final String MWSL_URI = "http://www.mwsl.com/webapps/spappz_live";
 	    
 	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		List<Fixture> fixtures = new ArrayList<Fixture>();
@@ -32,7 +32,7 @@ public class MWSLUtil {
 			Element  element = elements.get(13); // 13th table with no ID or Class
 			
 			Elements rows = element.getElementsByTag("tr");
-			for (int i = 1; i < rows.size(); i++) {
+			for (int i = 0; i < rows.size(); i++) {
 				Element row = rows.get(i);
 				Elements columns = row.getElementsByTag("td");
 				if (columns.size() > 1) {
@@ -48,8 +48,31 @@ public class MWSLUtil {
 					fixture.setAway(columns.get(6).text());
 					fixture.setField(columns.get(7).text());
 					Elements fieldLink = columns.get(7).getElementsByTag("a");
-					if (fieldLink.size() > 0)
-						fixture.setFieldMapUri(MWSL_URI + "/" + fieldLink.get(0).attr("href"));
+					if (fieldLink.size() > 0) {
+						String mwslFieldLink = MWSL_URI + "/" + fieldLink.get(0).attr("href");
+						String fieldMapUri = null;
+						try {
+							Document fieldDoc = Jsoup.connect(mwslFieldLink).get();
+							Elements fieldElements = fieldDoc.getElementsByTag("table");
+							Element  fieldElement = fieldElements.get(5); // 5th table with no ID or Class
+							Elements fieldRows = fieldElement.getElementsByTag("tr");
+							
+							for (Element fieldRow : fieldRows) {
+								Elements rowElements = fieldRow.getElementsByTag("td");
+								if (rowElements.get(0).text().equalsIgnoreCase("Map")) {
+									Elements mapElements = rowElements.get(2).getElementsByTag("a");
+									fieldMapUri = mapElements.get(0).attr("href");
+								}
+							}
+						} catch (IOException ioe) {
+							logger.error("Error getting field URL: " + ioe, ioe);
+						}
+						
+						if (fieldMapUri == null) {
+							fieldMapUri = mwslFieldLink;
+						}
+						fixture.setFieldMapUri(fieldMapUri);
+					}
 					fixture.setSeason(teamSeasonMap.getSeason());
 					fixture.setTeam(teamSeasonMap.getTeam());
 					

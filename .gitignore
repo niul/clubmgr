@@ -1,4 +1,6 @@
 *.class
+*.MF
+*.map
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -7,6 +9,8 @@
 *.jar
 *.war
 *.ear
+!/tools/maven-3.2.3/boot/*.jar
+!/tools/maven-3.2.3/lib/*.jar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*

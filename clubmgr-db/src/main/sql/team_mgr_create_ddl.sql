@@ -34,7 +34,7 @@ CREATE TABLE fixtures (
     home_score    VARCHAR(10),
     away_score    VARCHAR(10),
     field        VARCHAR(80),
-    field_map_uri    VARCHAR(80),
+    field_map_uri    VARCHAR(400),
     date        date,
     time        time,
     created        timestamp,

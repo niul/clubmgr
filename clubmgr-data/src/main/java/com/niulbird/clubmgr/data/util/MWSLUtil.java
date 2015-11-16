@@ -61,7 +61,7 @@ public class MWSLUtil {
 								Elements rowElements = fieldRow.getElementsByTag("td");
 								if (rowElements.get(0).text().equalsIgnoreCase("Map")) {
 									Elements mapElements = rowElements.get(2).getElementsByTag("a");
-									fieldMapUri = mapElements.get(0).attr("href");
+									fieldMapUri = mapElements.get(0).attr("href").replaceAll("[\n\r]", "").trim();
 								}
 							}
 						} catch (IOException ioe) {

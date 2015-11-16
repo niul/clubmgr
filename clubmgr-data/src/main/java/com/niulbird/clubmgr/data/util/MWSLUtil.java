@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
@@ -61,7 +62,7 @@ public class MWSLUtil {
 								Elements rowElements = fieldRow.getElementsByTag("td");
 								if (rowElements.get(0).text().equalsIgnoreCase("Map")) {
 									Elements mapElements = rowElements.get(2).getElementsByTag("a");
-									fieldMapUri = mapElements.get(0).attr("href").replaceAll("[\n\r]", "").trim();
+									fieldMapUri = StringUtils.chomp(mapElements.get(0).attr("href")).replaceAll("[\n\r]", "").trim();
 								}
 							}
 						} catch (IOException ioe) {

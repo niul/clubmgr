@@ -10,12 +10,12 @@
 				commandName="contactData" 
 				method="post">
 			<div class="row 50%">
-			  <div class="6u 12u(mobilep)">
+			  <div class="6u 12u(small)">
 				<form:label path="name"><f:message key="contact.name" />:</form:label>
 				<form:input type="text" path="name"/>
 				<form:errors path="name" class="form_error" />
 			  </div>
-			  <div class="6u 12u(mobilep)">
+			  <div class="6u 12u(small)">
 				<form:label path="email"><f:message key="contact.email" />:</form:label>
 				<form:input type="text" path="email"/>
 				<form:errors path="email" cssClass="form_error"/>

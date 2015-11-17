@@ -1,28 +1,19 @@
 package com.niulbird.clubmgr.bfc.interceptors;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.MessageSource;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.niulbird.clubmgr.bfc.util.ControllerUtility;
 
-import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 
 public class LogInterceptor extends HandlerInterceptorAdapter {
-	
-	private static Logger logger = Logger.getLogger(LogInterceptor.class);
-	
-	// Property source
-	@Resource(name = "messageSource")
-	MessageSource messageSource;
 
 	/**
-	 * Verify CSRF Token.
+	 * Add objects to context for logging.
 	 * 
 	 * @param request
 	 *            HttpServletRequest
@@ -37,8 +28,6 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler) throws Exception {
 
 		boolean proceedFlag = true;
-		
-		logger.debug("LogInterceptor: ***************************************************************************");
 		
 		// Add local thread info to logging context
 		MDC.put("SESSIONID", request.getSession().getId());

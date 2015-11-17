@@ -20,6 +20,7 @@ import com.niulbird.clubmgr.bfc.wordpress.dao.Post;
 public class DefaultWordPressDao  implements WordPressDao {
 	private static final Logger log = Logger.getLogger(DefaultWordPressDao.class);
 	
+	private static String GET_POSTS = "/posts/{0}";
 	private static String GET_POSTS_ALL = "/posts";
 	private static String GET_POSTS_NUM = "/posts/?number={0}";
 	
@@ -30,22 +31,25 @@ public class DefaultWordPressDao  implements WordPressDao {
 	@Cacheable(value = "postCache")	
 	public Post getPost(int id) {
 		Post post = null;
-		ArrayList<Post> posts = getAllPosts();
-			
-		for (Post p : posts ) {
-			if (Integer.parseInt(p.getId()) == id) {
-				post = p;
-				break;
-			}
-		}
+		String uri = baseUrl + siteName + MessageFormat.format(GET_POSTS, String.valueOf(id));
+		
+		log.debug("WordPress URL: " + uri);
+		
+		try {
+			JSONTokener tokener = new JSONTokener(new URL(uri).openStream());
+			JSONObject jsonObject = new JSONObject(tokener);
+		
+			post = PostUtil.getPost(jsonObject);
 						
-		log.debug("ID: " + post.getId());
-		log.debug("Date: " + post.getCreateDate());
-		log.debug("Title: " + post.getTitle());
-		log.debug("Excerpt: " + post.getExcerpt());
-		log.debug("Content: " + post.getContent());
-		log.debug("URL: " + post.getUrl());
-			
+			log.debug("ID: " + post.getId());
+			log.debug("Date: " + post.getCreateDate());
+			log.debug("Title: " + post.getTitle());
+			log.debug("Excerpt: " + post.getExcerpt());
+			log.debug("Content: " + post.getContent());
+			log.debug("URL: " + post.getUrl());
+		} catch (IOException ioe) {
+			log.error("IOException: " + ioe.getMessage(), ioe);
+		}
 		return post;
 	}
 	

@@ -30,10 +30,10 @@ public class NewsController extends BaseController {
 		mav.addObject(TITLE, messageSource.getMessage("news.title", null, null));
 
 		ArrayList<Post> posts = wordPressDao.getAllPosts();
-		mav.addObject("previous", ((start - Integer.parseInt(numNewsPosts) < 0 ) ? 0 : start - Integer.parseInt(numNewsPosts)));
-		mav.addObject("next", start + Integer.parseInt(numNewsPosts));
+		mav.addObject("previous", start - Integer.parseInt(numNewsPosts));
+		mav.addObject("next", ((start + Integer.parseInt(numNewsPosts) > posts.size() ) ? 0 : start + Integer.parseInt(numNewsPosts)));
 		mav.addObject("posts", posts.subList(start,
-				(posts.size() < Integer.parseInt(numNewsPosts)) ? posts.size()
+				(posts.size() < start + Integer.parseInt(numNewsPosts)) ? posts.size()
 						: start + Integer.parseInt(numNewsPosts)));
 		mav.addObject("footerPosts", posts.subList(0,
 				(posts.size() < Integer.parseInt(numFooterPosts)) ? posts.size()
@@ -50,14 +50,20 @@ public class NewsController extends BaseController {
 	public ModelAndView post(@RequestParam(value="id") int code) {
 		ModelAndView mav = new ModelAndView();
 
-		Post post = wordPressDao.getPost(code);
+		ArrayList<Post> posts = wordPressDao.getAllPosts();
+		Post post = null;
+		for (Post p : posts ) {
+			if (Integer.parseInt(p.getId()) == code) {
+				post = p;
+				break;
+			}
+		}
 		
 		mav.setViewName(POST);
 		mav.addObject(PAGE, POST);
 		mav.addObject(TITLE, post.getTitle());
 		mav.addObject("post", post);
 
-		ArrayList<Post> posts = wordPressDao.getAllPosts();
 		mav.addObject("posts", posts);
 		mav.addObject("footerPosts", posts.subList(0,
 				(posts.size() < Integer.parseInt(numFooterPosts)) ? posts.size()

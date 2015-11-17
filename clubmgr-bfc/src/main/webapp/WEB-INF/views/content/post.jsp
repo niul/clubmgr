@@ -17,4 +17,9 @@
 		</sup>
 		${post.content}
 	  </article>
-	  <a href="post.html?id=${post.previousId}" class="button icon fa-file-text-o"><f:message key="post.previous"/></a> <a href="post.html?id=${post.nextId}" class="button icon fa-file-text-o"><f:message key="post.next"/></a>
+	  <c:if test="${post.previousId ne '-1'}">
+	  <a href="post.html?id=${post.previousId}" class="button icon fa-file-text-o"><f:message key="post.previous"/></a>
+	  </c:if> 
+	  <c:if test="${not empty post.nextId}">
+	  <a href="post.html?id=${post.nextId}" class="button icon fa-file-text-o"><f:message key="post.next"/></a>
+	  </c:if>

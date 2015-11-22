@@ -4,7 +4,7 @@
       <header>
         <h2><f:message key="mens.jurassic.title"/></h2>
       </header>
-      <span class="image featured"><img src="static/images/mens-jurassic.jpg" alt="" /></span>
+      <span class="image featured"><img src='<c:url value="/static/images/mens-jurassic.jpg"/>' alt="" /></span>
 	  <p><f:message key="mens.jurassic.main"/></p>
 	  <h3><f:message key="teams.leagues"/>:</h3>
 	  <ul class="default">

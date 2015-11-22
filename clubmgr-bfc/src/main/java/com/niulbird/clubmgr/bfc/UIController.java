@@ -37,6 +37,11 @@ public class UIController extends BaseController {
 		return setView(CALENDAR, null);
 	}
 	
+	@RequestMapping(value = "/")
+	public ModelAndView root() {
+		return setView(HOME, null);
+	}
+	
 	@RequestMapping(value = "/index.html")
 	public ModelAndView home() {
 		return setView(HOME, null);

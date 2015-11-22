@@ -10,8 +10,8 @@
 </appender>
 
 <category name="org.springframework" additivity="false">
-    <priority value="DEBUG" />
-    <appender-ref ref="CONSOLE" />
+    <priority value="TRACE" />
+    <appender-ref ref="DEBUG" />
 </category>
 <category name="net.sf.ehcache" additivity="false">
     <priority value="INFO" />

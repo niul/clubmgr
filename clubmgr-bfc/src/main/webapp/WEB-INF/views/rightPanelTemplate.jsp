@@ -12,10 +12,10 @@
 		<meta name="description" content="<f:message key="header.metadata"/>" />
 		<meta name="keywords" content="<f:message key="header.title"/>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="static/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="static/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="static/css/ie8.css" /><![endif]-->
-		<link rel="shortcut icon" href="static/images/bombasticfc_logo.ico" />
+		<!--[if lte IE 8]><script src='<c:url value="/static/js/ie/html5shiv.js"/>'/><![endif]-->
+		<link rel="stylesheet" href='<c:url value="/static/css/main.css"/>' />
+		<!--[if lte IE 8]><link rel="stylesheet" href='<c:url value="/static/css/ie8.css"/>'/><![endif]-->
+		<link rel="shortcut icon" href='<c:url value="/static/images/bombasticfc_logo.ico"/>' />
 	</head>
 	<body class="right-sidebar">
 		<div id="page-wrapper">
@@ -37,15 +37,15 @@
 				</div>
 			</div>	
 			<tiles:insertAttribute name="footer"/>
+			<script src='<c:url value="/static/js/jquery.min.js"/>'></script>
+			<script src='<c:url value="/static/js/jquery.dropotron.min.js"/>'></script>
+			<script src='<c:url value="/static/js/skel.min.js"/>'></script>
+			<script src='<c:url value="/static/js/skel-layout.min.js"/>'></script>
+			<script src='<c:url value="/static/js/util.js"/>'></script>
+			<!--[if lte IE 8]><script src='<c:url value="/static/js/ie/respond.min.js"/>'></script><![endif]-->
+			<script src='<c:url value="/static/js/main.js"/>'></script>
+			<script src='<c:url value="/static/js/social.js"/>'></script>
+			<script src='<c:url value="/static/js/maps.js"/>'></script>
 		</div>
-		<script src="static/js/jquery.min.js"></script>
-		<script src="static/js/jquery.dropotron.min.js"></script>
-		<script src="static/js/skel.min.js"></script>
-		<script src="static/js/skel-layout.min.js"></script>
-		<script src="static/js/util.js"></script>
-		<!--[if lte IE 8]><script src="static/js/ie/respond.min.js"></script><![endif]-->
-		<script src="static/js/main.js"></script>
-		<script src="static/js/social.js"></script>
-		<script src="static/js/maps.js"></script>
 	</body>
 </html>

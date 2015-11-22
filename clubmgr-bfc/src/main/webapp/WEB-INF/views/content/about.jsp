@@ -4,7 +4,7 @@
       <header>
         <h2><f:message key="about.title"/></h2>
       </header>
-      <span class="image featured"><img src="static/images/football_grass_banner.png" alt="" /></span>
+      <span class="image featured"><img src='<c:url value="/static/images/football_grass_banner.png"/>' alt="" /></span>
 	  <h3><f:message key="about.section.main.p1"/></h3>
 	  <p><f:message key="about.section.main.p2"/></p>
       <p><f:message key="about.section.main.p3"/></p>

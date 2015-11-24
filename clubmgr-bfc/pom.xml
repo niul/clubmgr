@@ -142,15 +142,6 @@
 	</dependencies>
 
 	<build>
-		<!-- pluginManagement>
-			<plugins>
-				<plugin>
-          			<groupId>com.samaxes.maven</groupId>
-          			<artifactId>minify-maven-plugin</artifactId>
-          			<version>1.7.4</version>
-        		</plugin>
-        	</plugins>
-		</pluginManagement-->
 		<!-- for hot reload of the web application -->
 		<!-- outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory-->
 		<plugins>

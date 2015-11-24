@@ -20,7 +20,6 @@ function initialize() {
         
     // Multiple Markers
     var markers = [
-        ['Andy Livingstone Park', 49.2783611, -123.1061445],
         ['China Creek Park North', 49.2648382, -123.0845981],
         ['Trillium Park', 49.2741761, -123.0959648],
         ['Vancouver Technical Secondary', 49.2605065, -123.0521023]
@@ -29,20 +28,16 @@ function initialize() {
     // Info Window Content
     var infoWindowContent = [
         ['<div class="info_content">' +
-        '<h3>Andy Livingstone Park</h3>' +
-        '<p>Women\'s A Team Home Pitch</p>' +
-        '</div>'],
-        ['<div class="info_content">' +
-        '<h3>China Creek Park North</h3>' +
+        '<h4>China Creek Park North</h4>' +
         '<p>Men\'s A and B Home Pitch.</p>' +
         '</div>'],
         ['<div class="info_content">' +
-         '<h3>Trillium Park</h3>' +
+         '<h4>Trillium Park</h4>' +
          '<p>Men\'s Classic Home Pitch.</p>' +
          '</div>'],
         ['<div class="info_content">' +
-         '<h3>Vancouver Technical Secondary</h3>' +
-         '<p>Men\'s Jurassic Home Pitch.</p>' +
+         '<h4>Vancouver Technical Secondary</h4>' +
+         '<p>Women\s and Men\'s Jurassic Home Pitch.</p>' +
          '</div>']
     ];
         

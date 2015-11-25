@@ -12,6 +12,8 @@ public class MvcAppConfig extends WebMvcConfigurationSupport  {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		VersionResourceResolver versionResourceResolver = new VersionResourceResolver()
 				.addVersionStrategy(new ContentVersionStrategy(), "/**");
+		registry.addResourceHandler("/robots.txt").addResourceLocations("/robots.txt");
+		registry.addResourceHandler("/sitemap.xml").addResourceLocations("/sitemap.xml");
 		registry.addResourceHandler("/static/**").addResourceLocations("/static/")
 				.setCachePeriod(60 * 60 * 24 * 365)/* one year */
 				.resourceChain(true).addResolver(versionResourceResolver);

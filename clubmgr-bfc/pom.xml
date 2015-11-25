@@ -214,7 +214,7 @@
         		</executions>
             	<configuration>
             		<cssSourceDir>static/css</cssSourceDir>
-            		<cssTargetDir>../../src/main/webapp/static/css</cssTargetDir>
+            		<cssTargetDir>static/css</cssTargetDir>
               		<cssSourceIncludes>
                 		<cssSourceInclude>main.css</cssSourceInclude>
               		</cssSourceIncludes>
@@ -222,15 +222,17 @@
                 		<cssSourceExclude>**/*.min.css</cssSourceExclude>
               		</cssSourceExcludes>
             		<jsSourceDir>static/js</jsSourceDir>
+            		<jsTargetDir>static/js</jsTargetDir>
               		<jsSourceIncludes>
                 		<jsSourceInclude>**/*.js</jsSourceInclude>
               		</jsSourceIncludes>
               		<jsSourceExcludes>
                 		<jsSourceExclude>**/*.min.js</jsSourceExclude>
               		</jsSourceExcludes>
-              		<jsTargetDir>../../src/main/webapp/static/js</jsTargetDir>
+              		<jsTargetDir>static/js</jsTargetDir>
               		<skipMerge>true</skipMerge>
               		<verbose>true</verbose>
+              		<webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
             	</configuration>
       		</plugin>
 		</plugins>

@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/views/taglibs.jsp"%>
 
-      <h2><f:message key="news.title"/></h2>
+      <h1><f:message key="news.title"/></h1>
       <c:forEach var="post" items="${posts}">
       
 	  <fmt:formatDate value="${post.createDate}" var="formattedDate" 

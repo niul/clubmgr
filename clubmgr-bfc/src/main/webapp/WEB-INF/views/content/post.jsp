@@ -6,7 +6,7 @@
                 
 	  <article>
 	    <header>
-          <h2>${post.title}</h2>
+          <h1>${post.title}</h1>
 		</header>
 		<sup>
 			<f:message key="news.posted.on"/>: ${formattedDate}

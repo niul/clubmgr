@@ -4,7 +4,7 @@
 		<header id="header" class="container">
 			<!-- Logo -->
 			<div id="logo" >
-				<a href="index.html"><img id="header_logo" border="0" alt="bombastic fc" src='<c:url value="/static/images/bombasticfc_logo.png"/>' width="160" height="160"></a>
+				<a href="index.html"><img id="header_logo" border="0" alt="bombastic fc" src='<c:url value="/static/images/bombasticfc_logo.png"/>' alt="<f:message key="header.logo.image.alt"/>" width="160" height="160"></a>
 				<span><f:message key="header.title"/></span>
 			</div>
 			<!-- Navigation Bar -->
@@ -151,10 +151,10 @@
       				</c:if>
 					
 					<ul class="share-buttons">
-  						<li><a href="https://www.facebook.com/sharer/sharer.php?u=${cf:urlEncode(url)}&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(${url}) + '&t=' + encodeURIComponent(${url})); return false;"><img src='<c:url value="/static/images/social/share/Facebook.png"/>'></a></li>
-  						<li><a href="https://twitter.com/intent/tweet?source=${cf:urlEncode(url)}&text=:%20${cf:urlEncode(url)}&via=bombasticfc" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(${url})); return false;"><img src='<c:url value="/static/images/social/share/Twitter.png"/>'></a></li>
-  						<li><a href="https://plus.google.com/share?url=${cf:urlEncode(url)}" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(${url})); return false;"><img src='<c:url value="/static/images/social/share/Google+.png"/>'></a></li>
-  						<li><a href="http://wordpress.com/press-this.php?u=${cf:urlEncode(url)}&t=&s=" target="_blank" title="Publish on WordPress" onclick="window.open('http://wordpress.com/press-this.php?u=' + encodeURIComponent(${url}) + '&t=' +  encodeURIComponent(document.title)); return false;"><img src='<c:url value="/static/images/social/share/Wordpress.png"/>'></a></li>
+  						<li><a href="https://www.facebook.com/sharer/sharer.php?u=${cf:urlEncode(url)}&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(${url}) + '&t=' + encodeURIComponent(${url})); return false;"><img src='<c:url value="/static/images/social/share/Facebook.png"/>' alt="<f:message key="footer.social.facebook.image.alt"/>"></a></li>
+  						<li><a href="https://twitter.com/intent/tweet?source=${cf:urlEncode(url)}&text=:%20${cf:urlEncode(url)}&via=bombasticfc" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(${url})); return false;"><img src='<c:url value="/static/images/social/share/Twitter.png"/>' alt="<f:message key="footer.social.twitter.image.alt"/>"></a></li>
+  						<li><a href="https://plus.google.com/share?url=${cf:urlEncode(url)}" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(${url})); return false;"><img src='<c:url value="/static/images/social/share/Google+.png"/>' alt="<f:message key="footer.social.google.image.alt"/>"></a></li>
+  						<li><a href="http://wordpress.com/press-this.php?u=${cf:urlEncode(url)}&t=&s=" target="_blank" title="Publish on WordPress" onclick="window.open('http://wordpress.com/press-this.php?u=' + encodeURIComponent(${url}) + '&t=' +  encodeURIComponent(document.title)); return false;"><img src='<c:url value="/static/images/social/share/Wordpress.png"/>' alt="<f:message key="footer.social.wordpress.image.alt"/>"></a></li>
 					</ul>
 				</div>
 			</div>

@@ -2,7 +2,7 @@
 
       <article>
         <header>
-            <h2><f:message key="contact.title" /></h2>
+            <h1><f:message key="contact.title" /></h1>
         </header>
             <p><f:message key="contact.description" /></p>
 			

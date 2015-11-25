@@ -2,7 +2,7 @@
 
 	<article>
       <header>
-        <h2><f:message key="standings.title"/></h2>
+        <h1><f:message key="standings.title"/></h1>
       </header>
 	  <h3>${teamseasonmap.team.name} - ${teamseasonmap.season.name}</h3>
 	  <table class="default standings">

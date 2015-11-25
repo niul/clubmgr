@@ -9,8 +9,8 @@
 		<title><f:message key="header.title"/> - ${title}</title>
 		</c:if>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="<f:message key="header.metadata"/>" />
-		<meta name="keywords" content="<f:message key="header.title"/>" />
+		<meta name="description" content="<f:message key="header.metadata.description"/>" />
+		<meta name="keywords" content="<f:message key="header.metadata.keywords"/>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src='<c:url value="/static/js/ie/html5shiv.js"/>'/><![endif]-->
 		<link rel="stylesheet" href='<c:url value="/static/css/main.min.css"/>' />

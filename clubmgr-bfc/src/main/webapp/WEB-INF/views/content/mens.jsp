@@ -2,7 +2,7 @@
 
 	<article>
       <header>
-        <h2><f:message key="mens.title"/></h2>
+        <h1><f:message key="mens.title"/></h1>
       </header>
 	  <p><f:message key="mens.section.main"/></p>
 	  <ul class="default">

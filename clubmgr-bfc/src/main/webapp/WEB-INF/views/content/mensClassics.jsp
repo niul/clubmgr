@@ -2,9 +2,9 @@
 
 	<article>
       <header>
-        <h2><f:message key="mens.classics.title"/></h2>
+        <h1><f:message key="mens.classics.title"/></h1>
       </header>
-      <span class="image featured"><img src='<c:url value="/static/images/mens-classics.jpg"/>' alt="" /></span>
+      <span class="image featured"><img src='<c:url value="/static/images/mens-classics.jpg"/>' alt="<f:message key="mens.classics.image.alt"/>" /></span>
 	  <p><f:message key="mens.classics.main"/></p>
 	  <h3><f:message key="teams.leagues"/>:</h3>
 	  <ul class="default">

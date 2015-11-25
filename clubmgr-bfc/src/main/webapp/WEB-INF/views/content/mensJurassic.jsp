@@ -2,9 +2,9 @@
 
 	<article>
       <header>
-        <h2><f:message key="mens.jurassic.title"/></h2>
+        <h1><f:message key="mens.jurassic.title"/></h1>
       </header>
-      <span class="image featured"><img src='<c:url value="/static/images/mens-jurassic.jpg"/>' alt="" /></span>
+      <span class="image featured"><img src='<c:url value="/static/images/mens-jurassic.jpg"/>' alt="<f:message key="mens.jurassics.image.alt"/>" /></span>
 	  <p><f:message key="mens.jurassic.main"/></p>
 	  <h3><f:message key="teams.leagues"/>:</h3>
 	  <ul class="default">

@@ -1,0 +1,24 @@
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+
+	version = '1.0-SNAPSHOT'
+	sourceCompatibility = 1.7
+	targetCompatibility = 1.7
+
+	//Get dependencies from Maven central repository
+	repositories {
+	    mavenCentral()
+	}
+
+	//Project dependencies
+	dependencies {
+		compile 'log4j:log4j:1.2.14'
+		compile 'org.slf4j:slf4j-log4j12:1.5.8'
+		compile 'org.slf4j:slf4j-api:1.5.8'
+		compile 'org.slf4j:jcl-over-slf4j:1.5.8'
+		compile 'org.jboss.logging:jboss-logging:3.3.0.Final'
+		testCompile 'junit:junit:4.11'
+		testCompile 'org.springframework:spring-test:4.2.3.RELEASE'
+	}
+}

@@ -1,0 +1,9 @@
+//Project dependencies
+dependencies {
+	compile 'org.springframework:spring-core:4.2.3.RELEASE'
+	compile 'org.springframework:spring-beans:4.2.3.RELEASE'
+	compile 'org.springframework.data:spring-data-jpa:1.7.2.RELEASE'
+	compile 'org.hibernate:hibernate-entitymanager:5.0.1.Final'
+	compile 'org.hibernate:hibernate-ehcache:5.0.1.Final'
+	compile 'postgresql:postgresql:8.4-702.jdbc4'
+}

@@ -1,0 +1,1 @@
+include 'clubmgr-db', 'clubmgr-data', 'clubmgr-bfc'

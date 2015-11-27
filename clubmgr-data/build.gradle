@@ -1,0 +1,8 @@
+//Project dependencies
+dependencies {
+	compile project(':clubmgr-db')
+	compile 'org.springframework:spring-context-support:4.2.3.RELEASE'
+	compile 'net.sf.ehcache:ehcache:2.9.1'
+	compile 'org.jsoup:jsoup:1.8.3'
+	compile 'org.apache.commons:commons-lang3:3.4'
+}

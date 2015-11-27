@@ -1,7 +1,7 @@
 apply plugin: 'war'
-apply plugin: "com.github.robfletcher.compass"
-apply plugin: "js"
-apply plugin: "css"
+apply plugin: 'com.github.robfletcher.compass'
+apply plugin: 'js'
+apply plugin: 'css'
 
 //Project dependencies
 dependencies {

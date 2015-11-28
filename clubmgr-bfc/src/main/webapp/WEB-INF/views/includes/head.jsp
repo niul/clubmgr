@@ -13,11 +13,13 @@
 		<title><f:message key="header.title"/></title>
 		<meta property="og:title" content="<f:message key="header.title"/>" />
 		<meta name="twitter:title" content="<f:message key="header.title"/>" />
+		<meta itemprop="name" content="<f:message key="header.title"/>">
 		</c:if>
 		<c:if test="${not empty title}">
 		<title><f:message key="header.title"/> - ${title}</title>
 		<meta property="og:title" content="<f:message key="header.title"/> - ${title}" />
 		<meta name="twitter:title" content="<f:message key="header.title"/> - ${title}" />
+		<meta itemprop="name" content="<f:message key="header.title"/> - ${title}">
 		</c:if>
 		
 		<meta property="og:type" content="website" />
@@ -39,7 +41,6 @@
 		<meta property="fb:admins" content="217377088280485" />
 		
 		<!-- Schema.org markup for Google+ -->
-		<meta itemprop="name" content="<f:message key="header.metadata.name"/>">
 		<meta itemprop="description" content="<f:message key="header.metadata.description"/>">
 		<meta itemprop="image" content="https://secure.gravatar.com/blavatar/8a99c879a84cd362fb7c96f3d322ae1d?s=200&amp;ts=1448659724">
 		

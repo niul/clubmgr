@@ -140,15 +140,6 @@
       		</nav>
 			<div class="row">
       			<div class="2u -10u 12u$(medium) 12u$(small)">
-      				<f:message key="header.base_url" var="baseUrl"/>
-      				<c:set var="params" value="${pageContext.request.queryString}"/>
-      				<c:if test="${empty params}">
-						<c:set var="url" value="${baseUrl}${requestScope['javax.servlet.forward.request_uri']}" />
-					</c:if>
-      				<c:if test="${not empty params}">
-      					<c:set var="url" value="${baseUrl}${requestScope['javax.servlet.forward.request_uri']}?${pageContext.request.queryString}" />
-      				</c:if>
-					
 					<ul class="share-buttons">
   						<li><a href="https://www.facebook.com/sharer/sharer.php?u=${cf:urlEncode(url)}&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(${url}) + '&t=' + encodeURIComponent(${url})); return false;"><img src='<c:url value="/static/images/social/share/Facebook.png"/>' alt="<f:message key="footer.social.facebook.image.alt"/>"></a></li>
   						<li><a href="https://twitter.com/intent/tweet?source=${cf:urlEncode(url)}&text=:%20${cf:urlEncode(url)}&via=bombasticfc" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(${url})); return false;"><img src='<c:url value="/static/images/social/share/Twitter.png"/>' alt="<f:message key="footer.social.twitter.image.alt"/>"></a></li>

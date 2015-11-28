@@ -5,18 +5,22 @@
 
     <!-- Main Page -->
     <definition name="mainTemplate" template="/WEB-INF/views/mainTemplate.jsp">
+        <put-attribute name="head" value="/WEB-INF/views/includes/head.jsp" />
         <put-attribute name="header" value="/WEB-INF/views/includes/header.jsp" />
         <put-attribute name="banner" value="/WEB-INF/views/includes/banner.jsp" />
         <put-attribute name="content"  value="content" />
         <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
+        <put-attribute name="javascript" value="/WEB-INF/views/includes/javascript.jsp" />
     </definition>
     
     <!-- Left Panel -->
     <definition name="rightPanelTemplate" template="/WEB-INF/views/rightPanelTemplate.jsp">
+        <put-attribute name="head" value="/WEB-INF/views/includes/head.jsp" />
         <put-attribute name="header" value="/WEB-INF/views/includes/header.jsp" />
         <put-attribute name="rightPanel" value="/WEB-INF/views/includes/rightPanel.jsp" />
         <put-attribute name="content"  value="content" />
         <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
+        <put-attribute name="javascript" value="/WEB-INF/views/includes/javascript.jsp" />
     </definition>
 
     <!-- application -->

@@ -38,7 +38,7 @@
 		<meta name="twitter:creator" content="@bombasticfc" />
 		<meta name="twitter:url" content="${url}"/>
 		
-		<meta property="fb:admins" content="217377088280485" />
+		<meta property="fb:admins" content="BombasticFC" />
 		
 		<!-- Schema.org markup for Google+ -->
 		<meta itemprop="description" content="<f:message key="header.metadata.description"/>">

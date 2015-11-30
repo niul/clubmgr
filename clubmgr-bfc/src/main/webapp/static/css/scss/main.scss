@@ -614,11 +614,11 @@
 	#main-wrapper {
 		background: #fff;
 		box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.05);
-		padding: 5em 0 5em 0;
+		padding: 3em 0 3em 0;
 	}
 
 	#footer-wrapper {
-		padding: 4em 0 2em 0;
+		padding: 3em 0 2em 0;
 	}
 
 /* Header */
@@ -709,7 +709,13 @@
 			}
 		}
 	}
-
+	
+	.social-buttons {
+		position: absolute;
+		right: 0px;
+		bottom: 0px;
+	}
+	
 	.dropotron {
 		background: #fff;
 		letter-spacing: 0.025em;
@@ -1024,6 +1030,10 @@
 					}
 				}
 			}
+	
+			.social-buttons {
+				position: inherit;
+			}
 
 		/* Content */
 
@@ -1336,7 +1346,7 @@
 		/* Wrappers */
 
 			#header-wrapper {
-				padding: 3em 0 1.5em 0;
+				padding: 2em 0 1em 0;
 			}
 
 			#banner-wrapper {
@@ -1352,7 +1362,7 @@
 			}
 
 			#main-wrapper, #footer-wrapper {
-				padding: 40px 30px 40px 30px;
+				padding: 20px 30px 20px 30px;
 			}
 
 		/* Logo */

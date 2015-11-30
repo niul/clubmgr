@@ -2,8 +2,9 @@
 	
 	<div id="header-wrapper">
 		<header id="header" class="container">
+			<div class="row">
 			<!-- Logo -->
-			<div id="logo" >
+			<div id="logo" class="10u 12u$(medium)">
 				<a href='<c:url value="/index.html"/>'><img id="header_logo" src='<c:url value="/static/images/bombasticfc_logo.png"/>' alt="<f:message key="header.logo.image.alt"/>" width="160" height="160"></a>
 				<span><f:message key="header.title"/></span>
 			</div>
@@ -138,8 +139,7 @@
 	    			</c:choose>
         		</ul>
       		</nav>
-			<div class="row">
-      			<div class="2u -10u 12u$(medium) 12u$(small)">
+      			<div class="social-buttons 2u 12u$(medium) 12u$(small)">
 					<ul class="share-buttons">
   						<li><a href="https://www.facebook.com/sharer/sharer.php?u=${cf:urlEncode(url)}&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('${url}') + '&t=' + encodeURIComponent('${url}')); return false;"><img src='<c:url value="/static/images/social/share/Facebook.png"/>' alt="<f:message key="footer.social.facebook.image.alt"/>"></a></li>
   						<li><a href="https://twitter.com/intent/tweet?source=${cf:urlEncode(url)}&text=:%20${cf:urlEncode(url)}&via=bombasticfc" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent('${url}')); return false;"><img src='<c:url value="/static/images/social/share/Twitter.png"/>' alt="<f:message key="footer.social.twitter.image.alt"/>"></a></li>

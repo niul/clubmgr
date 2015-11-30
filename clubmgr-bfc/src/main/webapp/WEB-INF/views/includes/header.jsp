@@ -4,7 +4,7 @@
 		<header id="header" class="container">
 			<!-- Logo -->
 			<div id="logo" >
-				<a href="index.html"><img id="header_logo" src='<c:url value="/static/images/bombasticfc_logo.png"/>' alt="<f:message key="header.logo.image.alt"/>" width="160" height="160"></a>
+				<a href='<c:url value="/index.html"/>'><img id="header_logo" src='<c:url value="/static/images/bombasticfc_logo.png"/>' alt="<f:message key="header.logo.image.alt"/>" width="160" height="160"></a>
 				<span><f:message key="header.title"/></span>
 			</div>
 			<!-- Navigation Bar -->
@@ -12,50 +12,50 @@
 	   			<ul>
 	    			<c:choose>
 	      			<c:when test="${page=='home'}">
-	        			<li class="current"><a href="index.html"><f:message key="menu.item1"/></a></li>
+	        			<li class="current"><a href='<c:url value="/index.html"/>'><f:message key="menu.item1"/></a></li>
 	      			</c:when>
 	      			<c:otherwise>
-	        			<li><a href="index.html"><f:message key="menu.item1"/></a></li>
+	        			<li><a href='<c:url value="/index.html"/>'><f:message key="menu.item1"/></a></li>
 	      			</c:otherwise>
 	    			</c:choose>
         			<c:choose>
-	      			<c:when test="${(page=='teams') || (page=='mensA') || (page=='mensB') || (page=='mensClassic') || (page=='mensJurassic') || (page=='womens') || (page=='womensA') || (page=='standings') || (page=='fixtures')}">
+	      			<c:when test="${(page=='teams') || (page=='mens') || (page=='mensA') || (page=='mensB') || (page=='mensClassic') || (page=='mensJurassic') || (page=='womens') || (page=='womensA') || (page=='standings_fixtures')}">
 	        			<li class="current">
 	          				<a href="#"><f:message key="menu.item4"/></a>
 	          				<ul>
 	            				<li>
-	            					<a href="mens.html"><f:message key="teams.section.main.b1"/></a>
+	            					<a href='<c:url value="/mens.html"/>'><f:message key="teams.section.main.b1"/></a>
 	          						<ul>
 	            						<li>
-	            							<a href="mensA.html"><f:message key="menu.mens.b1"/></a>
+	            							<a href='<c:url value="/mensA.html"/>'><f:message key="menu.mens.b1"/></a>
 	            							<ul>
-	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_A&amp;season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
-	            							<a href="mensB.html"><f:message key="menu.mens.b2"/></a>
+	            							<a href='<c:url value="/mensB.html"/>'><f:message key="menu.mens.b2"/></a>
 	            							<ul>
-	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_B&amp;season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_B/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
-	            							<a href="mensClassics.html"><f:message key="menu.mens.b3"/></a>
+	            							<a href='<c:url value="/mensClassics.html"/>'><f:message key="menu.mens.b3"/></a>
 	            							<ul>
-	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_CLASSICS&amp;season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
-	            							<a href="mensJurassic.html"><f:message key="menu.mens.b4"/></a>
+	            							<a href='<c:url value="/mensJurassic.html"/>'><f:message key="menu.mens.b4"/></a>
 	            							<ul>
-	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_JURASSIC&amp;season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	          						</ul>
 	          					</li>
 	            				<li>
-	            					<a href="womens.html"><f:message key="menu.womens.b1"/></a>
+	            					<a href='<c:url value="/womens.html"/>'><f:message key="menu.womens.b1"/></a>
 	            					<ul>
-	            						<li><a href="standings_fixtures.html?team=BOMBASTIC_WOMENS&amp;season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            					</ul>
 	            				</li>
 	          				</ul>
@@ -66,38 +66,38 @@
 	          				<a href="#"><f:message key="menu.item4"/></a>
 	          				<ul>
 	            				<li>
-	            					<a href="mens.html"><f:message key="teams.section.main.b1"/></a>
+	            					<a href='<c:url value="/mens.html"/>'><f:message key="teams.section.main.b1"/></a>
 	          						<ul>
 	            						<li>
-	            							<a href="mensA.html"><f:message key="menu.mens.b1"/></a>
+	            							<a href='<c:url value="/mensA.html"/>'><f:message key="menu.mens.b1"/></a>
 	            							<ul>
-	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_A&amp;season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
-	            							<a href="mensB.html"><f:message key="menu.mens.b2"/></a>
+	            							<a href='<c:url value="/mensB.html"/>'><f:message key="menu.mens.b2"/></a>
 	            							<ul>
-	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_B&amp;season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_B/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
-	            							<a href="mensClassics.html"><f:message key="menu.mens.b3"/></a>
+	            							<a href='<c:url value="/mensClassics.html"/>'><f:message key="menu.mens.b3"/></a>
 	            							<ul>
-	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_CLASSICS&amp;season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
-	            							<a href="mensJurassic.html"><f:message key="menu.mens.b4"/></a>
+	            							<a href='<c:url value="/mensJurassic.html"/>'><f:message key="menu.mens.b4"/></a>
 	            							<ul>
-	            								<li><a href="standings_fixtures.html?team=BOMBASTIC_MENS_JURASSIC&amp;season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	          						</ul>
 	          					</li>
 	            				<li>
-	            					<a href="womens.html"><f:message key="menu.womens.b1"/></a>
+	            					<a href='<c:url value="/womens.html"/>'><f:message key="menu.womens.b1"/></a>
 	            					<ul>
-	            						<li><a href="standings_fixtures.html?team=BOMBASTIC_WOMENS&amp;season=WINTER_2015"><f:message key="teams.season.winter2015"/></a></li>
+	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            					</ul>
 	            				</li>
 	          				</ul>
@@ -106,34 +106,34 @@
 	    			</c:choose>
 	    			<c:choose>
 	      			<c:when test="${page=='news' || page=='post'}">
-	       				<li class="current"><a href="news.html"><f:message key="menu.item3"/></a></li>
+	       				<li class="current"><a href='<c:url value="/news.html"/>'><f:message key="menu.item3"/></a></li>
 	      			</c:when>
 	      			<c:otherwise>
-	        			<li><a href="news.html"><f:message key="menu.item3"/></a></li>
+	        			<li><a href='<c:url value="/news.html"/>'><f:message key="menu.item3"/></a></li>
 	      			</c:otherwise>
 	    			</c:choose>
 	    			<c:choose>
 	      			<c:when test="${page=='contact'}">
-	        			<li class="current"><a href="contact.html"><f:message key="menu.item5"/></a></li>
+	        			<li class="current"><a href='<c:url value="/contact.html"/>'><f:message key="menu.item5"/></a></li>
 	      			</c:when>
 	      			<c:otherwise>
-	        			<li><a href="contact.html"><f:message key="menu.item5"/></a></li>
+	        			<li><a href='<c:url value="/contact.html"/>'><f:message key="menu.item5"/></a></li>
 	      			</c:otherwise>
 	    			</c:choose>
 	    			<c:choose>
 	      			<c:when test="${page=='sponsors'}">
-	        				<li class="current"><a href="sponsors.html"><f:message key="menu.item6"/></a></li>
+	        				<li class="current"><a href='<c:url value="/sponsors.html"/>'><f:message key="menu.item6"/></a></li>
 	      			</c:when>
 	      			<c:otherwise>
-	        			<li><a href="sponsors.html"><f:message key="menu.item6"/></a></li>
+	        			<li><a href='<c:url value="/sponsors.html"/>'><f:message key="menu.item6"/></a></li>
 	      			</c:otherwise>
 	    			</c:choose>
 	    			<c:choose>
 	      			<c:when test="${page=='about'}">
-	       				<li class="current"><a href="about.html"><f:message key="menu.item2"/></a></li>
+	       				<li class="current"><a href='<c:url value="/about.html"/>'><f:message key="menu.item2"/></a></li>
 	      			</c:when>
 	      			<c:otherwise>
-	        			<li><a href="about.html"><f:message key="menu.item2"/></a></li>
+	        			<li><a href='<c:url value="/about.html"/>'><f:message key="menu.item2"/></a></li>
 	      			</c:otherwise>
 	    			</c:choose>
         		</ul>

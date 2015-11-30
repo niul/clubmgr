@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -73,9 +74,9 @@ public class TeamController extends BaseController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/standings_fixtures.html")
-	public ModelAndView standingsFixtures(@RequestParam(value = "team") String teamKey,
-			@RequestParam(value = "season") String seasonKey) {
+	@RequestMapping(value = "/season/{team}/{season}")
+	public ModelAndView teamSeason(@PathVariable(value = "team") String teamKey,
+			@PathVariable(value = "season") String seasonKey) {
 		log.debug("Getting Standings for " + teamKey + "/" + seasonKey);
 		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(teamKey, seasonKey);
 		List<Standing> standings = teamService.findStandings(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());

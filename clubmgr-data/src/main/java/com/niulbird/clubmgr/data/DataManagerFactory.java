@@ -21,6 +21,8 @@ public class DataManagerFactory {
 		
 		if (teamSeasonMap.getDataKey().equals("MWSL")) {
 			return new MWSLDataManager(teamService, teamSeasonMap, teamRegExStr, props);
+		} else if (teamSeasonMap.getDataKey().equals("RRSL")) {
+			return new RRSLDataManager(teamService, teamSeasonMap, teamRegExStr, props);
 		} else {
 			return new VMSLDataManager(teamService, teamSeasonMap, teamRegExStr, props);
 		}

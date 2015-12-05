@@ -1,4 +1,6 @@
-package com.niulbird.clubmgr.bfc;
+package com.niulbird.clubmgr.bfc.task;
+
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,31 +21,29 @@ public class TaskScheduler {
 	@Autowired
 	private WordPressDao wordPressDao;
 	
+	@Autowired
+	private Properties props;
+	
 	@Scheduled(cron="0 0 12 * * *")
     public void cachePosts() {
 		log.debug("Getting Cached Wordpress Posts");
 		wordPressDao.getAllPosts();
 		log.debug("Got Cached Wordpress Posts successfully");
     }
-	
+
 	@Scheduled(cron="0 30 */3 * * *")
     public void cacheFixturesStandings() {
 		log.debug("Updating Fixtures");
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "WINTER_2015", "Bombastic");
-		dataManager.updateFixtures();
-		dataManager.updateStandings();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_B", "WINTER_2015", "Bombastic");
-		dataManager.updateFixtures();
-		dataManager.updateStandings();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "WINTER_2015", "Bombastic");
-		dataManager.updateFixtures();
-		dataManager.updateStandings();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "WINTER_2015", "Bombastic");
-		dataManager.updateFixtures();
-		dataManager.updateStandings();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_WOMENS", "WINTER_2015", "Bombastic");
-		dataManager.updateFixtures();
-		dataManager.updateStandings();
+		log.debug("Props: " + props.getProperty("task.fixtures.list"));
+		String[] configs = props.getProperty("task.fixtures.list").split("\\|");
+		
+		for(String config : configs) {
+			log.debug("Config: " + config);
+			String[] parts = config.split(",");
+			DataManager dataManager = dataManagerFactory.createDataManager(parts[0], parts[1], parts[2]);
+			dataManager.updateFixtures();
+		}
+		
 		log.debug("Updated Fixtures successfully");
     }
 }

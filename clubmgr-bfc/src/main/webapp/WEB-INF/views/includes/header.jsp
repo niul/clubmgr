@@ -31,6 +31,7 @@
 	            							<a href='<c:url value="/mensA.html"/>'><f:message key="menu.mens.b1"/></a>
 	            							<ul>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
@@ -73,6 +74,7 @@
 	            							<a href='<c:url value="/mensA.html"/>'><f:message key="menu.mens.b1"/></a>
 	            							<ul>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>

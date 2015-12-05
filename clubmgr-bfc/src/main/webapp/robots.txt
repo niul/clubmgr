@@ -1,3 +1,3 @@
-Sitemap: http://bombasticfc.ca/sitemap.xml
+Sitemap: http://www.bombasticfc.ca/sitemap.xml
 User-Agent: *
 Disallow: /static

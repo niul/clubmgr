@@ -58,6 +58,7 @@
 	            					<a href='<c:url value="/womens.html"/>'><f:message key="menu.womens.b1"/></a>
 	            					<ul>
 	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
+	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>
 	            					</ul>
 	            				</li>
 	          				</ul>
@@ -101,6 +102,7 @@
 	            					<a href='<c:url value="/womens.html"/>'><f:message key="menu.womens.b1"/></a>
 	            					<ul>
 	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
+	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>
 	            					</ul>
 	            				</li>
 	          				</ul>

@@ -11,7 +11,7 @@
 	 							<fmt:formatDate value="${post.createDate}" var="formattedDate" 
                 					type="date" pattern="MMMM d, yyyy" />
       							<li>
-      								<a href="post.html?id=${post.id}">${post.title}</a><br>
+      								<a href='<c:url value="/post/${post.id}"/>'>${post.title}</a><br>
       								<sup>
       									${formattedDate} <f:message key="footer.list1.in"/>
       									<c:forEach var="category" items="${post.categories}">

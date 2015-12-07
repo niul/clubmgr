@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,8 +47,8 @@ public class NewsController extends BaseController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/post.html")
-	public ModelAndView post(@RequestParam(value="id") int code) {
+	@RequestMapping(value = "/post/{id}")
+	public ModelAndView post(@PathVariable(value="id") int code) {
 		ModelAndView mav = new ModelAndView();
 
 		ArrayList<Post> posts = wordPressDao.getAllPosts();

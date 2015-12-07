@@ -7,7 +7,7 @@
                 type="date" pattern="MMMM d, yyyy" />
 	  <article>
 	    <header>
-          <h3><a href="post.html?id=${post.id}">${post.title}</a></h3>
+          <h3><a href='<c:url value="/post/${post.id}"/>'>${post.title}</a></h3>
 		</header>
 		<sup>
 			<f:message key="news.posted.on"/>: ${formattedDate}
@@ -19,7 +19,7 @@
 		<p>
 		${post.excerpt}
 		<p>
-		<a href="post.html?id=${post.id}" class="button icon fa-file-text-o"><f:message key="news.posted.more"/></a>
+		<a href='<c:url value="/post/${post.id}"/>' class="button icon fa-file-text-o"><f:message key="news.posted.more"/></a>
 	  </article>
 	  
 	  </c:forEach>

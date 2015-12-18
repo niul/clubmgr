@@ -81,8 +81,7 @@ public class TeamController extends BaseController {
 		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(teamKey, seasonKey);
 		List<Standing> standings = teamService.findStandings(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
 		
-		if (standings.size() == 0 ||
-					new Date().after(new Date((standings.get(0).getCreated().getTime() + DAY_IN_MS)))) {
+		if (standings.size() == 0) {
 				log.debug("Updating Standings: [" + teamKey + "|" + seasonKey +"]");
 				DataManager dataManager = dataManagerFactory.createDataManager(teamKey, seasonKey, "Bombastic");
 				standings = dataManager.updateStandings();
@@ -90,8 +89,7 @@ public class TeamController extends BaseController {
 		
 		List<Fixture> fixtures = teamService.findFixtures(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
 		
-		if (fixtures.size() == 0 ||
-				new Date().after(new Date((fixtures.get(0).getCreated().getTime() + DAY_IN_MS)))) {
+		if (fixtures.size() == 0) {
 					log.debug("Updating Fixtures: [" + teamKey + "|" + seasonKey +"]");
 				DataManager dataManager = dataManagerFactory.createDataManager(teamKey, seasonKey, "Bombastic");
 				fixtures = dataManager.updateFixtures();

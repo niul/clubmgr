@@ -93,7 +93,7 @@ public class CESLUtil {
 					standing.setTeam(teamSeasonMap.getTeam());
 					standing.setPosition(i);
 					standing.setTeamName(columns.get(0).text());
-					standing.setGamesPlayed(new Integer(columns.get(2).text()));
+					standing.setGamesPlayed(new Integer(columns.get(1).text()));
 					standing.setWins(new Integer(columns.get(2).text()));
 					standing.setTies(new Integer(columns.get(3).text()));
 					standing.setLosses(new Integer(columns.get(4).text()));

@@ -42,6 +42,7 @@ public class TaskScheduler {
 			String[] parts = config.split(",");
 			DataManager dataManager = dataManagerFactory.createDataManager(parts[0], parts[1], parts[2]);
 			dataManager.updateFixtures();
+			dataManager.updateStandings();
 		}
 		
 		log.debug("Updated Fixtures successfully");

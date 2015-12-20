@@ -155,3 +155,10 @@ INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtur
     JOIN    seasons S ON S.season_key = 'WINTER_2015'
     WHERE    T.team_key = 'BOMBASTIC_WOMENS'
 );
+
+INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, created) (
+    SELECT    team_id, season_id, 'CESL', 'http://maxusis.com/cesl/', 'http://maxusis.com/cesl/schedule.aspx', CURRENT_TIMESTAMP
+    FROM    teams T
+    JOIN    seasons S ON S.season_key = 'SUMMER_2015'
+    WHERE    T.team_key = 'BOMBASTIC_MENS_CLASSICS'
+);

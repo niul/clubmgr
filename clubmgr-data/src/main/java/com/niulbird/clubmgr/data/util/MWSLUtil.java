@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.data.util;
+		package com.niulbird.clubmgr.data.util;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -23,7 +23,7 @@ import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 public class MWSLUtil {
     private final Log logger = LogFactory.getLog(getClass());
     
-	private static final String MWSL_URI = "http://www.mwsl.com/webapps/spappz_live";
+	private static final String MWSL_URI = "http://mwsl.com";
 	    
 	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		List<Fixture> fixtures = new ArrayList<Fixture>();
@@ -45,17 +45,17 @@ public class MWSLUtil {
 					Fixture fixture = new Fixture();
 					fixture.setDate(convertStringToDate(columns.get(2).text()));
 					fixture.setTime(convertStringToTime(columns.get(3).text()));
-					fixture.setHome(columns.get(4).text());
-					String[] score = columns.get(5).text().split("-");
+					fixture.setHome(columns.get(3).text());
+					String[] score = columns.get(4).text().split("-");
 					if (score.length == 2) {
 						fixture.setHomeScore(score[0].trim());
 						fixture.setAwayScore(score[1].trim());
 					}
-					fixture.setAway(columns.get(6).text());
-					fixture.setField(columns.get(7).text());
-					Elements fieldLink = columns.get(7).getElementsByTag("a");
+					fixture.setAway(columns.get(5).text());
+					fixture.setField(columns.get(6).text());
+					Elements fieldLink = columns.get(6).getElementsByTag("a");
 					if (fieldLink.size() > 0) {
-						String mwslFieldLink = MWSL_URI + "/" + fieldLink.get(0).attr("href");
+						String mwslFieldLink = MWSL_URI + fieldLink.get(0).attr("href");
 						String fieldMapUri = null;
 						try {
 							Document fieldDoc = Jsoup.connect(mwslFieldLink).get();
@@ -136,12 +136,12 @@ public class MWSLUtil {
 	
 	private Time convertStringToTime(String time) {
 		Time t = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("h:mma");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/d/yyyy h:mma");
 		long ms = 0;
 		try {
 			ms = sdf.parse(time).getTime();
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
+			logger.error("Cannot convert time: " + e.getMessage(), e);
 			return null;
 		}
 		t = new Time(ms);
@@ -150,12 +150,12 @@ public class MWSLUtil {
 	
 	private Date convertStringToDate(String date) {
 		Date d = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/d/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/d/yyyy h:mma");
 		long ms = 0;
 		try {
 			ms = sdf.parse(date).getTime();
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
+			logger.error("Cannot convert date: " + e.getMessage(), e);
 			return null;
 		}
 		d = new Date(ms);

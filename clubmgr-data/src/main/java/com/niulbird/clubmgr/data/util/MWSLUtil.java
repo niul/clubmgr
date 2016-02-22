@@ -30,7 +30,7 @@ public class MWSLUtil {
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).get();
 			Elements elements = doc.getElementsByTag("table");
-			int fixturesIndex = 13;
+			int fixturesIndex = 15;
 			
 			if (teamSeasonMap.getFixturesUri().contains("filesuffix=_old")) {
 				fixturesIndex = 12;
@@ -44,7 +44,7 @@ public class MWSLUtil {
 				if (columns.size() > 1) {
 					Fixture fixture = new Fixture();
 					fixture.setDate(convertStringToDate(columns.get(2).text()));
-					fixture.setTime(convertStringToTime(columns.get(3).text()));
+					fixture.setTime(convertStringToTime(columns.get(2).text()));
 					fixture.setHome(columns.get(3).text());
 					String[] score = columns.get(4).text().split("-");
 					if (score.length == 2) {
@@ -100,7 +100,7 @@ public class MWSLUtil {
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).get();
 			Elements elements = doc.getElementsByTag("table");
-			int fixturesIndex = 12;
+			int fixturesIndex = 14;
 			
 			if (teamSeasonMap.getFixturesUri().contains("filesuffix=_old")) {
 				fixturesIndex = 11;

@@ -33,7 +33,7 @@ public class MWSLUtil {
 			int fixturesIndex = 15;
 			
 			if (teamSeasonMap.getFixturesUri().contains("filesuffix=_old")) {
-				fixturesIndex = 12;
+				fixturesIndex = 15;
 			}
 			Element  element = elements.get(fixturesIndex); // nth table with no ID or Class
 			
@@ -98,12 +98,12 @@ public class MWSLUtil {
 	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).get();
+			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(10*1000).get();
 			Elements elements = doc.getElementsByTag("table");
 			int fixturesIndex = 14;
 			
 			if (teamSeasonMap.getFixturesUri().contains("filesuffix=_old")) {
-				fixturesIndex = 11;
+				fixturesIndex = 14;
 			}
 			Element  element = elements.get(fixturesIndex); // 12th table with no ID or Class
 			

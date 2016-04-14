@@ -93,15 +93,20 @@ public class CESLUtil {
 					standing.setTeam(teamSeasonMap.getTeam());
 					standing.setPosition(i);
 					standing.setTeamName(columns.get(0).text());
-					standing.setGamesPlayed(new Integer(columns.get(1).text()));
-					standing.setWins(new Integer(columns.get(2).text()));
-					standing.setTies(new Integer(columns.get(3).text()));
-					standing.setLosses(new Integer(columns.get(4).text()));
-					standing.setPoints(new Integer(columns.get(6).text()));
-					standing.setGoalsFor(new Integer(columns.get(7).text()));
-					standing.setGoalsAgainst(new Integer(columns.get(8).text()));
-					standings.add(standing);
-					logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
+					
+					try {
+						standing.setGamesPlayed(new Integer(columns.get(1).text()));
+						standing.setWins(new Integer(columns.get(2).text()));
+						standing.setTies(new Integer(columns.get(3).text()));
+						standing.setLosses(new Integer(columns.get(4).text()));
+						standing.setPoints(new Integer(columns.get(6).text()));
+						standing.setGoalsFor(new Integer(columns.get(7).text()));
+						standing.setGoalsAgainst(new Integer(columns.get(8).text()));
+						standings.add(standing);
+						logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
+					} catch (NumberFormatException nfe) {
+						logger.error("Number Format issue: " + nfe.getMessage());
+					}
 				}
 			}
 		} catch (IOException e) {

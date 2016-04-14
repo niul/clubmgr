@@ -113,6 +113,10 @@ public class CESLUtil {
 	private Time convertStringToTime(String time) {
 		Time t = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("hmma");
+		
+		if (time.length() == 5)
+			time = new String("0").concat(time);
+		
 		long ms = 0;
 		try {
 			ms = sdf.parse(time).getTime();

@@ -43,6 +43,7 @@
 	            						<li>
 	            							<a href='<c:url value="/mensClassics.html"/>'><f:message key="menu.mens.b3"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/SUMMER_2016"/>'><f:message key="teams.season.summer2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>
 	            							</ul>

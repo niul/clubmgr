@@ -110,16 +110,20 @@ public class RRSLUtil {
 					standing.setTeam(teamSeasonMap.getTeam());
 					standing.setPosition(new Integer(i-1));
 					standing.setTeamName(columns.get(0).text());
-					standing.setWins(new Integer(columns.get(1).text().replaceAll("[^0-9]", "")));
-					standing.setTies(new Integer(columns.get(2).text().replaceAll("[^0-9]", "")));
-					standing.setLosses(new Integer(columns.get(3).text().replaceAll("[^0-9]", "")));
-					standing.setGoalsFor(new Integer(columns.get(4).text().replaceAll("[^0-9]", "")));
-					standing.setGoalsAgainst(new Integer(columns.get(5).text().trim().replaceAll("[^0-9]", "")));
-					standing.setPoints(new Integer(columns.get(6).text().replaceAll("[^0-9]", "")));
-					standing.setGamesPlayed(standing.getWins() + standing.getTies() + standing.getLosses());
+					try {
+						standing.setWins(new Integer(columns.get(1).text().replaceAll("[^0-9]", "")));
+						standing.setTies(new Integer(columns.get(2).text().replaceAll("[^0-9]", "")));
+						standing.setLosses(new Integer(columns.get(3).text().replaceAll("[^0-9]", "")));
+						standing.setGoalsFor(new Integer(columns.get(4).text().replaceAll("[^0-9]", "")));
+						standing.setGoalsAgainst(new Integer(columns.get(5).text().trim().replaceAll("[^0-9]", "")));
+						standing.setPoints(new Integer(columns.get(6).text().replaceAll("[^0-9]", "")));
+						standing.setGamesPlayed(standing.getWins() + standing.getTies() + standing.getLosses());
 					
-					standings.add(standing);
-					logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
+						standings.add(standing);
+						logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
+					} catch (NumberFormatException nfe) {
+						logger.error("Number Format issue: " + nfe.getMessage());
+					}
 				}
 			}
 		} catch (IOException e) {

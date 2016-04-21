@@ -2,14 +2,12 @@ package com.niulbird.clubmgr.data.util;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
@@ -21,9 +19,12 @@ import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Standing;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 
-public class CESLUtil {
+public class CESLUtil extends BaseUtil {
 	// Logger for this class and subclasses
     private final Log logger = LogFactory.getLog(getClass());
+    
+    private final static String TIME_FORMAT = "hmma";
+    private final static String DATE_FORMAT = "d MMMMM, yyyy";
     
     private Properties props;
     
@@ -49,10 +50,10 @@ public class CESLUtil {
 					String strDate = columns.get(0).text().substring(columns.get(0).text().indexOf(" ")).replaceAll("-", " ").replaceAll("[^ a-zA-Z0-9]", "").trim();
 					if (!strDate.isEmpty()) {
 						Calendar now = Calendar.getInstance();
-						date = convertStringToDate(strDate + ", " + now.get(Calendar.YEAR));
+						date = convertStringToDate(strDate + ", " + now.get(Calendar.YEAR), DATE_FORMAT);
 					}
 					fixture.setDate(date);
-					fixture.setTime(convertStringToTime(columns.get(1).text().trim()));
+					fixture.setTime(convertStringToTime(columns.get(1).text().trim(), TIME_FORMAT));
 					fixture.setField(columns.get(2).text().trim());
 					fixture.setHome(columns.get(3).text().trim());
 					fixture.setAway(columns.get(4).text().trim());
@@ -92,18 +93,21 @@ public class CESLUtil {
 					standing.setSeason(teamSeasonMap.getSeason());
 					standing.setTeam(teamSeasonMap.getTeam());
 					standing.setPosition(i);
-					standing.setTeamName(columns.get(0).text());
+					standing.setTeamName(columns.get(0).text().replaceAll("\u00A0", ""));
 					
 					try {
-						standing.setGamesPlayed(new Integer(columns.get(1).text()));
-						standing.setWins(new Integer(columns.get(2).text()));
-						standing.setTies(new Integer(columns.get(3).text()));
-						standing.setLosses(new Integer(columns.get(4).text()));
-						standing.setPoints(new Integer(columns.get(6).text()));
-						standing.setGoalsFor(new Integer(columns.get(7).text()));
-						standing.setGoalsAgainst(new Integer(columns.get(8).text()));
-						standings.add(standing);
-						logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
+						standing.setGamesPlayed(getStripedInt(columns.get(1).text()));
+						standing.setWins(getStripedInt(columns.get(2).text()));
+						standing.setTies(getStripedInt(columns.get(3).text()));
+						standing.setLosses(getStripedInt(columns.get(4).text()));
+						standing.setPoints(getStripedInt(columns.get(6).text()));
+						standing.setGoalsFor(getStripedInt(columns.get(7).text()));
+						standing.setGoalsAgainst(getStripedInt(columns.get(8).text()));
+						
+						if (StringUtils.isNotBlank(standing.getTeamName())) {
+							standings.add(standing);
+							logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
+						}
 					} catch (NumberFormatException nfe) {
 						logger.error("Number Format issue: " + nfe.getMessage());
 					}
@@ -113,37 +117,5 @@ public class CESLUtil {
 			logger.error("Error getting Fixtures: " + e.getMessage(), e);
 		}
 		return standings;
-	}
-	
-	private Time convertStringToTime(String time) {
-		Time t = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("hmma");
-		
-		if (time.length() == 5)
-			time = new String("0").concat(time);
-		
-		long ms = 0;
-		try {
-			ms = sdf.parse(time).getTime();
-		} catch (ParseException e) {
-			logger.error(e.getMessage(), e);
-			return null;
-		}
-		t = new Time(ms);
-		return t;
-	}
-	
-	private Date convertStringToDate(String date) {
-		Date d = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("d MMMMM, yyyy");
-		long ms = 0;
-		try {
-			ms = sdf.parse(date).getTime();
-		} catch (ParseException e) {
-			logger.error(e.getMessage(), e);
-			return null;
-		}
-		d = new Date(ms);
-		return d;
 	}
 }

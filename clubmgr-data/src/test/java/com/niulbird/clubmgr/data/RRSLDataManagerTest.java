@@ -41,7 +41,7 @@ public class RRSLDataManagerTest {
 
 	@Test
 	@Rollback(false)
-	public void vmslUpdateFixturesTest() {
+	public void rrslUpdateFixturesTest() {
 		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "SUMMER_2015", "Bombastic");
 		List<Fixture> fixtures = dataManager.updateFixtures();
 		assertNotNull(fixtures);
@@ -49,7 +49,7 @@ public class RRSLDataManagerTest {
 
 	@Test
 	@Rollback(false)
-	public void vmslUpdateStandingsTest() {
+	public void rrslUpdateStandingsTest() {
 		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "SUMMER_2015", "Bombastic");
 		List<Standing> fixtures = dataManager.updateStandings();
 		assertNotNull(fixtures);

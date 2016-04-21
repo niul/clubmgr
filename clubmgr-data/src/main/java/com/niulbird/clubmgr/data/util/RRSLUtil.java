@@ -2,9 +2,6 @@ package com.niulbird.clubmgr.data.util;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -21,9 +18,12 @@ import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Standing;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 
-public class RRSLUtil {
+public class RRSLUtil extends BaseUtil {
 	// Logger for this class and subclasses
     private final Log logger = LogFactory.getLog(getClass());
+    
+    private final static String TIME_FORMAT = "h:mma";
+    private final static String DATE_FORMAT = "MMMMM d, yyyy";
     
     private Properties props;
     
@@ -32,8 +32,6 @@ public class RRSLUtil {
     }
     
 	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
-		String[] uriOverrides = props.getProperty("vmsl.url.override.values").split(",");
-		logger.debug("Found " + uriOverrides.length + " URI Overrides");
 		
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
@@ -52,23 +50,28 @@ public class RRSLUtil {
 					String strDate = columns.get(0).text().replaceAll("[^ a-zA-Z0-9]", "").trim();
 					if (!strDate.isEmpty()) {
 						Calendar now = Calendar.getInstance();
-						date = convertStringToDate(strDate + ", " + now.get(Calendar.YEAR));
+						date = convertStringToDate(strDate.replaceAll("(?:st|nd|rd|th)", "") + ", " + now.get(Calendar.YEAR), DATE_FORMAT);
 					}
 					fixture.setDate(date);
 					fixture.setHome(columns.get(1).text());
 					fixture.setAway(columns.get(2).text());
 					
-					String[] fieldTimeStr = columns.get(3).getElementsByTag("div").get(0).html().split("<br>");
-					if (fieldTimeStr.length == 2) {
-						fixture.setField(fieldTimeStr[0].replaceAll("[^ a-zA-Z0-9]", ""));
-						fixture.setTime(convertStringToTime(fieldTimeStr[1].replaceAll("[^:a-zA-Z0-9]", "")));
-					} else {
-						fixture.setField(columns.get(3).getElementsByTag("div").get(0).ownText().replaceAll("[^ a-zA-Z0-9]", ""));
-						
-						Element e1 = columns.get(3).getElementsByTag("div").get(0);
-						Element e2 = e1.getElementsByTag("div").get(1);
-						fixture.setTime(convertStringToTime(e2.text().replaceAll("[^:a-zA-Z0-9]", "")));
+					String[] fieldTimeStr = columns.get(3).getElementsByTag("div").get(0).html().replaceAll("\\<.*?>", " ").split(" ");
+					String field = new String();
+					String time = new String();
+					
+					logger.debug("FULL STRING: " + columns.get(3).getElementsByTag("div").get(0).html());
+					for (String s : fieldTimeStr) {
+						logger.debug("STRING: " + s);
+						s = s.replaceAll(" ", "");
+						if (Character.isDigit(s.charAt(0))) {
+							time = s.substring(0, 6);
+						} else {
+							field = field.concat(s + " ");
+						}
 					}
+					fixture.setField(field);
+					fixture.setTime(convertStringToTime(time, TIME_FORMAT));
 					
 					String[] score = columns.get(4).text().replaceAll("[^-0-9]", "").split("-");
 					if (score.length == 2) {
@@ -111,12 +114,12 @@ public class RRSLUtil {
 					standing.setPosition(new Integer(i-1));
 					standing.setTeamName(columns.get(0).text());
 					try {
-						standing.setWins(new Integer(columns.get(1).text().replaceAll("[^0-9]", "")));
-						standing.setTies(new Integer(columns.get(2).text().replaceAll("[^0-9]", "")));
-						standing.setLosses(new Integer(columns.get(3).text().replaceAll("[^0-9]", "")));
-						standing.setGoalsFor(new Integer(columns.get(4).text().replaceAll("[^0-9]", "")));
-						standing.setGoalsAgainst(new Integer(columns.get(5).text().trim().replaceAll("[^0-9]", "")));
-						standing.setPoints(new Integer(columns.get(6).text().replaceAll("[^0-9]", "")));
+						standing.setWins(getStripedInt(columns.get(1).text()));
+						standing.setTies(getStripedInt(columns.get(2).text()));
+						standing.setLosses(getStripedInt(columns.get(3).text()));
+						standing.setGoalsFor(getStripedInt(columns.get(4).text()));
+						standing.setGoalsAgainst(getStripedInt(columns.get(5).text()));
+						standing.setPoints(getStripedInt(columns.get(6).text()));
 						standing.setGamesPlayed(standing.getWins() + standing.getTies() + standing.getLosses());
 					
 						standings.add(standing);
@@ -130,33 +133,5 @@ public class RRSLUtil {
 			logger.error("Error getting Fixtures: " + e.getMessage(), e);
 		}
 		return standings;
-	}
-	
-	private Time convertStringToTime(String time) {
-		Time t = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("h:mma");
-		long ms = 0;
-		try {
-			ms = sdf.parse(time).getTime();
-		} catch (ParseException e) {
-			logger.error(e.getMessage(), e);
-			return null;
-		}
-		t = new Time(ms);
-		return t;
-	}
-	
-	private Date convertStringToDate(String date) {
-		Date d = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("MMMMM d, yyyy");
-		long ms = 0;
-		try {
-			ms = sdf.parse(date.replaceAll("(?:st|nd|rd|th)", "")).getTime();
-		} catch (ParseException e) {
-			logger.error(e.getMessage(), e);
-			return null;
-		}
-		d = new Date(ms);
-		return d;
 	}
 }

@@ -34,24 +34,24 @@ public class CESLDataManagerTest {
 	}
 
 	@Test
-	public void createDataManagerTest() {
+	public void createCeslDataManagerTest() {
 		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "SUMMER_2015", "Bombastic");
 		assertTrue(dataManager instanceof CESLDataManager);
 	}
 
 	@Test
 	@Rollback(false)
-	public void vmslUpdateFixturesTest() {
+	public void ceslUpdateFixturesTest() {
 		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "SUMMER_2015", "Bombastic");
 		List<Fixture> fixtures = dataManager.updateFixtures();
 		assertNotNull(fixtures);
 	}
-/**
+
 	@Test
 	@Rollback(false)
-	public void vmslUpdateStandingsTest() {
+	public void ceslUpdateStandingsTest() {
 		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "SUMMER_2015", "Bombastic");
 		List<Standing> fixtures = dataManager.updateStandings();
 		assertNotNull(fixtures);
-	}*/
+	}
 }

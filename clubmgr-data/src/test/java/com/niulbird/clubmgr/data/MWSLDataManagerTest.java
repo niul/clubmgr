@@ -44,8 +44,6 @@ public class MWSLDataManagerTest {
 	public void mwslUpdateFixturesTest() {
 		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_WOMENS", "SUMMER_2015", "Bombastic");
 		List<Fixture> fixtures = dataManager.updateFixtures();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_WOMENS", "WINTER_2015", "Bombastic");
-		fixtures = dataManager.updateFixtures();
 		assertNotNull(fixtures);
 	}
 
@@ -54,8 +52,6 @@ public class MWSLDataManagerTest {
 	public void mwslUpdateStandingsTest() {
 		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_WOMENS", "SUMMER_2015", "Bombastic");
 		List<Standing> fixtures = dataManager.updateStandings();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_WOMENS", "WINTER_2015", "Bombastic");
-		fixtures = dataManager.updateStandings();
 		assertNotNull(fixtures);
 	}
 }

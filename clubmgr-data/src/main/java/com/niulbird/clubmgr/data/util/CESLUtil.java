@@ -23,7 +23,7 @@ public class CESLUtil extends BaseUtil {
 	// Logger for this class and subclasses
     private final Log logger = LogFactory.getLog(getClass());
     
-    private final static String TIME_FORMAT = "hmma";
+    private final static String TIME_FORMAT = "hhmma";
     private final static String DATE_FORMAT = "d MMMMM, yyyy";
     
     private Properties props;

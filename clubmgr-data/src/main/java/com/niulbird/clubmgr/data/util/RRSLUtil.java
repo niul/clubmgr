@@ -60,9 +60,7 @@ public class RRSLUtil extends BaseUtil {
 					String field = new String();
 					String time = new String();
 					
-					logger.debug("FULL STRING: " + columns.get(3).getElementsByTag("div").get(0).html());
 					for (String s : fieldTimeStr) {
-						logger.debug("STRING: " + s);
 						s = s.replaceAll(" ", "");
 						if (Character.isDigit(s.charAt(0))) {
 							time = s.substring(0, 6);

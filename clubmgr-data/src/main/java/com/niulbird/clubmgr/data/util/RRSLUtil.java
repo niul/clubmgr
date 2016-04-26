@@ -10,6 +10,7 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
+import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -25,8 +26,6 @@ public class RRSLUtil extends BaseUtil {
     private final static String TIME_FORMAT = "h:mma";
     private final static String DATE_FORMAT = "MMMMM d, yyyy";
     
-    private Properties props;
-    
     public RRSLUtil(Properties props) {
     	this.props = props;
     }
@@ -35,7 +34,7 @@ public class RRSLUtil extends BaseUtil {
 		
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).get();
+			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByClass("webs-table");
 			Element  element = elements.get(1);
 			
@@ -62,7 +61,7 @@ public class RRSLUtil extends BaseUtil {
 					
 					for (String s : fieldTimeStr) {
 						s = s.replaceAll(" ", "");
-						if (Character.isDigit(s.charAt(0))) {
+						if (!StringUtil.isBlank(s) && Character.isDigit(s.charAt(0))) {
 							time = s.substring(0, 6);
 						} else {
 							field = field.concat(s + " ");
@@ -97,7 +96,7 @@ public class RRSLUtil extends BaseUtil {
 	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).get();
+			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByClass("webs-table");
 			Element  element = elements.get(0);
 			

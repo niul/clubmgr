@@ -36,7 +36,7 @@ public class CESLUtil extends BaseUtil {
 		Date date = null;
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).get();
+			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByTag("table");
 			Element  element = elements.get(5); // Fifth table without a class or ID.
 			
@@ -80,7 +80,7 @@ public class CESLUtil extends BaseUtil {
 	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getStandingsUri()).get();
+			Document doc = Jsoup.connect(teamSeasonMap.getStandingsUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByTag("table");
 			Element  element = elements.get(4); // Fifth table without a class or ID.
 			

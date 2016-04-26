@@ -1,7 +1,6 @@
 package com.niulbird.clubmgr.bfc;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -25,8 +24,6 @@ import com.niulbird.clubmgr.db.service.TeamService;
 @Controller
 public class TeamController extends BaseController {
 	private static final Logger log = Logger.getLogger(TeamController.class);
-	
-	private final static long DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 	private static final String FIXTURES = "fixtures";
 	private static final String PAGE = "page";

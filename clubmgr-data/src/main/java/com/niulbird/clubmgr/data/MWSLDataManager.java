@@ -19,7 +19,7 @@ public class MWSLDataManager extends DataManager {
 	protected MWSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, 
 			String teamRegExStr, Properties props) {
 		super(teamService, teamSeasonMap, teamRegExStr, props);
-		mwslUtil = new MWSLUtil();
+		mwslUtil = new MWSLUtil(props);
 	}
 
 	@Override

@@ -4,12 +4,15 @@ import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public abstract class BaseUtil {
     private final Log logger = LogFactory.getLog(getClass());
+    
+    protected Properties props;
     
     protected Integer getStripedInt(String input) {
     	Integer i = new Integer(0);

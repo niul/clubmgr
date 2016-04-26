@@ -3,6 +3,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -23,11 +24,15 @@ public class MWSLUtil extends BaseUtil {
     private final static String DATE_FORMAT = "MM/d/yyyy h:mma";
     
 	private static final String MWSL_URI = "http://mwsl.com";
-	    
+    
+    public MWSLUtil(Properties props) {
+    	this.props = props;
+    }
+    
 	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).get();
+			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByTag("table");
 			int fixturesIndex = 14;
 			
@@ -97,7 +102,7 @@ public class MWSLUtil extends BaseUtil {
 	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(10*1000).get();
+			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).timeout(10*1000).get();
 			Elements elements = doc.getElementsByTag("table");
 			int fixturesIndex = 13;
 			

@@ -20,11 +20,9 @@ import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Standing;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 
-public class VMSLUtil {
+public class VMSLUtil extends BaseUtil {
 	// Logger for this class and subclasses
     private final Log logger = LogFactory.getLog(getClass());
-    
-    private Properties props;
     
     public VMSLUtil(Properties props) {
     	this.props = props;
@@ -36,7 +34,7 @@ public class VMSLUtil {
 		
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).get();
+			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByClass("matchtable");
 			Element  element = elements.get(0);
 			
@@ -86,7 +84,7 @@ public class VMSLUtil {
 	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).get();
+			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByClass("standingstable");
 			Element  element = elements.get(0);
 			

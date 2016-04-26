@@ -18,9 +18,9 @@
 	    <tbody>
 	    <c:forEach var="fixture" items="${fixtures}">
 	      <tr>
-	  	    <td class="not-small"><fmt:formatDate value="${fixture.date}" pattern="MM/dd/YYYY" /> <fmt:formatDate value="${fixture.time}" pattern="h:mma" /></td>
+	  	    <td class="not-small"><fmt:formatDate value="${fixture.date}" pattern="E MMM d, YYYY" /> @ <fmt:formatDate value="${fixture.time}" pattern="h:mma" /></td>
 	  	    <td class="only-small">
-	  	    	<fmt:formatDate value="${fixture.date}" pattern="MMM, d" /> <fmt:formatDate value="${fixture.time}" pattern="h:mma" />
+	  	    	<fmt:formatDate value="${fixture.date}" pattern="E MMM, d" /> <fmt:formatDate value="${fixture.time}" pattern="h:mma" />
 	  	    	<br/>
 	  	    	<div id="arrow${fixture.fixtureId}" class="expand icon"></div>
 	  	    	<div class="field"><a class="field" onclick='expand_field(fixture${fixture.fixtureId}, "${fixture.field}", "${fixture.fieldMapUri}", arrow${fixture.fixtureId})'>Field</a></div>

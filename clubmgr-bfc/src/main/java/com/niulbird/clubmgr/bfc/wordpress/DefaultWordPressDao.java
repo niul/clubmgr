@@ -97,7 +97,7 @@ public class DefaultWordPressDao  implements WordPressDao {
 	}
 	
 	@Override
-	@Caching(evict = { @CacheEvict("postCache"), @CacheEvict("postsCache"), @CacheEvict("stickyItemsCache") })
+	@Caching(evict = { @CacheEvict("postCache"), @CacheEvict("postsCache") })
 	public void clearAllCache() {
 		
 	}

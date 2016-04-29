@@ -96,13 +96,13 @@ public class CESLUtil extends BaseUtil {
 					standing.setTeamName(columns.get(0).text().replaceAll("\u00A0", ""));
 					
 					try {
-						standing.setGamesPlayed(getStripedInt(columns.get(1).text()));
+						standing.setGamesPlayed(getStripedInt(columns.get(1).text().split("\\s+")[0]));
 						standing.setWins(getStripedInt(columns.get(2).text()));
 						standing.setTies(getStripedInt(columns.get(3).text()));
 						standing.setLosses(getStripedInt(columns.get(4).text()));
-						standing.setPoints(getStripedInt(columns.get(6).text()));
-						standing.setGoalsFor(getStripedInt(columns.get(7).text()));
-						standing.setGoalsAgainst(getStripedInt(columns.get(8).text()));
+						standing.setPoints(getStripedInt(columns.get(5).text()));
+						standing.setGoalsFor(getStripedInt(columns.get(6).text()));
+						standing.setGoalsAgainst(getStripedInt(columns.get(7).text()));
 						
 						if (StringUtils.isNotBlank(standing.getTeamName())) {
 							standings.add(standing);

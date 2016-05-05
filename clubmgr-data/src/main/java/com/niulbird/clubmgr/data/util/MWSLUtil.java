@@ -34,10 +34,10 @@ public class MWSLUtil extends BaseUtil {
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByTag("table");
-			int fixturesIndex = 14;
+			int fixturesIndex = 15;
 			
 			if (teamSeasonMap.getFixturesUri().contains("filesuffix=_old")) {
-				fixturesIndex = 14;
+				fixturesIndex = 15;
 			}
 			Element  element = elements.get(fixturesIndex); // nth table with no ID or Class
 			
@@ -104,10 +104,10 @@ public class MWSLUtil extends BaseUtil {
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).timeout(10*1000).get();
 			Elements elements = doc.getElementsByTag("table");
-			int fixturesIndex = 13;
+			int fixturesIndex = 14;
 			
 			if (teamSeasonMap.getFixturesUri().contains("filesuffix=_old")) {
-				fixturesIndex = 13;
+				fixturesIndex = 14;
 			}
 			Element  element = elements.get(fixturesIndex); // 12th table with no ID or Class
 			

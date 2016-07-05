@@ -2,8 +2,8 @@
 
 	<article>
       <header>
-	    <h1>${teamseasonmap.team.name} - ${teamseasonmap.season.name}</h1>
-        <h3><f:message key="standings.title"/></h3>
+	    <h1>${teamseasonmap.team.name} / ${teamseasonmap.season.name}</h1>
+        <h3><f:message key="standings.title"/> / <a href="${teamseasonmap.standingsUri}" target="_blank">${teamseasonmap.description}</a></h3>
       </header>
 	  <table class="default standings">
 	    <thead>
@@ -39,7 +39,7 @@
 	
 		<article>
       <header>
-        <h3><f:message key="fixtures.title"/></h3>
+        <h3><f:message key="fixtures.title"/> / <a href="${teamseasonmap.fixturesUri}" target="_blank">${teamseasonmap.description}</a></h3>
       </header>
 	  <table class="default fixtures u-full-width">
 	    <thead>

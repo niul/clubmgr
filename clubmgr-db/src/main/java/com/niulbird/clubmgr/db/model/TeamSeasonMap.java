@@ -38,6 +38,8 @@ public final class TeamSeasonMap {
 	private String standingsUri;
 	
 	private Date created;
+	private String description;
+	
 
 	public TeamSeasonMap () {
 		created = new Date();
@@ -97,5 +99,13 @@ public final class TeamSeasonMap {
 
 	public void setCreated(Date created) {
 		this.created = created;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

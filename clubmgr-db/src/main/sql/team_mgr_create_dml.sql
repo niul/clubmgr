@@ -121,43 +121,43 @@ INSERT INTO standings (team_id, season_id, position, team, gamesPlayed, wins, ti
     WHERE    T.team_key = 'BOMBASTIC_MENS_A'
 );
 
-INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, created) (
-    SELECT    team_id, season_id, 'VMSL', 'http://vmslsoccer.com/division-2b/', 'http://vmslsoccer.com/division-2b/', CURRENT_TIMESTAMP
+INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, description, created) (
+    SELECT    team_id, season_id, 'VMSL', 'http://vmslsoccer.com/division-2b/', 'http://vmslsoccer.com/division-2b/', 'VMSL Division 2', CURRENT_TIMESTAMP
     FROM    teams T
     JOIN    seasons S ON S.season_key = 'WINTER_2015'
     WHERE    T.team_key = 'BOMBASTIC_MENS_A'
 );
 
-INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, created) (
-    SELECT    team_id, season_id, 'VMSL', 'http://vmslsoccer.com/cat-division/', 'http://vmslsoccer.com/cat-division/', CURRENT_TIMESTAMP
+INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, description, created) (
+    SELECT    team_id, season_id, 'VMSL', 'http://vmslsoccer.com/cat-division/', 'http://vmslsoccer.com/cat-division/', 'VMSL Division CAT', CURRENT_TIMESTAMP
     FROM    teams T
     JOIN    seasons S ON S.season_key = 'WINTER_2015'
     WHERE    T.team_key = 'BOMBASTIC_MENS_B'
 );
 
-INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, created) (
-    SELECT    team_id, season_id, 'VMSL', 'http://vmslsoccer.com/masters-division-1/', 'http://vmslsoccer.com/masters-division-1/', CURRENT_TIMESTAMP
+INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, description, created) (
+    SELECT    team_id, season_id, 'VMSL', 'http://vmslsoccer.com/masters-division-1/', 'http://vmslsoccer.com/masters-division-1/', 'VMSL Masters Division 1', CURRENT_TIMESTAMP
     FROM    teams T
     JOIN    seasons S ON S.season_key = 'WINTER_2015'
     WHERE    T.team_key = 'BOMBASTIC_MENS_CLASSICS'
 );
 
-INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, created) (
-    SELECT    team_id, season_id, 'VMSL', 'http://vmslsoccer.com/masters-over-40s-division-1/', 'http://vmslsoccer.com/masters-over-40s-division-1/', CURRENT_TIMESTAMP
+INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, description, created) (
+    SELECT    team_id, season_id, 'VMSL', 'http://vmslsoccer.com/masters-over-40s-division-1/', 'http://vmslsoccer.com/masters-over-40s-division-1/', 'VMSL Over 40s Division 1', CURRENT_TIMESTAMP
     FROM    teams T
     JOIN    seasons S ON S.season_key = 'WINTER_2015'
     WHERE    T.team_key = 'BOMBASTIC_MENS_JURASSIC'
 );
 
-INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, created) (
-    SELECT    team_id, season_id, 'MWSL', 'http://mwsl.com/webapps/spappz_live/team_page_mwsl?id=1920', 'http://mwsl.com/webapps/spappz_live/team_page_mwsl?id=1920', CURRENT_TIMESTAMP
+INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, description, created) (
+    SELECT    team_id, season_id, 'MWSL', 'http://mwsl.com/webapps/spappz_live/team_page_mwsl?id=1920', 'http://mwsl.com/webapps/spappz_live/team_page_mwsl?id=1920', 'MWSL Division 1C', CURRENT_TIMESTAMP
     FROM    teams T
     JOIN    seasons S ON S.season_key = 'WINTER_2015'
     WHERE    T.team_key = 'BOMBASTIC_WOMENS'
 );
 
-INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, created) (
-    SELECT    team_id, season_id, 'CESL', 'http://maxusis.com/cesl/', 'http://maxusis.com/cesl/schedule.aspx', CURRENT_TIMESTAMP
+INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtures_uri, description, created) (
+    SELECT    team_id, season_id, 'CESL', 'http://maxusis.com/cesl/', 'http://maxusis.com/cesl/schedule.aspx', 'CESL Summer League', CURRENT_TIMESTAMP
     FROM    teams T
     JOIN    seasons S ON S.season_key = 'SUMMER_2015'
     WHERE    T.team_key = 'BOMBASTIC_MENS_CLASSICS'

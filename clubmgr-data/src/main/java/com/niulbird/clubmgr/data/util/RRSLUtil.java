@@ -55,16 +55,24 @@ public class RRSLUtil extends BaseUtil {
 					fixture.setHome(columns.get(1).text());
 					fixture.setAway(columns.get(2).text());
 					
-					String[] fieldTimeStr = columns.get(3).getElementsByTag("div").get(0).html().replaceAll("\\<.*?>", " ").split(" ");
+					String[] fieldTimeStr = columns.get(3).getElementsByTag("div").get(0).html().replaceAll("\\<.*?>", " ").replaceAll("  ", " ").split(" ");
 					String field = new String();
 					String time = new String();
+					String hour = new String();
 					
 					for (String s : fieldTimeStr) {
-						s = s.replaceAll(" ", "");
-						if (!StringUtil.isBlank(s) && Character.isDigit(s.charAt(0))) {
-							time = s.substring(0, 6);
-						} else {
-							field = field.concat(s + " ");
+						if (!StringUtil.isBlank(s) && !s.equalsIgnoreCase(" ") && !s.equalsIgnoreCase("\n")) {
+							if (Character.isDigit(s.charAt(0))) {
+								if (s.length() == 1) { 
+									hour = s;
+								} else {
+									time = s.substring(0, 6);
+								}
+							} else if (s.charAt(0) == ':') {
+								time = hour.concat(s.substring(0, 5));
+							} else {
+								field = field.concat(s.replace("&nbsp;", "") + " ");
+							}
 						}
 					}
 					fixture.setField(field);

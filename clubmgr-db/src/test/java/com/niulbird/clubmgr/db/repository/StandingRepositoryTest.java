@@ -79,10 +79,10 @@ public class StandingRepositoryTest {
 	
 	@Test
 	public void findOneTest() {
-		Standing standing = repository.findOne(1);
-		assertNotNull(standing);
-		assertNotNull(standing.getTeam());
-		assertNotNull(standing.getSeason());
+		Standing testStanding = repository.findOne(standing.getStandingId());
+		assertNotNull(testStanding);
+		assertNotNull(testStanding.getTeam());
+		assertNotNull(testStanding.getSeason());
 	}
 	
 	@Test
@@ -94,10 +94,9 @@ public class StandingRepositoryTest {
 	@Test
 	@Rollback(false)
 	public void findFixtureByTeamAndSeasonTest() {
-		club = clubRepository.findByClubKey("STANDING_UNIT_TEST");
-		team = teamRepository.findByTeamKey("STANDING_UNIT_TEST");
-		season = seasonRepository.findBySeasonKey("STANDING_UNIT_TEST");
-		List<Standing> standings = repository.findByTeamAndSeason(team, season);
+		Team testTeam = teamRepository.findByTeamKey("STANDING_UNIT_TEST");
+		Season testSeason = seasonRepository.findBySeasonKey("STANDING_UNIT_TEST");
+		List<Standing> standings = repository.findByTeamAndSeason(testTeam, testSeason);
 		assertNotNull(standings);
 	}
 	

@@ -43,7 +43,7 @@ public class SeasonRepositoryTest {
 	
 	@Test
 	public void findSeasonByKeyTest() {
-		Season season = repository.findBySeasonKey("SEASON_UNIT_TEST");
-		assertNotNull(season);
+		Season testSeason = repository.findBySeasonKey("SEASON_UNIT_TEST");
+		assertNotNull(testSeason);
 	}
 }

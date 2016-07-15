@@ -44,7 +44,7 @@ public class ClubRepositoryTest {
 	
 	@Test
 	public void findByClubByKeyTest() {
-		Club club = repository.findByClubKey("UNIT_TEST");
-		assertNotNull(club);
+		Club testClub = repository.findByClubKey("UNIT_TEST");
+		assertNotNull(testClub);
 	}
 }

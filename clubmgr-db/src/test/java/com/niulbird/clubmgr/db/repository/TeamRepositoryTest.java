@@ -48,13 +48,13 @@ public class TeamRepositoryTest {
 	
 	@Test
 	public void findSavedTeamById() {
-		team = repository.save(team);
-		assertEquals(team, repository.findOne(team.getTeamId()));
+		Team testTeam = repository.save(team);
+		assertEquals(testTeam, repository.findOne(team.getTeamId()));
 	}
 	
 	@Test
 	public void findTeamByKeyTest() {
-		Team team = repository.findByTeamKey("TEAM_UNIT_TEST");
-		assertNotNull(team);
+		Team testTeam = repository.findByTeamKey("TEAM_UNIT_TEST");
+		assertNotNull(testTeam);
 	}
 }

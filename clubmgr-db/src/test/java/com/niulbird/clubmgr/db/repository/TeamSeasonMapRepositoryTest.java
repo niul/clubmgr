@@ -59,6 +59,8 @@ public class TeamSeasonMapRepositoryTest {
 		teamSeasonMap.setSeason(season);
 		teamSeasonMap.setTeam(team);
 		teamSeasonMap.setStandingsUri("TEAM_SEASON_MAP_UNIT_TEST");
+		teamSeasonMap.setDataKey("UNIT_TEST");
+		teamSeasonMap.setDescription("TEAM_SEASON_MAP_UNIT_TEST");
 		
 		club = clubRepository.save(club);
 		team = teamRepository.save(team);
@@ -74,9 +76,9 @@ public class TeamSeasonMapRepositoryTest {
 	
 	@Test
 	public void findOneTest() {
-		TeamSeasonMap teamSeasonMap = repository.findOne(1);
-		assertNotNull(teamSeasonMap);
-		assertNotNull(teamSeasonMap.getTeam());
+		TeamSeasonMap testTeamSeasonMap = repository.findOne(teamSeasonMap.getTeamSeasonMapId());
+		assertNotNull(testTeamSeasonMap);
+		assertNotNull(testTeamSeasonMap.getTeam());
 	}
 	
 	@Test
@@ -88,8 +90,8 @@ public class TeamSeasonMapRepositoryTest {
 	@Test
 	@Rollback(false)
 	public void findByTeamTeamKeyAndSeasonSeasonKeyTest() {
-		TeamSeasonMap teamSeasonMap = repository.findByTeamTeamKeyAndSeasonSeasonKey("TEAM_SEASON_MAP_UNIT_TEST", "TEAM_SEASON_MAP_UNIT_TEST");
-		assertNotNull(teamSeasonMap);
-		assertNotNull(teamSeasonMap.getTeam());
+		TeamSeasonMap testTeamSeasonMap = repository.findByTeamTeamKeyAndSeasonSeasonKey("TEAM_SEASON_MAP_UNIT_TEST", "TEAM_SEASON_MAP_UNIT_TEST");
+		assertNotNull(testTeamSeasonMap);
+		assertNotNull(testTeamSeasonMap.getTeam());
 	}
 }

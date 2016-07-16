@@ -80,7 +80,7 @@ public class TeamController extends BaseController {
 		
 		if (standings.size() == 0) {
 				log.debug("Updating Standings: [" + teamKey + "|" + seasonKey +"]");
-				DataManager dataManager = dataManagerFactory.createDataManager(teamKey, seasonKey, "Bombastic");
+				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
 				standings = dataManager.updateStandings();
 		}
 		
@@ -88,7 +88,7 @@ public class TeamController extends BaseController {
 		
 		if (fixtures.size() == 0) {
 					log.debug("Updating Fixtures: [" + teamKey + "|" + seasonKey +"]");
-				DataManager dataManager = dataManagerFactory.createDataManager(teamKey, seasonKey, "Bombastic");
+				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
 				fixtures = dataManager.updateFixtures();
 		}
 

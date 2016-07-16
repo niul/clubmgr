@@ -15,6 +15,7 @@ public interface TeamService {
     public Team update(Team team) throws RecordNotFound;
     public Team findById(Integer id);
     public TeamSeasonMap findTeamSeasonMap(String teamKey, String seasonKey);
+    public List<TeamSeasonMap> findScheduledTeamSeason();
     public List<Fixture> findFixtures(Team team, Season season);
     public List<Standing> findStandings(Team team, Season season);
     public List<Fixture> createFixtures(List<Fixture> fixtures);

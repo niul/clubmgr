@@ -39,6 +39,7 @@ public final class TeamSeasonMap {
 	
 	private Date created;
 	private String description;
+	private Boolean scheduled;
 	
 
 	public TeamSeasonMap () {
@@ -107,5 +108,13 @@ public final class TeamSeasonMap {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Boolean getScheduled() {
+		return scheduled;
+	}
+
+	public void setScheduled(Boolean scheduled) {
+		this.scheduled = scheduled;
 	}
 }

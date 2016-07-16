@@ -76,6 +76,7 @@ CREATE TABLE team_season_map (
     fixtures_uri        varchar(80) NOT NULL,
     standings_uri        varchar(80) NOT NULL,
     description        varchar(80) NOT NULL,
+    scheduled        boolean NOT NULL,
     created            timestamp,
     CONSTRAINT FK_team_season_map_teams_id FOREIGN KEY (team_id)
     REFERENCES teams (team_id) MATCH SIMPLE

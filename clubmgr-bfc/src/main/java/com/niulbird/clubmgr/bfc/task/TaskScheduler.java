@@ -1,6 +1,6 @@
 package com.niulbird.clubmgr.bfc.task;
 
-import java.util.Properties;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.niulbird.clubmgr.bfc.wordpress.WordPressDao;
 import com.niulbird.clubmgr.data.DataManager;
 import com.niulbird.clubmgr.data.DataManagerFactory;
+import com.niulbird.clubmgr.db.model.TeamSeasonMap;
+import com.niulbird.clubmgr.db.service.TeamService;
 
 @Service
 public class TaskScheduler {
@@ -19,10 +21,10 @@ public class TaskScheduler {
 	private DataManagerFactory dataManagerFactory;
 	
 	@Autowired
-	private WordPressDao wordPressDao;
+	private TeamService teamService;
 	
 	@Autowired
-	private Properties props;
+	private WordPressDao wordPressDao;
 	
 	@Scheduled(cron="0 0 12 * * *")
     public void cachePosts() {
@@ -33,14 +35,13 @@ public class TaskScheduler {
 
 	@Scheduled(cron="0 30 */3 * * *")
     public void cacheFixturesStandings() {
-		log.debug("Updating Fixtures");
-		log.debug("Props: " + props.getProperty("task.fixtures.list"));
-		String[] configs = props.getProperty("task.fixtures.list").split("\\|");
+		log.debug("Updating Fixtures and Standings");
+		List<TeamSeasonMap> teamSeasonMapList = teamService.findScheduledTeamSeason();
 		
-		for(String config : configs) {
-			log.debug("Config: " + config);
-			String[] parts = config.split(",");
-			DataManager dataManager = dataManagerFactory.createDataManager(parts[0], parts[1], parts[2]);
+		for(TeamSeasonMap teamSeasonMap : teamSeasonMapList) {
+			log.debug("Team: " + teamSeasonMap.getTeam().getName());
+			log.debug("Season: " + teamSeasonMap.getSeason().getName());
+			DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
 			dataManager.updateFixtures();
 			dataManager.updateStandings();
 		}

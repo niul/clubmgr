@@ -83,6 +83,11 @@ public class TeamServiceImpl implements TeamService {
 	public TeamSeasonMap findTeamSeasonMap(String teamKey, String seasonKey) {
 		return teamSeasonMapRepository.findByTeamTeamKeyAndSeasonSeasonKey(teamKey, seasonKey);
 	}
+	
+	@Override
+	public List<TeamSeasonMap> findScheduledTeamSeason() {
+		return teamSeasonMapRepository.findByScheduled(true);
+	}
 
 	@Override
 	public List<Fixture> findFixtures(Team team, Season season) {

@@ -354,11 +354,11 @@
 	/* handle Wordpress images */
 	img {
 		&.size-large {
-			max-width: 80%;
+			max-width: 100%;
 			height: auto;
 		}
 		&.size-full {
-			max-width: 80%;
+			max-width: 100%;
 			height: auto;
 		}
 	}
@@ -933,18 +933,6 @@
 				&.left {
 					width: 25%;
 					margin-bottom: 2em !important;
-				}
-			}
-			
-				/* handle Wordpress images */
-			img {
-				&.size-large {
-					max-width: 100%;
-					height: auto;
-				}
-				&.size-full {
-					max-width: 100%;
-					height: auto;
 				}
 			}
 

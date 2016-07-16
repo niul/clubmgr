@@ -2,8 +2,10 @@ package com.niulbird.clubmgr.db.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -61,6 +63,7 @@ public class TeamSeasonMapRepositoryTest {
 		teamSeasonMap.setStandingsUri("TEAM_SEASON_MAP_UNIT_TEST");
 		teamSeasonMap.setDataKey("UNIT_TEST");
 		teamSeasonMap.setDescription("TEAM_SEASON_MAP_UNIT_TEST");
+		teamSeasonMap.setScheduled(true);
 		
 		club = clubRepository.save(club);
 		team = teamRepository.save(team);
@@ -93,5 +96,13 @@ public class TeamSeasonMapRepositoryTest {
 		TeamSeasonMap testTeamSeasonMap = repository.findByTeamTeamKeyAndSeasonSeasonKey("TEAM_SEASON_MAP_UNIT_TEST", "TEAM_SEASON_MAP_UNIT_TEST");
 		assertNotNull(testTeamSeasonMap);
 		assertNotNull(testTeamSeasonMap.getTeam());
+	}
+	
+	@Test
+	@Rollback(false)
+	public void findByScheduledTest() {
+		List<TeamSeasonMap> testTeamSeasonMapList = repository.findByScheduled(true);
+		assertNotNull(testTeamSeasonMapList);
+		assertTrue(testTeamSeasonMapList.size() > 0);
 	}
 }

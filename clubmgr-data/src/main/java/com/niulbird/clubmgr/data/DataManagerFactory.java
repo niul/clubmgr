@@ -15,9 +15,8 @@ public class DataManagerFactory {
 	
 	@Autowired
 	Properties props;
-	
-	public DataManager createDataManager(String teamKey, String seasonKey, String teamRegExStr) {
-		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(teamKey, seasonKey);
+
+	public DataManager createDataManager(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		
 		if (teamSeasonMap.getDataKey().equals("MWSL")) {
 			return new MWSLDataManager(teamService, teamSeasonMap, teamRegExStr, props);
@@ -28,5 +27,9 @@ public class DataManagerFactory {
 		} else {
 			return new VMSLDataManager(teamService, teamSeasonMap, teamRegExStr, props);
 		}
+	}
+	
+	public DataManager createDataManager(String teamKey, String seasonKey, String teamRegExStr) {
+		return createDataManager(teamService.findTeamSeasonMap(teamKey, seasonKey), teamRegExStr);
 	}
 }

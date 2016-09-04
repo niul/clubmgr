@@ -275,7 +275,7 @@
 			border: 0;
 		}
 	}
-
+	
 /* Tables */
 
 	table {
@@ -563,7 +563,7 @@
 
 				li {
 					display: inline-block;
-					margin-right: 0.25em;
+					margin-right: 1em;
 
 					a {
 						@include vendor('transition', 'background-color .25s ease-in-out');

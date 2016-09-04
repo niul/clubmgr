@@ -43,10 +43,35 @@
 					<section class="widget contact last">
 						<h3><f:message key="footer.contact"/></h3>
 						<ul>
-  							<li><a href="<f:message key='footer.social.facebook.url'/>" title="<f:message key='footer.social.facebook.url'/>" target="_blank"><img src='<c:url value="/static/images/social/blue/facebook-logo-square.png"/>' alt="<f:message key="footer.social.facebook.image.alt"/>" height="64" width="64"></a></li>
-  							<li><a href="<f:message key='footer.social.twitter.url'/>"  title="<f:message key='footer.social.twitter.url'/>" target="_blank"><img src='<c:url value="/static/images/social/blue/twitter-logo-square.png"/>' alt="<f:message key="footer.social.twitter.image.alt"/>" height="64" width="64"></a></li>
-  							<li><a href="<f:message key='footer.social.google_plus.url'/>" title="<f:message key='footer.social.google_plus.url'/>" target="_blank"><img src='<c:url value="/static/images/social/blue/google-logo-square.png"/>' alt="<f:message key="footer.social.google.image.alt"/>" height="64" width="64"></a></li>
-  							<li><a href="<f:message key='footer.social.wordpress.url'/>" title="<f:message key='footer.social.wordpress.url'/>" target="_blank"><img src='<c:url value="/static/images/social/blue/wordpress-logo-square.png"/>' alt="<f:message key="footer.social.wordpress.image.alt"/>" height="64" width="64"></a></li>
+  							<li>
+  								<a href="<f:message key='footer.social.facebook.url'/>" title="<f:message key='footer.social.facebook.url'/>" target="_blank">
+  									<span class="fa-stack fa-2x">
+  										<i class="fa fa-facebook-square fa-2x" aria-hidden="true" ></i>
+  									</span>
+  								</a>
+  							</li>
+  							<li>
+  								<a href="<f:message key='footer.social.twitter.url'/>"  title="<f:message key='footer.social.twitter.url'/>" target="_blank">
+  									<span class="fa-stack fa-2x">
+  										<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+  									</span>
+  								</a>
+  							</li>
+  							<li>
+  								<a href="<f:message key='footer.social.google_plus.url'/>" title="<f:message key='footer.social.google_plus.url'/>" target="_blank">
+  									<span class="fa-stack fa-2x">
+  										<i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i>
+  									</span>
+  								</a>
+  							</li>
+  							<li>
+  								<a href="<f:message key='footer.social.wordpress.url'/>" title="<f:message key='footer.social.wordpress.url'/>" target="_blank">
+  									<span class="fa-stack fa-2x">
+  										<i class="fa fa-square fa-stack-2x" aria-hidden="true"></i>
+  										<i class="fa fa-wordpress fa-stack-1x fa-inverse" aria-hidden="true"></i>
+  									</span>
+  								</a>
+  							</li>
 						</ul>
 					</section>
 				</div>

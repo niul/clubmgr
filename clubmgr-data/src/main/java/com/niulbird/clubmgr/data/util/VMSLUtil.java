@@ -1,14 +1,11 @@
-package com.niulbird.clubmgr.data.util;
+		package com.niulbird.clubmgr.data.util;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
@@ -21,22 +18,24 @@ import com.niulbird.clubmgr.db.model.Standing;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 
 public class VMSLUtil extends BaseUtil {
-	// Logger for this class and subclasses
     private final Log logger = LogFactory.getLog(getClass());
+    
+    private final static String TIME_FORMAT = "MM/d/yyyy h:mma";
+    private final static String DATE_FORMAT = "MM/d/yyyy h:mma";
+    
+	private static final String VMSL_URI = "http://vmsl.techsys.tv";
     
     public VMSLUtil(Properties props) {
     	this.props = props;
     }
     
 	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
-		String[] uriOverrides = props.getProperty("vmsl.url.override.values").split(",");
-		logger.debug("Found " + uriOverrides.length + " URI Overrides");
-		
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
-			Elements elements = doc.getElementsByClass("matchtable");
-			Element  element = elements.get(0);
+			Elements elements = doc.getElementsByTag("table");
+
+			Element  element = elements.get(Integer.parseInt(props.getProperty("vmsl.fixtures.index"))); 
 			
 			Elements rows = element.getElementsByTag("tr");
 			for (int i = 1; i < rows.size(); i++) {
@@ -44,31 +43,48 @@ public class VMSLUtil extends BaseUtil {
 				Elements columns = row.getElementsByTag("td");
 				if (columns.size() > 1) {
 					Fixture fixture = new Fixture();
-					fixture.setDate(convertStringToDate(columns.get(0).text()));
-					fixture.setHome(columns.get(1).text());
-					String[] score = columns.get(2).text().split(" - ");
+					fixture.setDate(convertStringToDate(columns.get(2).text(), DATE_FORMAT));
+					fixture.setTime(convertStringToTime(columns.get(2).text(), TIME_FORMAT));
+					fixture.setHome(columns.get(3).text());
+					String[] score = columns.get(4).text().split("-");
 					if (score.length == 2) {
 						fixture.setHomeScore(score[0].trim());
 						fixture.setAwayScore(score[1].trim());
 					}
-					fixture.setAway(columns.get(3).text());
-					fixture.setField(columns.get(4).text());
-					Elements fieldLink = columns.get(4).getElementsByTag("a");
+					fixture.setAway(columns.get(5).text());
+					fixture.setField(columns.get(6).text());
+					Elements fieldLink = columns.get(6).getElementsByTag("a");
 					if (fieldLink.size() > 0) {
-						String fieldLinkUri = fieldLink.get(0).attr("href");
-						for (String uriOverride : uriOverrides) {
-							if (fieldLinkUri.contains(uriOverride)) {
-								logger.debug("URI Override: [" + fieldLinkUri +"] to [" + props.getProperty("vmsl.url.override." + uriOverride) + "]");
-								fieldLinkUri = props.getProperty("vmsl.url.override." + uriOverride);
+						String vmslFieldLink = VMSL_URI + fieldLink.get(0).attr("href");
+						String fieldMapUri = null;
+						try {
+							Document fieldDoc = Jsoup.connect(vmslFieldLink).get();
+							Elements fieldElements = fieldDoc.getElementsByTag("table");
+							Element  fieldElement = fieldElements.get(3); // 4th table with no ID or Class
+							Elements fieldRows = fieldElement.getElementsByTag("tr");
+							
+							for (Element fieldRow : fieldRows) {
+								Elements rowElements = fieldRow.getElementsByTag("td");
+								if (rowElements.get(0).text().equalsIgnoreCase("Map")) {
+									Elements mapElements = rowElements.get(2).getElementsByTag("a");
+									if (mapElements.size() > 0) {
+										fieldMapUri = StringUtils.chomp(mapElements.get(0).attr("href")).replaceAll("[\n\r]", "").trim();
+									}
+								}
 							}
+						} catch (IOException ioe) {
+							logger.error("Error getting field URL: " + ioe, ioe);
 						}
-						fixture.setFieldMapUri(fieldLinkUri);
+						
+						if (fieldMapUri == null) {
+							fieldMapUri = vmslFieldLink;
+						}
+						fixture.setFieldMapUri(fieldMapUri);
 					}
-					fixture.setTime(convertStringToTime(columns.get(5).text()));
 					fixture.setSeason(teamSeasonMap.getSeason());
 					fixture.setTeam(teamSeasonMap.getTeam());
 					
-					if (fixture.getHome().contains(teamRegExStr) || fixture.getAway().contains(teamRegExStr)) {
+					if ((fixture.getHome().contains(teamRegExStr) || fixture.getAway().contains(teamRegExStr)) && !fixture.getField().equalsIgnoreCase("BYE")) {
 						fixtures.add(fixture);
 						logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t" + fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: " + fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: " + fixture.getTime());
 					}
@@ -85,8 +101,9 @@ public class VMSLUtil extends BaseUtil {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
-			Elements elements = doc.getElementsByClass("standingstable");
-			Element  element = elements.get(0);
+			Elements elements = doc.getElementsByTag("table");
+			
+			Element  element = elements.get(Integer.parseInt(props.getProperty("vmsl.standings.index"))); 
 			
 			Elements rows = element.getElementsByTag("tr");
 			for (int i = 1; i < rows.size(); i++) {
@@ -96,20 +113,15 @@ public class VMSLUtil extends BaseUtil {
 					Standing standing = new Standing();
 					standing.setSeason(teamSeasonMap.getSeason());
 					standing.setTeam(teamSeasonMap.getTeam());
-					standing.setPosition(new Integer(columns.get(0).text()));
-					standing.setTeamName(columns.get(2).text());
-					standing.setGamesPlayed(new Integer(columns.get(3).text()));
-					standing.setWins(new Integer(columns.get(4).text()));
-					standing.setTies(new Integer(columns.get(5).text()));
-					standing.setLosses(new Integer(columns.get(6).text()));
-
-					String[] goals = columns.get(7).text().split(" - ");
-					if (goals.length == 2) {
-						standing.setGoalsFor(new Integer(goals[0].trim()));
-						standing.setGoalsAgainst(new Integer(goals[1].trim()));
-					}
-					
-					standing.setPoints(new Integer(columns.get(8).text()));
+					standing.setPosition(Integer.valueOf(i));
+					standing.setTeamName(columns.get(0).text());
+					standing.setGamesPlayed(getStripedInt(columns.get(1).text()));
+					standing.setWins(getStripedInt(columns.get(2).text()));
+					standing.setTies(getStripedInt(columns.get(3).text()));
+					standing.setLosses(getStripedInt(columns.get(4).text()));
+					standing.setGoalsFor(getStripedInt(columns.get(5).text()));
+					standing.setGoalsAgainst(getStripedInt(columns.get(6).text()));		
+					standing.setPoints(getStripedInt(columns.get(8).text()));
 					standings.add(standing);
 					logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
 				}
@@ -118,33 +130,5 @@ public class VMSLUtil extends BaseUtil {
 			logger.error("Error getting Fixtures: " + e.getMessage(), e);
 		}
 		return standings;
-	}
-	
-	private Time convertStringToTime(String time) {
-		Time t = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
-		long ms = 0;
-		try {
-			ms = sdf.parse(time).getTime();
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
-		t = new Time(ms);
-		return t;
-	}
-	
-	private Date convertStringToDate(String date) {
-		Date d = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("MMMMM d, yyyy");
-		long ms = 0;
-		try {
-			ms = sdf.parse(date).getTime();
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
-		d = new Date(ms);
-		return d;
 	}
 }

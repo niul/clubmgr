@@ -35,20 +35,20 @@ public class VMSLDataManagerTest {
 
 	@Test
 	public void createDataManagerTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "WINTER_2015", "Bombastic");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "WINTER_2016", "Bombastic");
 		assertTrue(dataManager instanceof VMSLDataManager);
 	}
 
 	@Test
 	@Rollback(false)
 	public void vmslUpdateFixturesTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "WINTER_2015", "Bombastic");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "WINTER_2016", "Bombastic");
 		List<Fixture> fixtures = dataManager.updateFixtures();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_B", "WINTER_2015", "Bombastic");
+		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_B", "WINTER_2016", "Bombastic");
 		fixtures = dataManager.updateFixtures();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "WINTER_2015", "Bombastic");
+		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "WINTER_2016", "Bombastic");
 		fixtures = dataManager.updateFixtures();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "WINTER_2015", "Bombastic");
+		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "WINTER_2016", "Bombastic");
 		fixtures = dataManager.updateFixtures();
 		assertNotNull(fixtures);
 	}
@@ -56,13 +56,13 @@ public class VMSLDataManagerTest {
 	@Test
 	@Rollback(false)
 	public void vmslUpdateStandingsTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "WINTER_2015", "Bombastic");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "WINTER_2016", "Bombastic");
 		List<Standing> fixtures = dataManager.updateStandings();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_B", "WINTER_2015", "Bombastic");
+		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_B", "WINTER_2016", "Bombastic");
 		fixtures = dataManager.updateStandings();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "WINTER_2015", "Bombastic");
+		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "WINTER_2016", "Bombastic");
 		fixtures = dataManager.updateStandings();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "WINTER_2015", "Bombastic");
+		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "WINTER_2016", "Bombastic");
 		fixtures = dataManager.updateStandings();
 		assertNotNull(fixtures);
 	}

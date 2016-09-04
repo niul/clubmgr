@@ -38,7 +38,7 @@ public class MWSLUtil extends BaseUtil {
 			Element  element = elements.get(Integer.parseInt(props.getProperty("mwsl.fixtures.index"))); 
 			
 			Elements rows = element.getElementsByTag("tr");
-			for (int i = 0; i < rows.size(); i++) {
+			for (int i = 1; i < rows.size(); i++) {
 				Element row = rows.get(i);
 				Elements columns = row.getElementsByTag("td");
 				if (columns.size() > 1) {
@@ -98,7 +98,7 @@ public class MWSLUtil extends BaseUtil {
 	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).timeout(10*1000).get();
+			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByTag("table");
 			
 			Element  element = elements.get(Integer.parseInt(props.getProperty("mwsl.standings.index"))); 

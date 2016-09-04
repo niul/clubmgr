@@ -30,6 +30,7 @@
 	            						<li>
 	            							<a href='<c:url value="/mensA.html"/>'><f:message key="menu.mens.b1"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/WINTER_2016"/>'><f:message key="teams.season.winter2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/SUMMER_2016"/>'><f:message key="teams.season.summer2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>
@@ -38,12 +39,14 @@
 	            						<li>
 	            							<a href='<c:url value="/mensB.html"/>'><f:message key="menu.mens.b2"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_B/WINTER_2016"/>'><f:message key="teams.season.winter2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_B/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
 	            							<a href='<c:url value="/mensClassics.html"/>'><f:message key="menu.mens.b3"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/WINTER_2016"/>'><f:message key="teams.season.winter2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/SUMMER_2016"/>'><f:message key="teams.season.summer2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>
@@ -52,6 +55,7 @@
 	            						<li>
 	            							<a href='<c:url value="/mensJurassic.html"/>'><f:message key="menu.mens.b4"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2016"/>'><f:message key="teams.season.winter2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
@@ -60,6 +64,7 @@
 	            				<li>
 	            					<a href='<c:url value="/womens.html"/>'><f:message key="menu.womens.b1"/></a>
 	            					<ul>
+	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2016"/>'><f:message key="teams.season.winter2016"/></a></li>
 	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2016"/>'><f:message key="teams.season.summer2016"/></a></li>
 	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>
@@ -78,6 +83,7 @@
 	            						<li>
 	            							<a href='<c:url value="/mensA.html"/>'><f:message key="menu.mens.b1"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/WINTER_2016"/>'><f:message key="teams.season.winter2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/SUMMER_2016"/>'><f:message key="teams.season.summer2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>
@@ -86,12 +92,14 @@
 	            						<li>
 	            							<a href='<c:url value="/mensB.html"/>'><f:message key="menu.mens.b2"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_B/WINTER_2016"/>'><f:message key="teams.season.winter2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_B/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
 	            						<li>
 	            							<a href='<c:url value="/mensClassics.html"/>'><f:message key="menu.mens.b3"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/WINTER_2016"/>'><f:message key="teams.season.winter2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/SUMMER_2016"/>'><f:message key="teams.season.summer2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>
@@ -100,6 +108,7 @@
 	            						<li>
 	            							<a href='<c:url value="/mensJurassic.html"/>'><f:message key="menu.mens.b4"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2016"/>'><f:message key="teams.season.winter2016"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            							</ul>
 	            						</li>
@@ -108,6 +117,7 @@
 	            				<li>
 	            					<a href='<c:url value="/womens.html"/>'><f:message key="menu.womens.b1"/></a>
 	            					<ul>
+	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2016"/>'><f:message key="teams.season.winter2016"/></a></li>
 	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2016"/>'><f:message key="teams.season.summer2016"/></a></li>
 	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2015"/>'><f:message key="teams.season.winter2015"/></a></li>
 	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2015"/>'><f:message key="teams.season.summer2015"/></a></li>

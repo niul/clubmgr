@@ -20,8 +20,8 @@ import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 public class MWSLUtil extends BaseUtil {
     private final Log logger = LogFactory.getLog(getClass());
     
-    private final static String TIME_FORMAT = "MM/d/yyyy h:mma";
-    private final static String DATE_FORMAT = "MM/d/yyyy h:mma";
+    private final static String TIME_FORMAT = "EEE MM/d/yyyy h:mma";
+    private final static String DATE_FORMAT = "EEE MM/d/yyyy h:mma";
     
 	private static final String MWSL_URI = "http://mwsl.com";
     

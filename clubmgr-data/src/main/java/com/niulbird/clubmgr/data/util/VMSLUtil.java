@@ -23,7 +23,7 @@ public class VMSLUtil extends BaseUtil {
     private final static String TIME_FORMAT = "EEE MM/d/yyyy h:mma";
     private final static String DATE_FORMAT = "EEE MM/d/yyyy h:mma";
     
-	private static final String VMSL_URI = "http://vmsl.techsys.tv";
+	private static final String VMSL_URI = "http://vmslsoccer.com";
     
     public VMSLUtil(Properties props) {
     	this.props = props;
@@ -35,58 +35,71 @@ public class VMSLUtil extends BaseUtil {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByTag("table");
 
-			Element  element = elements.get(Integer.parseInt(props.getProperty("vmsl.fixtures.index"))); 
+			for (Element element : elements) {
 			
 			Elements rows = element.getElementsByTag("tr");
-			for (int i = 1; i < rows.size(); i++) {
-				Element row = rows.get(i);
-				Elements columns = row.getElementsByTag("td");
-				if (columns.size() > 1) {
-					Fixture fixture = new Fixture();
-					fixture.setDate(convertStringToDate(columns.get(2).text(), DATE_FORMAT));
-					fixture.setTime(convertStringToTime(columns.get(2).text(), TIME_FORMAT));
-					fixture.setHome(columns.get(3).text());
-					String[] score = columns.get(4).text().split("-");
-					if (score.length == 2) {
-						fixture.setHomeScore(score[0].trim());
-						fixture.setAwayScore(score[1].trim());
-					}
-					fixture.setAway(columns.get(5).text());
-					fixture.setField(columns.get(6).text());
-					Elements fieldLink = columns.get(6).getElementsByTag("a");
-					if (fieldLink.size() > 0) {
-						String vmslFieldLink = VMSL_URI + fieldLink.get(0).attr("href");
-						String fieldMapUri = null;
-						try {
-							Document fieldDoc = Jsoup.connect(vmslFieldLink).get();
-							Elements fieldElements = fieldDoc.getElementsByTag("table");
-							Element  fieldElement = fieldElements.get(3); // 4th table with no ID or Class
-							Elements fieldRows = fieldElement.getElementsByTag("tr");
-							
-							for (Element fieldRow : fieldRows) {
-								Elements rowElements = fieldRow.getElementsByTag("td");
-								if (rowElements.get(0).text().equalsIgnoreCase("Map")) {
-									Elements mapElements = rowElements.get(2).getElementsByTag("a");
-									if (mapElements.size() > 0) {
-										fieldMapUri = StringUtils.chomp(mapElements.get(0).attr("href")).replaceAll("[\n\r]", "").trim();
+				if (rows != null && rows.size() > 0) {
+					Elements headerRow = rows.get(0).getElementsByTag("td");
+					if (headerRow != null && headerRow.size() > 0
+							&& headerRow.get(0).text().equalsIgnoreCase("Schedule")) {
+						for (int i = 1; i < rows.size(); i++) {
+							Element row = rows.get(i);
+							Elements columns = row.getElementsByTag("td");
+							if (columns.size() > 1) {
+								Fixture fixture = new Fixture();
+								fixture.setDate(convertStringToDate(columns.get(2).text(), DATE_FORMAT));
+								fixture.setTime(convertStringToTime(columns.get(2).text(), TIME_FORMAT));
+								fixture.setHome(columns.get(3).text());
+								String[] score = columns.get(4).text().split("-");
+								if (score.length == 2) {
+									fixture.setHomeScore(score[0].trim());
+									fixture.setAwayScore(score[1].trim());
+								}
+								fixture.setAway(columns.get(5).text());
+								fixture.setField(columns.get(6).text());
+								Elements fieldLink = columns.get(6).getElementsByTag("a");
+								if (fieldLink.size() > 0) {
+									String vmslFieldLink = VMSL_URI + fieldLink.get(0).attr("href");
+									String fieldMapUri = null;
+									try {
+										Document fieldDoc = Jsoup.connect(vmslFieldLink).get();
+										Elements fieldElements = fieldDoc.getElementsByTag("table");
+										Element fieldElement = fieldElements.get(3); // 4th table with no ID or Class
+										Elements fieldRows = fieldElement.getElementsByTag("tr");
+
+										for (Element fieldRow : fieldRows) {
+											Elements rowElements = fieldRow.getElementsByTag("td");
+											if (rowElements.get(0).text().equalsIgnoreCase("Map")) {
+												Elements mapElements = rowElements.get(2).getElementsByTag("a");
+												if (mapElements.size() > 0) {
+													fieldMapUri = StringUtils.chomp(mapElements.get(0).attr("href"))
+															.replaceAll("[\n\r]", "").trim();
+												}
+											}
+										}
+									} catch (IOException ioe) {
+										logger.error("Error getting field URL: " + ioe, ioe);
 									}
+
+									if (fieldMapUri == null) {
+										fieldMapUri = vmslFieldLink;
+									}
+									fixture.setFieldMapUri(fieldMapUri);
+								}
+								fixture.setSeason(teamSeasonMap.getSeason());
+								fixture.setTeam(teamSeasonMap.getTeam());
+
+								if ((fixture.getHome().contains(teamRegExStr)
+										|| fixture.getAway().contains(teamRegExStr))
+										&& !fixture.getField().equalsIgnoreCase("BYE")) {
+									fixtures.add(fixture);
+									logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t"
+											+ fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: "
+											+ fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: "
+											+ fixture.getTime());
 								}
 							}
-						} catch (IOException ioe) {
-							logger.error("Error getting field URL: " + ioe, ioe);
 						}
-						
-						if (fieldMapUri == null) {
-							fieldMapUri = vmslFieldLink;
-						}
-						fixture.setFieldMapUri(fieldMapUri);
-					}
-					fixture.setSeason(teamSeasonMap.getSeason());
-					fixture.setTeam(teamSeasonMap.getTeam());
-					
-					if ((fixture.getHome().contains(teamRegExStr) || fixture.getAway().contains(teamRegExStr)) && !fixture.getField().equalsIgnoreCase("BYE")) {
-						fixtures.add(fixture);
-						logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t" + fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: " + fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: " + fixture.getTime());
 					}
 				}
 			}
@@ -103,27 +116,36 @@ public class VMSLUtil extends BaseUtil {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByTag("table");
 			
-			Element  element = elements.get(Integer.parseInt(props.getProperty("vmsl.standings.index"))); 
-			
-			Elements rows = element.getElementsByTag("tr");
-			for (int i = 1; i < rows.size(); i++) {
-				Element row = rows.get(i);
-				Elements columns = row.getElementsByTag("td");
-				if (columns.size() > 1) {
-					Standing standing = new Standing();
-					standing.setSeason(teamSeasonMap.getSeason());
-					standing.setTeam(teamSeasonMap.getTeam());
-					standing.setPosition(Integer.valueOf(i));
-					standing.setTeamName(columns.get(0).text());
-					standing.setGamesPlayed(getStripedInt(columns.get(1).text()));
-					standing.setWins(getStripedInt(columns.get(2).text()));
-					standing.setTies(getStripedInt(columns.get(3).text()));
-					standing.setLosses(getStripedInt(columns.get(4).text()));
-					standing.setGoalsFor(getStripedInt(columns.get(5).text()));
-					standing.setGoalsAgainst(getStripedInt(columns.get(6).text()));		
-					standing.setPoints(getStripedInt(columns.get(8).text()));
-					standings.add(standing);
-					logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
+			for (Element element : elements) {
+
+				Elements rows = element.getElementsByTag("tr");
+				if (rows != null && rows.size() > 0) {
+					Elements headerRow = rows.get(0).getElementsByTag("td");
+					if (headerRow != null && headerRow.size() > 0
+							&& headerRow.get(0).text().equalsIgnoreCase("Team")) {
+
+						for (int i = 1; i < rows.size(); i++) {
+							Element row = rows.get(i);
+							Elements columns = row.getElementsByTag("td");
+							if (columns.size() > 1) {
+								Standing standing = new Standing();
+								standing.setSeason(teamSeasonMap.getSeason());
+								standing.setTeam(teamSeasonMap.getTeam());
+								standing.setPosition(Integer.valueOf(i));
+								standing.setTeamName(columns.get(0).text());
+								standing.setGamesPlayed(getStripedInt(columns.get(1).text()));
+								standing.setWins(getStripedInt(columns.get(2).text()));
+								standing.setTies(getStripedInt(columns.get(3).text()));
+								standing.setLosses(getStripedInt(columns.get(4).text()));
+								standing.setGoalsFor(getStripedInt(columns.get(5).text()));
+								standing.setGoalsAgainst(getStripedInt(columns.get(6).text()));
+								standing.setPoints(getStripedInt(columns.get(8).text()));
+								standings.add(standing);
+								logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: "
+										+ standing.getPosition() + "\tPoints: " + standing.getPoints());
+							}
+						}
+					}
 				}
 			}
 		} catch (IOException e) {

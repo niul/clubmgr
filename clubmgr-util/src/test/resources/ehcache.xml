@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ehcache>
+<ehcache 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+    <defaultCache eternal="true" maxElementsInMemory="100" overflowToDisk="false" />
+    <cache name="postsCache" 
+    	maxElementsInMemory="1" 
+    	eternal="false" 
+    	overflowToDisk="false" 
+    	timeToLiveSeconds="3600"/>
+    <cache name="postCache" 
+    	maxElementsInMemory="10" 
+    	eternal="false" 
+    	overflowToDisk="false" 
+    	timeToLiveSeconds="3600"/>
+</ehcache>

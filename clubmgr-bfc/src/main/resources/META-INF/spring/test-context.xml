@@ -89,7 +89,7 @@
     </bean>
     
     <!-- Wordpress Service -->
-    <bean id="wordPressDao" class="com.niulbird.clubmgr.bfc.wordpress.DefaultWordPressDao">
+    <bean id="wordPressDao" class="com.niulbird.clubmgr.util.wordpress.DefaultWordPressDao">
     	<property name="baseUrl" value="${wordpress.site.baseUrl}"/>
     	<property name="siteName" value="${wordpress.site.name}"/>
     </bean>

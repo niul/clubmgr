@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.bfc.wordpress.dao;
+package com.niulbird.clubmgr.util.wordpress.dao;
 
 public class Tag {
 	String id;

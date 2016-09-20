@@ -1,5 +1,7 @@
 package com.niulbird.clubmgr.db.repository;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +16,6 @@ public interface FixtureRepository extends JpaRepository<Fixture, Integer> {
 	List<Fixture> findByTeamAndSeasonOrderByDateAsc(Team team, Season season);
 	List<Fixture> findByTeamTeamKeyAndSeasonSeasonKey(String teamTeamKey, String seasonSeasonKey);
 	List<Fixture> deleteByTeamAndSeason(Team team, Season season);
+	List<Fixture> findByDate(Date date);
+	List<Fixture> findByDateAndTimeBetween(Date date, Time start, Time end);
 }

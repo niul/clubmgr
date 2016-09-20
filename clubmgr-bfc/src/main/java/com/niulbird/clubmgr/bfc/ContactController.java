@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.ContactData;
-import com.niulbird.clubmgr.bfc.util.MailUtil;
-import com.niulbird.clubmgr.bfc.wordpress.dao.Post;
+import com.niulbird.clubmgr.util.MailUtil;
+import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 @Controller
 public class ContactController extends BaseController {

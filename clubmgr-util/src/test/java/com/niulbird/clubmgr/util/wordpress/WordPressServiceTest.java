@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.bfc.wordpress;
+package com.niulbird.clubmgr.util.wordpress;
 
 import java.util.ArrayList;
 
@@ -6,9 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.niulbird.clubmgr.bfc.BaseTestCase;
-import com.niulbird.clubmgr.bfc.wordpress.WordPressDao;
-import com.niulbird.clubmgr.bfc.wordpress.dao.Post;
+import com.niulbird.clubmgr.BaseTestCase;
+import com.niulbird.clubmgr.util.wordpress.WordPressDao;
+import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 public class WordPressServiceTest extends BaseTestCase {
 

@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.bfc.wordpress;
+package com.niulbird.clubmgr.util.wordpress;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,8 +13,8 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
-import com.niulbird.clubmgr.bfc.wordpress.dao.Category;
-import com.niulbird.clubmgr.bfc.wordpress.dao.Post;
+import com.niulbird.clubmgr.util.wordpress.dao.Category;
+import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 @Component
 public class DefaultWordPressDao  implements WordPressDao {

@@ -1,0 +1,9 @@
+//Project dependencies
+dependencies {
+	compile project(':clubmgr-util')
+	compile 'org.springframework:spring-context-support:4.2.3.RELEASE'
+	compile 'net.sf.ehcache:ehcache:2.9.1'
+	compile 'javax.mail:mail:1.4'
+	compile 'org.jsoup:jsoup:1.8.3'
+	compile 'org.json:json:20140107'
+}

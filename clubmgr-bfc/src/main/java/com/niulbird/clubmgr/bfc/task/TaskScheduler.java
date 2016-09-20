@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.niulbird.clubmgr.bfc.wordpress.WordPressDao;
+import com.niulbird.clubmgr.util.wordpress.WordPressDao;
 import com.niulbird.clubmgr.data.DataManager;
 import com.niulbird.clubmgr.data.DataManagerFactory;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;

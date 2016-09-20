@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.ContactData;
-import com.niulbird.clubmgr.bfc.wordpress.dao.Post;
+import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 @Controller
 public class NewsController extends BaseController {

@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.ContactData;
-import com.niulbird.clubmgr.bfc.wordpress.WordPressDao;
-import com.niulbird.clubmgr.bfc.wordpress.dao.Post;
 import com.niulbird.clubmgr.data.DataManager;
 import com.niulbird.clubmgr.data.DataManagerFactory;
 import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Standing;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.service.TeamService;
+import com.niulbird.clubmgr.util.wordpress.WordPressDao;
+import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 @Controller
 public class TeamController extends BaseController {

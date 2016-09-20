@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.bfc.wordpress.dao;
+package com.niulbird.clubmgr.util.wordpress.dao;
 
 import java.util.ArrayList;
 import java.util.Date;

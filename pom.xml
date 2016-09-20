@@ -16,6 +16,7 @@
 	<modules>
 		<module>clubmgr-db</module>
 		<module>clubmgr-data</module>
+		<module>clubmgr-util</module>
 		<module>clubmgr-bfc</module>
 	</modules>
 	<dependencyManagement>
@@ -28,6 +29,11 @@
 			<dependency>
 				<groupId>com.niulbird.clubmgr</groupId>
 				<artifactId>clubmgr-data</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.niulbird.clubmgr</groupId>
+				<artifactId>clubmgr-util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

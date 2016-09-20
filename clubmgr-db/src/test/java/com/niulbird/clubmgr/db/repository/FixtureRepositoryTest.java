@@ -3,6 +3,8 @@ package com.niulbird.clubmgr.db.repository;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import org.junit.After;
@@ -100,6 +102,20 @@ public class FixtureRepositoryTest {
 	@Rollback(false)
 	public void findFixtureByTeamKeyNameTest() {
 		List<Fixture> fixtures = repository.findByTeamTeamKeyAndSeasonSeasonKey("FIXTURE_UNIT_TEST", "FIXTURE_UNIT_TEST");
+		assertNotNull(fixtures);
+	}
+	
+	@Test
+	@Rollback(false)
+	public void findFixtureByDateTest() {
+		List<Fixture> fixtures = repository.findByDate(Date.valueOf("2016-09-17"));
+		assertNotNull(fixtures);
+	}
+	
+	@Test
+	@Rollback(false)
+	public void findFixtureByDateAndTimeTest() {
+		List<Fixture> fixtures = repository.findByDateAndTimeBetween(Date.valueOf("2016-09-17"), Time.valueOf("12:01:00"),  Time.valueOf("14:00:00"));
 		assertNotNull(fixtures);
 	}
 }

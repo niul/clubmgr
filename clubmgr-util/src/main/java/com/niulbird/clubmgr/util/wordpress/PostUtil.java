@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.bfc.wordpress;
+package com.niulbird.clubmgr.util.wordpress;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -7,11 +7,11 @@ import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.niulbird.clubmgr.bfc.util.ISO8601DateParser;
-import com.niulbird.clubmgr.bfc.wordpress.dao.Author;
-import com.niulbird.clubmgr.bfc.wordpress.dao.Category;
-import com.niulbird.clubmgr.bfc.wordpress.dao.Post;
-import com.niulbird.clubmgr.bfc.wordpress.dao.Tag;
+import com.niulbird.clubmgr.util.ISO8601DateParser;
+import com.niulbird.clubmgr.util.wordpress.dao.Author;
+import com.niulbird.clubmgr.util.wordpress.dao.Category;
+import com.niulbird.clubmgr.util.wordpress.dao.Post;
+import com.niulbird.clubmgr.util.wordpress.dao.Tag;
 
 public class PostUtil {
 	private static final Logger log = Logger.getLogger(PostUtil.class);

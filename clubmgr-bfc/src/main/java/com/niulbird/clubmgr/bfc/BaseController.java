@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
-import com.niulbird.clubmgr.bfc.wordpress.WordPressDao;
+import com.niulbird.clubmgr.util.wordpress.WordPressDao;
 
 @Component
 public abstract class BaseController {

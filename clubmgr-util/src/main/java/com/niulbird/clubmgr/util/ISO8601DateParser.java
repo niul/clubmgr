@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.bfc.util;
+package com.niulbird.clubmgr.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

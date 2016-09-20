@@ -1,8 +1,8 @@
-package com.niulbird.clubmgr.bfc.wordpress;
+package com.niulbird.clubmgr.util.wordpress;
 
 import java.util.ArrayList;
 
-import com.niulbird.clubmgr.bfc.wordpress.dao.Post;
+import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 public interface WordPressDao {
 

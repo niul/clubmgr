@@ -1,9 +1,9 @@
-package com.niulbird.clubmgr.bfc.wordpress.dao;
+package com.niulbird.clubmgr.util.wordpress.dao;
 
-public class Category {
+public class Author {
 	String id;
 	String name;
-	String slug;
+	String url;
 
 	public String getId() {
 		return id;
@@ -21,11 +21,11 @@ public class Category {
 		this.name = name;
 	}
 	
-	public String getSlug() {
-		return slug;
+	public String getUrl() {
+		return url;
 	}
 	
-	public void setSlug(String slug) {
-		this.slug = slug;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }

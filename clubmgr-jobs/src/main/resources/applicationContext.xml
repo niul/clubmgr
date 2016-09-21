@@ -36,18 +36,6 @@
 	<task:scheduler id="myScheduler" pool-size="10"/>
   	<context:property-placeholder location="classpath:global.properties"/>
 	<util:properties id="props" location="classpath:global.properties" />
-    
-    <!-- Cache -->
-    <cache:annotation-driven />
-    <bean id="cacheManager"
-      class="org.springframework.cache.ehcache.EhCacheCacheManager" 
-      p:cache-manager-ref="ehcache"/>
-
-	<!-- EhCache library setup -->
-	<bean id="ehcache"
-      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" 
-      p:config-location="classpath:ehcache.xml"
-      p:shared="true"/>
 
 	<!-- Datasource -->
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">

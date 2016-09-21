@@ -24,7 +24,7 @@ public class NewsController extends BaseController {
 	@RequestMapping(value = "/news.html")
 	public ModelAndView news(@RequestParam(value = "start", defaultValue = "0") int start) {
 		ModelAndView mav = new ModelAndView();
-		log.debug("Start: " + start);
+		log.debug("Getting News from start: " + start);
 		
 		mav.setViewName(NEWS);
 		mav.addObject(PAGE, NEWS);
@@ -50,6 +50,8 @@ public class NewsController extends BaseController {
 	@RequestMapping(value = "/post/{id}")
 	public ModelAndView post(@PathVariable(value="id") int code) {
 		ModelAndView mav = new ModelAndView();
+		
+		log.debug("Getting Post ID: " + code);
 
 		ArrayList<Post> posts = wordPressDao.getAllPosts();
 		Post post = null;

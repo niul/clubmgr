@@ -1,0 +1,7 @@
+apply plugin: 'war'
+
+//Project dependencies
+dependencies {
+	compile project(':clubmgr-data')
+	compile 'org.springframework:spring-context-support:4.2.3.RELEASE'
+}

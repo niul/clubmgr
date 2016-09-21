@@ -18,6 +18,7 @@
 		<module>clubmgr-data</module>
 		<module>clubmgr-util</module>
 		<module>clubmgr-bfc</module>
+		<module>clubmgr-jobs</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -39,6 +40,12 @@
 			<dependency>
 				<groupId>com.niulbird.clubmgr</groupId>
 				<artifactId>clubmgr-bfc</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>
+			<dependency>
+				<groupId>com.niulbird.clubmgr</groupId>
+				<artifactId>clubmgr-jobs</artifactId>
 				<version>${project.version}</version>
 				<type>war</type>
 			</dependency>

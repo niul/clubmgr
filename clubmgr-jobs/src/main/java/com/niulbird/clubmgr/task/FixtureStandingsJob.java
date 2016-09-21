@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.bfc.task;
+package com.niulbird.clubmgr.task;
 
 import java.util.List;
 
@@ -7,31 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.niulbird.clubmgr.util.wordpress.WordPressDao;
 import com.niulbird.clubmgr.data.DataManager;
 import com.niulbird.clubmgr.data.DataManagerFactory;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.service.TeamService;
 
 @Service
-public class TaskScheduler {
-	private static final Logger log = Logger.getLogger(TaskScheduler.class);
+public class FixtureStandingsJob {
+	private static final Logger log = Logger.getLogger(FixtureStandingsJob.class);
 
 	@Autowired
 	private DataManagerFactory dataManagerFactory;
 	
 	@Autowired
 	private TeamService teamService;
-	
-	@Autowired
-	private WordPressDao wordPressDao;
-	
-	@Scheduled(cron="0 0 12 * * *")
-    public void cachePosts() {
-		log.debug("Getting Cached Wordpress Posts");
-		wordPressDao.getAllPosts();
-		log.debug("Got Cached Wordpress Posts successfully");
-    }
 
 	@Scheduled(cron="0 30 */3 * * *")
     public void cacheFixturesStandings() {

@@ -23,8 +23,7 @@
     	http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/util 
 		http://www.springframework.org/schema/util/spring-util-4.2.xsd">
-
-
+  
 	<!-- Auto scan the components -->
 	<context:annotation-config />
 	<context:component-scan base-package="com.niulbird.clubmgr" />
@@ -159,4 +158,8 @@
 	
 	<tx:annotation-driven transaction-manager="transactionManager"
         proxy-target-class="true" />
+        
+    
+    <!-- security configuration -->
+    <import resource="applicationContext-security.xml"/>
 </beans>

@@ -2,6 +2,7 @@ package com.niulbird.clubmgr.db.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,11 +22,13 @@ public final class Club {
 	@Column(name = "club_id")
     private Integer clubId;
 	
+	private UUID uuid;
 	private String name;
 	
 	@Column(name = "club_key", nullable = false)
 	private String clubKey;
 	
+	private String domain;
 	private Date created;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "club", cascade = CascadeType.ALL)
@@ -42,6 +45,14 @@ public final class Club {
 	public void setClubId(Integer clubId) {
 		this.clubId = clubId;
 	}
+	
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
 
 	public String getName() {
 		return name;
@@ -57,6 +68,14 @@ public final class Club {
 
 	public void setClubKey(String clubKey) {
 		this.clubKey = clubKey;
+	}
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 
 	public Date getCreated() {

@@ -1,3 +1,3 @@
 <%@ include file="/WEB-INF/views/taglibs.jsp"%>
 
-<h1><f:message key="page.not.found"/></h1>
+<h1><f:message key="page.access.denied"/></h1>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,6 +46,7 @@ public class RRSLUtil extends BaseUtil {
 				Elements columns = row.getElementsByTag("td");
 				if (columns.size() > 1) {
 					Fixture fixture = new Fixture();
+					fixture.setUuid(UUID.randomUUID());
 					
 					String strDate = columns.get(0).text().replaceAll("[^ a-zA-Z0-9]", "").trim();
 					if (!strDate.isEmpty()) {
@@ -114,6 +116,7 @@ public class RRSLUtil extends BaseUtil {
 				Elements columns = row.getElementsByTag("td");
 				if (columns.size() > 1) {
 					Standing standing = new Standing();
+					standing.setUuid(UUID.randomUUID());
 					standing.setSeason(teamSeasonMap.getSeason());
 					standing.setTeam(teamSeasonMap.getTeam());
 					standing.setPosition(new Integer(i-1));

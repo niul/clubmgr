@@ -3,6 +3,8 @@ package com.niulbird.clubmgr.db.repository;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.UUID;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +28,7 @@ public class ClubRepositoryTest {
 	@Before
 	public void setUp() {
 		club = new Club();
+		club.setUuid(UUID.randomUUID());
 		club.setClubKey("UNIT_TEST");
 		club.setName("UNIT_TEST");
 		

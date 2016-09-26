@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -46,6 +47,7 @@ public class CESLUtil extends BaseUtil {
 				Elements columns = row.getElementsByTag("td");
 				if (columns.size() == 7 && !columns.get(0).text().replaceAll("[^a-zA-Z0-9]", "").trim().isEmpty()) {
 					Fixture fixture = new Fixture();
+					fixture.setUuid(UUID.randomUUID());
 					
 					String strDate = columns.get(0).text().substring(columns.get(0).text().indexOf(" ")).replaceAll("-", " ").replaceAll("[^ a-zA-Z0-9]", "").trim();
 					if (!strDate.isEmpty()) {
@@ -90,6 +92,7 @@ public class CESLUtil extends BaseUtil {
 				Elements columns = row.getElementsByTag("td");
 				if (columns.size() > 1) {
 					Standing standing = new Standing();
+					standing.setUuid(UUID.randomUUID());
 					standing.setSeason(teamSeasonMap.getSeason());
 					standing.setTeam(teamSeasonMap.getTeam());
 					standing.setPosition(i);

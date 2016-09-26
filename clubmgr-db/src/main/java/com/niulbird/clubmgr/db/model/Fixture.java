@@ -2,6 +2,7 @@ package com.niulbird.clubmgr.db.model;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,8 @@ public final class Fixture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "fixture_id", nullable = false)
     private Integer fixtureId;
+
+	private UUID uuid;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "team_id")
@@ -56,6 +59,12 @@ public final class Fixture {
 	}
 	public void setFixtureId(Integer fixtureId) {
 		this.fixtureId = fixtureId;
+	}
+	public UUID getUuid() {
+		return uuid;
+	}
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
 	}
 	public Team getTeam() {
 		return team;

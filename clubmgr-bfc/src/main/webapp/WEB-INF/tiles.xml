@@ -95,5 +95,17 @@
 	<definition name="page_not_found"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/page_not_found.jsp"/>
     </definition>
+  
+  <definition name="access_denied"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/access_denied.jsp"/>
+    </definition>
+  
+  <definition name="login"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/login.jsp"/>
+    </definition>
+  
+  <definition name="admin_home"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/admin/index.jsp"/>
+    </definition>
 
 </tiles-definitions>

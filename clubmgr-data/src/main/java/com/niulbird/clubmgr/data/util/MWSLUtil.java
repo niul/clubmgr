@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -48,6 +49,7 @@ public class MWSLUtil extends BaseUtil {
 							Elements columns = row.getElementsByTag("td");
 							if (columns.size() > 1) {
 								Fixture fixture = new Fixture();
+								fixture.setUuid(UUID.randomUUID());
 								fixture.setDate(convertStringToDate(columns.get(2).text(), DATE_FORMAT));
 								fixture.setTime(convertStringToTime(columns.get(2).text(), TIME_FORMAT));
 								fixture.setHome(columns.get(3).text());
@@ -127,6 +129,7 @@ public class MWSLUtil extends BaseUtil {
 							Elements columns = row.getElementsByTag("td");
 							if (columns.size() > 1) {
 								Standing standing = new Standing();
+								standing.setUuid(UUID.randomUUID());
 								standing.setSeason(teamSeasonMap.getSeason());
 								standing.setTeam(teamSeasonMap.getTeam());
 								standing.setPosition(Integer.valueOf(i));

@@ -2,13 +2,16 @@
 
 CREATE TABLE clubs (
     club_id        serial PRIMARY KEY,
+    uuid		uuid,
     name        varchar(40) NOT NULL,
     club_key    varchar(40) NOT NULL,
+    domain      varchar(80) NOT NULL,
     created        timestamp
 );
 
 CREATE TABLE teams (
     team_id        serial PRIMARY KEY,
+    uuid		uuid,
     club_id        serial,
     name        varchar(40) NOT NULL,
     team_key    varchar(40) NOT NULL,
@@ -27,6 +30,7 @@ CREATE TABLE seasons (
 
 CREATE TABLE fixtures (
     fixture_id    serial PRIMARY KEY,
+    uuid		uuid,
     team_id        serial,
     season_id    serial,
     home        VARCHAR(40) NOT NULL,
@@ -48,6 +52,7 @@ CREATE TABLE fixtures (
 
 CREATE TABLE standings (
     standing_id    serial PRIMARY KEY,
+    uuid		uuid,
     team_id        serial,
     season_id    serial,
     position    int,
@@ -83,5 +88,17 @@ CREATE TABLE team_season_map (
     ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT FK_team_season_map_season_id FOREIGN KEY (season_id)
     REFERENCES seasons (season_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE user_club_teams (
+    user_club_team_id	serial PRIMARY KEY,
+    club_id		serial,
+    team_id		serial,
+    CONSTRAINT FK_user_club_teams_club_id FOREIGN KEY (club_id)
+    REFERENCES clubs (club_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT FK_user_club_teams_team_id FOREIGN KEY (team_id)
+    REFERENCES teams (team_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE
 );

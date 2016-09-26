@@ -22,7 +22,7 @@ public class FixtureStandingsJob {
 	@Autowired
 	private TeamService teamService;
 
-	@Scheduled(cron="0 */10 * * * *")
+	@Scheduled(cron="0 30 */3 * * *")
     public void cacheFixturesStandings() {
 		log.debug("Updating Fixtures and Standings");
 		List<TeamSeasonMap> teamSeasonMapList = teamService.findScheduledTeamSeason();

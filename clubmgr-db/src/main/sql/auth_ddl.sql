@@ -1,8 +1,8 @@
 CREATE TABLE roles (
-    role_id	serial PRIMARY KEY,
+    role_id		serial PRIMARY KEY,
     role_key	varchar(20) NOT NULL,
-    description	varchar(80) NOT NULL,
-    created	timestamp
+    description		varchar(80) NOT NULL,
+    created		timestamp
 );
 
 CREATE TABLE users (

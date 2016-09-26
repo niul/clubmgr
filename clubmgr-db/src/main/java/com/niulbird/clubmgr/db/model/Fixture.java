@@ -116,7 +116,7 @@ public final class Fixture {
 		this.fieldMapUri = fieldMapUri;
 	}
 
-	public Date getDate() {
+	public java.sql.Date getDate() {
 		return date;
 	}
 	public void setDate(java.sql.Date date) {

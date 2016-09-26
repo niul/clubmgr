@@ -1,5 +1,6 @@
 package com.niulbird.clubmgr.db.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,8 +113,29 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public List<Fixture> updateFixtures(Team team, Season season, List<Fixture> fixtures) {
-		fixtureRepository.deleteByTeamAndSeason(team, season);
-		return fixtureRepository.save(fixtures);	
+		List<Fixture> allDbFixtures = new ArrayList<Fixture>();
+		for (Fixture fixture : fixtures) {
+			List<Fixture> dbFixtures = fixtureRepository.findByTeamAndSeasonAndHomeAndAway(fixture.getTeam(), fixture.getSeason(), fixture.getHome(), fixture.getAway());
+			Fixture dbFixture;
+			if (dbFixtures == null) {
+				fixtureRepository.save(fixture);
+				allDbFixtures.add(fixture);
+			} else {
+				if (dbFixtures.size() > 1) {
+					dbFixture = fixtureRepository.findByTeamAndSeasonAndHomeAndAwayAndDate(fixture.getTeam(), fixture.getSeason(), fixture.getHome(), fixture.getAway(), fixture.getDate());
+				} else {
+					dbFixture = dbFixtures.get(0);
+				}
+				dbFixture.setAwayScore(fixture.getAwayScore());
+				dbFixture.setDate(fixture.getDate());
+				dbFixture.setField(fixture.getField());
+				dbFixture.setFieldMapUri(fixture.getFieldMapUri());
+				dbFixture.setHomeScore(fixture.getHomeScore());
+				fixtureRepository.save(dbFixture);
+				allDbFixtures.add(dbFixture);
+			}
+		}
+		return allDbFixtures;
 	}
 
 	@Override

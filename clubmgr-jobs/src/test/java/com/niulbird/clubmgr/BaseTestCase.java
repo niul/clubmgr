@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.bfc;
+package com.niulbird.clubmgr;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

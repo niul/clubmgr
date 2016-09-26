@@ -42,24 +42,24 @@ public class VMSLUtil extends BaseUtil {
 				if (rows != null && rows.size() > 0) {
 					Elements headerRow = rows.get(0).getElementsByTag("td");
 					if (headerRow != null && headerRow.size() > 0
-							&& headerRow.get(0).text().equalsIgnoreCase("Schedule")) {
+							&& headerRow.get(0).text().equalsIgnoreCase("Type")) {
 						for (int i = 1; i < rows.size(); i++) {
 							Element row = rows.get(i);
 							Elements columns = row.getElementsByTag("td");
 							if (columns.size() > 1) {
 								Fixture fixture = new Fixture();
 								fixture.setUuid(UUID.randomUUID());
-								fixture.setDate(convertStringToDate(columns.get(2).text(), DATE_FORMAT));
-								fixture.setTime(convertStringToTime(columns.get(2).text(), TIME_FORMAT));
-								fixture.setHome(columns.get(3).text());
-								String[] score = columns.get(4).text().split("-");
+								fixture.setDate(convertStringToDate(columns.get(1).text(), DATE_FORMAT));
+								fixture.setTime(convertStringToTime(columns.get(1).text(), TIME_FORMAT));
+								fixture.setHome(columns.get(2).text());
+								String[] score = columns.get(3).text().split("-");
 								if (score.length == 2) {
 									fixture.setHomeScore(score[0].trim());
 									fixture.setAwayScore(score[1].trim());
 								}
-								fixture.setAway(columns.get(5).text());
-								fixture.setField(columns.get(6).text());
-								Elements fieldLink = columns.get(6).getElementsByTag("a");
+								fixture.setAway(columns.get(4).text());
+								fixture.setField(columns.get(5).text());
+								Elements fieldLink = columns.get(5).getElementsByTag("a");
 								if (fieldLink.size() > 0) {
 									String vmslFieldLink = VMSL_URI + fieldLink.get(0).attr("href");
 									String fieldMapUri = null;

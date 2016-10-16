@@ -123,7 +123,7 @@ public class TeamServiceImpl implements TeamService {
 		for (Fixture fixture : fixtures) {
 			List<Fixture> dbFixtures = fixtureRepository.findByTeamAndSeasonAndHomeAndAway(fixture.getTeam(), fixture.getSeason(), fixture.getHome(), fixture.getAway());
 			Fixture dbFixture;
-			if (dbFixtures == null) {
+			if (dbFixtures == null || dbFixtures.size() == 0) {
 				fixtureRepository.save(fixture);
 				allDbFixtures.add(fixture);
 			} else {

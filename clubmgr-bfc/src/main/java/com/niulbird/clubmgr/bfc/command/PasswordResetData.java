@@ -2,20 +2,16 @@ package com.niulbird.clubmgr.bfc.command;
 
 import javax.validation.constraints.Size;
 
-public class LoginData {
-	
-	@Size(min=2, max=30)
-	String username;
+import org.springmodules.validation.bean.conf.loader.annotation.handler.RegExp;
+
+public class PasswordResetData {
+	@RegExp(value = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,30})")
 	@Size(min=8, max=30)
 	String password;
 	
-	public String getUsername() {
-		return username;
-	}
-	
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	@RegExp(value = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,30})")
+	@Size(min=2, max=30)
+	String passwordRepeat;
 	
 	public String getPassword() {
 		return password;
@@ -23,5 +19,13 @@ public class LoginData {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getPasswordRepeat() {
+		return passwordRepeat;
+	}
+	
+	public void setPasswordRepeat(String passwordRepeat) {
+		this.passwordRepeat = passwordRepeat;
 	}
 }

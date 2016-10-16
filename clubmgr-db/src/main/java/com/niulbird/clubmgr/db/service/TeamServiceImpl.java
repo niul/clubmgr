@@ -2,6 +2,7 @@ package com.niulbird.clubmgr.db.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,15 +36,20 @@ public class TeamServiceImpl implements TeamService {
 	
 	@Override
 	@Transactional
-	public Team create(Team shop) {
-		Team createdTeam = shop;
-		return teamRepository.save(createdTeam);
+	public Team create(Team team) {
+		return teamRepository.save(team);
 	}
 
 	@Override
 	@Transactional
 	public Team findById(Integer id) {
 		return teamRepository.findOne(id);
+	}
+
+	@Override
+	@Transactional
+	public Team findByUuid(String uuid) {
+		return teamRepository.findByUuid(UUID.fromString(uuid));
 	}
 
 	@Override
@@ -131,6 +137,7 @@ public class TeamServiceImpl implements TeamService {
 				dbFixture.setField(fixture.getField());
 				dbFixture.setFieldMapUri(fixture.getFieldMapUri());
 				dbFixture.setHomeScore(fixture.getHomeScore());
+				dbFixture.setActive(fixture.getActive());
 				fixtureRepository.save(dbFixture);
 				allDbFixtures.add(dbFixture);
 			}

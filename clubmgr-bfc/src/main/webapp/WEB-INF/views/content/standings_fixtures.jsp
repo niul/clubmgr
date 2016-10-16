@@ -53,7 +53,14 @@
 	    </thead>
 	    <tbody>
 	    <c:forEach var="fixture" items="${fixtures}">
+	      <c:choose>
+	        <c:when test="${fixture.active}">
 	      <tr>
+	        </c:when>
+	        <c:otherwise>
+	      <tr class="strikethrough">
+            </c:otherwise>
+          </c:choose>
 	  	    <td class="not-small"><fmt:formatDate value="${fixture.date}" pattern="MMM d, YYYY (E)" /> @ <fmt:formatDate value="${fixture.time}" pattern="h:mma" /></td>
 	  	    <td class="only-small">
 	  	    	<fmt:formatDate value="${fixture.date}" pattern="MMM d (E)" /> <fmt:formatDate value="${fixture.time}" pattern="h:mma" />

@@ -48,6 +48,7 @@ public final class Fixture {
 	
 	private java.sql.Date date;
 	private Time time;
+	private boolean active;
 	private Date created;
 	
 	public Fixture () {
@@ -127,6 +128,12 @@ public final class Fixture {
 	}
 	public void setTime(Time time) {
 		this.time = time;
+	}
+	public boolean getActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	public Date getCreated() {
 		return created;

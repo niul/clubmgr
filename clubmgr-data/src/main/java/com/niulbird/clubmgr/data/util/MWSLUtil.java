@@ -90,6 +90,13 @@ public class MWSLUtil extends BaseUtil {
 								fixture.setSeason(teamSeasonMap.getSeason());
 								fixture.setTeam(teamSeasonMap.getTeam());
 
+								// Check if fixture is cancelled.
+								if (row.attr("class").equalsIgnoreCase("dimmedstrikethrough")) {
+									fixture.setActive(false);
+								} else {
+									fixture.setActive(true);
+								}
+
 								if (fixture.getHome().contains(teamRegExStr)
 										|| fixture.getAway().contains(teamRegExStr)) {
 									fixtures.add(fixture);

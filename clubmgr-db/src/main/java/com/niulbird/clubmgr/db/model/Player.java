@@ -15,37 +15,56 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
 
 @Entity
-@Table(name = "users")
-public final class User {
-    private Integer userId;
+@Table(name = "players")
+public final class Player {
+    private Integer playerId;
 	private UUID uuid;
     private Club club;
-	private String username;
-	private String password;
+    
+	@NotNull @Size(min=2, max=40)
 	private String firstName;
+	
+	@NotNull @Size(min=2, max=40)
 	private String lastName;
+	
+	@NotNull @Email
 	private String email;
+	
+	@Pattern(regexp="(^$|[0-9]{10})")
+	private String phone;
+	private Date dob;
+	private String address1;
+	private String address2;
+	private String city;
+	private String state;
+	private String zip;
+	private String country;
 	private Boolean enabled;
 	private Date created;
-	
-	private List<Role> roles;
+
 	private List<Team> teams;
 
-	public User () {
+	public Player () {
 		created = new Date();
 	}
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id")
-	public Integer getUserId() {
-		return userId;
+	@Column(name = "player_id")
+	public Integer getPlayerId() {
+		return playerId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setPlayerId(Integer playerId) {
+		this.playerId = playerId;
 	}
 	
 	public UUID getUuid() {
@@ -64,22 +83,6 @@ public final class User {
 
 	public void setClub(Club club) {
 		this.club = club;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	@Column(name = "first_name", nullable = false)
@@ -108,6 +111,70 @@ public final class User {
 		this.email = email;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	public String getAddress1() {
+		return address1;
+	}
+	
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	public boolean getEnabled() {
 		return enabled;
 	}
@@ -124,18 +191,8 @@ public final class User {
 		this.created = created;
 	}
 	
-	@ManyToMany
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-	
 	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_teams", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
+    @JoinTable(name = "player_teams", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
     public List<Team> getTeams() {
         return teams;
     }

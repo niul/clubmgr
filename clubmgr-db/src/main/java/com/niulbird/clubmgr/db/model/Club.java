@@ -33,6 +33,9 @@ public final class Club {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "club", cascade = CascadeType.ALL)
 	private List<Team> teams;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "club", cascade = CascadeType.ALL)
+	private List<Player> players;
 
 	public Club () {
 		created = new Date();
@@ -93,6 +96,12 @@ public final class Club {
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
-	
-	
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
 }

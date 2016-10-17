@@ -31,7 +31,7 @@
 			  <div class="12u">
 			    <ul class="actions">
 			      <li>
-			      	<button type="submit" class="button icon fa-envelope-o"><f:message key='contact.submit' /></button>
+			      	<button type="submit" class="button icon fa-envelope-o"><f:message key='form.submit' /></button>
 			      </li>
 				</ul>
 			  </div>

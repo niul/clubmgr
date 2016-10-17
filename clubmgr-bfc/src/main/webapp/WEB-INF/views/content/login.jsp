@@ -3,6 +3,7 @@
 <article>
 	<header>
 		<h1><f:message key="admin.title"/></h1>
+		<h3><f:message key="login.header"/></h3>
 	</header>
 
 	<c:if test="${not empty error}">
@@ -16,14 +17,14 @@
 		commandName="loginData" method="POST">
 
 		<div class="row 50%">
-			<div class="6u 12u(small)">
-				<form:label path="username"><f:message key="login.username"/>:</form:label>
-				<form:input type="text" path="username" />
+			<div class="6u$ 12u(medium)">
+				<f:message key="login.username" var="username"/> 
+				<form:input type="text" path="username" placeholder="${username}"/>
 				<form:errors path="username" class="form_error" />
 			</div>
-			<div class="6u 12u(small)">
-				<form:label path="password"><f:message key="login.password"/>:</form:label>
-				<form:input type="password" path="password" />
+			<div class="6u$ 12u(medium)">
+				<f:message key="login.password" var="password"/> 
+				<form:input type="password" path="password" placeholder="${password}"/>
 				<form:errors path="password" cssClass="form_error" />
 			</div>
 		</div>

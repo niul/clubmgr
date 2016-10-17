@@ -2,7 +2,13 @@
 	
 	<div id="header-wrapper">
 		<header id="header" class="container">
+		
 			<div class="row">
+		<sec:authorize access="hasAnyRole('ADMIN','CLUB_MGR','TEAM_MGR')">
+			<div id="logout">
+				<f:message key="admin.welcome"/> ${user.firstName} <a href="<c:url value="/logout.html" />"><f:message key="login.logout"/></a>
+			</div>
+		</sec:authorize>
 			<!-- Logo -->
 			<div id="logo" class="10u 12u$(medium)">
 				<a href='<c:url value="/index.html"/>'><img id="header_logo" src='<c:url value="/static/images/bombasticfc_logo.png"/>' alt="<f:message key="header.logo.image.alt"/>" width="160" height="160"></a>
@@ -11,6 +17,16 @@
 			<!-- Navigation Bar -->
 			<nav id="nav">
 	   			<ul>
+		<sec:authorize access="hasAnyRole('ADMIN','CLUB_MGR','TEAM_MGR')">
+	    			<c:choose>
+	      			<c:when test="${page=='admin_home'}">
+	        			<li class="current"><a href='<c:url value="/admin/index.html"/>'><f:message key="menu.item0"/></a></li>
+	      			</c:when>
+	      			<c:otherwise>
+	        			<li><a href='<c:url value="/admin/index.html"/>'><f:message key="menu.item0"/></a></li>
+	      			</c:otherwise>
+	    			</c:choose>
+		</sec:authorize>
 	    			<c:choose>
 	      			<c:when test="${page=='home'}">
 	        			<li class="current"><a href='<c:url value="/index.html"/>'><f:message key="menu.item1"/></a></li>

@@ -13,7 +13,17 @@
         <put-attribute name="javascript" value="/WEB-INF/views/includes/javascript.jsp" />
     </definition>
     
-    <!-- Left Panel -->
+    <!-- Admin Panel -->
+    <definition name="adminPanelTemplate" template="/WEB-INF/views/adminPanelTemplate.jsp">
+        <put-attribute name="head" value="/WEB-INF/views/includes/head.jsp" />
+        <put-attribute name="header" value="/WEB-INF/views/includes/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/content/admin/menu.jsp" />
+        <put-attribute name="content"  value="content" />
+        <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
+        <put-attribute name="javascript" value="/WEB-INF/views/includes/javascript.jsp" />
+    </definition>
+    
+    <!-- Right Panel -->
     <definition name="rightPanelTemplate" template="/WEB-INF/views/rightPanelTemplate.jsp">
         <put-attribute name="head" value="/WEB-INF/views/includes/head.jsp" />
         <put-attribute name="header" value="/WEB-INF/views/includes/header.jsp" />
@@ -91,21 +101,29 @@
     <definition name="post"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/post.jsp"/>
     </definition>
-	
-	<definition name="page_not_found"  extends="rightPanelTemplate">
-        <put-attribute name="content" value="/WEB-INF/views/content/page_not_found.jsp"/>
-    </definition>
-  
-  <definition name="access_denied"  extends="rightPanelTemplate">
-        <put-attribute name="content" value="/WEB-INF/views/content/access_denied.jsp"/>
-    </definition>
   
   <definition name="login"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/login.jsp"/>
     </definition>
   
-  <definition name="admin_home"  extends="rightPanelTemplate">
-        <put-attribute name="content" value="/WEB-INF/views/content/admin/index.jsp"/>
+  <definition name="password_reset"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/password_reset.jsp"/>
+    </definition>
+  
+  <definition name="admin_players"  extends="adminPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/admin/players.jsp"/>
+   </definition>
+  
+  <definition name="admin_add_player"  extends="adminPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/admin/add_player.jsp"/>
+   </definition>
+  
+  <definition name="admin_edit_player"  extends="adminPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/admin/edit_player.jsp"/>
+   </definition>
+  
+  <definition name="error"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/error.jsp"/>
     </definition>
 
 </tiles-definitions>

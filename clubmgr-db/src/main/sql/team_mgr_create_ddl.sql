@@ -41,6 +41,7 @@ CREATE TABLE fixtures (
     field_map_uri    VARCHAR(400),
     date        date,
     time        time,
+	active		boolean  NOT NULL DEFAULT TRUE,
     created        timestamp,
     CONSTRAINT FK_fixtures_team_id FOREIGN KEY (team_id)
     REFERENCES teams (team_id) MATCH SIMPLE
@@ -91,14 +92,48 @@ CREATE TABLE team_season_map (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE user_club_teams (
-    user_club_team_id	serial PRIMARY KEY,
-    club_id		serial,
+CREATE TABLE user_teams (
+    user_team_id	serial PRIMARY KEY,
+    user_id		serial,
     team_id		serial,
-    CONSTRAINT FK_user_club_teams_club_id FOREIGN KEY (club_id)
-    REFERENCES clubs (club_id) MATCH SIMPLE
+    CONSTRAINT FK_user_teams_user_id FOREIGN KEY (user_id)
+    REFERENCES users (user_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT FK_user_club_teams_team_id FOREIGN KEY (team_id)
+    CONSTRAINT FK_user_teams_team_id FOREIGN KEY (team_id)
+    REFERENCES teams (team_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE players (
+	player_id	serial PRIMARY KEY,
+	uuid		uuid,
+	club_id		serial NOT NULL,
+	first_name	varchar(40) NOT NULL,
+	last_name	varchar(40) NOT NULL,
+	email		varchar(80) NOT NULL,
+	phone		varchar(20),
+	dob			timestamp,
+	address1	varchar(80),
+	address2	varchar(80),
+	city		varchar(40),
+	state		varchar(10),
+	zip		varchar(10),
+	country		varchar(2),
+	enabled		boolean  NOT NULL DEFAULT TRUE,
+    created            timestamp,
+    CONSTRAINT FK_playerss_club_id FOREIGN KEY (club_id)
+    REFERENCES clubs (club_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE player_teams (
+    player_team_id	serial PRIMARY KEY,
+    player_id		serial,
+    team_id		serial,
+    CONSTRAINT FK_player_teams_player_id FOREIGN KEY (player_id)
+    REFERENCES players (player_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT FK_user_teams_team_id FOREIGN KEY (team_id)
     REFERENCES teams (team_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE
 );

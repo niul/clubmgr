@@ -1,6 +1,7 @@
 package com.niulbird.clubmgr.db.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,6 +36,10 @@ public final class Team {
 	private String teamKey;
 	
 	private Date created;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "player_teams", joinColumns = @JoinColumn(name = "team_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
+	private List<Player> players;
 	
 	public Team() {
 		created = new Date();
@@ -85,4 +92,13 @@ public final class Team {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+
+	
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
 }

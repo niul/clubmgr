@@ -33,3 +33,14 @@ CREATE TABLE user_roles (
     REFERENCES roles (role_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+CREATE TABLE password_resets (
+	password_reset_id	serial PRIMARY KEY,
+	user_id		serial NOT NULL,
+	reset_key	uuid NOT NULL,
+	complete	boolean NOT NULL DEFAULT FALSE,
+	created		timestamp,
+	updated		timestamp,
+	CONSTRAINT FK_password_resets_user_id FOREIGN KEY (user_id)
+    REFERENCES users (user_id) MATCH SIMPLE
+);

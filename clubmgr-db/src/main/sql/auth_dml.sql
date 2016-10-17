@@ -21,18 +21,18 @@ VALUES    (uuid_generate_v4(), 3, 'teammgr', '$2a$10$INrvgDoDtubWtDD2.91MUe5R7ig
 INSERT INTO user_roles (user_id, role_id, created) (
     SELECT	user_id, role_id, CURRENT_TIMESTAMP
     FROM	users U
-    JOIN    roles R ON R.role_key = 'ADMIN'
+    JOIN    roles R ON R.role_key = 'ROLE_ADMIN'
     WHERE	U.username = 'admin'
 );
 INSERT INTO user_roles (user_id, role_id, created) (
     SELECT	user_id, role_id, CURRENT_TIMESTAMP
     FROM	users U
-    JOIN    roles R ON R.role_key = 'CLUB_MGR'
+    JOIN    roles R ON R.role_key = 'ROLE_CLUB_MGR'
     WHERE	U.username = 'clubmgr'
 );
 INSERT INTO user_roles (user_id, role_id, created) (
     SELECT	user_id, role_id, CURRENT_TIMESTAMP
     FROM	users U
-    JOIN    roles R ON R.role_key = 'TEAM_MGR'
+    JOIN    roles R ON R.role_key = 'ROLE_TEAM_MGR'
     WHERE	U.username = 'teammgr'
 );

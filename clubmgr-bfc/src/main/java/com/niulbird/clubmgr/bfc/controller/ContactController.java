@@ -1,6 +1,4 @@
-package com.niulbird.clubmgr.bfc;
-
-import java.util.ArrayList;
+package com.niulbird.clubmgr.bfc.controller;
 
 import org.apache.log4j.Logger;
 
@@ -18,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.ContactData;
 import com.niulbird.clubmgr.util.MailUtil;
-import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 @Controller
 public class ContactController extends BaseController {
@@ -26,8 +23,6 @@ public class ContactController extends BaseController {
 	
 	private static final String CONTACT = "contact";
 	private static final String SUCCESS = "contact_success";
-	private static final String PAGE = "page";
-	private static final String TITLE = "title";
 	
 	@Autowired
 	private JavaMailSenderImpl mailSender;
@@ -57,23 +52,5 @@ public class ContactController extends BaseController {
 			mav.addObject("contactData", contactData);
 			return mav;
 		}
-	}
-	
-	private ModelAndView setView(String pageName, String title) {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName(pageName);
-		mav.addObject(TITLE, title);
-		mav.addObject(PAGE, pageName);
-		
-		ArrayList<Post> posts = wordPressDao.getAllPosts();
-		mav.addObject("posts", posts);
-		mav.addObject("menuPosts", posts.subList(0,
-				(posts.size() < Integer.parseInt(numFooterPosts)) ? posts.size()
-						: Integer.parseInt(numFooterPosts)));
-		
-		log.debug("Setting view: " + pageName);
-		
-		return mav;
 	}
 }

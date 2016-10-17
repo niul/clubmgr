@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.bfc;
+package com.niulbird.clubmgr.bfc.controller;
 
 import java.util.ArrayList;
 import java.util.List;

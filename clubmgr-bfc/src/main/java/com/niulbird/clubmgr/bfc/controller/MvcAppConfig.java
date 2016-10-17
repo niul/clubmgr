@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.bfc;
+package com.niulbird.clubmgr.bfc.controller;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

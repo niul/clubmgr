@@ -53,6 +53,17 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
+	@Transactional
+	public List<Team> findByUuid(String[] uuids) {
+		List<UUID> uuidList = new ArrayList<UUID>();
+		
+		for (String uuid : uuids) {
+			uuidList.add(UUID.fromString(uuid));
+		}
+		return teamRepository.findByUuidIn(uuidList);
+	}
+
+	@Override
 	@Transactional(rollbackFor=RecordNotFound.class)
 	public Team delete(Integer id) throws RecordNotFound {
 		Team deletedTeam = teamRepository.findOne(id);
@@ -137,6 +148,8 @@ public class TeamServiceImpl implements TeamService {
 				dbFixture.setField(fixture.getField());
 				dbFixture.setFieldMapUri(fixture.getFieldMapUri());
 				dbFixture.setHomeScore(fixture.getHomeScore());
+				dbFixture.setDate(fixture.getDate());
+				dbFixture.setTime(fixture.getTime());
 				dbFixture.setActive(fixture.getActive());
 				fixtureRepository.save(dbFixture);
 				allDbFixtures.add(dbFixture);

@@ -1,5 +1,6 @@
 package com.niulbird.clubmgr.db.repository;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +10,7 @@ import com.niulbird.clubmgr.db.model.Team;
 
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Integer> {
-	 Team findByTeamKey(String teamKey);
-	 Team findByUuid(UUID uuid);
+	Team findByTeamKey(String teamKey);
+	Team findByUuid(UUID uuid);
+	List<Team> findByUuidIn(List<UUID> uuid);
 }

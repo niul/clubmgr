@@ -148,7 +148,7 @@ CREATE TABLE player_teams (
     CONSTRAINT FK_player_teams_team_id FOREIGN KEY (team_id)
     REFERENCES teams (team_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT FK_player_teams_team_id FOREIGN KEY (position_id)
+    CONSTRAINT FK_player_teams_position_id FOREIGN KEY (position_id)
     REFERENCES positions (position_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE
 );

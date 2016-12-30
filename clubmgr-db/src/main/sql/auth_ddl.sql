@@ -15,6 +15,7 @@ CREATE TABLE users (
     last_name	varchar(40),
     email	varchar(80),
     enabled	boolean NOT NULL DEFAULT TRUE,
+    chg_password	boolean NOT NULL DEFAULT TRUE,
     created	timestamp,
     CONSTRAINT FK_users_club_id FOREIGN KEY (club_id)
     REFERENCES clubs (club_id) MATCH SIMPLE

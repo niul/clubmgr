@@ -1,6 +1,7 @@
 package com.niulbird.clubmgr.task;
 
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class FixtureStandingsJob {
 
 	@Autowired
 	private DataManagerFactory dataManagerFactory;
+
+	@Autowired
+	Properties props;
 	
 	@Autowired
 	private TeamService teamService;
@@ -30,7 +34,7 @@ public class FixtureStandingsJob {
 		for(TeamSeasonMap teamSeasonMap : teamSeasonMapList) {
 			log.debug("Team: " + teamSeasonMap.getTeam().getName());
 			log.debug("Season: " + teamSeasonMap.getSeason().getName());
-			DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
+			DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, props.getProperty("team.regex"));
 			dataManager.updateFixtures();
 			dataManager.updateStandings();
 		}

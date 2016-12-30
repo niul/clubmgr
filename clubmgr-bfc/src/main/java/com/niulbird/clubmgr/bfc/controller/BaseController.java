@@ -21,6 +21,7 @@ public abstract class BaseController {
 	protected static final String ERROR = "error";
 	protected static final String PAGE = "page";
 	protected static final String TITLE = "title";
+	protected static final String USER = "user";
 	
 	@Autowired
 	protected WordPressDao wordPressDao;

@@ -119,21 +119,67 @@ CREATE TABLE players (
 	state		varchar(10),
 	zip		varchar(10),
 	country		varchar(2),
+	position_id	serial,
 	enabled		boolean  NOT NULL DEFAULT TRUE,
     created            timestamp,
-    CONSTRAINT FK_playerss_club_id FOREIGN KEY (club_id)
+    CONSTRAINT FK_players_club_id FOREIGN KEY (club_id)
     REFERENCES clubs (club_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT FK_players_position_id FOREIGN KEY (position_id)
+    REFERENCES positions (position_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE positions (
+    position_id		serial PRIMARY KEY,
+    position_key    varchar(20) NOT NULL,
+    position_desc   varchar(80) NOT NULL,
+    created            timestamp
 );
 
 CREATE TABLE player_teams (
     player_team_id	serial PRIMARY KEY,
     player_id		serial,
     team_id		serial,
+    position_id		serial,
     CONSTRAINT FK_player_teams_player_id FOREIGN KEY (player_id)
     REFERENCES players (player_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT FK_user_teams_team_id FOREIGN KEY (team_id)
+    CONSTRAINT FK_player_teams_team_id FOREIGN KEY (team_id)
     REFERENCES teams (team_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT FK_player_teams_team_id FOREIGN KEY (position_id)
+    REFERENCES positions (position_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE player_team_season_map (
+	player_team_season_map_id	serial PRIMARY KEY,
+	player_id			serial,
+	team_season_map_id	serial,
+	CONSTRAINT FK_player_team_season_map_player_id FOREIGN KEY (player_id)
+    REFERENCES players (player_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_player_team_season_map_team_season_map_id FOREIGN KEY (team_season_map_id)
+    REFERENCES team_season_map (team_season_map_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE player_fixture_stats (
+	player_fixture_stat_id	serial PRIMARY KEY,
+	player_id	serial NOT NULL,
+	fixture_id	serial NOT NULL,
+	started		boolean  NOT NULL DEFAULT FALSE,
+	substitute	boolean  NOT NULL DEFAULT FALSE,
+	assists		int,
+	goals		int,
+	yellow_card	boolean  NOT NULL DEFAULT FALSE,
+	red_card	boolean  NOT NULL DEFAULT FALSE,
+	rating		int,
+	CONSTRAINT FK_player_fixture_stats_player_id FOREIGN KEY (player_id)
+    REFERENCES players (player_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_player_fixture_stats_fixture_id FOREIGN KEY (fixture_id)
+    REFERENCES fixtures (fixture_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE
 );

@@ -3,6 +3,7 @@ package com.niulbird.clubmgr.db.repository;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,5 @@ public interface FixtureRepository extends JpaRepository<Fixture, Integer> {
 	List<Fixture> findByDateAndTimeBetween(Date date, Time start, Time end);
 	List<Fixture> findByTeamAndSeasonAndHomeAndAway(Team team, Season season, String home, String away);
 	Fixture findByTeamAndSeasonAndHomeAndAwayAndDate(Team team, Season season, String home, String away, Date date);
+	Fixture findByUuid(UUID uuid);
 }

@@ -2,17 +2,17 @@
 
 	<article>
       <header>
-        <h1><f:message key="fixtures.title"/></h1>
+        <h1><fmt:message key="fixtures.title"/></h1>
       </header>
 	  <h3>${teamseasonmap.team.name} - ${teamseasonmap.season.name}</h3>
 	  <table class="default fixtures u-full-width">
 	    <thead>
 	      <tr>
-	    	<th><f:message key="fixtures.headers.date"/></th>
-	    	<th class="home"><f:message key="fixtures.headers.home"/></th>
-	    	<th><f:message key="fixtures.headers.result"/></th>
-	    	<th><f:message key="fixtures.headers.away"/></th>
-	    	<th class="not-small"><f:message key="fixtures.headers.field"/></th>
+	    	<th><fmt:message key="fixtures.headers.date"/></th>
+	    	<th class="home"><fmt:message key="fixtures.headers.home"/></th>
+	    	<th><fmt:message key="fixtures.headers.result"/></th>
+	    	<th><fmt:message key="fixtures.headers.away"/></th>
+	    	<th class="not-small"><fmt:message key="fixtures.headers.field"/></th>
 	      </tr>
 	    </thead>
 	    <tbody>

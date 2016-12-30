@@ -101,4 +101,8 @@ public final class Team {
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
+    
+    public String toString() {
+    	return uuid.toString();
+    }
 }

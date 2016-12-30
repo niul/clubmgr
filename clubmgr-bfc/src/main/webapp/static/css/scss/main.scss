@@ -122,7 +122,6 @@
 
 	b, strong {
 		font-weight: 600;
-		color: $primary-color;
 	}
 
 	i, em {
@@ -241,6 +240,10 @@
 		input[type="password"] {
 			line-height: 3em;
 			padding: 0 1em;
+			
+			&.small {
+				width: 50px;
+			}
 		}
 
 		select {
@@ -319,6 +322,12 @@
 				color: #fff;
 			}
 		}
+		
+		td {
+			&.center {
+					vertical-align: middle;
+				}
+		}	
 	}
 
 /* Image */

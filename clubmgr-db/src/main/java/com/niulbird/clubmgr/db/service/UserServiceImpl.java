@@ -40,10 +40,18 @@ public class UserServiceImpl implements UserService {
 		PasswordReset passwordReset = passwordResetRepository.findByResetKey(resetKey);
 		User user = passwordReset.getUser();
 		user.setPassword(password);
+		user.setChangePassword(false);
 		userRepository.save(user);
 		
 		passwordReset.setComplete(true);
 		passwordReset.setUpdated(new Date());
 		passwordResetRepository.save(passwordReset);
+	}
+
+	@Override
+	public void updatePassword(User user, String password) {
+		user.setPassword(password);
+		user.setChangePassword(false);
+		userRepository.save(user);
 	}
 }

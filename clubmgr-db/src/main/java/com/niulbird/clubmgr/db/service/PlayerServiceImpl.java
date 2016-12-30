@@ -62,12 +62,16 @@ public class PlayerServiceImpl implements PlayerService {
 
 		if (updatedPlayer == null)
 			throw new RecordNotFound();
-
+		
+		
 		updatedPlayer.setFirstName(player.getFirstName());
 		updatedPlayer.setLastName(player.getLastName());
 		updatedPlayer.setEmail(player.getEmail());
 		updatedPlayer.setPhone(player.getPhone());
 		updatedPlayer.setEnabled(player.getEnabled());
+		updatedPlayer.setPosition(player.getPosition());
+		updatedPlayer.setTeams(player.getTeams());
+		updatedPlayer.setTeamSeasonMaps(player.getTeamSeasonMaps());
 		playerRepository.save(updatedPlayer);
 		
 		return updatedPlayer;

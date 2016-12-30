@@ -2,6 +2,7 @@ package com.niulbird.clubmgr.db.model;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -50,6 +52,9 @@ public final class Fixture {
 	private Time time;
 	private boolean active;
 	private Date created;
+	
+	@OneToMany(mappedBy = "fixture")
+	private List<PlayerFixtureStatistic> playerFixtureStatistics;
 	
 	public Fixture () {
 		created = new Date();
@@ -141,6 +146,12 @@ public final class Fixture {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
-	
+
+	public List<PlayerFixtureStatistic> getPlayerFixtureStatistics() {
+		return playerFixtureStatistics;
+	}
+
+	public void setPlayerFixtureStatistics(List<PlayerFixtureStatistic> playerFixtureStatistics) {
+		this.playerFixtureStatistics = playerFixtureStatistics;
+	}
 }

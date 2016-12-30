@@ -9,4 +9,5 @@ public interface UserService {
 	public User getUser(String username);
 	public PasswordReset findByResetKey(UUID resetKey);
 	public void updatePassword(UUID resetKey, String password);
+	public void updatePassword(User user, String password);
 }

@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="4u 6u(medium) 12u$(small)">
 					<section class="widget links">
-						<h3><f:message key="footer.list1.title"/></h3>
+						<h3><fmt:message key="footer.list1.title"/></h3>
 						<ul class="style2">
 							<c:forEach var="post" items="${footerPosts}">
 	 							<fmt:formatDate value="${post.createDate}" var="formattedDate" 
@@ -13,7 +13,7 @@
       							<li>
       								<a href='<c:url value="/post/${post.id}"/>'>${post.title}</a><br>
       								<sup>
-      									${formattedDate} <f:message key="footer.list1.in"/>
+      									${formattedDate} <fmt:message key="footer.list1.in"/>
       									<c:forEach var="category" items="${post.categories}">
       										${category.name}
       									</c:forEach>
@@ -26,46 +26,46 @@
 				<div class="4u 6u$(medium) 12u$(small)">
 					<!-- Links -->
 					<section class="widget links">
-						<h3><f:message key="footer.list2.title"/></h3>
+						<h3><fmt:message key="footer.list2.title"/></h3>
 						<ul class="style2">
-							<li><a href="<f:message key='footer.list2.item1.url'/>" target="_blank"><f:message key="footer.list2.item1.name"/></a></li>
-							<li><a href="<f:message key='footer.list2.item2.url'/>" target="_blank"><f:message key="footer.list2.item2.name"/></a></li>
-							<li><a href="<f:message key='footer.list2.item3.url'/>" target="_blank"><f:message key="footer.list2.item3.name"/></a></li>
-							<li><a href="<f:message key='footer.list2.item4.url'/>" target="_blank"><f:message key="footer.list2.item4.name"/></a></li>
-							<li><a href="<f:message key='footer.list2.item5.url'/>" target="_blank"><f:message key="footer.list2.item5.name"/></a></li>
-							<li><a href="<f:message key='footer.list2.item6.url'/>" target="_blank"><f:message key="footer.list2.item6.name"/></a></li>
-							<li><a href="<f:message key='footer.list2.item7.url'/>" target="_blank"><f:message key="footer.list2.item7.name"/></a></li>
+							<li><a href="<fmt:message key='footer.list2.item1.url'/>" target="_blank"><fmt:message key="footer.list2.item1.name"/></a></li>
+							<li><a href="<fmt:message key='footer.list2.item2.url'/>" target="_blank"><fmt:message key="footer.list2.item2.name"/></a></li>
+							<li><a href="<fmt:message key='footer.list2.item3.url'/>" target="_blank"><fmt:message key="footer.list2.item3.name"/></a></li>
+							<li><a href="<fmt:message key='footer.list2.item4.url'/>" target="_blank"><fmt:message key="footer.list2.item4.name"/></a></li>
+							<li><a href="<fmt:message key='footer.list2.item5.url'/>" target="_blank"><fmt:message key="footer.list2.item5.name"/></a></li>
+							<li><a href="<fmt:message key='footer.list2.item6.url'/>" target="_blank"><fmt:message key="footer.list2.item6.name"/></a></li>
+							<li><a href="<fmt:message key='footer.list2.item7.url'/>" target="_blank"><fmt:message key="footer.list2.item7.name"/></a></li>
 						</ul>
 					</section>
 				</div>
 				<div class="4u 12u$(medium) 12u$(small)">
 					<!-- Contact -->
 					<section class="widget contact last">
-						<h3><f:message key="footer.contact"/></h3>
+						<h3><fmt:message key="footer.contact"/></h3>
 						<ul>
   							<li>
-  								<a href="<f:message key='footer.social.facebook.url'/>" title="<f:message key='footer.social.facebook.url'/>" target="_blank">
+  								<a href="<fmt:message key='footer.social.facebook.url'/>" title="<fmt:message key='footer.social.facebook.url'/>" target="_blank">
   									<span class="fa-stack fa-2x">
   										<i class="fa fa-facebook-square fa-2x" aria-hidden="true" ></i>
   									</span>
   								</a>
   							</li>
   							<li>
-  								<a href="<f:message key='footer.social.twitter.url'/>"  title="<f:message key='footer.social.twitter.url'/>" target="_blank">
+  								<a href="<fmt:message key='footer.social.twitter.url'/>"  title="<fmt:message key='footer.social.twitter.url'/>" target="_blank">
   									<span class="fa-stack fa-2x">
   										<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
   									</span>
   								</a>
   							</li>
   							<li>
-  								<a href="<f:message key='footer.social.google_plus.url'/>" title="<f:message key='footer.social.google_plus.url'/>" target="_blank">
+  								<a href="<fmt:message key='footer.social.google_plus.url'/>" title="<fmt:message key='footer.social.google_plus.url'/>" target="_blank">
   									<span class="fa-stack fa-2x">
   										<i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i>
   									</span>
   								</a>
   							</li>
   							<li>
-  								<a href="<f:message key='footer.social.wordpress.url'/>" title="<f:message key='footer.social.wordpress.url'/>" target="_blank">
+  								<a href="<fmt:message key='footer.social.wordpress.url'/>" title="<fmt:message key='footer.social.wordpress.url'/>" target="_blank">
   									<span class="fa-stack fa-2x">
   										<i class="fa fa-square fa-stack-2x" aria-hidden="true"></i>
   										<i class="fa fa-wordpress fa-stack-1x fa-inverse" aria-hidden="true"></i>
@@ -90,7 +90,7 @@
 	  				<!-- Copyright -->
 	  				<div id="copyright">
 	    				<ul class="menu">
-		  					<li>&copy; ${year} <f:message key="footer.copyright"/></li><li><f:message key="footer.design"/></li>
+		  					<li>&copy; ${year} <fmt:message key="footer.copyright"/></li><li><fmt:message key="footer.design"/></li>
 						</ul>
 	 				</div>
 	 			</div>

@@ -1,6 +1,6 @@
 <!DOCTYPE tiles-definitions PUBLIC
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
     <!-- Main Page -->
@@ -110,6 +110,10 @@
         <put-attribute name="content" value="/WEB-INF/views/content/password_reset.jsp"/>
     </definition>
   
+  <definition name="password_change"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/admin/password_change.jsp"/>
+    </definition>
+  
   <definition name="admin_players"  extends="adminPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/admin/players.jsp"/>
    </definition>
@@ -120,6 +124,18 @@
   
   <definition name="admin_edit_player"  extends="adminPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/admin/edit_player.jsp"/>
+   </definition>
+  
+  <definition name="admin_squads"  extends="adminPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/admin/squads.jsp"/>
+   </definition>
+  
+  <definition name="admin_reports"  extends="adminPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/admin/reports.jsp"/>
+   </definition>
+  
+  <definition name="admin_report"  extends="adminPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/admin/report.jsp"/>
    </definition>
   
   <definition name="error"  extends="rightPanelTemplate">

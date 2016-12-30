@@ -28,11 +28,11 @@ public final class Player {
     private Integer playerId;
 	private UUID uuid;
     private Club club;
-    
-	@NotNull @Size(min=2, max=40)
+
+	@NotNull @Size(min=2, max=40) @Pattern(regexp="[A-Z][a-z]+( [A-Z][a-z]+)?")
 	private String firstName;
 	
-	@NotNull @Size(min=2, max=40)
+	@NotNull @Size(min=2, max=40) @Pattern(regexp="[A-Z]['A-Za-z]+( [A-Z][a-z]+)?")
 	private String lastName;
 	
 	@NotNull @Email
@@ -51,6 +51,8 @@ public final class Player {
 	private Date created;
 
 	private List<Team> teams;
+	private List<TeamSeasonMap> teamSeasonMaps;
+	private Position position;
 
 	public Player () {
 		created = new Date();
@@ -200,4 +202,24 @@ public final class Player {
     public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "player_team_season_map", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "team_season_map_id"))
+    public List<TeamSeasonMap> getTeamSeasonMaps() {
+        return teamSeasonMaps;
+    }
+
+    public void setTeamSeasonMaps(List<TeamSeasonMap> teamSeasonMaps) {
+        this.teamSeasonMaps = teamSeasonMaps;
+    }
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "position_id")
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
 }

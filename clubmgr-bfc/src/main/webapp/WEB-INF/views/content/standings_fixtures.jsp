@@ -3,20 +3,20 @@
 	<article>
       <header>
 	    <h1>${teamseasonmap.team.name} / ${teamseasonmap.season.name}</h1>
-        <h3><f:message key="standings.title"/> / <a href="${teamseasonmap.standingsUri}" target="_blank">${teamseasonmap.description}</a></h3>
+        <h3><fmt:message key="standings.title"/> / <a href="${teamseasonmap.standingsUri}" target="_blank">${teamseasonmap.description}</a></h3>
       </header>
 	  <table class="default standings">
 	    <thead>
 	      <tr>
-	    	<th class="not-small"><span title="<f:message key='standings.headers.position.name'/>"><f:message key="standings.headers.position"/></span></th>
-	    	<th><span title="<f:message key='standings.headers.team.name'/>"><f:message key="standings.headers.team"/></span></th>
-	    	<th><span title="<f:message key='standings.headers.games_played.name'/>"><f:message key="standings.headers.games_played"/></span></th>
-	    	<th><span title="<f:message key='standings.headers.wins.name'/>"><f:message key="standings.headers.wins"/></span></th>
-	    	<th><span title="<f:message key='standings.headers.losses.name'/>"><f:message key="standings.headers.ties"/></span></th>
-	    	<th><span title="<f:message key='standings.headers.ties.name'/>"><f:message key="standings.headers.losses"/></span></th>
-	    	<th class="not-small"><span title="<f:message key='standings.headers.goals_for.name'/>"><f:message key="standings.headers.goals_for"/></span></th>
-	    	<th class="not-small"><span title="<f:message key='standings.headers.goals_against.name'/>"><f:message key="standings.headers.goals_against"/></span></th>
-	    	<th><span title="<f:message key='standings.headers.points.name'/>"><f:message key="standings.headers.points"/></span></th>
+	    	<th class="not-small"><span title="<fmt:message key='standings.headers.position.name'/>"><fmt:message key="standings.headers.position"/></span></th>
+	    	<th><span title="<fmt:message key='standings.headers.team.name'/>"><fmt:message key="standings.headers.team"/></span></th>
+	    	<th><span title="<fmt:message key='standings.headers.games_played.name'/>"><fmt:message key="standings.headers.games_played"/></span></th>
+	    	<th><span title="<fmt:message key='standings.headers.wins.name'/>"><fmt:message key="standings.headers.wins"/></span></th>
+	    	<th><span title="<fmt:message key='standings.headers.losses.name'/>"><fmt:message key="standings.headers.ties"/></span></th>
+	    	<th><span title="<fmt:message key='standings.headers.ties.name'/>"><fmt:message key="standings.headers.losses"/></span></th>
+	    	<th class="not-small"><span title="<fmt:message key='standings.headers.goals_for.name'/>"><fmt:message key="standings.headers.goals_for"/></span></th>
+	    	<th class="not-small"><span title="<fmt:message key='standings.headers.goals_against.name'/>"><fmt:message key="standings.headers.goals_against"/></span></th>
+	    	<th><span title="<fmt:message key='standings.headers.points.name'/>"><fmt:message key="standings.headers.points"/></span></th>
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -39,16 +39,16 @@
 	
 		<article>
       <header>
-        <h3><f:message key="fixtures.title"/> / <a href="${teamseasonmap.fixturesUri}" target="_blank">${teamseasonmap.description}</a></h3>
+        <h3><fmt:message key="fixtures.title"/> / <a href="${teamseasonmap.fixturesUri}" target="_blank">${teamseasonmap.description}</a></h3>
       </header>
 	  <table class="default fixtures u-full-width">
 	    <thead>
 	      <tr>
-	    	<th><f:message key="fixtures.headers.date"/></th>
-	    	<th class="home"><f:message key="fixtures.headers.home"/></th>
-	    	<th><f:message key="fixtures.headers.result"/></th>
-	    	<th><f:message key="fixtures.headers.away"/></th>
-	    	<th class="not-small"><f:message key="fixtures.headers.field"/></th>
+	    	<th><fmt:message key="fixtures.headers.date"/></th>
+	    	<th class="home"><fmt:message key="fixtures.headers.home"/></th>
+	    	<th><fmt:message key="fixtures.headers.result"/></th>
+	    	<th><fmt:message key="fixtures.headers.away"/></th>
+	    	<th class="not-small"><fmt:message key="fixtures.headers.field"/></th>
 	      </tr>
 	    </thead>
 	    <tbody>

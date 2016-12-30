@@ -94,30 +94,25 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.8.2</version>
     </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <version>5.0.1.Final</version>
-    </dependency>
 
     <!-- Tiles -->
     <dependency>
       <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-api</artifactId>
-      <version>2.2.2</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
       <artifactId>tiles-core</artifactId>
-      <version>2.2.2</version>
+      <version>3.0.7</version>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.apache.tiles</groupId>
       <artifactId>tiles-jsp</artifactId>
-      <version>2.2.2</version>
+      <version>3.0.7</version>
       <type>jar</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.5</version>
     </dependency>
   </dependencies>
 

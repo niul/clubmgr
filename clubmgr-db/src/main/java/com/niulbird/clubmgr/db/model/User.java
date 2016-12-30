@@ -28,6 +28,7 @@ public final class User {
 	private String lastName;
 	private String email;
 	private Boolean enabled;
+	private Boolean changePassword;
 	private Date created;
 	
 	private List<Role> roles;
@@ -114,6 +115,15 @@ public final class User {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	@Column(name = "chg_password", nullable = false)
+	public boolean getChangePassword() {
+		return changePassword;
+	}
+
+	public void setChangePassword(boolean changePassword) {
+		this.changePassword = changePassword;
 	}
 
 	public Date getCreated() {

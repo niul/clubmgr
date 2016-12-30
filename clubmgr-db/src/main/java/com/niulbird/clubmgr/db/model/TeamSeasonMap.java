@@ -1,6 +1,7 @@
 package com.niulbird.clubmgr.db.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -40,6 +43,10 @@ public final class TeamSeasonMap {
 	private Date created;
 	private String description;
 	private Boolean scheduled;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "player_team_season_map", joinColumns = @JoinColumn(name = "team_season_map_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
+	private List<Player> players;
 	
 
 	public TeamSeasonMap () {
@@ -117,4 +124,12 @@ public final class TeamSeasonMap {
 	public void setScheduled(Boolean scheduled) {
 		this.scheduled = scheduled;
 	}
+	
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
 }

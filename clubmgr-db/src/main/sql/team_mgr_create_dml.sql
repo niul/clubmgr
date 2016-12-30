@@ -163,3 +163,8 @@ INSERT INTO team_season_map (team_id, season_id, data_key, standings_uri, fixtur
     JOIN    seasons S ON S.season_key = 'SUMMER_2015'
     WHERE    T.team_key = 'BOMBASTIC_MENS_CLASSICS'
 );
+
+INSERT INTO positions (position_key, position_desc) VALUES ('GOALKEEPER', 'Goalkeeper');
+INSERT INTO positions (position_key, position_desc) VALUES ('DEFENDER', 'Defender');
+INSERT INTO positions (position_key, position_desc) VALUES ('MIDFIELDER', 'Midfieler');
+INSERT INTO positions (position_key, position_desc) VALUES ('FORWARD', 'Forward');

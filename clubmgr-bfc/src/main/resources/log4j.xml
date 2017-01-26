@@ -19,7 +19,7 @@
 </appender>
 
 <category name="org.springframework" additivity="false">
-    <priority value="DEBUG" />
+    <priority value="INFO" />
     <appender-ref ref="CONSOLE" />
     <appender-ref ref="CLUBMGR_LOGS"/>
 </category>

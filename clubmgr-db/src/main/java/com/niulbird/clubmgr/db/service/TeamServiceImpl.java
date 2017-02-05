@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +23,8 @@ import com.niulbird.clubmgr.db.repository.TeamSeasonMapRepository;
 @Service
 @Transactional
 public class TeamServiceImpl implements TeamService {
-	
+
+    private final Log logger = LogFactory.getLog(getClass());
 	@Autowired
 	private TeamRepository teamRepository;
 	
@@ -143,16 +146,25 @@ public class TeamServiceImpl implements TeamService {
 				} else {
 					dbFixture = dbFixtures.get(0);
 				}
-				dbFixture.setAwayScore(fixture.getAwayScore());
-				dbFixture.setDate(fixture.getDate());
-				dbFixture.setField(fixture.getField());
-				dbFixture.setFieldMapUri(fixture.getFieldMapUri());
-				dbFixture.setHomeScore(fixture.getHomeScore());
-				dbFixture.setDate(fixture.getDate());
-				dbFixture.setTime(fixture.getTime());
-				dbFixture.setActive(fixture.getActive());
-				fixtureRepository.save(dbFixture);
-				allDbFixtures.add(dbFixture);
+				if (dbFixture == null) {
+					logger.debug("Saving Fixture: \tDate: " + fixture.getDate() + "\tHome: " + fixture.getHome() + "\tAway: " + fixture.getAway() 
+					+ "\tHomeScore: " + fixture.getHomeScore() + "\tAwayScore: " + fixture.getAwayScore());
+					fixtureRepository.save(fixture);
+					allDbFixtures.add(fixture);
+				} else {
+					logger.debug("Updating Fixture: \tID: " + dbFixture.getFixtureId() + "\tDate: " + fixture.getDate() + "\tHome: " + fixture.getHome() + "\tAway: " + fixture.getAway() 
+					+ "\tHomeScore: " + fixture.getHomeScore() + "\tAwayScore: " + fixture.getAwayScore());
+					dbFixture.setAwayScore(fixture.getAwayScore());
+					dbFixture.setDate(fixture.getDate());
+					dbFixture.setField(fixture.getField());
+					dbFixture.setFieldMapUri(fixture.getFieldMapUri());
+					dbFixture.setHomeScore(fixture.getHomeScore());
+					dbFixture.setDate(fixture.getDate());
+					dbFixture.setTime(fixture.getTime());
+					dbFixture.setActive(fixture.getActive());
+					fixtureRepository.save(dbFixture);
+					allDbFixtures.add(dbFixture);
+				}
 			}
 		}
 		return allDbFixtures;

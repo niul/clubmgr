@@ -141,15 +141,11 @@ CREATE TABLE player_teams (
     player_team_id	serial PRIMARY KEY,
     player_id		serial,
     team_id		serial,
-    position_id		serial,
     CONSTRAINT FK_player_teams_player_id FOREIGN KEY (player_id)
     REFERENCES players (player_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT FK_player_teams_team_id FOREIGN KEY (team_id)
     REFERENCES teams (team_id) MATCH SIMPLE
-    ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT FK_player_teams_position_id FOREIGN KEY (position_id)
-    REFERENCES positions (position_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 

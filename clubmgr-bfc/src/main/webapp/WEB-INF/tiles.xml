@@ -90,6 +90,10 @@
         <put-attribute name="content" value="/WEB-INF/views/content/fixtures.jsp"/>
     </definition>
     
+    <definition name="fixture"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/fixture.jsp"/>
+    </definition>
+    
     <definition name="standings"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/standings.jsp"/>
     </definition>

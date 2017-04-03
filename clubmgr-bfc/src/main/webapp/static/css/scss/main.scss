@@ -287,6 +287,42 @@
     	font-weight: lighter;
 	}
 	
+	.highlight {
+    	background: #ccc;
+    	border: 1px solid #ccc;
+    	border-radius: 3px;
+    	color: #333;
+    	display: inline-block;
+    	font-weight: bold;
+    	line-height: 99%;
+    	margin: 0;
+    	padding: 2px 5px;
+    	text-align: center;
+    	text-decoration: none;
+    	text-transform: uppercase;
+	}
+	
+	.highlight-YES {
+			@extend .highlight;
+			color: #ffffff;
+    		background-color: #14892c;
+    		border-color: #14892c;
+	}
+	
+	.highlight-NO {
+			@extend .highlight;
+			color: #ffffff;
+    		background-color: #d04437;
+    		border-color: #d04437;
+	}
+	
+	.highlight-MAYBE {
+			@extend .highlight;
+			color: #594300;
+    		background-color: #ffd351;
+    		border-color: #ffd351;
+	}
+	
 /* Tables */
 
 	table {

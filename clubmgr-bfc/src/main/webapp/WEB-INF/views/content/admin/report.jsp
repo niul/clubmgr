@@ -18,12 +18,12 @@
 						<fmt:param value="${fixtureDate}"/>
 					</fmt:message>
 				</h4>
-			<form:form action="${requestScope['javax.servlet.forward.request_uri']}" modelAttribute="playerFixtureStatisticList" method="POST">
-				<spring:hasBindErrors name="playerFixtureStatisticList">
+			<form:form action="${requestScope['javax.servlet.forward.request_uri']}" modelAttribute="playerFixtureInfoList" method="POST">
+				<spring:hasBindErrors name="playerFixtureInfoList">
 					<div class="msg form_error"><strong><fmt:message key="report.errors"/>:</strong>
 					<c:forEach var="error" items="${errors.allErrors}">
 						<c:choose>
- 							<c:when test="${error.field == 'playerFixtureStatisticList'}">
+ 							<c:when test="${error.field == 'playerFixtureInfoList'}">
 								<div><spring:message message="${error}" /></div>
 							</c:when>
 							<c:otherwise>
@@ -46,20 +46,20 @@
 						<th><fmt:message key="report.header.rating"/></th>
 					</tr>
 				</thead>
-				<c:forEach items="${playerFixtureStatisticList.playerFixtureStatisticList}"  var="playerFixtureStatistic" varStatus="vs">
+				<c:forEach items="${playerFixtureInfoList.playerFixtureInfoList}"  var="playerFixtureInfo" varStatus="vs">
 				<tr>
-					<form:input type="hidden" path="playerFixtureStatisticList[${vs.index}].player.firstName" value="${playerFixtureStatistic.player.firstName}"/>
-					<form:input type="hidden" path="playerFixtureStatisticList[${vs.index}].player.lastName" value="${playerFixtureStatistic.player.lastName}"/>
-					<form:input type="hidden" path="playerFixtureStatisticList[${vs.index}].player.uuid" value="${playerFixtureStatistic.player.uuid}"/>
-					<form:input type="hidden" path="playerFixtureStatisticList[${vs.index}].fixture.uuid" value="${playerFixtureStatistic.fixture.uuid}"/>
-					<td class="center">${playerFixtureStatistic.player.firstName} ${playerFixtureStatistic.player.lastName}</td>
-					<td class="center"><form:checkbox path="playerFixtureStatisticList[${vs.index}].started" value="${playerFixtureStatistic.started}"/></td>
-					<td class="center"><form:checkbox path="playerFixtureStatisticList[${vs.index}].substitute" value="${playerFixtureStatistic.substitute}"/></td>
-					<td class="center"><form:checkbox path="playerFixtureStatisticList[${vs.index}].yellowCard" value="${playerFixtureStatistic.yellowCard}"/></td>
-					<td class="center"><form:checkbox path="playerFixtureStatisticList[${vs.index}].redCard" value="${playerFixtureStatistic.redCard}"/></td>
-					<td class="center"><form:input class="small" autocomplete="off" maxlength="1" path="playerFixtureStatisticList[${vs.index}].assists" value="${playerFixtureStatistic.assists}"/></td>
-					<td class="center"><form:input class="small" autocomplete="off" maxlength="1" path="playerFixtureStatisticList[${vs.index}].goals" value="${playerFixtureStatistic.goals}"/></td>
-					<td class="center"><form:input class="small" autocomplete="off" maxlength="2" path="playerFixtureStatisticList[${vs.index}].rating" value="${playerFixtureStatistic.rating}"/></td>
+					<form:input type="hidden" path="playerFixtureInfoList[${vs.index}].player.firstName" value="${playerFixtureInfo.player.firstName}"/>
+					<form:input type="hidden" path="playerFixtureInfoList[${vs.index}].player.lastName" value="${playerFixtureInfo.player.lastName}"/>
+					<form:input type="hidden" path="playerFixtureInfoList[${vs.index}].player.uuid" value="${playerFixtureInfo.player.uuid}"/>
+					<form:input type="hidden" path="playerFixtureInfoList[${vs.index}].fixture.uuid" value="${playerFixtureInfo.fixture.uuid}"/>
+					<td class="center">${playerFixtureInfo.player.firstName} ${playerFixtureInfo.player.lastName}</td>
+					<td class="center"><form:checkbox path="playerFixtureInfoList[${vs.index}].started" value="${playerFixtureInfo.started}"/></td>
+					<td class="center"><form:checkbox path="playerFixtureInfoList[${vs.index}].substitute" value="${playerFixtureInfo.substitute}"/></td>
+					<td class="center"><form:checkbox path="playerFixtureInfoList[${vs.index}].yellowCard" value="${playerFixtureInfo.yellowCard}"/></td>
+					<td class="center"><form:checkbox path="playerFixtureInfoList[${vs.index}].redCard" value="${playerFixtureInfo.redCard}"/></td>
+					<td class="center"><form:input class="small" autocomplete="off" maxlength="1" path="playerFixtureInfoList[${vs.index}].assists" value="${playerFixtureInfo.assists}"/></td>
+					<td class="center"><form:input class="small" autocomplete="off" maxlength="1" path="playerFixtureInfoList[${vs.index}].goals" value="${playerFixtureInfo.goals}"/></td>
+					<td class="center"><form:input class="small" autocomplete="off" maxlength="2" path="playerFixtureInfoList[${vs.index}].rating" value="${playerFixtureInfo.rating}"/></td>
 				</tr>
 				</c:forEach>
 			</table>

@@ -71,7 +71,7 @@
         	</props>
     	</property>
 	</bean>
-	
+  
 	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
 		<property name="to">
         	<value><![CDATA[${email.toName} <${email.toEmail}>]]></value>

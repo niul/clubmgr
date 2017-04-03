@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SortComparator;
+
 @Entity
 @Table(name = "fixtures")
 public final class Fixture {
@@ -54,7 +56,7 @@ public final class Fixture {
 	private Date created;
 	
 	@OneToMany(mappedBy = "fixture")
-	private List<PlayerFixtureStatistic> playerFixtureStatistics;
+	private List<PlayerFixtureInfo> playerFixtureInfo;
 	
 	public Fixture () {
 		created = new Date();
@@ -146,12 +148,13 @@ public final class Fixture {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-
-	public List<PlayerFixtureStatistic> getPlayerFixtureStatistics() {
-		return playerFixtureStatistics;
+	
+	@SortComparator( PlayerFixtureInfoComparator.class )
+	public List<PlayerFixtureInfo> getPlayerFixtureInfo() {
+		return playerFixtureInfo;
 	}
 
-	public void setPlayerFixtureStatistics(List<PlayerFixtureStatistic> playerFixtureStatistics) {
-		this.playerFixtureStatistics = playerFixtureStatistics;
+	public void setPlayerFixtureInfo(List<PlayerFixtureInfo> playerFixtureInfo) {
+		this.playerFixtureInfo = playerFixtureInfo;
 	}
 }

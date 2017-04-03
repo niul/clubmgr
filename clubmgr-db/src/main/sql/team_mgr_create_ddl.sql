@@ -165,10 +165,13 @@ CREATE TABLE player_team_season_map (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE player_fixture_stats (
-	player_fixture_stat_id	serial PRIMARY KEY,
+CREATE TABLE player_fixture_info (
+	player_fixture_info_id	serial PRIMARY KEY,
 	player_id	serial NOT NULL,
 	fixture_id	serial NOT NULL,
+	uuid		uuid,
+	status		int,
+	comment		varchar(100),
 	started		boolean  NOT NULL DEFAULT FALSE,
 	substitute	boolean  NOT NULL DEFAULT FALSE,
 	assists		int,
@@ -176,6 +179,8 @@ CREATE TABLE player_fixture_stats (
 	yellow_card	boolean  NOT NULL DEFAULT FALSE,
 	red_card	boolean  NOT NULL DEFAULT FALSE,
 	rating		int,
+    created		timestamp,
+    viewed		timestamp,
 	CONSTRAINT FK_player_fixture_stats_player_id FOREIGN KEY (player_id)
     REFERENCES players (player_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE,

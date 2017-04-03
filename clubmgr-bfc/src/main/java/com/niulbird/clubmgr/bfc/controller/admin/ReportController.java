@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.niulbird.clubmgr.bfc.command.PlayerFixtureStatisticList;
-import com.niulbird.clubmgr.bfc.command.PlayerFixtureStatisticListValidator;
+import com.niulbird.clubmgr.bfc.command.PlayerFixtureInfoList;
+import com.niulbird.clubmgr.bfc.command.PlayerFixtureInfoListValidator;
 import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Season;
 import com.niulbird.clubmgr.db.model.Team;
@@ -42,7 +42,7 @@ public class ReportController extends AdminBaseController {
 	TeamService teamService;
 	
 	@Autowired
-	PlayerFixtureStatisticListValidator playerFixtureStatisticListValidator;
+	PlayerFixtureInfoListValidator playerFixtureInfoListValidator;
 
 	@Transactional
 	@RequestMapping(value = "/admin/reports.html")
@@ -76,7 +76,7 @@ public class ReportController extends AdminBaseController {
 	@Transactional
 	@RequestMapping(value = "/admin/editReport.html", method = RequestMethod.GET)
 	public ModelAndView editReport(@RequestParam (required = false) String uuid,
-			@ModelAttribute("playerFixtureStatisticList") PlayerFixtureStatisticList playerFixtureStatisticList,
+			@ModelAttribute("playerFixtureInfoList") PlayerFixtureInfoList playerFixtureInfoList,
 			@RequestParam (required = false) String teamUuid,
 			@RequestParam (required = false) String seasonKey,
 			HttpServletRequest request) {
@@ -86,10 +86,10 @@ public class ReportController extends AdminBaseController {
 		mav = getFilterObjects(ADMIN_REPORT, teamUuid, false, seasonKey, request);
 		
 		Fixture fixture = fixtureService.findFixtureByUuid(uuid);
-		playerFixtureStatisticList.setPlayerFixtureStatisticList(fixtureService.findPlayerStatisticsByFixture(fixture, teamUuid, seasonKey));
+		playerFixtureInfoList.setPlayerFixtureInfoList(fixtureService.findPlayerInfoByFixture(fixture, teamUuid, seasonKey));
 		
 		mav.addObject(FIXTURE, fixture);
-		mav.addObject("playerFixtureStatisticList", playerFixtureStatisticList);
+		mav.addObject("playerFixtureInfoList", playerFixtureInfoList);
 		
 		return mav;
 	}
@@ -97,7 +97,7 @@ public class ReportController extends AdminBaseController {
 	@Transactional
 	@RequestMapping(value = "/admin/editReport.html", method = RequestMethod.POST)
 	public ModelAndView editReport(@RequestParam (required = false) String uuid,
-			@Valid PlayerFixtureStatisticList playerFixtureStatisticList,
+			@Valid PlayerFixtureInfoList playerFixtureInfoList,
 			BindingResult result,
 			@RequestParam (required = false) String teamUuid,
 			@RequestParam (required = false) String seasonKey,
@@ -108,18 +108,18 @@ public class ReportController extends AdminBaseController {
 		mav = getFilterObjects(ADMIN_REPORT, teamUuid, false, seasonKey, request);
 
 		Fixture fixture = fixtureService.findFixtureByUuid(uuid);
-		playerFixtureStatisticList.setFixture(fixture);
-		playerFixtureStatisticListValidator.validate(playerFixtureStatisticList, result);
+		playerFixtureInfoList.setFixture(fixture);
+		playerFixtureInfoListValidator.validate(playerFixtureInfoList, result);
 		
 		if (result.hasErrors()) {
 			mav = getFilterObjects(ADMIN_REPORT, teamUuid, false, seasonKey, request);
 			
 			mav.addObject(FIXTURE, fixture);
-			mav.addObject("playerFixtureStatisticList", playerFixtureStatisticList);
+			mav.addObject("playerFixtureInfoList", playerFixtureInfoList);
 			
 			return mav;
 		}
-		fixtureService.updateFixtureReport(fixture, playerFixtureStatisticList.getPlayerFixtureStatisticList());
+		fixtureService.updateFixtureReport(fixture, playerFixtureInfoList.getPlayerFixtureInfoList());
 		mav.setViewName("redirect:/admin/reports.html?uuid=" + teamUuid + "&seasonKey=" + seasonKey);
 		
 		return mav;

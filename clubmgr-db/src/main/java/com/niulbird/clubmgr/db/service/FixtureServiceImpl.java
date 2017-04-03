@@ -6,16 +6,19 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Player;
-import com.niulbird.clubmgr.db.model.PlayerFixtureStatistic;
+import com.niulbird.clubmgr.db.model.PlayerFixtureInfo;
+import com.niulbird.clubmgr.db.model.Status;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.repository.FixtureRepository;
-import com.niulbird.clubmgr.db.repository.PlayerFixtureStatisticRepository;
+import com.niulbird.clubmgr.db.repository.PlayerFixtureInfoRepository;
 import com.niulbird.clubmgr.db.repository.PlayerRepository;
 import com.niulbird.clubmgr.db.repository.TeamRepository;
 import com.niulbird.clubmgr.db.repository.TeamSeasonMapRepository;
@@ -23,15 +26,17 @@ import com.niulbird.clubmgr.db.repository.TeamSeasonMapRepository;
 @Service
 @Transactional
 public class FixtureServiceImpl implements FixtureService {
-	
+
+    private final Log logger = LogFactory.getLog(getClass());
+    
 	@Autowired
 	private FixtureRepository fixtureRepository;
 	
 	@Autowired
 	private PlayerRepository playerRepository;
-	
+
 	@Autowired
-	private PlayerFixtureStatisticRepository playerFixtureStatisticRepository;
+	private PlayerFixtureInfoRepository playerFixtureInfoRepository;
 	
 	@Autowired
 	private TeamRepository teamRepository;
@@ -63,15 +68,15 @@ public class FixtureServiceImpl implements FixtureService {
 	}
 
 	@Override
-	public List<PlayerFixtureStatistic> findPlayerStatisticsByFixture(Fixture fixture,
+	public List<PlayerFixtureInfo> findPlayerInfoByFixture(Fixture fixture,
 			String teamUuid, String seasonKey) {
-		List<PlayerFixtureStatistic> playerFixtureStatisticList = fixture.getPlayerFixtureStatistics();
+		List<PlayerFixtureInfo> playerFixtureStatisticList = fixture.getPlayerFixtureInfo();
 		
 		if (playerFixtureStatisticList.size() == 0) {
 			TeamSeasonMap teamSeasonMap = teamSeasonMapRepository.findByTeamTeamKeyAndSeasonSeasonKey(teamRepository.findByUuid(UUID.fromString(teamUuid)).getTeamKey(), seasonKey);
 			List<Player> players = teamSeasonMap.getPlayers();
 			for (Player player : players) {
-				PlayerFixtureStatistic playerFixtureStatistic = new PlayerFixtureStatistic();
+				PlayerFixtureInfo playerFixtureStatistic = new PlayerFixtureInfo();
 				playerFixtureStatistic.setPlayer(player);
 				playerFixtureStatistic.setFixture(fixture);
 				playerFixtureStatistic.setStarted(false);
@@ -82,21 +87,21 @@ public class FixtureServiceImpl implements FixtureService {
 		
 		return playerFixtureStatisticList;
 	}
-
+	
 	@Override
-	public void updateFixtureReport(Fixture fixture, List<PlayerFixtureStatistic> playerFixtureStatisticList) {
+	public void updateFixtureReport(Fixture fixture, List<PlayerFixtureInfo> playerFixtureStatisticList) {
 		Fixture dbFixture = fixtureRepository.findByUuid(fixture.getUuid());
 		
-		for (PlayerFixtureStatistic playerFixtureStatistic : playerFixtureStatisticList) {
+		for (PlayerFixtureInfo playerFixtureStatistic : playerFixtureStatisticList) {
 			Player dbPlayer = playerRepository.findByUuid(playerFixtureStatistic.getPlayer().getUuid());
 					
 			playerFixtureStatistic.setFixture(dbFixture);
 			playerFixtureStatistic.setPlayer(dbPlayer);
 			
-			PlayerFixtureStatistic dbPlayerFixtureStatistic = playerFixtureStatisticRepository.findByFixtureAndPlayer(dbFixture, dbPlayer);
+			PlayerFixtureInfo dbPlayerFixtureStatistic = playerFixtureInfoRepository.findByFixtureAndPlayer(dbFixture, dbPlayer);
 			
 			if (dbPlayerFixtureStatistic == null) {
-				playerFixtureStatisticRepository.save(playerFixtureStatistic);
+				playerFixtureInfoRepository.save(playerFixtureStatistic);
 			} else {
 				dbPlayerFixtureStatistic.setAssists(playerFixtureStatistic.getAssists());
 				dbPlayerFixtureStatistic.setGoals(playerFixtureStatistic.getGoals());
@@ -108,5 +113,85 @@ public class FixtureServiceImpl implements FixtureService {
 			}
 		}
 		
+	}
+
+	@Override
+	public List<PlayerFixtureInfo> findPlayerInfoByFixture(Fixture fixture) {
+		List<PlayerFixtureInfo> playerFixtureInfoesList = fixture.getPlayerFixtureInfo();
+		
+		if (playerFixtureInfoesList.size() == 0) {
+			TeamSeasonMap teamSeasonMap = teamSeasonMapRepository.findByTeamAndSeason(fixture.getTeam(), fixture.getSeason());
+			List<Player> players = teamSeasonMap.getPlayers();
+			for (Player player : players) {
+				PlayerFixtureInfo playerFixtureInfo = new PlayerFixtureInfo();
+				playerFixtureInfo.setFixture(fixture);
+				playerFixtureInfo.setPlayer(player);
+				playerFixtureInfo.setFixture(fixture);
+				playerFixtureInfo.setStatus(Status.PENDING);
+				playerFixtureInfo.setUuid(UUID.randomUUID());
+				playerFixtureInfo.setCreated(new java.sql.Time(new java.util.Date().getTime()));
+				playerFixtureInfo.setStarted(false);
+				playerFixtureInfo.setSubstitute(false);
+				playerFixtureInfo.setYellowCard(false);
+				playerFixtureInfo.setRedCard(false);
+				playerFixtureInfoesList.add(playerFixtureInfo);
+			}
+		}
+		
+		return playerFixtureInfoesList;
+	}
+
+	@Override
+	@Transactional
+	public void updatePlayerInfo(List<PlayerFixtureInfo> playerFixtureInfoList) {
+		for (PlayerFixtureInfo playerFixtureInfo : playerFixtureInfoList) {
+			logger.debug("Saving: [" + playerFixtureInfo.getPlayerFixtureInfoId() + "][" + playerFixtureInfo.getPlayer().getFirstName() 
+					+ " " + playerFixtureInfo.getPlayer().getLastName() + "]");
+			playerFixtureInfoRepository.save(playerFixtureInfo);
+		}
+	}
+
+	@Override
+	@Transactional
+	public void updatePlayerInfo(PlayerFixtureInfo playerFixtureInfo) {
+		logger.debug("Saving: [" + playerFixtureInfo.getPlayerFixtureInfoId() + "][" + playerFixtureInfo.getPlayer().getFirstName() 
+					+ " " + playerFixtureInfo.getPlayer().getLastName() + "]");
+		playerFixtureInfoRepository.save(playerFixtureInfo);
+	}
+	
+	@Override
+	@Transactional
+	public PlayerFixtureInfo create(PlayerFixtureInfo playerFixtureStatus) {
+		return playerFixtureInfoRepository.save(playerFixtureStatus);
+	}
+
+	@Override
+	@Transactional(rollbackFor=RecordNotFound.class)
+	public PlayerFixtureInfo findByUuid(String uuid) {
+		return playerFixtureInfoRepository.findByUuid(UUID.fromString(uuid));
+	}
+
+	@Override
+	@Transactional(rollbackFor=RecordNotFound.class)
+	public PlayerFixtureInfo delete(Integer id) throws RecordNotFound {
+		PlayerFixtureInfo deletedPlayer = playerFixtureInfoRepository.findOne(id);
+
+		if (deletedPlayer == null)
+			throw new RecordNotFound();
+
+		playerFixtureInfoRepository.delete(deletedPlayer);
+		return deletedPlayer;
+	}
+
+	@Override
+	@Transactional
+	public List<PlayerFixtureInfo> findAll() {
+		return playerFixtureInfoRepository.findAll();
+	}
+
+	@Override
+	@Transactional
+	public List<PlayerFixtureInfo> findByFixture(Fixture fixture) {
+		return playerFixtureInfoRepository.findByFixtureOrderByPlayerFirstNameAscPlayerLastNameAsc(fixture);
 	}
 }

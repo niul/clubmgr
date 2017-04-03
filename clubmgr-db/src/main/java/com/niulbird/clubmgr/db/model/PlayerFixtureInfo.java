@@ -1,7 +1,12 @@
 package com.niulbird.clubmgr.db.model;
 
+import java.util.Date;
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,15 +16,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "player_fixture_stats")
-public final class PlayerFixtureStatistic {
+@Table(name = "player_fixture_info")
+public final class PlayerFixtureInfo {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "player_fixture_stat_id", nullable = false)
-    private Integer playerFixtureStatId;
+	@Column(name = "player_fixture_info_id", nullable = false)
+    private Integer playerFixtureInfoId;
 
 	private Player player;
 	private Fixture fixture;
+	private UUID uuid;
+	
+	@Enumerated(EnumType.STRING)
+	private Status status;
+
+	private String comment;
+	private Date created;
+	private Date viewed;
 	private Boolean started;
 	private Boolean substitute;
 	
@@ -31,13 +44,13 @@ public final class PlayerFixtureStatistic {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "player_fixture_stat_id")
-	public Integer getPlayerFixtureStatId() {
-		return playerFixtureStatId;
+	@Column(name = "player_fixture_info_id")
+	public Integer getPlayerFixtureInfoId() {
+		return playerFixtureInfoId;
 	}
 
-	public void setPlayerFixtureStatId(Integer playerFixtureStatId) {
-		this.playerFixtureStatId = playerFixtureStatId;
+	public void setPlayerFixtureInfoId(Integer playerFixtureInfoId) {
+		this.playerFixtureInfoId = playerFixtureInfoId;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -58,6 +71,46 @@ public final class PlayerFixtureStatistic {
 
 	public void setFixture(Fixture fixture) {
 		this.fixture = fixture;
+	}
+	
+	public UUID getUuid() {
+		return uuid;
+	}
+	
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getViewed() {
+		return viewed;
+	}
+
+	public void setViewed(Date viewed) {
+		this.viewed = viewed;
 	}
 
 	public boolean getStarted() {

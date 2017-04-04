@@ -48,7 +48,7 @@ public class FixtureAvailabilityJob {
 	private JavaMailSenderImpl mailSender;
 
 	@Transactional
-	@Scheduled(cron = "0 */5 * * * *")
+	@Scheduled(cron = "0 15 9 * * *")
 	public void sendFixturePlayerStatus() {
 		log.debug("Getting Fixtures to send Player Status Email.");
 		MailUtil mailUtil = new MailUtil();
@@ -84,16 +84,12 @@ public class FixtureAvailabilityJob {
 						} catch (IOException | TemplateException e) {
 							log.error("Error generating Fixture Email Template: " + e.getMessage(), e);
 						}
-						System.setProperty("socksProxyHost", "localhost");
-						System.setProperty("socksProxyPort", "3128");
 						boolean isSent = mailUtil.sendMail(mailSender, playerFixtureInfo.getPlayer().getEmail(),
 								messageSource.getMessage("email.fixture.subject", null, null) + " - "
 										+ dateFormatter.format(fixture.getDate()) + " @ "
 										+ timeFormatter.format(fixture.getTime()) + " on " + fixture.getField(),
 								body, props);
 						log.debug("Message sent to [" + playerFixtureInfo.getPlayer().getEmail() + "]: " + isSent);
-						System.clearProperty("socksProxyHost");
-						System.clearProperty("socksProxyPort");
 					}
 				}
 			}

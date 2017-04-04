@@ -6,11 +6,11 @@ import javax.validation.constraints.Size;
 public class PasswordChangeData {
 	String oldPassword;
 	
-	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,30})")
+	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{8,30})")
 	@Size(min=8, max=30)
 	String password;
 	
-	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,30})")
+	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{8,30})")
 	@Size(min=2, max=30)
 	String passwordRepeat;
 	

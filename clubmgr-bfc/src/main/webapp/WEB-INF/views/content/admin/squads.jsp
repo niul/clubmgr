@@ -16,8 +16,8 @@
 						<th><fmt:message key="squad.active.headers.email"/></th>
 					</tr>
 				</thead>
-			<c:forEach var="player" items="${players_active}">
-				<tr>
+			<c:forEach var="player" items="${players_active}" varStatus="vs">
+				<tr class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
 					<td>${player.firstName} ${player.lastName}</td>
 					<td>${player.email}</td>
 				</tr>
@@ -40,8 +40,8 @@
 						<th><fmt:message key="squad.inactive.headers.actions"/></th>
 					</tr>
 				</thead>
-			<c:forEach var="player" items="${players_inactive}">
-				<tr>
+			<c:forEach var="player" items="${players_inactive}" varStatus="vs">
+				<tr class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
 					<td>${player.firstName} ${player.lastName}</td>
 					<td>${player.email}</td>
 					<td>

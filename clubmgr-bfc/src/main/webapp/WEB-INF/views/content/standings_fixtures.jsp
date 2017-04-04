@@ -20,8 +20,8 @@
 	      </tr>
 	    </thead>
 	    <tbody>
-	    <c:forEach var="standing" items="${standings}">
-	      <tr>
+	    <c:forEach var="standing" items="${standings}" varStatus="vs">
+	      <tr class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
 	  	    <td class="not-small">${standing.position}</td>
 	  	    <td>${standing.teamName}</td>
 	  	    <td>${standing.gamesPlayed}</td>
@@ -52,13 +52,13 @@
 	      </tr>
 	    </thead>
 	    <tbody>
-	    <c:forEach var="fixture" items="${fixtures}">
+	    <c:forEach var="fixture" items="${fixtures}" varStatus="vs">
 	      <c:choose>
 	        <c:when test="${fixture.active}">
-	      <tr>
+	      <tr  class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
 	        </c:when>
 	        <c:otherwise>
-	      <tr class="strikethrough">
+	      <tr class="strikethrough ${vs.index % 2 == 1 ? 'odd' : 'even'}">
             </c:otherwise>
           </c:choose>
 	  	    <td class="not-small"><fmt:formatDate value="${fixture.date}" pattern="MMM d, YYYY (E)" /> @ <fmt:formatDate value="${fixture.time}" pattern="h:mma" /></td>

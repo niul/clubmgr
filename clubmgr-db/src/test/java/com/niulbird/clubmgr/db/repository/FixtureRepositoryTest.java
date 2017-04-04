@@ -156,7 +156,7 @@ public class FixtureRepositoryTest {
 	@Test
 	@Rollback(false)
 	public void findFixtureByDateTest() {
-		List<Fixture> fixtures = repository.findByDate(Date.valueOf("2016-09-17"));
+		List<Fixture> fixtures = repository.findByDate(Date.valueOf("2017-04-1"));
 		assertNotNull(fixtures);
 	}
 	

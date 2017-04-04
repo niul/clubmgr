@@ -1,9 +1,9 @@
 package com.niulbird.clubmgr.task;
 
 import java.io.IOException;
-import java.text.ParseException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,43 +34,43 @@ public class FixtureAvailabilityJob {
 
 	@Autowired
 	private MessageSource messageSource;
-	
+
 	@Autowired
 	Properties props;
-	
+
 	@Autowired
 	private FixtureService fixtureService;
 
 	@Autowired
 	private Configuration freeMarkerConfiguration;
-	
+
 	@Autowired
 	private JavaMailSenderImpl mailSender;
 
 	@Transactional
-	@Scheduled(cron="0 */5 * * * *")
-    public void sendFixturePlayerStatus() {
+	@Scheduled(cron = "0 */5 * * * *")
+	public void sendFixturePlayerStatus() {
 		log.debug("Getting Fixtures to send Player Status Email.");
 		MailUtil mailUtil = new MailUtil();
-		
+
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE, MMM d");
 		SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mma");
-		
-		List<Fixture> fixtures = new ArrayList<Fixture>();
-		try {
-			fixtures = fixtureService.findFixturesByDate(new java.sql.Date((new SimpleDateFormat(("yyyy-MM-dd")).parse("2017-04-01").getTime())));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		for(Fixture fixture : fixtures) {
+
+		String[] daysBefore = props.getProperty("fixture.days.before", null).split("\\s*,\\s*");
+
+		for (int i = 0; i < daysBefore.length; i++) {
+			Date date = getDaysFromCurrentDate(Integer.parseInt(daysBefore[i]));
+			log.debug("Getting fixtures for date: " + date);
+			List<Fixture> fixtures = fixtureService.findFixturesByDate(date);
+
+			for (Fixture fixture : fixtures) {
 				log.debug("Fixture: " + fixture.getFixtureId());
 				log.debug("Date: " + fixture.getDate());
 				List<PlayerFixtureInfo> playerFixtureInfoList = fixtureService.findPlayerInfoByFixture(fixture);
-			
-				for(PlayerFixtureInfo playerFixtureInfo : playerFixtureInfoList) {
-					log.debug("Player: " + playerFixtureInfo.getPlayer().getFirstName() + " " + playerFixtureInfo.getPlayer().getLastName());
+
+				for (PlayerFixtureInfo playerFixtureInfo : playerFixtureInfoList) {
+					log.debug("Player: " + playerFixtureInfo.getPlayer().getFirstName() + " "
+							+ playerFixtureInfo.getPlayer().getLastName());
 					if (playerFixtureInfo.getStatus() == Status.PENDING) {
 						Map<String, Object> map = new HashMap<String, Object>();
 						map.put("lang", messageSource);
@@ -79,25 +79,32 @@ public class FixtureAvailabilityJob {
 							map.put("msg", new MessageResolverMethod(messageSource, null));
 							map.put("fixture", fixture);
 							map.put("playerFixtureInfo", playerFixtureInfo);
-							body = FreeMarkerTemplateUtils.processTemplateIntoString(freeMarkerConfiguration.getTemplate("fixture.ftl"),
-									map);
+							body = FreeMarkerTemplateUtils
+									.processTemplateIntoString(freeMarkerConfiguration.getTemplate("fixture.ftl"), map);
 						} catch (IOException | TemplateException e) {
 							log.error("Error generating Fixture Email Template: " + e.getMessage(), e);
 						}
 						System.setProperty("socksProxyHost", "localhost");
-				        System.setProperty("socksProxyPort", "3128");
-						boolean isSent = mailUtil.sendMail(mailSender, 
-								playerFixtureInfo.getPlayer().getEmail(), 
-								messageSource.getMessage("email.fixture.subject", null, null) + " - " + dateFormatter.format(fixture.getDate()) 
-								+ " @ " + timeFormatter.format(fixture.getTime()) + " on " + fixture.getField(), 
-								body, 
-								props);
+						System.setProperty("socksProxyPort", "3128");
+						boolean isSent = mailUtil.sendMail(mailSender, playerFixtureInfo.getPlayer().getEmail(),
+								messageSource.getMessage("email.fixture.subject", null, null) + " - "
+										+ dateFormatter.format(fixture.getDate()) + " @ "
+										+ timeFormatter.format(fixture.getTime()) + " on " + fixture.getField(),
+								body, props);
 						log.debug("Message sent to [" + playerFixtureInfo.getPlayer().getEmail() + "]: " + isSent);
 						System.clearProperty("socksProxyHost");
-				        System.clearProperty("socksProxyPort");
+						System.clearProperty("socksProxyPort");
 					}
 				}
+			}
 		}
 		log.debug("Updated Fixtures successfully");
-    }
+	}
+
+	private Date getDaysFromCurrentDate(int numberOfDays) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, numberOfDays);
+
+		return new Date(cal.getTimeInMillis());
+	}
 }

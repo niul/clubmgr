@@ -35,6 +35,21 @@ public class ReportController extends AdminBaseController {
 	private static final String FIXTURES = "fixtures";
 	private static final String FIXTURE = "fixture";
 	
+	@SuppressWarnings("serial")
+	private static final List<Integer> RATINGS = new ArrayList<Integer>() {{
+        add(0);
+        add(1);
+        add(2);
+        add(3);
+        add(4);
+        add(5);
+        add(6);
+        add(7);
+        add(8);
+        add(9);
+        add(10);
+    }};
+	
 	@Autowired
 	FixtureService fixtureService;
 	
@@ -90,6 +105,7 @@ public class ReportController extends AdminBaseController {
 		
 		mav.addObject(FIXTURE, fixture);
 		mav.addObject("playerFixtureInfoList", playerFixtureInfoList);
+		mav.addObject("ratings", RATINGS);
 		
 		return mav;
 	}

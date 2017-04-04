@@ -18,8 +18,8 @@
 						<th><fmt:message key="players.headers.actions"/></th>
 					</tr>
 				</thead>
-			<c:forEach var="player" items="${players}">
-				<tr>
+			<c:forEach var="player" items="${players}" varStatus="vs">
+				<tr class="${vs.index % 2 == 1 ? 'odd' : 'even'}" >
 					<td>${player.firstName} ${player.lastName}</td>
 					<td>${player.email}</td>
 					<td>

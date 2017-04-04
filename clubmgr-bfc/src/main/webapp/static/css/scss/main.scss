@@ -247,6 +247,7 @@
 		}
 
 		select {
+			height: 50px;
 			line-height: 3em;
 			padding: 0 1em;
 		}
@@ -336,6 +337,10 @@
 
 				&:first-child {
 					border-top: 0;
+				}
+				
+				&.odd {
+					background-color: rgba(0,0,0,0.05);
 				}
 			}
 

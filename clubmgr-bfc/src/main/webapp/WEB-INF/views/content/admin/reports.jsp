@@ -19,8 +19,8 @@
 						<th><fmt:message key="reports.headers.actions"/></th>
 					</tr>
 				</thead>
-			<c:forEach var="fixture" items="${fixtures}">
-				<tr>
+			<c:forEach var="fixture" items="${fixtures}" varStatus="vs">
+				<tr class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
 					<td class="not-small"><fmt:formatDate value="${fixture.date}" pattern="MMM d, YYYY (E)" /></td>
 					<td class="only-small"><fmt:formatDate value="${fixture.date}" pattern="MMM d, YYYY" /></td>
 					<td align="right">${fixture.home}</td>

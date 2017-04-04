@@ -47,7 +47,7 @@
 					</tr>
 				</thead>
 				<c:forEach items="${playerFixtureInfoList.playerFixtureInfoList}"  var="playerFixtureInfo" varStatus="vs">
-				<tr>
+				<tr class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
 					<form:input type="hidden" path="playerFixtureInfoList[${vs.index}].player.firstName" value="${playerFixtureInfo.player.firstName}"/>
 					<form:input type="hidden" path="playerFixtureInfoList[${vs.index}].player.lastName" value="${playerFixtureInfo.player.lastName}"/>
 					<form:input type="hidden" path="playerFixtureInfoList[${vs.index}].player.uuid" value="${playerFixtureInfo.player.uuid}"/>
@@ -59,7 +59,11 @@
 					<td class="center"><form:checkbox path="playerFixtureInfoList[${vs.index}].redCard" value="${playerFixtureInfo.redCard}"/></td>
 					<td class="center"><form:input class="small" autocomplete="off" maxlength="1" path="playerFixtureInfoList[${vs.index}].assists" value="${playerFixtureInfo.assists}"/></td>
 					<td class="center"><form:input class="small" autocomplete="off" maxlength="1" path="playerFixtureInfoList[${vs.index}].goals" value="${playerFixtureInfo.goals}"/></td>
-					<td class="center"><form:input class="small" autocomplete="off" maxlength="2" path="playerFixtureInfoList[${vs.index}].rating" value="${playerFixtureInfo.rating}"/></td>
+					<td class="center">
+					<form:select path="playerFixtureInfoList[${vs.index}].rating" value="${playerFixtureInfo.rating}">
+  						<form:options items="${ratings}" />
+					</form:select>
+					</td>
 				</tr>
 				</c:forEach>
 			</table>

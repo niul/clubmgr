@@ -100,6 +100,7 @@ public class PlayerController extends AdminBaseController {
 		if (result.hasErrors()) {
 			mav = getFilterObjects(ADMIN_ADD_PLAYER, teamUuid, true, null, request);
 			mav.addObject(PLAYER, player);
+			mav.addObject(POSITIONS, positionService.findAll());
 			return mav;
 		}
 		

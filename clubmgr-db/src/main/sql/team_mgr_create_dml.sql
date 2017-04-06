@@ -32,6 +32,16 @@ INSERT INTO teams (club_id, uuid, name, team_key, created) (
     FROM    clubs WHERE club_key = 'BOMBASTIC'
 );
 
+INSERT INTO teams (club_id, uuid, name, team_key, created) (
+    SELECT    club_id, uuid_generate_v4(), 'Mens RRSL', 'BOMBASTIC_MENS_RRSL', CURRENT_TIMESTAMP
+    FROM    clubs WHERE club_key = 'BOMBASTIC'
+);
+
+INSERT INTO teams (club_id, uuid, name, team_key, created) (
+    SELECT    club_id, uuid_generate_v4(), 'Mens CESL', 'BOMBASTIC_MENS_CESL', CURRENT_TIMESTAMP
+    FROM    clubs WHERE club_key = 'BOMBASTIC'
+);
+
 INSERT INTO seasons (name, season_key, created)
 VALUES ('Summer 2015', 'SUMMER_2015', CURRENT_TIMESTAMP);
 

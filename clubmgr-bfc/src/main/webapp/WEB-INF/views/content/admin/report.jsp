@@ -60,7 +60,7 @@
 					<td class="center"><form:input class="small" autocomplete="off" maxlength="1" path="playerFixtureInfoList[${vs.index}].assists" value="${playerFixtureInfo.assists}"/></td>
 					<td class="center"><form:input class="small" autocomplete="off" maxlength="1" path="playerFixtureInfoList[${vs.index}].goals" value="${playerFixtureInfo.goals}"/></td>
 					<td class="center">
-					<form:select path="playerFixtureInfoList[${vs.index}].rating" value="${playerFixtureInfo.rating}">
+					<form:select path="playerFixtureInfoList[${vs.index}].rating" value="${playerFixtureInfo.rating}" class="single">
   						<form:options items="${ratings}" />
 					</form:select>
 					</td>

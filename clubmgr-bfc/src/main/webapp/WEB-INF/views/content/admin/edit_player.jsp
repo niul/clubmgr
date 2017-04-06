@@ -32,7 +32,7 @@
 			</div>
 			<div class="8u$ 12u(medium)">
 				<form:label path="position"><fmt:message key="player.add.position"/>:</form:label> 
-				<form:select path="position" items="${positions}" itemLabel="description" itemValue="key"/>
+				<form:select path="position" items="${positions}" itemLabel="description" itemValue="key" class="single"/>
 				<form:errors path="position" class="form_error" />
 			</div>
 			<c:if test="${fn:length(teams) gt 1}">

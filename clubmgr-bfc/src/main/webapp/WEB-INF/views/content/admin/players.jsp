@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/taglibs.jsp"%>
 
 	<!-- Main bar -->
-	<div class="9u 12u(small)">				
+	<div class="9u 12u(small)" style="padding: 80px 0 0 40px" >
 		<!-- Panel -->
 		<div class="panel">
 			<div class="panel-head">

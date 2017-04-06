@@ -32,7 +32,7 @@
 			</div>
 			<div class="8u$ 12u(medium)">
 				<form:label path="position"><fmt:message key="player.add.position"/>:</form:label> 
-				<form:select path="position">
+				<form:select path="position" class="single">
 					<form:options items="${positions}" itemValue="key" itemLabel="description"/>
 				</form:select>
 				<form:errors path="position" class="form_error" />

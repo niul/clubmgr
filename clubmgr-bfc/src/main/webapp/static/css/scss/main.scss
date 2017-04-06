@@ -247,9 +247,11 @@
 		}
 
 		select {
-			height: 50px;
 			line-height: 3em;
 			padding: 0 1em;
+			&.single {
+				height: 50px;
+			}
 		}
 
 		textarea {

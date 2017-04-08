@@ -51,8 +51,8 @@
 	      </tr>
 	    </thead>
 	    <tbody>
-	    <c:forEach var="playerFixtureInfo" items="${playerFixtureInfoList}">
-	      <tr>
+	    <c:forEach var="playerFixtureInfo" items="${playerFixtureInfoList}" varStatus="vs">
+	      <tr class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
 	      	<td>${playerFixtureInfo.player.firstName} ${playerFixtureInfo.player.lastName}</td>
 	      	<td><span class="highlight-${playerFixtureInfo.status}">${playerFixtureInfo.status}</span></td>
 	      	<td class="not-small"><fmt:formatDate value="${playerFixtureInfo.viewed}" pattern="E MMM, d @ h:mma" /></td>

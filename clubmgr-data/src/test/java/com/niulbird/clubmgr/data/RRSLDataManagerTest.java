@@ -35,7 +35,7 @@ public class RRSLDataManagerTest {
 
 	@Test
 	public void createDataManagerTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "SUMMER_2015", "Bombastic");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_RRSL", "SUMMER_2017", "Bombastic");
 		assertTrue(dataManager instanceof RRSLDataManager);
 	}
 
@@ -50,7 +50,7 @@ public class RRSLDataManagerTest {
 	@Test
 	@Rollback(false)
 	public void rrslUpdateStandingsTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "SUMMER_2015", "Bombastic");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_RRSL", "SUMMER_2017", "Bombastic");
 		List<Standing> fixtures = dataManager.updateStandings();
 		assertNotNull(fixtures);
 	}

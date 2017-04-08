@@ -106,12 +106,11 @@ public class RRSLUtil extends BaseUtil {
 	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
-			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
-			Elements elements = doc.getElementsByClass("webs-table");
-			Element  element = elements.get(0);
+			Document doc = Jsoup.connect(teamSeasonMap.getStandingsUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
+			Element element = doc.select("table#table1").first();
 			
 			Elements rows = element.getElementsByTag("tr");
-			for (int i = 2; i < rows.size(); i++) {
+			for (int i = 1; i < rows.size(); i++) {
 				Element row = rows.get(i);
 				Elements columns = row.getElementsByTag("td");
 				if (columns.size() > 1) {
@@ -119,16 +118,16 @@ public class RRSLUtil extends BaseUtil {
 					standing.setUuid(UUID.randomUUID());
 					standing.setSeason(teamSeasonMap.getSeason());
 					standing.setTeam(teamSeasonMap.getTeam());
-					standing.setPosition(new Integer(i-1));
+					standing.setPosition(new Integer(i));
 					standing.setTeamName(columns.get(0).text());
 					try {
-						standing.setWins(getStripedInt(columns.get(1).text()));
-						standing.setTies(getStripedInt(columns.get(2).text()));
+						standing.setGamesPlayed(getStripedInt(columns.get(1).text()));
+						standing.setWins(getStripedInt(columns.get(2).text()));
 						standing.setLosses(getStripedInt(columns.get(3).text()));
-						standing.setGoalsFor(getStripedInt(columns.get(4).text()));
-						standing.setGoalsAgainst(getStripedInt(columns.get(5).text()));
-						standing.setPoints(getStripedInt(columns.get(6).text()));
-						standing.setGamesPlayed(standing.getWins() + standing.getTies() + standing.getLosses());
+						standing.setTies(getStripedInt(columns.get(4).text()));
+						standing.setPoints(getStripedInt(columns.get(5).text()));
+						standing.setGoalsFor(getStripedInt(columns.get(6).text()));
+						standing.setGoalsAgainst(getStripedInt(columns.get(7).text()));
 					
 						standings.add(standing);
 						logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());

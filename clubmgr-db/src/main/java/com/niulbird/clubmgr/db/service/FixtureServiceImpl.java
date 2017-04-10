@@ -136,6 +136,7 @@ public class FixtureServiceImpl implements FixtureService {
 				playerFixtureInfo.setRedCard(false);
 				playerFixtureInfoesList.add(playerFixtureInfo);
 			}
+			playerFixtureInfoRepository.save(playerFixtureInfoesList);
 		}
 		
 		return playerFixtureInfoesList;

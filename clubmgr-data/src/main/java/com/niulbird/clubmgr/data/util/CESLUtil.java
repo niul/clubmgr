@@ -3,7 +3,6 @@ package com.niulbird.clubmgr.data.util;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
@@ -25,7 +24,7 @@ public class CESLUtil extends BaseUtil {
     private final Log logger = LogFactory.getLog(getClass());
     
     private final static String TIME_FORMAT = "hhmma";
-    private final static String DATE_FORMAT = "d MMMMM, yyyy";
+    private final static String DATE_FORMAT = "d-MMMMM-yyyy";
     
     private Properties props;
     
@@ -39,37 +38,35 @@ public class CESLUtil extends BaseUtil {
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByTag("table");
-			Element  element = elements.get(5); // Fifth table without a class or ID.
+			Element  element = elements.get(1); // 2nd Table Element
 			
 			Elements rows = element.getElementsByTag("tr");
-			for (int i = 1; i < rows.size() - 1; i++) {
+			for (int i = 1; i < rows.size(); i++) {
 				Element row = rows.get(i);
 				Elements columns = row.getElementsByTag("td");
-				if (columns.size() == 7 && !columns.get(0).text().replaceAll("[^a-zA-Z0-9]", "").trim().isEmpty()) {
-					Fixture fixture = new Fixture();
-					fixture.setUuid(UUID.randomUUID());
-					
-					String strDate = columns.get(0).text().substring(columns.get(0).text().indexOf(" ")).replaceAll("-", " ").replaceAll("[^ a-zA-Z0-9]", "").trim();
-					if (!strDate.isEmpty()) {
-						Calendar now = Calendar.getInstance();
-						date = convertStringToDate(strDate + ", " + now.get(Calendar.YEAR), DATE_FORMAT);
-					}
-					fixture.setDate(date);
-					fixture.setTime(convertStringToTime(columns.get(1).text().trim(), TIME_FORMAT));
-					fixture.setField(columns.get(2).text().trim());
-					fixture.setHome(columns.get(3).text().trim());
-					fixture.setAway(columns.get(4).text().trim());
-					fixture.setHomeScore(columns.get(5).text().trim().split(" ")[0]);
-					fixture.setAwayScore(columns.get(6).text().trim().split(" ")[0]);
-					
-					fixture.setFieldMapUri(props.getProperty("field.url." + fixture.getField().replaceAll(" ", "")));
-					fixture.setSeason(teamSeasonMap.getSeason());
-					fixture.setTeam(teamSeasonMap.getTeam());
 
-					if (fixture.getHome().contains(teamRegExStr) || fixture.getAway().contains(teamRegExStr)) {
-						fixtures.add(fixture);
-						logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t" + fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: " + fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: " + fixture.getTime());
-					}
+				Fixture fixture = new Fixture();
+				fixture.setUuid(UUID.randomUUID());
+					
+				String strDate = columns.get(1).text().substring(columns.get(1).text().indexOf(" "));
+				if (!strDate.isEmpty()) {
+					date = convertStringToDate(strDate, DATE_FORMAT);
+				}
+				fixture.setDate(date);
+				fixture.setTime(convertStringToTime(columns.get(2).text().trim(), TIME_FORMAT));
+				fixture.setField(columns.get(3).text().trim());
+				fixture.setHome(columns.get(4).text().trim());
+				fixture.setAway(columns.get(5).text().trim());
+				//fixture.setHomeScore(columns.get(5).text().trim().split(" ")[0]);
+				//fixture.setAwayScore(columns.get(6).text().trim().split(" ")[0]);
+					
+				fixture.setFieldMapUri(props.getProperty("field.url." + fixture.getField().replaceAll(" ", "")));
+				fixture.setSeason(teamSeasonMap.getSeason());
+				fixture.setTeam(teamSeasonMap.getTeam());
+
+				if (fixture.getHome().contains(teamRegExStr) || fixture.getAway().contains(teamRegExStr)) {
+					fixtures.add(fixture);
+					logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t" + fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: " + fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: " + fixture.getTime() + "\tField: " + fixture.getFieldMapUri());
 				}
 			}
 		} catch (IOException e) {
@@ -84,10 +81,10 @@ public class CESLUtil extends BaseUtil {
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getStandingsUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Elements elements = doc.getElementsByTag("table");
-			Element  element = elements.get(4); // Fifth table without a class or ID.
+			Element  element = elements.get(1); // 2nd Table Element
 			
 			Elements rows = element.getElementsByTag("tr");
-			for (int i = 1; i < rows.size() - 1; i++) {
+			for (int i = 1; i < rows.size(); i++) {
 				Element row = rows.get(i);
 				Elements columns = row.getElementsByTag("td");
 				if (columns.size() > 1) {
@@ -96,7 +93,7 @@ public class CESLUtil extends BaseUtil {
 					standing.setSeason(teamSeasonMap.getSeason());
 					standing.setTeam(teamSeasonMap.getTeam());
 					standing.setPosition(i);
-					standing.setTeamName(columns.get(0).text().replaceAll("\u00A0", ""));
+					standing.setTeamName(columns.get(0).text());
 					
 					try {
 						standing.setGamesPlayed(getStripedInt(columns.get(1).text().split("\\s+")[0]));

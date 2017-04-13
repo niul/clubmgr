@@ -47,6 +47,7 @@ public class CESLUtil extends BaseUtil {
 
 				Fixture fixture = new Fixture();
 				fixture.setUuid(UUID.randomUUID());
+				fixture.setActive(true);
 					
 				String strDate = columns.get(1).text().substring(columns.get(1).text().indexOf(" "));
 				if (!strDate.isEmpty()) {

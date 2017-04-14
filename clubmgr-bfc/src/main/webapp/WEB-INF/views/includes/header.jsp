@@ -58,7 +58,7 @@
 	            						<li>
 	            							<a href='<c:url value="/mensA.html"/>'><fmt:message key="menu.mens.b1"/></a>
 	            							<ul>
-	            								<!-- li><a href='<c:url value="/season/BOMBASTIC_MENS_RRSL/SUMMER_2017"/>'><fmt:message key="teams.season.summer2017"/></a></li-->
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_RRSL/SUMMER_2017"/>'><fmt:message key="teams.season.summer2017"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_A/WINTER_2016"/>'><fmt:message key="teams.season.winter2016"/></a></li>
 	            								<li>
 	            									<a href="#"><fmt:message key="menu.archive"/></a>

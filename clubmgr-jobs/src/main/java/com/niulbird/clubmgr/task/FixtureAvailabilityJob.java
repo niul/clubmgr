@@ -31,6 +31,8 @@ import freemarker.template.TemplateException;
 @Service
 public class FixtureAvailabilityJob {
 	private static final Logger log = Logger.getLogger(FixtureAvailabilityJob.class);
+	
+	private static final int SECOND = 1000;
 
 	@Autowired
 	private MessageSource messageSource;
@@ -90,6 +92,22 @@ public class FixtureAvailabilityJob {
 										+ timeFormatter.format(fixture.getTime()) + " on " + fixture.getField(),
 								body, props);
 						log.debug("Message sent to [" + playerFixtureInfo.getPlayer().getEmail() + "]: " + isSent);
+						
+						// Give some time between sending out emails not to overload SMTP server.
+						try {
+							Thread.sleep(5 * SECOND);
+						} catch (InterruptedException e) {
+							log.error("Sleep interupted: " + e.getMessage());
+						}
+					}
+					
+					// Add a little bit of time between fixtures not to overload SMTP server.
+					if (playerFixtureInfoList.size() > 0) {
+						try {
+							Thread.sleep(60 * SECOND);
+						} catch (InterruptedException e) {
+							log.error("Sleep interupted: " + e.getMessage());
+						}
 					}
 				}
 			}

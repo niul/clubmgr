@@ -3,7 +3,6 @@ package com.niulbird.clubmgr.data.util;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
@@ -11,7 +10,6 @@ import java.util.UUID;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
-import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -25,7 +23,7 @@ public class RRSLUtil extends BaseUtil {
     private final Log logger = LogFactory.getLog(getClass());
     
     private final static String TIME_FORMAT = "h:mma";
-    private final static String DATE_FORMAT = "MMMMM d, yyyy";
+    private final static String DATE_FORMAT = "dd-MMM-yyyy";
     
     public RRSLUtil(Properties props) {
     	this.props = props;
@@ -36,64 +34,37 @@ public class RRSLUtil extends BaseUtil {
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
-			Elements elements = doc.getElementsByClass("webs-table");
-			Element  element = elements.get(1);
-			
-			Elements rows = element.getElementsByTag("tr");
+			Elements rows = doc.getElementsByTag("tr");
 			Date date = null;
-			for (int i = 2; i < rows.size(); i++) {
+			for (int i = 6; i < rows.size() - 1; i++) {
 				Element row = rows.get(i);
 				Elements columns = row.getElementsByTag("td");
 				if (columns.size() > 1) {
 					Fixture fixture = new Fixture();
 					fixture.setUuid(UUID.randomUUID());
+					fixture.setActive(true);
 					
-					String strDate = columns.get(0).text().replaceAll("[^ a-zA-Z0-9]", "").trim();
+					String strDate = columns.get(1).text().trim().split("\\s+")[1];
 					if (!strDate.isEmpty()) {
-						Calendar now = Calendar.getInstance();
-						date = convertStringToDate(strDate.replaceAll("(?:st|nd|rd|th)", "") + ", " + now.get(Calendar.YEAR), DATE_FORMAT);
+						date = convertStringToDate(strDate, DATE_FORMAT);
 					}
 					fixture.setDate(date);
-					fixture.setHome(columns.get(1).text());
-					fixture.setAway(columns.get(2).text());
 					
-					String[] fieldTimeStr = columns.get(3).getElementsByTag("div").get(0).html().replaceAll("\\<.*?>", " ").replaceAll("  ", " ").split(" ");
-					String field = new String();
-					String time = new String();
-					String hour = new String();
-					
-					for (String s : fieldTimeStr) {
-						if (!StringUtil.isBlank(s) && !s.equalsIgnoreCase(" ") && !s.equalsIgnoreCase("\n")) {
-							if (Character.isDigit(s.charAt(0))) {
-								if (s.length() == 1) { 
-									hour = s;
-								} else {
-									time = s.substring(0, 6);
-								}
-							} else if (s.charAt(0) == ':') {
-								time = hour.concat(s.substring(0, 5));
-							} else {
-								field = field.concat(s.replace("&nbsp;", "") + " ");
-							}
-						}
-					}
-					fixture.setField(field);
+					String time = columns.get(2).text().trim().split("\\s+")[0] + "M";
 					fixture.setTime(convertStringToTime(time, TIME_FORMAT));
 					
-					String[] score = columns.get(4).text().replaceAll("[^-0-9]", "").split("-");
-					if (score.length == 2) {
-						fixture.setHomeScore(score[0].trim());
-						fixture.setAwayScore(score[1].trim());
-					}
-					
+					fixture.setHome(columns.get(3).text().split("\\s\\(")[0]);
+					fixture.setHomeScore(columns.get(4).text());
+					fixture.setAway(columns.get(5).text().split("\\s\\(")[0]);
+					fixture.setAwayScore(columns.get(6).text());
+					fixture.setField(columns.get(7).text());
 					fixture.setFieldMapUri(props.getProperty("field.url." + fixture.getField().replaceAll(" ", "")));
+					
 					fixture.setSeason(teamSeasonMap.getSeason());
 					fixture.setTeam(teamSeasonMap.getTeam());
 
-					if (fixture.getHome().contains(teamRegExStr) || fixture.getAway().contains(teamRegExStr)) {
-						fixtures.add(fixture);
-						logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t" + fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: " + fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: " + fixture.getTime());
-					}
+					logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t" + fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: " + fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: " + fixture.getTime());
+					fixtures.add(fixture);
 				}
 			}
 		} catch (IOException e) {

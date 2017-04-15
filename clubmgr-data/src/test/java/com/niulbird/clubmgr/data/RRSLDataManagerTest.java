@@ -42,7 +42,7 @@ public class RRSLDataManagerTest {
 	@Test
 	@Rollback(false)
 	public void rrslUpdateFixturesTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "SUMMER_2015", "Bombastic");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_RRSL", "SUMMER_2017", "Bombastic");
 		List<Fixture> fixtures = dataManager.updateFixtures();
 		assertNotNull(fixtures);
 	}

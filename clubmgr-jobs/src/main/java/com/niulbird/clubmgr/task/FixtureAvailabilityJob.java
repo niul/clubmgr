@@ -48,7 +48,7 @@ public class FixtureAvailabilityJob {
 	private JavaMailSenderImpl mailSender;
 
 	@Transactional
-	@Scheduled(cron = "0 15 9 * * *")
+	@Scheduled(cron = "0 15 12 * * *")
 	public void sendFixturePlayerStatus() {
 		log.debug("Getting Fixtures to send Player Status Email.");
 		MailUtil mailUtil = new MailUtil();

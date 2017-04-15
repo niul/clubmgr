@@ -3,6 +3,7 @@ package com.niulbird.clubmgr.bfc.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -104,7 +105,9 @@ public class FixtureController extends BaseController {
 		if (StringUtils.isNoneEmpty(player)) {
 			playerFixtureInfo = fixtureService.findByUuid(player);
 			if (playerFixtureInfo.getViewed() == null) {
-				playerFixtureInfo.setViewed(new java.sql.Time(new java.util.Date().getTime()));
+				Calendar calendar = Calendar.getInstance();
+				calendar.add(Calendar.HOUR_OF_DAY, -3);
+				playerFixtureInfo.setViewed(new java.sql.Time(calendar.getTimeInMillis()));
 				fixtureService.updatePlayerInfo(playerFixtureInfo);
 			}
 		}

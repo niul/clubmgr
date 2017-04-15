@@ -23,9 +23,7 @@
 					<td>${player.firstName} ${player.lastName}</td>
 					<td>${player.email}</td>
 					<td>
-						<c:forEach var="team" items="${player.teams}" varStatus="loop">
-							${team.name} <c:if test="${!loop.last}">|</c:if>
-						</c:forEach>
+						<c:forEach var="team" items="${player.teams}" varStatus="loop">${team.name}<c:if test="${!loop.last}">|</c:if></c:forEach>
 					</td>
 					<td>
 						<a href='<c:url value="/admin/editPlayer.html?uuid=${player.uuid}&teamUuid=${team.uuid}"/>' class="button small icon fa-edit"><span><fmt:message key="players.headers.actions.edit"/></span></a>

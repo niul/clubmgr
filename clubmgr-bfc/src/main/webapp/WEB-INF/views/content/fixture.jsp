@@ -24,7 +24,7 @@
 			  <div class="row">
 			    <div class="12u">
 				  <form:label path="comment"><fmt:message key="fixture.comment" />:</form:label>
-				  <form:input type="text" path="comment"/>
+				  <form:input type="text" path="comment" class="red"/>
 				  <form:hidden path="uuid" />
 				  <form:hidden path="player"/>
 			    </div>

@@ -233,6 +233,14 @@
 			&:focus {
 				border-color: $secondary-color;
 			}
+			
+			&.red {
+				box-shadow: 0 0 7px red;
+				&:focus {
+					border-color: $secondary-color;
+					box-shadow: 0 0 0px $secondary-color;
+				}
+			}
 		}
 
 		input[type="text"],

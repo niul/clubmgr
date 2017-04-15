@@ -41,7 +41,7 @@ public class MailUtil {
 			String subject,
 			String body,
 			Properties props) {
-		log.info("MailUtil::sendMail(): " + body);
+		log.trace("MailUtil::sendMail(): " + body);
 		
 		boolean retVal = true;
 		MimeMessage message = mailSender.createMimeMessage();

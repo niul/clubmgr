@@ -101,22 +101,20 @@
         	</props>
     	</property>
 	</bean>
-	
-	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
-		<property name="to">
-        	<value><![CDATA[${email.toName} <${email.toEmail}>]]></value>
-    	</property>
-		<property name="from">
-        	<value><![CDATA[${email.fromName} <${email.fromEmail}>]]></value>
-    	</property>
-        <property name="subject" value="${email.subject}"/>
-    </bean>
     
     <!-- Wordpress Service -->
     <bean id="wordPressDao" class="com.niulbird.clubmgr.util.wordpress.DefaultWordPressDao">
     	<property name="baseUrl" value="${wordpress.site.baseUrl}"/>
     	<property name="siteName" value="${wordpress.site.name}"/>
     </bean>
+  
+    <!-- Freemarker -->  
+    <bean id="freeMarkerConfigurationFactory" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+      <property name="templateLoaderPath" value="classpath:templates"/>
+      <property name="preferFileSystemAccess" value="false"/>
+    </bean>
+    <bean id="freeMarkerConfiguration" class="freemarker.template.Configuration" factory-bean="freeMarkerConfigurationFactory" factory-method="createConfiguration" scope="prototype"/>
+  
     
     <!-- Cache -->
     <cache:annotation-driven />

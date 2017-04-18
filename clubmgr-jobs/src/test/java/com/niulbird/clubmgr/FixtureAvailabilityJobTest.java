@@ -20,7 +20,7 @@ import com.niulbird.clubmgr.db.model.Position;
 import com.niulbird.clubmgr.db.model.Season;
 import com.niulbird.clubmgr.db.model.Status;
 import com.niulbird.clubmgr.db.model.Team;
-import com.niulbird.clubmgr.task.util.MessageResolverMethod;
+import com.niulbird.clubmgr.util.freemarker.MessageResolverMethod;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;

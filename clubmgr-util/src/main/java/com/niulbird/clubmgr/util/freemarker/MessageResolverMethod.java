@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.task.util;
+package com.niulbird.clubmgr.util.freemarker;
 
 import java.util.List;
 import java.util.Locale;

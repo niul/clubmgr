@@ -22,8 +22,8 @@ import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.PlayerFixtureInfo;
 import com.niulbird.clubmgr.db.model.Status;
 import com.niulbird.clubmgr.db.service.FixtureService;
-import com.niulbird.clubmgr.task.util.MessageResolverMethod;
 import com.niulbird.clubmgr.util.MailUtil;
+import com.niulbird.clubmgr.util.freemarker.MessageResolverMethod;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;

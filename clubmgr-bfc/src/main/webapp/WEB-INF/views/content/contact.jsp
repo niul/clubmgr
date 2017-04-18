@@ -22,6 +22,12 @@
 			  </div>
 			</div>
 			<div class="row 50%">
+				<div class="12u">
+					<form:label path="subject"><fmt:message key="contact.subject" />:</form:label>
+					<form:select path="subject" items="${subjects}" class="single"/>
+				</div>
+			</div>
+			<div class="row 50%">
 			  <div class="12u">
 				<form:label path="message"><fmt:message key="contact.message" />:</form:label>
 				<form:textarea rows="8" cols="50" class="contact" path="message" />

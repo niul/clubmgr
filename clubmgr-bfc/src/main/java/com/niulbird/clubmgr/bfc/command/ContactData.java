@@ -12,6 +12,7 @@ public class ContactData {
 	String name;
 	@NotEmpty @Email
 	String email;
+	String subject;
 	String message;
 	
 	public String getName() {
@@ -28,6 +29,14 @@ public class ContactData {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 	
 	public String getMessage() {

@@ -9,9 +9,9 @@
 	  <h3><fmt:message key="teams.leagues"/>:</h3>
 	  <ul class="default">
 	  	<li>
-	  		<fmt:message key="teams.winter"/>: <a href='<fmt:message key="mens.jurassic.winter.name.url"/>'><fmt:message key="mens.jurassic.winter.name"/></a>
+	  		<fmt:message key="teams.winter"/>: <a href='<fmt:message key="mens.jurassic.winter.name.url"/>' target="_blank"><fmt:message key="mens.jurassic.winter.name"/></a>
 	  		/
-	  		<a href='<fmt:message key="mens.jurassic.winter.division.url"/>'><fmt:message key="mens.jurassic.winter.division"/></a>
+	  		<a href='<fmt:message key="mens.jurassic.winter.division.url"/>' target="_blank"><fmt:message key="mens.jurassic.winter.division"/></a>
 	  	</li>
 	  </ul>
 	  <h3><fmt:message key="teams.training"/>:</h3>

@@ -9,14 +9,14 @@
 	  <h3><fmt:message key="teams.leagues"/>:</h3>
 	  <ul class="default">
 	  	<li>
-	  		<fmt:message key="teams.winter"/>: <a href='<fmt:message key="womens.A.winter.name.url"/>'><fmt:message key="womens.A.winter.name"/></a>
+	  		<fmt:message key="teams.winter"/>: <a href='<fmt:message key="womens.A.winter.name.url"/>' target="_blank"><fmt:message key="womens.A.winter.name"/></a>
 	  		/
-	  		<a href='<fmt:message key="womens.A.winter.division.url"/>'><fmt:message key="womens.A.winter.division"/></a>
+	  		<a href='<fmt:message key="womens.A.winter.division.url"/>' target="_blank"><fmt:message key="womens.A.winter.division"/></a>
 	  	</li>
 	  	<li>
-	  		<fmt:message key="teams.summer"/>: <a href='<fmt:message key="womens.A.summer.name.url"/>'><fmt:message key="womens.A.summer.name"/></a>
+	  		<fmt:message key="teams.summer"/>: <a href='<fmt:message key="womens.A.summer.name.url"/>' target="_blank"><fmt:message key="womens.A.summer.name"/></a>
 	  		/
-	  		<a href='<fmt:message key="womens.A.summer.division.url"/>'><fmt:message key="womens.A.summer.division"/></a>
+	  		<a href='<fmt:message key="womens.A.summer.division.url"/>' target="_blank"><fmt:message key="womens.A.summer.division"/></a>
 	  	</li>
 	  </ul>
 	  <h3><fmt:message key="teams.training"/>:</h3>

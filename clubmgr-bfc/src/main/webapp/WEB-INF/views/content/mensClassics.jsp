@@ -9,12 +9,12 @@
 	  <h3><fmt:message key="teams.leagues"/>:</h3>
 	  <ul class="default">
 	  	<li>
-	  		<fmt:message key="teams.winter"/>: <a href='<fmt:message key="mens.classics.winter.name.url"/>'><fmt:message key="mens.classics.winter.name"/></a>
+	  		<fmt:message key="teams.winter"/>: <a href='<fmt:message key="mens.classics.winter.name.url"/>' target="_blank"><fmt:message key="mens.classics.winter.name"/></a>
 	  		/
-	  		<a href='<fmt:message key="mens.classics.winter.division.url"/>'><fmt:message key="mens.classics.winter.division"/></a>
+	  		<a href='<fmt:message key="mens.classics.winter.division.url"/>' target="_blank"><fmt:message key="mens.classics.winter.division"/></a>
 	  	</li>
 	  	<li>
-	  		<fmt:message key="teams.summer"/>: <a href='<fmt:message key="mens.classics.summer.name.url"/>'><fmt:message key="mens.classics.summer.name"/></a>
+	  		<fmt:message key="teams.summer"/>: <a href='<fmt:message key="mens.classics.summer.name.url"/>' target="_blank"><fmt:message key="mens.classics.summer.name"/></a>
 	  	</li>
 	  </ul>
 	  <h3><fmt:message key="teams.training"/>:</h3>

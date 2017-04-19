@@ -100,14 +100,14 @@ public class FixtureAvailabilityJob {
 							log.error("Sleep interupted: " + e.getMessage());
 						}
 					}
-					
-					// Add a little bit of time between fixtures not to overload SMTP server.
-					if (playerFixtureInfoList.size() > 0) {
-						try {
-							Thread.sleep(60 * SECOND);
-						} catch (InterruptedException e) {
-							log.error("Sleep interupted: " + e.getMessage());
-						}
+				}
+				
+				// Add a little bit of time between fixtures not to overload SMTP server.
+				if (playerFixtureInfoList.size() > 0) {
+					try {
+						Thread.sleep(60 * SECOND);
+					} catch (InterruptedException e) {
+						log.error("Sleep interupted: " + e.getMessage());
 					}
 				}
 			}

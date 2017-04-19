@@ -3,6 +3,8 @@ package com.niulbird.clubmgr.bfc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,8 +45,9 @@ public class TeamController extends BaseController {
 	
 	@RequestMapping(value = "/fixtures.html")
 	public ModelAndView fixtures(@RequestParam(value = "team") String teamKey,
-			@RequestParam(value = "season") String seasonKey) {
-		log.debug("Getting Fixtures for " + teamKey + "/" + seasonKey);
+			@RequestParam(value = "season") String seasonKey,
+			HttpServletRequest request) {
+		log.debug("Getting Fixtures: " + request.getRequestURL().append("?").append(request.getQueryString()));
 		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(teamKey, seasonKey);
 		List<Fixture> fixtures = teamService.findFixtures(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
 		
@@ -58,8 +61,9 @@ public class TeamController extends BaseController {
 	
 	@RequestMapping(value = "/standings.html")
 	public ModelAndView standings(@RequestParam(value = "team") String teamKey,
-			@RequestParam(value = "season") String seasonKey) {
-		log.debug("Getting Standings for " + teamKey + "/" + seasonKey);
+			@RequestParam(value = "season") String seasonKey,
+			HttpServletRequest request) {
+		log.debug("Getting Standings: " + request.getRequestURL().append("?").append(request.getQueryString()));
 		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(teamKey, seasonKey);
 		List<Standing> standings = teamService.findStandings(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
 		
@@ -73,8 +77,9 @@ public class TeamController extends BaseController {
 	
 	@RequestMapping(value = "/season/{team}/{season}")
 	public ModelAndView teamSeason(@PathVariable(value = "team") String teamKey,
-			@PathVariable(value = "season") String seasonKey) {
-		log.debug("Getting Standings for " + teamKey + "/" + seasonKey);
+			@PathVariable(value = "season") String seasonKey,
+			HttpServletRequest request) {
+		log.debug("Getting Standings: " + request.getRequestURL());
 		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(teamKey, seasonKey);
 		List<Standing> standings = teamService.findStandings(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
 		
@@ -98,6 +103,8 @@ public class TeamController extends BaseController {
 		mav.addObject(TEAMSEASONMAP, teamSeasonMap);
 		mav.addObject(STANDINGS, standings);
 		mav.addObject(FIXTURES, fixtures);
+		
+		log.debug("Got " + standings.size() + " Standings and " + fixtures.size() + " Fixtures");
 		
 		return mav;
 	}

@@ -2,6 +2,8 @@ package com.niulbird.clubmgr.bfc.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +24,10 @@ public class NewsController extends BaseController {
 	private static final String TITLE = "title";
 	
 	@RequestMapping(value = "/news.html")
-	public ModelAndView news(@RequestParam(value = "start", defaultValue = "0") int start) {
+	public ModelAndView news(@RequestParam(value = "start", defaultValue = "0") int start,
+			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		log.debug("Getting News from start: " + start);
+		log.debug("Getting News from start: " + start + " |" + request.getRequestURL().append("?").append(request.getQueryString()));
 		
 		mav.setViewName(NEWS);
 		mav.addObject(PAGE, NEWS);
@@ -48,10 +51,10 @@ public class NewsController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/post/{id}")
-	public ModelAndView post(@PathVariable(value="id") int code) {
+	public ModelAndView post(@PathVariable(value="id") int code,
+			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		
-		log.debug("Getting Post ID: " + code);
+		log.debug("Getting Post ID: " + code + " |" + request.getRequestURL());
 
 		ArrayList<Post> posts = wordPressDao.getAllPosts();
 		Post post = null;
@@ -79,9 +82,9 @@ public class NewsController extends BaseController {
 	
 
 	@RequestMapping(value = "/refreshCache.html")
-	public ModelAndView refreshCache() {
+	public ModelAndView refreshCache(HttpServletRequest request) {
 		wordPressDao.clearAllCache();
 		
-		return news(0);
+		return news(0, request);
 	}
 }

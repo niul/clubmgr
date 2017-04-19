@@ -54,9 +54,9 @@ public class RRSLUtil extends BaseUtil {
 					fixture.setTime(convertStringToTime(time, TIME_FORMAT));
 					
 					fixture.setHome(columns.get(3).text().split("\\s\\(")[0].trim());
-					fixture.setHomeScore(columns.get(4).text().trim());
+					fixture.setHomeScore(columns.get(4).text().replaceAll("\u00a0", "").trim());
 					fixture.setAway(columns.get(5).text().split("\\s\\(")[0].trim());
-					fixture.setAwayScore(columns.get(6).text().trim());
+					fixture.setAwayScore(columns.get(6).text().replaceAll("\u00a0", "").trim());
 					fixture.setField(columns.get(7).text().trim());
 					fixture.setFieldMapUri(props.getProperty("field.url." + fixture.getField().replaceAll(" ", "")));
 					

@@ -23,6 +23,15 @@
         <put-attribute name="javascript" value="/WEB-INF/views/includes/javascript.jsp" />
     </definition>
     
+    <!-- One Panel -->
+    <definition name="onePanelTemplate" template="/WEB-INF/views/onePanelTemplate.jsp">
+        <put-attribute name="head" value="/WEB-INF/views/includes/head.jsp" />
+        <put-attribute name="header" value="/WEB-INF/views/includes/header.jsp" />
+        <put-attribute name="content"  value="content" />
+        <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
+        <put-attribute name="javascript" value="/WEB-INF/views/includes/javascript.jsp" />
+    </definition>
+    
     <!-- Right Panel -->
     <definition name="rightPanelTemplate" template="/WEB-INF/views/rightPanelTemplate.jsp">
         <put-attribute name="head" value="/WEB-INF/views/includes/head.jsp" />
@@ -90,7 +99,7 @@
         <put-attribute name="content" value="/WEB-INF/views/content/fixtures.jsp"/>
     </definition>
     
-    <definition name="fixture"  extends="rightPanelTemplate">
+    <definition name="fixture"  extends="onePanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/fixture.jsp"/>
     </definition>
     

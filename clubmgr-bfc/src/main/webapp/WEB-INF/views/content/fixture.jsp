@@ -4,10 +4,52 @@
       <header>
         <h1><fmt:message key="fixture.title"/></h1>
       </header>
-	  <strong><fmt:message key="fixture.home"/>:</strong> ${fixture.home}<br/>
-	  <strong><fmt:message key="fixture.away"/>:</strong> ${fixture.away}<br/>
-	  <strong><fmt:message key="fixture.date"/>:</strong> <fmt:formatDate value="${fixture.date}" pattern="E MMM, d" /> @ <fmt:formatDate value="${fixture.time}" pattern="h:mma" /><br/>
-	  <strong><fmt:message key="fixture.field"/>:</strong> <a href="${fixture.fieldMapUri}" target="_blank">${fixture.field}</a><br/>
+      
+      <div class="row">
+      	<!-- Fixture Details -->
+      	<div class="6u 12u(small)">
+	  	<table>
+	  		<tr>
+	  			<td><strong><fmt:message key="fixture.home"/>:</strong></td>
+	  			<td>${fixture.home}</td>
+	  		</tr>
+	  		<tr>
+	  			<td><strong><fmt:message key="fixture.away"/>:</strong></td>
+	  			<td>${fixture.away}</td>
+	  		</tr>
+	  		<tr>
+	  			<td><strong><fmt:message key="fixture.date"/>:</strong></td>
+	  			<td><fmt:formatDate value="${fixture.date}" pattern="E MMM, d" /> @ <fmt:formatDate value="${fixture.time}" pattern="h:mma" /></td>
+	  		</tr>
+	  		<tr>
+	  			<td><strong><fmt:message key="fixture.field"/>:</strong></td>
+	  			<td><a href="${fixture.fieldMapUri}" target="_blank">${fixture.field}</a></td>
+	  		</tr>
+	  	</table>
+	  	</div>
+	  
+      	<!-- Summary -->
+      	<div class="not-small 6u">
+	  	<table>
+	  		<tr>
+	  			<td align="right"><span class="highlight-YES"><fmt:message key="fixture.yes"/></span> :</td>
+	  			<td>${fixtureSummary.yes}</td>
+	  		</tr>
+	  		<tr>
+	  			<td align="right"><span class="highlight-MAYBE"><fmt:message key="fixture.maybe"/></span> :</td>
+	  			<td>${fixtureSummary.maybe}</td>
+	  		</tr>
+	  		<tr>
+		  		<td align="right"><span class="highlight-NO"><fmt:message key="fixture.no"/></span> :</td>
+		  		<td>${fixtureSummary.no}</td>
+	  		</tr>
+	  		<tr>
+		  		<td align="right"><span class="highlight-PENDING"><fmt:message key="fixture.pending"/></span> :</td>
+		  		<td>${fixtureSummary.pending}</td>
+	  		</tr>
+	  	</table>
+	  	</div>
+	  </div>
 	  
 	  <c:if test="${pageContext.request.method=='GET'}">
 	    <c:if test="${not empty playerFixtureInfo}">

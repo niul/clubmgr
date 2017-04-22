@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.FixtureData;
+import com.niulbird.clubmgr.bfc.command.FixtureSummary;
 import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.PlayerFixtureInfo;
 import com.niulbird.clubmgr.db.model.Status;
@@ -33,6 +34,7 @@ public class FixtureController extends BaseController {
 	private static final Logger log = Logger.getLogger(FixtureController.class);
 	
 	private static final String FIXTURE = "fixture";
+	private static final String FIXTURE_SUMMARY = "fixtureSummary";
 	private static final String PLAYER_FIXTURE_INFO = "playerFixtureInfo";
 	private static final String PLAYER_FIXTURE_INFO_LIST = "playerFixtureInfoList";
 	
@@ -54,12 +56,17 @@ public class FixtureController extends BaseController {
 			playerFixtureInfo = fixtureService.findByUuid(player);
 			playerFixtureInfo.setStatus(Status.valueOf(status));
 			fixtureService.updatePlayerInfo(playerFixtureInfo);
+			log.debug("Updated Fixture [" + fixture.getTeam() + "][" + playerFixtureInfo.getPlayer().getFirstName() + " " 
+			+ playerFixtureInfo.getPlayer().getLastName() + "]");
 		}
 		
 		playerFixtureInfoList = fixtureService.findByFixture(fixture);
+		
+		FixtureSummary fixtureSummary = getFixtureSummary(playerFixtureInfoList);
 
 		ModelAndView mav = setView(FIXTURE, messageSource.getMessage("fixture.title", null, null));
 		mav.addObject(FIXTURE, fixture);
+		mav.addObject(FIXTURE_SUMMARY, fixtureSummary);
 		mav.addObject(PLAYER_FIXTURE_INFO, playerFixtureInfo);
 		mav.addObject(PLAYER_FIXTURE_INFO_LIST, playerFixtureInfoList);
 		
@@ -85,9 +92,12 @@ public class FixtureController extends BaseController {
 		}
 		
 		playerFixtureInfoList = fixtureService.findByFixture(fixture);
+		
+		FixtureSummary fixtureSummary = getFixtureSummary(playerFixtureInfoList);
 
 		ModelAndView mav = setView(FIXTURE, messageSource.getMessage("fixture.title", null, null));
 		mav.addObject(FIXTURE, fixture);
+		mav.addObject(FIXTURE_SUMMARY, fixtureSummary);
 		mav.addObject(PLAYER_FIXTURE_INFO, playerFixtureInfo);
 		mav.addObject(PLAYER_FIXTURE_INFO_LIST, playerFixtureInfoList);
 		
@@ -114,5 +124,22 @@ public class FixtureController extends BaseController {
 		InputStream in = request.getSession().getServletContext().getResourceAsStream("/static/images/1by1.png");
 	    response.setContentType(MediaType.IMAGE_PNG_VALUE);
 	    IOUtils.copy(in, response.getOutputStream());
+	}
+	
+	private FixtureSummary getFixtureSummary(List<PlayerFixtureInfo> playerFixtureInfoList) {
+		FixtureSummary fixtureSummary = new FixtureSummary();
+		
+		for (PlayerFixtureInfo playerFixtureInfoLocal : playerFixtureInfoList) {
+			if (playerFixtureInfoLocal.getStatus() == Status.YES) {
+				fixtureSummary.addYes();
+			} else if (playerFixtureInfoLocal.getStatus() == Status.MAYBE) {
+				fixtureSummary.addMaybe();
+			} else if (playerFixtureInfoLocal.getStatus() == Status.NO) {
+				fixtureSummary.addNo();
+			} else if (playerFixtureInfoLocal.getStatus() == Status.PENDING) {
+				fixtureSummary.addPending();
+			}
+		}
+		return fixtureSummary;
 	}
 }

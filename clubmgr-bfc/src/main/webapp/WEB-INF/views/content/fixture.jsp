@@ -7,7 +7,7 @@
       
       <div class="row">
       	<!-- Fixture Details -->
-      	<div class="6u 12u(small)">
+      	<div class="4u 12u(small)">
 	  	<table>
 	  		<tr>
 	  			<td><strong><fmt:message key="fixture.home"/>:</strong></td>
@@ -29,22 +29,22 @@
 	  	</div>
 	  
       	<!-- Summary -->
-      	<div class="not-small 6u">
+      	<div class="2u -6u 12u(small)">
 	  	<table>
 	  		<tr>
-	  			<td align="right"><span class="highlight-YES"><fmt:message key="fixture.yes"/></span> :</td>
+	  			<td><span class="highlight-YES"><fmt:message key="fixture.yes"/></span> : </td>
 	  			<td>${fixtureSummary.yes}</td>
 	  		</tr>
 	  		<tr>
-	  			<td align="right"><span class="highlight-MAYBE"><fmt:message key="fixture.maybe"/></span> :</td>
+	  			<td><span class="highlight-MAYBE"><fmt:message key="fixture.maybe"/></span> : </td>
 	  			<td>${fixtureSummary.maybe}</td>
 	  		</tr>
 	  		<tr>
-		  		<td align="right"><span class="highlight-NO"><fmt:message key="fixture.no"/></span> :</td>
+		  		<td><span class="highlight-NO"><fmt:message key="fixture.no"/></span> : </td>
 		  		<td>${fixtureSummary.no}</td>
 	  		</tr>
 	  		<tr>
-		  		<td align="right"><span class="highlight-PENDING"><fmt:message key="fixture.pending"/></span> :</td>
+		  		<td><span class="highlight-PENDING"><fmt:message key="fixture.pending"/></span> : </td>
 		  		<td>${fixtureSummary.pending}</td>
 	  		</tr>
 	  	</table>

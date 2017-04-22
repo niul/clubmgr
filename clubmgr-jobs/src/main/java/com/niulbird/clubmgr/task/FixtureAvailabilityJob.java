@@ -50,7 +50,7 @@ public class FixtureAvailabilityJob {
 	private JavaMailSenderImpl mailSender;
 
 	@Transactional
-	@Scheduled(cron = "0 15 12 * * *")
+	@Scheduled(cron = "0 15 10 * * *")
 	public void sendFixturePlayerStatus() {
 		log.debug("Getting Fixtures to send Player Status Email.");
 		MailUtil mailUtil = new MailUtil();
@@ -95,7 +95,7 @@ public class FixtureAvailabilityJob {
 						
 						// Give some time between sending out emails not to overload SMTP server.
 						try {
-							Thread.sleep(5 * SECOND);
+							Thread.sleep(3 * SECOND);
 						} catch (InterruptedException e) {
 							log.error("Sleep interupted: " + e.getMessage());
 						}
@@ -105,7 +105,7 @@ public class FixtureAvailabilityJob {
 				// Add a little bit of time between fixtures not to overload SMTP server.
 				if (playerFixtureInfoList.size() > 0) {
 					try {
-						Thread.sleep(60 * SECOND);
+						Thread.sleep(30 * SECOND);
 					} catch (InterruptedException e) {
 						log.error("Sleep interupted: " + e.getMessage());
 					}

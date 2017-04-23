@@ -53,6 +53,21 @@
 	          				<a href="#"><fmt:message key="menu.item4"/></a>
 	          				<ul>
 	            				<li>
+	            					<a href='<c:url value="/womens.html"/>'><fmt:message key="menu.womens.b1"/></a>
+	            					<ul>
+	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2017"/>'><fmt:message key="teams.season.summer2017"/></a></li>
+	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2016"/>'><fmt:message key="teams.season.winter2016"/></a></li>
+	            						<li>
+	            							<a href="#"><fmt:message key="menu.archive"/></a>
+	            							<ul>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2016"/>'><fmt:message key="teams.season.summer2016"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2015"/>'><fmt:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2015"/>'><fmt:message key="teams.season.summer2015"/></a></li>
+	            							</ul>
+	            						</li>
+	            					</ul>
+	            				</li>
+	            				<li>
 	            					<a href='<c:url value="/mens.html"/>'><fmt:message key="teams.section.main.b1"/></a>
 	          						<ul>
 	            						<li>
@@ -101,15 +116,6 @@
 	            						</li>
 	          						</ul>
 	          					</li>
-	            				<li>
-	            					<a href='<c:url value="/womens.html"/>'><fmt:message key="menu.womens.b1"/></a>
-	            					<ul>
-	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2016"/>'><fmt:message key="teams.season.winter2016"/></a></li>
-	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2016"/>'><fmt:message key="teams.season.summer2016"/></a></li>
-	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2015"/>'><fmt:message key="teams.season.winter2015"/></a></li>
-	            						<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2015"/>'><fmt:message key="teams.season.summer2015"/></a></li>
-	            					</ul>
-	            				</li>
 	          				</ul>
 	        			</li>
 	    			<c:choose>

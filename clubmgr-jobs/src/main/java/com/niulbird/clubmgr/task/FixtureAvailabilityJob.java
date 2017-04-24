@@ -56,7 +56,7 @@ public class FixtureAvailabilityJob {
 		MailUtil mailUtil = new MailUtil();
 
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE, MMM d");
-		SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mma");
+		SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
 
 		String[] daysBefore = props.getProperty("fixture.days.before", null).split("\\s*,\\s*");
 

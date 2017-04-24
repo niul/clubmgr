@@ -26,7 +26,7 @@
 											<table>
 											  <tr><td align="right"><strong>${msg("email.fixture.home")}:</strong></td><td>${fixture.home}</td></tr>
 											  <tr><td align="right"><strong>${msg("email.fixture.away")}:</strong></td><td>${fixture.away}</td></tr>
-											  <tr><td align="right"><strong>${msg("email.fixture.date")}:</strong></td><td>${fixture.date?string["EEE, MMM d"]} @ ${fixture.time?["hh:mma"]}</td></tr>
+											  <tr><td align="right"><strong>${msg("email.fixture.date")}:</strong></td><td>${fixture.date?string["EEE, MMM d"]} @ ${fixture.time?string["hh:mm a"]}</td></tr>
 											  <tr><td align="right"><strong>${msg("email.fixture.field")}:</strong></td><td><a href="${fixture.fieldMapUri}">${fixture.field}</a></td></tr>
 											</table>
                                     </td>

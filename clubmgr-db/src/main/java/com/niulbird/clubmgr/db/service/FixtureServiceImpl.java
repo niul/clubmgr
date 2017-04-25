@@ -70,7 +70,7 @@ public class FixtureServiceImpl implements FixtureService {
 	@Override
 	public List<PlayerFixtureInfo> findPlayerInfoByFixture(Fixture fixture,
 			String teamUuid, String seasonKey) {
-		List<PlayerFixtureInfo> playerFixtureStatisticList = fixture.getPlayerFixtureInfo();
+		List<PlayerFixtureInfo> playerFixtureStatisticList = playerFixtureInfoRepository.findByFixtureOrderByPlayerFirstNameAscPlayerLastNameAsc(fixture);
 		
 		if (playerFixtureStatisticList.size() == 0) {
 			TeamSeasonMap teamSeasonMap = teamSeasonMapRepository.findByTeamTeamKeyAndSeasonSeasonKey(teamRepository.findByUuid(UUID.fromString(teamUuid)).getTeamKey(), seasonKey);

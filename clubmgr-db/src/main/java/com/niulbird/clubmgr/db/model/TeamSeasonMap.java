@@ -124,7 +124,7 @@ public final class TeamSeasonMap {
 	public void setScheduled(Boolean scheduled) {
 		this.scheduled = scheduled;
 	}
-	
+
     public List<Player> getPlayers() {
         return players;
     }

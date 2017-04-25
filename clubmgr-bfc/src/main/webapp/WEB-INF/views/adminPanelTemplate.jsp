@@ -10,6 +10,7 @@
 			<tiles:insertAttribute name="header"/>
 			<div id="main-wrapper">
 				<div class="container">
+					<h1><fmt:message key="admin.title"/></h1>
 					<div class="row 200%">
 			    		<tiles:insertAttribute name="menu"/>
 			    		<tiles:insertAttribute name="content"/>

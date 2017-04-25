@@ -93,7 +93,8 @@ public class PlayerController extends AdminBaseController {
 			BindingResult result,
 			@RequestParam (required = false) String teamUuid, 
 			HttpServletRequest request) {
-		log.debug("Adding Players for [" + getPrincipal() + "][" + teamUuid + "]");
+		log.debug("Adding Players for [" + getPrincipal() + "][" + teamUuid + "][" + player.getFirstName() + " " + player.getLastName() + "][" 
+			+ player.getEmail() + "][" + player.getPosition() + "]");
 
 		ModelAndView mav = new ModelAndView();
 		

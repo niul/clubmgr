@@ -1,10 +1,5 @@
 <%@ include file="/WEB-INF/views/taglibs.jsp"%>
 
-<div class="12u">
-	<header>
-		<h1><fmt:message key="admin.title"/></h1>
-	</header>
-</div>
 
 <!-- Sidebar -->
 	<div class="3u 12u$(small)">				

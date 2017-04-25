@@ -16,8 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.SortComparator;
-
 @Entity
 @Table(name = "fixtures")
 public final class Fixture {
@@ -149,7 +147,6 @@ public final class Fixture {
 		this.created = created;
 	}
 	
-	@SortComparator( PlayerFixtureInfoComparator.class )
 	public List<PlayerFixtureInfo> getPlayerFixtureInfo() {
 		return playerFixtureInfo;
 	}

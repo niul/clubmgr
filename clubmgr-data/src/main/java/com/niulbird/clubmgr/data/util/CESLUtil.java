@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -56,10 +58,27 @@ public class CESLUtil extends BaseUtil {
 				fixture.setDate(date);
 				fixture.setTime(convertStringToTime(columns.get(2).text().trim(), TIME_FORMAT));
 				fixture.setField(columns.get(3).text().trim());
-				fixture.setHome(columns.get(4).text().trim());
-				fixture.setAway(columns.get(5).text().trim());
-				//fixture.setHomeScore(columns.get(5).text().trim().split(" ")[0]);
-				//fixture.setAwayScore(columns.get(6).text().trim().split(" ")[0]);
+				
+				String homeColumn = columns.get(4).text().trim();
+				Matcher matcher = Pattern.compile("^\\D*(\\d)").matcher(homeColumn);
+				matcher.find();
+				if (matcher.matches()) {
+					int start = matcher.start(1);
+					fixture.setHome(homeColumn.substring(0, start - 1).trim());
+					fixture.setHomeScore(homeColumn.substring(start));
+				} else {
+					fixture.setHome(homeColumn);
+				}
+				String awayColumn = columns.get(5).text().trim();
+				matcher = Pattern.compile("^\\D*(\\d)").matcher(awayColumn);
+				matcher.find();
+				if (matcher.matches()) {
+					int start = matcher.start(1);
+					fixture.setAway(awayColumn.substring(0, start - 1).trim());
+					fixture.setAwayScore(awayColumn.substring(start));
+				} else {
+					fixture.setAway(awayColumn);
+				}
 					
 				fixture.setFieldMapUri(props.getProperty("field.url." + fixture.getField().replaceAll(" ", "")));
 				fixture.setSeason(teamSeasonMap.getSeason());

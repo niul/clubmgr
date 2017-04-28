@@ -60,22 +60,22 @@ public class CESLUtil extends BaseUtil {
 				fixture.setField(columns.get(3).text().trim());
 				
 				String homeColumn = columns.get(4).text().trim();
-				Matcher matcher = Pattern.compile("^\\D*(\\d)").matcher(homeColumn);
+				Matcher matcher = Pattern.compile("[^0-9]*([0-9]+).*").matcher(homeColumn);
 				matcher.find();
 				if (matcher.matches()) {
 					int start = matcher.start(1);
-					fixture.setHome(homeColumn.substring(0, start - 1).trim());
-					fixture.setHomeScore(homeColumn.substring(start));
+					fixture.setHome(homeColumn.substring(0, start - 1).replaceAll("\u00a0", "").trim());
+					fixture.setHomeScore(homeColumn.substring(start, start + 1));
 				} else {
 					fixture.setHome(homeColumn);
 				}
 				String awayColumn = columns.get(5).text().trim();
-				matcher = Pattern.compile("^\\D*(\\d)").matcher(awayColumn);
+				matcher = Pattern.compile("[^0-9]*([0-9]+).*").matcher(awayColumn);
 				matcher.find();
 				if (matcher.matches()) {
 					int start = matcher.start(1);
-					fixture.setAway(awayColumn.substring(0, start - 1).trim());
-					fixture.setAwayScore(awayColumn.substring(start));
+					fixture.setAway(awayColumn.substring(0, start - 1).replaceAll("\u00a0", "").trim());
+					fixture.setAwayScore(awayColumn.substring(start, start + 1));
 				} else {
 					fixture.setAway(awayColumn);
 				}

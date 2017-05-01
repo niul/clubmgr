@@ -110,8 +110,14 @@
 	            						<li>
 	            							<a href='<c:url value="/mensJurassic.html"/>'><fmt:message key="menu.mens.b4"/></a>
 	            							<ul>
-	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2016"/>'><fmt:message key="teams.season.winter2016"/></a></li>
-	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2015"/>'><fmt:message key="teams.season.winter2015"/></a></li>
+	            								<li><a href='<c:url value="/fixtures/BOMBASTIC_MENS_JURASSIC/SUMMER_2017"/>'><fmt:message key="teams.season.summer2017"/></a></li>
+	            								<li>
+	            									<a href="#"><fmt:message key="menu.archive"/></a>
+	            									<ul>
+	            										<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2016"/>'><fmt:message key="teams.season.winter2016"/></a></li>
+	            										<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2015"/>'><fmt:message key="teams.season.winter2015"/></a></li>
+	            									</ul>
+	            								</li>
 	            							</ul>
 	            						</li>
 	          						</ul>

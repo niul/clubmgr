@@ -2,9 +2,9 @@
 
 	<article>
       <header>
-        <h1><fmt:message key="fixtures.title"/></h1>
+        <h1>${teamseasonmap.team.name} / ${teamseasonmap.season.name}</h1>
+        <h3><fmt:message key="fixtures.title"/> / <a href="${teamseasonmap.fixturesUri}" target="_blank">${teamseasonmap.description}</a></h3>
       </header>
-	  <h3>${teamseasonmap.team.name} - ${teamseasonmap.season.name}</h3>
 	  <table class="default fixtures u-full-width">
 	    <thead>
 	      <tr>

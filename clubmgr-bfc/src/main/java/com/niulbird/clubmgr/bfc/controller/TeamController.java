@@ -109,6 +109,25 @@ public class TeamController extends BaseController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/fixtures/{team}/{season}")
+	public ModelAndView teamFixture(@PathVariable(value = "team") String teamKey,
+			@PathVariable(value = "season") String seasonKey,
+			HttpServletRequest request) {
+		log.debug("Getting Standings: " + request.getRequestURL());
+		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(teamKey, seasonKey);
+		
+		List<Fixture> fixtures = teamService.findFixtures(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
+		
+		ModelAndView mav = setView(FIXTURES);
+		mav.addObject(TITLE, teamSeasonMap.getTeam().getName() + " - " + teamSeasonMap.getSeason().getName());
+		mav.addObject(TEAMSEASONMAP, teamSeasonMap);
+		mav.addObject(FIXTURES, fixtures);
+		
+		log.debug("Got " + fixtures.size() + " Fixtures");
+		
+		return mav;
+	}
+	
 	private ModelAndView setView(String pageName) {
 		ModelAndView mav = new ModelAndView();
 		

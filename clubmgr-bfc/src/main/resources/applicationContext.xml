@@ -51,6 +51,17 @@
     </bean>
 
     <mvc:annotation-driven conversion-service="conversionService"/>
+    
+    <mvc:resources mapping="/static/**" location="/static/" cache-period="31536000">
+      <mvc:resource-chain resource-cache="true" auto-registration="true">
+        <mvc:resolvers>
+          <mvc:version-resolver>
+            <mvc:content-version-strategy patterns="/**" />
+          </mvc:version-resolver>
+        </mvc:resolvers>
+      </mvc:resource-chain>
+    </mvc:resources>
+    
     <mvc:interceptors>
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="siteLanguage"/>

@@ -48,7 +48,7 @@ public class FixtureController extends BaseController {
 			@RequestParam (required = false) String status) {
 		List<PlayerFixtureInfo> playerFixtureInfoList = new ArrayList<PlayerFixtureInfo>();
 		PlayerFixtureInfo playerFixtureInfo = null;
-		log.debug("Viewing Fixture for [" + uuid + "][" + player + "][" + status + "]");
+		log.debug("Viewing Fixture for [fixture=" + uuid + "][playerFixtureInfo=" + player + "][" + status + "]");
 		
 		Fixture fixture = fixtureService.findFixtureByUuid(uuid);
 		
@@ -81,7 +81,7 @@ public class FixtureController extends BaseController {
 	public ModelAndView fixtureComment(@ModelAttribute("fixtureData") FixtureData fixtureData) {
 		List<PlayerFixtureInfo> playerFixtureInfoList = new ArrayList<PlayerFixtureInfo>();
 		PlayerFixtureInfo playerFixtureInfo = null;
-		log.debug("Viewing Fixture for [" + fixtureData.getUuid() + "][" + fixtureData.getPlayer() + "][" + fixtureData.getComment() + "]");
+		log.debug("Viewing Fixture for [fixture=" + fixtureData.getUuid() + "][playerFixtureInfo=" + fixtureData.getPlayer() + "][" + fixtureData.getComment() + "]");
 		
 		Fixture fixture = fixtureService.findFixtureByUuid(fixtureData.getUuid());
 		
@@ -110,7 +110,7 @@ public class FixtureController extends BaseController {
 			HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		PlayerFixtureInfo playerFixtureInfo = null;
-		log.debug("Viewing Fixture Email for [" + player + "]");
+		log.debug("Viewing Fixture Email Tracker for [playerFixtureInfo=" + player + "]");
 		
 		if (StringUtils.isNoneEmpty(player)) {
 			playerFixtureInfo = fixtureService.findByUuid(player);

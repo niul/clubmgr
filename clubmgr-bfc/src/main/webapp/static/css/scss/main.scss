@@ -697,7 +697,6 @@
 
 				li {
 					display: inline-block;
-					margin-right: 1em;
 
 					a {
 						@include vendor('transition', 'background-color .25s ease-in-out');
@@ -731,7 +730,7 @@
 		}
 		h3 {
 			border-bottom: 2px solid $primary-color;
-			max-width: 80%;
+			max-width: 100%;
 		}
 	}
 

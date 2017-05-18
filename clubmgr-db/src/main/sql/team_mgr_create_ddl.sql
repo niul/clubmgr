@@ -120,6 +120,7 @@ CREATE TABLE players (
 	zip		varchar(10),
 	country		varchar(2),
 	position_id	serial,
+	manager		boolean NOT NULL DEFAULT FALSE,
 	enabled		boolean  NOT NULL DEFAULT TRUE,
     created            timestamp,
     CONSTRAINT FK_players_club_id FOREIGN KEY (club_id)

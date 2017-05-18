@@ -52,7 +52,7 @@
 	  </div>
 	  
 	  <c:if test="${pageContext.request.method=='GET'}">
-	    <c:if test="${not empty playerFixtureInfo}">
+	    <c:if test="${not empty playerFixtureInfo && statusUpdated}">
 	    <div class="form_error">
 	      <fmt:message key="fixture.response">
 		    <fmt:param value="${playerFixtureInfo.player.firstName}"/>
@@ -90,15 +90,25 @@
 	    	<th><fmt:message key="fixture.headers.status"/></th>
 	    	<th class="not-small"><fmt:message key="fixture.headers.viewed"/></th>
 	    	<th><fmt:message key="fixture.headers.comment"/></th>
+	    	<c:if test="${playerFixtureInfo.player.manager}">
+	    	<th><fmt:message key="fixture.headers.update"/></th>
+	    	</c:if>
 	      </tr>
 	    </thead>
 	    <tbody>
-	    <c:forEach var="playerFixtureInfo" items="${playerFixtureInfoList}" varStatus="vs">
+	    <c:forEach var="playerFixtureInfoIter" items="${playerFixtureInfoList}" varStatus="vs">
 	      <tr class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
-	      	<td>${playerFixtureInfo.player.firstName} ${playerFixtureInfo.player.lastName}</td>
-	      	<td><span class="highlight-${playerFixtureInfo.status}">${playerFixtureInfo.status}</span></td>
-	      	<td class="not-small"><fmt:formatDate value="${playerFixtureInfo.viewed}" pattern="E MMM, d @ h:mma" /></td>
-	      	<td>${playerFixtureInfo.comment}</td>
+	      	<td>${playerFixtureInfoIter.player.firstName} ${playerFixtureInfoIter.player.lastName}</td>
+	      	<td><span class="highlight-${playerFixtureInfoIter.status}">${playerFixtureInfoIter.status}</span></td>
+	      	<td class="not-small"><fmt:formatDate value="${playerFixtureInfoIter.viewed}" pattern="E MMM, d @ h:mma" /></td>
+	      	<td>${playerFixtureInfoIter.comment}</td>
+	      	<c:if test="${playerFixtureInfo.player.manager}">
+	    	<td>
+	    		<a href='<c:url value="/fixture.html?uuid=${fixture.uuid}&player=${playerFixtureInfo.uuid}&updatePlayer=${playerFixtureInfoIter.uuid}&status=YES"/>'><span class="highlight-YES"><fmt:message key="fixture.yes"/></span></a> |
+	    		<a href='<c:url value="/fixture.html?uuid=${fixture.uuid}&player=${playerFixtureInfo.uuid}&updatePlayer=${playerFixtureInfoIter.uuid}&status=MAYBE"/>'><span class="highlight-MAYBE"><fmt:message key="fixture.maybe"/></span></a> |
+	    		<a href='<c:url value="/fixture.html?uuid=${fixture.uuid}&player=${playerFixtureInfo.uuid}&updatePlayer=${playerFixtureInfoIter.uuid}&status=NO"/>'><span class="highlight-NO"><fmt:message key="fixture.no"/></span></a>
+	    	</td>
+	    	</c:if>
 	  	  </tr>
 	    </c:forEach>
 	    </tbody>

@@ -37,6 +37,7 @@ public class FixtureController extends BaseController {
 	private static final String FIXTURE_SUMMARY = "fixtureSummary";
 	private static final String PLAYER_FIXTURE_INFO = "playerFixtureInfo";
 	private static final String PLAYER_FIXTURE_INFO_LIST = "playerFixtureInfoList";
+	private static final String STATUS_UPDATED = "statusUpdated";
 	
 	@Autowired
 	FixtureService fixtureService;
@@ -45,19 +46,32 @@ public class FixtureController extends BaseController {
 	@RequestMapping(value = "/fixture.html", method = RequestMethod.GET)
 	public ModelAndView fixture(@RequestParam (required = true) String uuid,
 			@RequestParam (required = false) String player,
+			@RequestParam (required = false) String updatePlayer,
 			@RequestParam (required = false) String status) {
 		List<PlayerFixtureInfo> playerFixtureInfoList = new ArrayList<PlayerFixtureInfo>();
 		PlayerFixtureInfo playerFixtureInfo = null;
+		boolean statusUpdated = false;
 		log.debug("Viewing Fixture for [fixture=" + uuid + "][playerFixtureInfo=" + player + "][" + status + "]");
 		
 		Fixture fixture = fixtureService.findFixtureByUuid(uuid);
 		
-		if (StringUtils.isNotEmpty(player) && StringUtils.isNotEmpty(status)) {
+		if (StringUtils.isNotEmpty(player)) {
 			playerFixtureInfo = fixtureService.findByUuid(player);
-			playerFixtureInfo.setStatus(Status.valueOf(status));
-			fixtureService.updatePlayerInfo(playerFixtureInfo);
-			log.debug("Updated Fixture [" + fixture.getTeam() + "][" + playerFixtureInfo.getPlayer().getFirstName() + " " 
-			+ playerFixtureInfo.getPlayer().getLastName() + "]");
+			if (StringUtils.isNotEmpty(status)) {
+				if (StringUtils.isNotEmpty(updatePlayer)) {
+					PlayerFixtureInfo updatePlayerFixtureInfo = fixtureService.findByUuid(updatePlayer);
+					updatePlayerFixtureInfo.setStatus(Status.valueOf(status));
+					fixtureService.updatePlayerInfo(updatePlayerFixtureInfo);
+					log.debug("Updated Fixture [" + fixture.getTeam() + "][" + updatePlayerFixtureInfo.getPlayer().getFirstName() + " " 
+							+ updatePlayerFixtureInfo.getPlayer().getLastName() + "]");
+				} else {
+					playerFixtureInfo.setStatus(Status.valueOf(status));
+					fixtureService.updatePlayerInfo(playerFixtureInfo);
+					statusUpdated = true;
+					log.debug("Updated Fixture [" + fixture.getTeam() + "][" + playerFixtureInfo.getPlayer().getFirstName() + " " 
+							+ playerFixtureInfo.getPlayer().getLastName() + "]");
+				}
+			}
 		}
 		
 		playerFixtureInfoList = fixtureService.findByFixture(fixture);
@@ -69,6 +83,7 @@ public class FixtureController extends BaseController {
 		mav.addObject(FIXTURE_SUMMARY, fixtureSummary);
 		mav.addObject(PLAYER_FIXTURE_INFO, playerFixtureInfo);
 		mav.addObject(PLAYER_FIXTURE_INFO_LIST, playerFixtureInfoList);
+		mav.addObject(STATUS_UPDATED, statusUpdated);
 		
 		FixtureData fixtureData = new FixtureData(uuid, player, null);
 		mav.addObject("fixtureData", fixtureData);

@@ -47,6 +47,7 @@ public final class Player {
 	private String state;
 	private String zip;
 	private String country;
+	private Boolean manager;
 	private Boolean enabled;
 	private Date created;
 
@@ -175,6 +176,14 @@ public final class Player {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public boolean getManager() {
+		return manager;
+	}
+
+	public void setManager(boolean manager) {
+		this.manager = manager;
 	}
 
 	public boolean getEnabled() {

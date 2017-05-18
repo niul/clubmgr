@@ -51,15 +51,15 @@ public class VMSLUtil extends BaseUtil {
 								fixture.setUuid(UUID.randomUUID());
 								fixture.setDate(convertStringToDate(columns.get(2).text(), DATE_FORMAT));
 								fixture.setTime(convertStringToTime(columns.get(2).text(), TIME_FORMAT));
-								fixture.setHome(columns.get(3).text());
-								String[] score = columns.get(4).text().split("-");
+								fixture.setHome(columns.get(4).text());
+								String[] score = columns.get(5).text().split("-");
 								if (score.length == 2) {
 									fixture.setHomeScore(score[0].trim());
 									fixture.setAwayScore(score[1].trim());
 								}
-								fixture.setAway(columns.get(5).text());
-								fixture.setField(columns.get(6).text());
-								Elements fieldLink = columns.get(6).getElementsByTag("a");
+								fixture.setAway(columns.get(6).text());
+								fixture.setField(columns.get(7).text());
+								Elements fieldLink = columns.get(7).getElementsByTag("a");
 								if (fieldLink.size() > 0) {
 									String vmslFieldLink = VMSL_URI + fieldLink.get(0).attr("href");
 									String fieldMapUri = null;

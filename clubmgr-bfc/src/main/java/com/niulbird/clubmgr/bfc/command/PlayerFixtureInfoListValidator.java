@@ -53,7 +53,7 @@ public class PlayerFixtureInfoListValidator implements Validator {
 		}
 		
 		if (goalsRecorded != goalsFor) {
-			errors.rejectValue("playerFixtureInfoList", "error.goals_mismatch");
+			//errors.rejectValue("playerFixtureInfoList", "error.goals_mismatch");
 			log.debug("Error with report not matching goals scored.");
 		}
     }

@@ -14,12 +14,16 @@
 					<tr>
 						<th><fmt:message key="squad.active.headers.name"/></th>
 						<th><fmt:message key="squad.active.headers.email"/></th>
+						<th><fmt:message key="squad.active.headers.actions"/></th>
 					</tr>
 				</thead>
 			<c:forEach var="player" items="${players_active}" varStatus="vs">
 				<tr class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
 					<td>${player.firstName} ${player.lastName}</td>
 					<td>${player.email}</td>
+					<td>
+						<a href='<c:url value="/admin/removeSquad.html?uuid=${player.uuid}&teamUuid=${team.uuid}&seasonKey=${season.seasonKey}"/>' class="button small icon fa-edit"><span><fmt:message key="squad.active.headers.actions.remove"/></span></a>
+					</td>
 				</tr>
 			</c:forEach>
 			</table>

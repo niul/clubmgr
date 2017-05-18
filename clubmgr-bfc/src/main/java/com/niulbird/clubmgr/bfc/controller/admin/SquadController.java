@@ -102,4 +102,30 @@ public class SquadController extends AdminBaseController {
 		
 		return mav;
 	}
+	
+	@Transactional
+	@RequestMapping(value = "/admin/removeSquad.html")
+	public ModelAndView removeSquad(@RequestParam (required = false) String uuid,
+			@RequestParam (required = false) String teamUuid,
+			@RequestParam (required = false) String seasonKey,
+			HttpServletRequest request) {
+
+		log.debug("Removing from Squad [" + getPrincipal() + "][" + teamUuid + "][" + uuid + "]");
+		ModelAndView mav = new ModelAndView();
+		
+		Team team = teamService.findByUuid(teamUuid);
+		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(team.getTeamKey(), seasonKey);
+		
+		Player player = playerService.findByUuid(uuid);
+		player.getTeamSeasonMaps().remove(teamSeasonMap);
+		try {
+			playerService.update(player);
+		} catch (RecordNotFound rnf) {
+			log.error("Error updating player: " + rnf.getMessage(), rnf);
+		}
+		
+		mav.setViewName("redirect:/admin/squads.html?uuid=" + teamUuid + "&seasonKey=" + seasonKey);
+		
+		return mav;
+	}
 }

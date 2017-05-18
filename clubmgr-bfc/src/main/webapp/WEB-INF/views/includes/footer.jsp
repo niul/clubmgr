@@ -46,22 +46,25 @@
   							<li>
   								<a href="<fmt:message key='footer.social.facebook.url'/>" title="<fmt:message key='footer.social.facebook.url'/>" target="_blank">
   									<span class="fa-stack fa-2x">
-  										<i class="fa fa-facebook-square fa-2x" aria-hidden="true" ></i>
+										<i class="fa fa-square fa-stack-2x"></i>
+  										<i class="fa fa-facebook fa-stack-1x fa-inverse" aria-hidden="true" ></i>
   									</span>
   								</a>
   							</li>
   							<li>
   								<a href="<fmt:message key='footer.social.twitter.url'/>"  title="<fmt:message key='footer.social.twitter.url'/>" target="_blank">
   									<span class="fa-stack fa-2x">
-  										<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+										<i class="fa fa-square fa-stack-2x"></i>
+  										<i class="fa fa-twitter fa-stack-1x fa-inverse" aria-hidden="true"></i>
   									</span>
   								</a>
   							</li>
   							<li>
   								<a href="<fmt:message key='footer.social.google_plus.url'/>" title="<fmt:message key='footer.social.google_plus.url'/>" target="_blank">
   									<span class="fa-stack fa-2x">
-  										<i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i>
-  									</span>
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-google-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
+									</span>
   								</a>
   							</li>
   							<li>

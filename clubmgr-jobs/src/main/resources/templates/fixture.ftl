@@ -84,7 +84,7 @@
                                  <!-- Spacing -->
                                  <tr>
                                     <td style="font-family: 'Open Sans', sans-serif; font-size: 13px; color: #14074c; text-align:left;line-height: 24px;" st-content="rightimage-paragraph">
-                                       ${msg("email.fixture.status.1")} <a href="${msg("email.fixture.response.url")}?uuid=${fixture.uuid}" style="font-weight: bold;">${msg("email.fixture.status.2")}</a> ${msg("email.fixture.status.3")}
+                                       ${msg("email.fixture.status.1")} <a href="${msg("email.fixture.response.url")}?uuid=${fixture.uuid}&player=${playerFixtureInfo.uuid}" style="font-weight: bold;">${msg("email.fixture.status.2")}</a> ${msg("email.fixture.status.3")}
                                     </td>
                                  </tr>
                                  <!-- end of content -->

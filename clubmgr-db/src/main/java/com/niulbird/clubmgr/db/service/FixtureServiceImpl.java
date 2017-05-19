@@ -44,10 +44,14 @@ public class FixtureServiceImpl implements FixtureService {
 	@Autowired
 	private TeamSeasonMapRepository teamSeasonMapRepository;
 
-
 	@Override
 	public List<Fixture> findFixturesByDate(Date date) {
 		return fixtureRepository.findByDate(date);
+	}
+	
+	@Override
+	public List<Fixture> findFixturesByTeamAndDate(String teamKey, Date date) {
+		return fixtureRepository.findByTeamTeamKeyAndDate(teamKey, date);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import com.niulbird.clubmgr.db.model.PlayerFixtureInfo;
 public interface FixtureService {
     public List<Fixture> findFixturesByDate(Date date);
     public List<Fixture> findFixturesByDateTime(Date date, int offsetStartHour, int offsetEndHour);
+	public List<Fixture> findFixturesByTeamAndDate(String teamKey, Date date);
     public Fixture findFixtureByUuid(String uuid);
     public List<PlayerFixtureInfo> findPlayerInfoByFixture(Fixture fixture, String teamUuid, String seasonKey);
     public void updateFixtureReport(Fixture fixture, List<PlayerFixtureInfo> playerFixtureInfoList);

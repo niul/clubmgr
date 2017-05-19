@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,20 +53,37 @@ public class FixtureAvailabilityJob {
 	private JavaMailSenderImpl mailSender;
 
 	@Transactional
-	@Scheduled(cron = "0 15 10 * * *")
+	@Scheduled(cron = "0 24 11 * * *")
 	public void sendFixturePlayerStatus() {
+    	Pattern pattern = Pattern.compile(".*\\.\\s*(.*)");
 		log.debug("Getting Fixtures to send Player Status Email.");
+    	
+		Set<String> set = props.stringPropertyNames();
+
+        for(String name : set){
+            if(name.startsWith("fixture.days.before")) {
+            	Matcher m = pattern.matcher(name);
+
+            	if (m.find()) {
+            	    String teamKey = m.group(1);
+                	String[] daysBefore = props.getProperty(name).split("\\s*,\\s*");
+                	send(teamKey, daysBefore);
+            	}
+            }
+        }
+		log.debug("Updated Fixtures successfully");
+	}
+	
+	private void send(String teamKey, String[] daysBefore) {
 		MailUtil mailUtil = new MailUtil();
 
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE, MMM d");
 		SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
-
-		String[] daysBefore = props.getProperty("fixture.days.before", null).split("\\s*,\\s*");
-
+		
 		for (int i = 0; i < daysBefore.length; i++) {
 			Date date = getDaysFromCurrentDate(Integer.parseInt(daysBefore[i]));
-			log.debug("Getting fixtures for date: " + date);
-			List<Fixture> fixtures = fixtureService.findFixturesByDate(date);
+			log.debug("Finding fixtures for TEAM [" + teamKey + "] and DATE [" + date +"]");
+			List<Fixture> fixtures = fixtureService.findFixturesByTeamAndDate(teamKey, date);
 
 			for (Fixture fixture : fixtures) {
 				log.debug("Fixture: " + fixture.getFixtureId());
@@ -112,7 +132,6 @@ public class FixtureAvailabilityJob {
 				}
 			}
 		}
-		log.debug("Updated Fixtures successfully");
 	}
 
 	private Date getDaysFromCurrentDate(int numberOfDays) {

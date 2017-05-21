@@ -56,7 +56,7 @@ public class LoginController extends BaseController {
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "redirect:/login.html?logout";
+		return "redirect:/login.html?logout=true";
 	}
 
 	@RequestMapping(value = "/403", method = RequestMethod.GET)

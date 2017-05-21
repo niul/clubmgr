@@ -9,6 +9,11 @@
 			</div>
 			<div class="box-content">
 			<h4><fmt:message key="reports.title"/></h4>
+			<c:if test="${sendEmail}">
+	    	<div class="form_error">
+	      		<fmt:message key="report.email.sent"/>
+	    	</div>
+	    	</c:if>
 			<table class="default">
 				<thead>
 					<tr>

@@ -17,10 +17,10 @@
 		<form-login
 		    login-page="/login.html"
 		    default-target-url="/admin/players.html"
-			authentication-failure-url="/login.html?error"
+			authentication-failure-url="/login.html?error=true"
 			username-parameter="username"
 			password-parameter="password" />
-		<logout logout-success-url="/login.html?logout"  />
+		<logout logout-success-url="/login.html?logout=true"  />
 		<!-- enable csrf protection -->
 		<csrf/>
 	</http>

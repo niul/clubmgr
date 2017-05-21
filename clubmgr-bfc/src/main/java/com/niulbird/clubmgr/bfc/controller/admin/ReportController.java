@@ -67,6 +67,7 @@ public class ReportController extends AdminBaseController {
 	@RequestMapping(value = "/admin/reports.html")
 	public ModelAndView players(@RequestParam (required = false) String uuid,
 			@RequestParam (required = false) String seasonKey,
+			@RequestParam (required = false) boolean sendEmail,
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		Team team;
@@ -88,6 +89,7 @@ public class ReportController extends AdminBaseController {
 		fixtures = teamService.findFixtures(team, (Season)mav.getModel().get(SEASON));
 
 		mav.addObject(FIXTURES, fixtures);
+		mav.addObject("sendEmail", sendEmail);
 		
 		return mav;
 	}
@@ -157,7 +159,7 @@ public class ReportController extends AdminBaseController {
 		emailService.sendFixtureEmailAsync(uuid);
 		
 		mav = getFilterObjects(ADMIN_REPORT, teamUuid, false, seasonKey, request);
-		mav.setViewName("redirect:/admin/reports.html?uuid=" + teamUuid + "&seasonKey=" + seasonKey);
+		mav.setViewName("redirect:/admin/reports.html?uuid=" + teamUuid + "&seasonKey=" + seasonKey + "&sendEmail=true");
 		
 		return mav;
 	}

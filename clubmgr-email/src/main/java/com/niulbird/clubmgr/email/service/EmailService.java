@@ -65,8 +65,12 @@ public class EmailService {
 		
 		mailUtil.sendMail(mailSender, emailList, props.getProperty("email.subject"), body, props);
 	}
-	
+
 	@Async
+	public void sendFixtureEmailAsync(String uuid) {
+		sendFixtureEmail(uuid);
+	}
+	
 	@Transactional
 	public void sendFixtureEmail(String uuid) {
 		MailUtil mailUtil = new MailUtil();

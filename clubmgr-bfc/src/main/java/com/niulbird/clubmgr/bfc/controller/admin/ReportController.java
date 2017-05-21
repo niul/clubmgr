@@ -154,7 +154,7 @@ public class ReportController extends AdminBaseController {
 		ModelAndView mav = new ModelAndView();
 		log.debug("Sending Fixture Email for [" + getPrincipal() + "][" + uuid + "]");
 
-		emailService.sendFixtureEmail(uuid);
+		emailService.sendFixtureEmailAsync(uuid);
 		
 		mav = getFilterObjects(ADMIN_REPORT, teamUuid, false, seasonKey, request);
 		mav.setViewName("redirect:/admin/reports.html?uuid=" + teamUuid + "&seasonKey=" + seasonKey);

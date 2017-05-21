@@ -67,6 +67,7 @@ public class EmailService {
 	}
 
 	@Async
+	@Transactional
 	public void sendFixtureEmailAsync(String uuid) {
 		sendFixtureEmail(uuid);
 	}

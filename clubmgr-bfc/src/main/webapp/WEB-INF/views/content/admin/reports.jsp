@@ -30,6 +30,11 @@
 	  	    			<c:if test="${not empty fixture.homeScore}">
 	  	    			<a href='<c:url value="/admin/editReport.html?uuid=${fixture.uuid}&teamUuid=${team.uuid}&seasonKey=${season.seasonKey}"/>' class="button small icon fa-edit"><span><fmt:message key="reports.headers.actions.edit"/></span></a>
 	  	    			</c:if>
+	  	    			
+	  	    			<jsp:useBean id="today" class="java.util.Date" />
+	  	    			<c:if test="${(empty fixture.homeScore) && (today lt fixture.date)}">
+	  	    			<a href='<c:url value="/admin/sendFixtureEmail.html?uuid=${fixture.uuid}&teamUuid=${team.uuid}&seasonKey=${season.seasonKey}"/>' class="button small icon fa-envelope-o"><span><fmt:message key="reports.headers.actions.email"/></span></a>
+	  	    			</c:if>
 	  	    		</td>
 				</tr>
 			</c:forEach>

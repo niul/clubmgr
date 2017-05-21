@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.util;
+package com.niulbird.clubmgr.email.util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;

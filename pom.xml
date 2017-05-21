@@ -18,6 +18,7 @@
 		<module>clubmgr-db</module>
 		<module>clubmgr-data</module>
 		<module>clubmgr-util</module>
+		<module>clubmgr-email</module>
 		<module>clubmgr-jobs</module>
 		<module>clubmgr-bfc</module>
 	</modules>
@@ -36,6 +37,11 @@
 			<dependency>
 				<groupId>com.niulbird.clubmgr</groupId>
 				<artifactId>clubmgr-util</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.niulbird.clubmgr</groupId>
+				<artifactId>clubmgr-email</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

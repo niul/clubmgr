@@ -25,6 +25,7 @@ import com.niulbird.clubmgr.db.model.Season;
 import com.niulbird.clubmgr.db.model.Team;
 import com.niulbird.clubmgr.db.service.FixtureService;
 import com.niulbird.clubmgr.db.service.TeamService;
+import com.niulbird.clubmgr.email.service.EmailService;
 
 @Controller
 public class ReportController extends AdminBaseController {
@@ -49,6 +50,9 @@ public class ReportController extends AdminBaseController {
         add(9);
         add(10);
     }};
+    
+	@Autowired
+	EmailService emailService;
 	
 	@Autowired
 	FixtureService fixtureService;
@@ -141,4 +145,20 @@ public class ReportController extends AdminBaseController {
 		return mav;
 	}
 	
+	@Transactional
+	@RequestMapping(value = "/admin/sendFixtureEmail.html", method = RequestMethod.GET)
+	public ModelAndView sendFixtureEmail(@RequestParam (required = false) String uuid,
+			@RequestParam (required = false) String teamUuid,
+			@RequestParam (required = false) String seasonKey,
+			HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		log.debug("Sending Fixture Email for [" + getPrincipal() + "][" + uuid + "]");
+
+		emailService.sendFixtureEmail(uuid);
+		
+		mav = getFilterObjects(ADMIN_REPORT, teamUuid, false, seasonKey, request);
+		mav.setViewName("redirect:/admin/reports.html?uuid=" + teamUuid + "&seasonKey=" + seasonKey);
+		
+		return mav;
+	}
 }

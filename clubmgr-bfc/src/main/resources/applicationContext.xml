@@ -5,6 +5,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:task="http://www.springframework.org/schema/task"
        xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
@@ -15,6 +16,8 @@
         http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
         http://www.springframework.org/schema/cache 
         http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-4.2.xsd
 		http://www.springframework.org/schema/util 
 		http://www.springframework.org/schema/util/spring-util-4.2.xsd">
   
@@ -137,7 +140,10 @@
 	<bean id="ehcache"
       class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" 
       p:config-location="classpath:ehcache.xml"
-      p:shared="true"/>    
+      p:shared="true"/>
+      
+    <task:annotation-driven executor="myExecutor"/>
+    <task:executor id="myExecutor" pool-size="5"/>
     
     <!-- security configuration -->
     <import resource="applicationContext-security.xml"/>

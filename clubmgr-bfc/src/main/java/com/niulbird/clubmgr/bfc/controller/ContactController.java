@@ -2,18 +2,14 @@ package com.niulbird.clubmgr.bfc.controller;
 
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.ContactData;
-import com.niulbird.clubmgr.util.freemarker.MessageResolverMethod;
-
-import freemarker.template.Configuration;
-import freemarker.template.TemplateException;
-
-import com.niulbird.clubmgr.util.MailUtil;
+import com.niulbird.clubmgr.email.service.EmailService;
 
 @Controller
 public class ContactController extends BaseController {
@@ -36,13 +27,8 @@ public class ContactController extends BaseController {
 	private static final String SUCCESS = "contact_success";
 
 	@Autowired
-	Properties props;
+	EmailService emailService;
 	
-	@Autowired
-	private JavaMailSenderImpl mailSender;
-	
-	@Autowired
-	private Configuration freeMarkerConfiguration;
 	
 	@RequestMapping(value = "/contact.html", method = RequestMethod.GET)
 	public ModelAndView contactView(@ModelAttribute("contactData") ContactData contactData) {
@@ -64,24 +50,14 @@ public class ContactController extends BaseController {
 		if (result.hasErrors()) {
 			return setView(CONTACT, messageSource.getMessage("contact.title", null, null));
 		} else {
-			MailUtil mailUtil = new MailUtil();
-			
-			String body = new String();
 			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("email", contactData.getEmail());
+			map.put("message", contactData.getMessage());
+			map.put("name", contactData.getName());
+			map.put("subject", contactData.getSubject());
 			
-
-			try {
-				map.put("msg", new MessageResolverMethod(messageSource, null));
-				map.put("contactData", contactData);
-				body = FreeMarkerTemplateUtils
-						.processTemplateIntoString(freeMarkerConfiguration.getTemplate("contact.ftl"), map);
-			} catch (IOException | TemplateException e) {
-				log.error("Error generating freemarker template: " + e.getMessage(), e);
-			}
-						
-			String[] emailList = props.getProperty("email.toEmail.contact." + contactData.getSubject()).split("\\|");
+			emailService.sendContactEmail(map);
 			
-			mailUtil.sendMail(mailSender, emailList, props.getProperty("email.subject"), body, props);
 			ModelAndView mav = setView(SUCCESS, messageSource.getMessage("contact.title", null, null));
 			mav.addObject("contactData", contactData);
 			mav.addObject("subjects", getSubjects());

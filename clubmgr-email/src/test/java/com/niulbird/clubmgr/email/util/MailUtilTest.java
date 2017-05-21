@@ -1,4 +1,4 @@
-package com.niulbird.clubmgr.util;
+package com.niulbird.clubmgr.email.util;
 
 import org.junit.Test;
 
@@ -8,8 +8,8 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import com.niulbird.clubmgr.BaseTestCase;
-import com.niulbird.clubmgr.util.MailUtil;
+import com.niulbird.clubmgr.email.BaseTestCase;
+import com.niulbird.clubmgr.email.util.MailUtil;
 
 public class MailUtilTest extends BaseTestCase {
 

@@ -12,18 +12,7 @@ import org.apache.log4j.MDC;
 
 public class LogInterceptor extends HandlerInterceptorAdapter {
 
-	/**
-	 * Add objects to context for logging.
-	 * 
-	 * @param request
-	 *            HttpServletRequest
-	 * @param response
-	 *            HttpServletResponse
-	 * @param handler
-	 *            Object
-	 * @return boolean
-	 * @throws Exception
-	 */
+	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 
@@ -36,18 +25,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 		return proceedFlag;
 	}
 
-	/**
-	 * Write CSRF Token to session and cookie.
-	 * 
-	 * @param request
-	 *            HttpServletRequest
-	 * @param response
-	 *            HttpServletResponse
-	 * @param handler
-	 *            Object
-	 * @return boolean
-	 * @throws Exception
-	 */
+	@Override
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler, ModelAndView mav)
 			throws Exception {

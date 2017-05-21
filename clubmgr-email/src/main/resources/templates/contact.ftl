@@ -24,13 +24,13 @@
                                     <td style="font-family: 'Open Sans', sans-serif; color: #14074c; text-align:left;" st-title="rightimage-title">
 											<table>
 											  <tr><td><strong>${msg("contact.name")}:</strong></td></tr>
-											  <tr><td>${contactData.name}</td></tr>
+											  <tr><td>${name}</td></tr>
                                 			  <tr><td width="100%" height="20"></td></tr>
 											  <tr><td><strong>${msg("contact.email")}:</strong></td></tr>
-											  <tr><td>${contactData.email}</td></tr>
+											  <tr><td>${email}</td></tr>
                                 			  <tr><td width="100%" height="20"></td></tr>
 											  <tr><td><strong>${msg("contact.message")}:</strong></td></tr>
-											  <tr><td>${contactData.message}</td></tr>
+											  <tr><td>${message}</td></tr>
 											</table>
                                     </td>
                                  </tr>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.niulbird.clubmgr.bfc.command.ContactData;
 import com.niulbird.clubmgr.data.DataManager;
 import com.niulbird.clubmgr.data.DataManagerFactory;
+import com.niulbird.clubmgr.db.dto.PlayerStatisticDTO;
 import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Standing;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
+import com.niulbird.clubmgr.db.service.StatsService;
 import com.niulbird.clubmgr.db.service.TeamService;
 import com.niulbird.clubmgr.util.wordpress.WordPressDao;
 import com.niulbird.clubmgr.util.wordpress.dao.Post;
@@ -29,6 +32,8 @@ public class TeamController extends BaseController {
 
 	private static final String FIXTURES = "fixtures";
 	private static final String PAGE = "page";
+	private static final String PLAYER_STATS = "player_stats";
+	private static final String SEASON_DETAILS = "season_details";
 	private static final String STANDINGS = "standings";
 	private static final String STANDINGS_FIXTURES = "standings_fixtures";
 	private static final String TEAMSEASONMAP = "teamseasonmap";
@@ -36,6 +41,9 @@ public class TeamController extends BaseController {
 	
 	@Autowired
 	private WordPressDao wordPressDao;
+
+	@Autowired
+	private StatsService statsService;
 	
 	@Autowired
 	private TeamService teamService;
@@ -71,6 +79,44 @@ public class TeamController extends BaseController {
 		mav.addObject(TITLE, teamSeasonMap.getTeam().getName() + " - " + teamSeasonMap.getSeason().getName());
 		mav.addObject(TEAMSEASONMAP, teamSeasonMap);
 		mav.addObject(STANDINGS, standings);
+		
+		return mav;
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/seasonDetail/{team}/{season}")
+	public ModelAndView teamSeasonDetails(@PathVariable(value = "team") String teamKey,
+			@PathVariable(value = "season") String seasonKey,
+			HttpServletRequest request) {
+		log.debug("Getting Standings: " + request.getRequestURL());
+		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(teamKey, seasonKey);
+		List<Standing> standings = teamService.findStandings(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
+		
+		if (standings.size() == 0) {
+				log.debug("Updating Standings: [" + teamKey + "|" + seasonKey +"]");
+				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
+				standings = dataManager.updateStandings();
+		}
+		
+		List<Fixture> fixtures = teamService.findFixtures(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
+		
+		if (fixtures.size() == 0) {
+					log.debug("Updating Fixtures: [" + teamKey + "|" + seasonKey +"]");
+				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
+				fixtures = dataManager.updateFixtures();
+		}
+		
+		List<PlayerStatisticDTO> playerStatistics = statsService.getTeamSeasonStats(teamSeasonMap.getTeam().getTeamKey(), teamSeasonMap.getSeason().getSeasonKey());
+
+		
+		ModelAndView mav = setView(SEASON_DETAILS);
+		mav.addObject(TITLE, teamSeasonMap.getTeam().getName() + " - " + teamSeasonMap.getSeason().getName());
+		mav.addObject(TEAMSEASONMAP, teamSeasonMap);
+		mav.addObject(STANDINGS, standings);
+		mav.addObject(FIXTURES, fixtures);
+		mav.addObject(PLAYER_STATS, playerStatistics);
+		
+		log.debug("Got " + standings.size() + " Standings and " + fixtures.size() + " Fixtures");
 		
 		return mav;
 	}

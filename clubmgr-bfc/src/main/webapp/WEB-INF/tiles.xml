@@ -107,6 +107,10 @@
         <put-attribute name="content" value="/WEB-INF/views/content/standings.jsp"/>
     </definition>
     
+    <definition name="season_details"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/season_details.jsp"/>
+    </definition>
+    
     <definition name="standings_fixtures"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/standings_fixtures.jsp"/>
     </definition>

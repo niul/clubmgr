@@ -1,5 +1,7 @@
 <%@ include file="/WEB-INF/views/taglibs.jsp"%>
 
+	<script src='<c:url value="/static/js/jquery.tablesorter.min.js"/>'></script>
+
 	<article>
       <header>
 	    <h1>${teamseasonmap.team.name} / ${teamseasonmap.season.name}</h1>
@@ -86,7 +88,7 @@
 	  </div>
 	  <div id='tab3'>
         <h3><fmt:message key="statistics.title"/> / ${teamseasonmap.description}</h3>
-  	    <table class="default fixtures u-full-width">
+  	    <table id="statsTable" class="default fixtures u-full-width tablesorter">
 	    <thead>
 	      <tr>
 	    	<th><fmt:message key="statistics.headers.name"/></th>
@@ -131,8 +133,10 @@
     }
     </script>
     <script>
-    $(document).ready(function(){
-    	$('ul.tabs').each(function(){
+    $(document).ready(function() {
+    	$("#statsTable").tablesorter({widgets: ['zebra']}); 
+    	
+    	$('ul.tabs').each(function() {
     	  // For each set of tabs, we want to keep track of
     	  // which tab is active and its associated content
     	  var $active, $content, $links = $(this).find('a');

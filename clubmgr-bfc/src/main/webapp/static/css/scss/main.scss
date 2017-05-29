@@ -407,6 +407,18 @@
 				&.home {
 					text-align: right;
 				}
+				&.header {
+					background-image: url(../images/small_bg.gif); 
+    				cursor: pointer;
+    				background-repeat: no-repeat; 
+    				background-position: center left; 
+				}
+				&.headerSortUp {
+					background-image: url(../images/small_asc.gif);
+				}
+				&.headerSortDown {
+					background-image: url(../images/small_desc.gif);
+				}
 			}
 
 			thead {

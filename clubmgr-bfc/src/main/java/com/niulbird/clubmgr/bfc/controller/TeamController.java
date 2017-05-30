@@ -2,6 +2,7 @@ package com.niulbird.clubmgr.bfc.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.ContactData;
+import com.niulbird.clubmgr.bfc.util.TeamUtility;
 import com.niulbird.clubmgr.data.DataManager;
 import com.niulbird.clubmgr.data.DataManagerFactory;
+import com.niulbird.clubmgr.db.dto.FixtureStatisticDTO;
 import com.niulbird.clubmgr.db.dto.PlayerStatisticDTO;
 import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Standing;
@@ -31,6 +34,7 @@ public class TeamController extends BaseController {
 	private static final Logger log = Logger.getLogger(TeamController.class);
 
 	private static final String FIXTURES = "fixtures";
+	private static final String FIXTURE_STATISTICS = "fixture_statistics";
 	private static final String PAGE = "page";
 	private static final String PLAYER_STATS = "player_stats";
 	private static final String SEASON_DETAILS = "season_details";
@@ -38,6 +42,9 @@ public class TeamController extends BaseController {
 	private static final String STANDINGS_FIXTURES = "standings_fixtures";
 	private static final String TEAMSEASONMAP = "teamseasonmap";
 	private static final String TITLE = "title";
+	
+	@Autowired
+	private Properties props;
 	
 	@Autowired
 	private WordPressDao wordPressDao;
@@ -99,11 +106,14 @@ public class TeamController extends BaseController {
 		}
 		
 		List<Fixture> fixtures = teamService.findFixtures(teamSeasonMap.getTeam(), teamSeasonMap.getSeason());
+		List<FixtureStatisticDTO> fixtureStatisticsList = new ArrayList<FixtureStatisticDTO>();
 		
 		if (fixtures.size() == 0) {
 					log.debug("Updating Fixtures: [" + teamKey + "|" + seasonKey +"]");
 				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
 				fixtures = dataManager.updateFixtures();
+		} else {
+			fixtureStatisticsList = TeamUtility.getFixtureStatistics(fixtures, props.getProperty("team.regex"));
 		}
 		
 		List<PlayerStatisticDTO> playerStatistics = statsService.getTeamSeasonStats(teamSeasonMap.getTeam().getTeamKey(), teamSeasonMap.getSeason().getSeasonKey());
@@ -113,7 +123,7 @@ public class TeamController extends BaseController {
 		mav.addObject(TITLE, teamSeasonMap.getTeam().getName() + " - " + teamSeasonMap.getSeason().getName());
 		mav.addObject(TEAMSEASONMAP, teamSeasonMap);
 		mav.addObject(STANDINGS, standings);
-		mav.addObject(FIXTURES, fixtures);
+		mav.addObject(FIXTURE_STATISTICS, fixtureStatisticsList);
 		mav.addObject(PLAYER_STATS, playerStatistics);
 		
 		log.debug("Got " + standings.size() + " Standings and " + fixtures.size() + " Fixtures");

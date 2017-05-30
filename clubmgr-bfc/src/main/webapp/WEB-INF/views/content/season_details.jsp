@@ -60,27 +60,99 @@
 	      </tr>
 	    </thead>
 	    <tbody>
-	    <c:forEach var="fixture" items="${fixtures}" varStatus="vs">
+	    <c:forEach var="fixtureStatistic" items="${fixture_statistics}" varStatus="vs">
 	      <c:choose>
-	        <c:when test="${fixture.active}">
+	        <c:when test="${fixtureStatistic.fixture.active}">
 	      <tr  class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
 	        </c:when>
 	        <c:otherwise>
 	      <tr class="strikethrough ${vs.index % 2 == 1 ? 'odd' : 'even'}">
             </c:otherwise>
           </c:choose>
-	  	    <td class="not-small"><fmt:formatDate value="${fixture.date}" pattern="MMM d, YYYY (E)" /> @ <fmt:formatDate value="${fixture.time}" pattern="h:mma" /></td>
+	  	    <td class="not-small"><fmt:formatDate value="${fixtureStatistic.fixture.date}" pattern="MMM d, YYYY (E)" /> @ <fmt:formatDate value="${fixtureStatistic.fixture.time}" pattern="h:mma" /></td>
 	  	    <td class="only-small">
-	  	    	<fmt:formatDate value="${fixture.date}" pattern="MMM d (E)" /> <fmt:formatDate value="${fixture.time}" pattern="h:mma" />
+	  	    	<fmt:formatDate value="${fixtureStatistic.fixture.date}" pattern="MMM d (E)" /> <fmt:formatDate value="${fixtureStatistic.fixture.time}" pattern="h:mma" />
 	  	    	<br/>
-	  	    	<div id="arrow${fixture.fixtureId}" class="expand icon"></div>
-	  	    	<div class="field"><a class="field" onclick='expand_field(fixture${fixture.fixtureId}, "${fixture.field}", "${fixture.fieldMapUri}", arrow${fixture.fixtureId})'>Field</a></div>
-	  	    	<div id="fixture${fixture.fixtureId}"></div>
+	  	    	<div id="arrow${fixtureStatistic.fixture.fixtureId}" class="expand icon"></div>
+	  	    	<div class="field"><a class="field" onclick='expand_field(fixture${fixtureStatistic.fixture.fixtureId}, "${fixtureStatistic.fixture.field}", "${fixtureStatistic.fixture.fieldMapUri}", arrow${fixtureStatistic.fixture.fixtureId})'>Field</a></div>
+	  	    	<div id="fixture${fixtureStatistic.fixture.fixtureId}"></div>
 	  	    </td>
-	  	    <td align="right">${fixture.home}</td>
-	  	    <td align="center">${fixture.homeScore}-${fixture.awayScore}</td>
-	  	    <td>${fixture.away}</td>
-	  	    <td class="not-small"><a href="${fixture.fieldMapUri}" target="_blank">${fixture.field}</a></td>
+	  	    <td align="right">
+	  	    	${fixtureStatistic.fixture.home}
+	  	    	<c:if test="${fixtureStatistic.home}">
+	  	    	<br>
+	  	    	<div class="not-small" style="font-size: xx-small; white-space: nowrap; line-height: 150%">
+	  	    		<small>
+	  	    		<c:if test="${fn:length(fixtureStatistic.goals) > 0}">
+	  	    			<span class="fa fa-soccer-ball-o"></span>
+	  	    		<c:forEach var="entry" items="${fixtureStatistic.goals}">
+	  	    			${entry.key.firstName} ${entry.key.lastName} (${entry.value})
+	  	    		</c:forEach>
+	  	    			<br/>
+	  	    		</c:if>
+	  	    		<c:if test="${fn:length(fixtureStatistic.assists) > 0}">
+	  	    			<span class="fa fa-handshake-o"></span>
+	  	    		<c:forEach var="entry" items="${fixtureStatistic.assists}">
+	  	    			${entry.key.firstName} ${entry.key.lastName} (${entry.value})
+	  	    		</c:forEach>
+	  	    			<br/>
+	  	    		</c:if>
+	  	    		<c:if test="${fn:length(fixtureStatistic.yellowCards) > 0}">
+	  	    			<i class="card yellow"></i>
+	  	    		<c:forEach var="entry" items="${fixtureStatistic.yellowCards}">
+	  	    			${entry.key.firstName} ${entry.key.lastName}
+	  	    		</c:forEach>
+						<br/>
+	  	    		</c:if>
+	  	    		<c:if test="${fn:length(fixtureStatistic.redCards) > 0}">
+	  	    			<i class="card red"></i>
+	  	    		<c:forEach var="entry" items="${fixtureStatistic.redCards}">
+	  	    			${entry.key.firstName} ${entry.key.lastName}
+	  	    		</c:forEach>
+	  	    		</c:if>
+	  	    		</small>
+	  	    	</div>
+	  	    	</c:if>
+	  	    </td>
+	  	    <td align="center">${fixtureStatistic.fixture.homeScore}-${fixtureStatistic.fixture.awayScore}</td>
+	  	    <td>
+	  	    	${fixtureStatistic.fixture.away}
+	  	    	<c:if test="${fixtureStatistic.home == false}">
+	  	    	<br>
+	  	    	<div class="not-small" style="font-size: xx-small; white-space: nowrap; line-height: 150%">
+	  	    		<small>
+	  	    		<c:if test="${fn:length(fixtureStatistic.goals) > 0}">
+	  	    			<span class="fa fa-soccer-ball-o"></span>
+	  	    		<c:forEach var="entry" items="${fixtureStatistic.goals}">
+	  	    			${entry.key.firstName} ${entry.key.lastName} (${entry.value})
+	  	    		</c:forEach>
+	  	    			<br/>
+	  	    		</c:if>
+	  	    		<c:if test="${fn:length(fixtureStatistic.assists) > 0}">
+	  	    			<span class="fa fa-handshake-o"></span>
+	  	    		<c:forEach var="entry" items="${fixtureStatistic.assists}">
+	  	    			${entry.key.firstName} ${entry.key.lastName} (${entry.value})
+	  	    		</c:forEach>
+	  	    			<br/>
+	  	    		</c:if>
+	  	    		<c:if test="${fn:length(fixtureStatistic.yellowCards) > 0}">
+	  	    			<i class="card yellow"></i>
+	  	    		<c:forEach var="entry" items="${fixtureStatistic.yellowCards}">
+	  	    			${entry.key.firstName} ${entry.key.lastName}
+	  	    		</c:forEach>
+						<br/>
+	  	    		</c:if>
+	  	    		<c:if test="${fn:length(fixtureStatistic.redCards) > 0}">
+	  	    			<i class="card red"></i>
+	  	    		<c:forEach var="entry" items="${fixtureStatistic.redCards}">
+	  	    			${entry.key.firstName} ${entry.key.lastName}
+	  	    		</c:forEach>
+	  	    		</c:if>
+	  	    		</small>
+	  	    	</div>
+	  	    	</c:if>
+	  	    </td>
+	  	    <td class="not-small"><a href="${fixtureStatistic.fixture.fieldMapUri}" target="_blank">${fixtureStatistic.fixture.field}</a></td>
 	  	  </tr>
 	    </c:forEach>
 	    </tbody>

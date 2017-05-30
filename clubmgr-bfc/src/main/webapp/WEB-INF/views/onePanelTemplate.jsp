@@ -4,6 +4,7 @@
 	xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"  lang="en">
 	<head>
 		<tiles:insertAttribute name="head"/>
+		<tiles:insertAttribute name="javascript"/>
 	</head>
 	<body class="right-sidebar">
 		<div id="page-wrapper">
@@ -20,7 +21,6 @@
 				</div>
 			</div>	
 			<tiles:insertAttribute name="footer"/>
-			<tiles:insertAttribute name="javascript"/>
 		</div>
 	</body>
 </html>

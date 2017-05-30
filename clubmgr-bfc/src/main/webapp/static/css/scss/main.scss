@@ -375,6 +375,31 @@
 		}
 	}
 	
+/* Fixtures */
+	.football {
+	}
+	
+	.assist {
+	}
+	
+	.card {
+		display: inline-block;
+		height: 9px;
+		width: 6px;
+		
+		-ms-transform: rotate(12deg);
+    	-webkit-transform: rotate(12deg);
+    	transform: rotate(12deg);
+    	
+    	&.yellow {
+    		background: #FFFF00;
+    	}
+    	
+    	&.red {
+    		background: #FF0000;
+    	}
+	}
+	
 /* Tables */
 
 	table {

@@ -120,7 +120,7 @@ public class PlayerController extends AdminBaseController {
 		player.setCreated(new Date());
 		player.setManager(false);
 		
-		if (player.getTeams().size() != 0) {
+		if (player.getTeams().size() == 0 && teamUuid != null) {
 			Team team = teamService.findByUuid(teamUuid);
 			if (team != null) {
 				List<Team> teams = new ArrayList<Team>();

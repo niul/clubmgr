@@ -22,6 +22,8 @@
 		<meta itemprop="name" content="<fmt:message key="header.title"/> - ${title}">
 		</c:if>
 		
+		<meta name="google-site-verification" content="eBeqXvHRHei2wuMqjPOss1ZWphUh7Yw-yot21TvQPAA" />
+		
 		<meta property="og:type" content="website" />
 		<meta property="og:description" content="<fmt:message key="header.metadata.description"/>" />
 		<meta property="og:url" content="${url}" />

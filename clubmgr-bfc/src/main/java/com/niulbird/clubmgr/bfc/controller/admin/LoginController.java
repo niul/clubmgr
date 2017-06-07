@@ -55,6 +55,7 @@ public class LoginController extends BaseController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
+			request.getSession().removeAttribute(USER);
 		}
 		return "redirect:/login.html?logout=true";
 	}

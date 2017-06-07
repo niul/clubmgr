@@ -90,7 +90,7 @@
 	    	<th><fmt:message key="fixture.headers.status"/></th>
 	    	<th class="not-small"><fmt:message key="fixture.headers.viewed"/></th>
 	    	<th><fmt:message key="fixture.headers.comment"/></th>
-	    	<c:if test="${playerFixtureInfo.player.manager}">
+	    	<c:if test="${playerFixtureInfo.player.manager || sessionScope.user != null}">
 	    	<th><fmt:message key="fixture.headers.update"/></th>
 	    	</c:if>
 	      </tr>
@@ -102,7 +102,7 @@
 	      	<td><span class="highlight-${playerFixtureInfoIter.status}">${playerFixtureInfoIter.status}</span></td>
 	      	<td class="not-small"><fmt:formatDate value="${playerFixtureInfoIter.viewed}" pattern="E MMM, d @ h:mma" /></td>
 	      	<td>${playerFixtureInfoIter.comment}</td>
-	      	<c:if test="${playerFixtureInfo.player.manager}">
+	      	<c:if test="${playerFixtureInfo.player.manager || sessionScope.user != null}">
 	    	<td>
 	    		<a href='<c:url value="/fixture.html?uuid=${fixture.uuid}&player=${playerFixtureInfo.uuid}&updatePlayer=${playerFixtureInfoIter.uuid}&status=YES"/>'><span class="highlight-YES"><fmt:message key="fixture.yes"/></span></a> |
 	    		<a href='<c:url value="/fixture.html?uuid=${fixture.uuid}&player=${playerFixtureInfo.uuid}&updatePlayer=${playerFixtureInfoIter.uuid}&status=MAYBE"/>'><span class="highlight-MAYBE"><fmt:message key="fixture.maybe"/></span></a> |

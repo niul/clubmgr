@@ -15,13 +15,10 @@
 	  	</li>
 	  	<li>
 	  		<fmt:message key="teams.summer"/>: <a href='<fmt:message key="mens.B.summer.name.url"/>' target="_blank"><fmt:message key="mens.B.summer.name"/></a>
-	  		/
-	  		<a href='<fmt:message key="mens.B.summer.division.url"/>' target="_blank"><fmt:message key="mens.B.summer.division"/></a>
 	  	</li>
 	  </ul>
 	  <h3><fmt:message key="teams.training"/>:</h3>
 	  <ul class="default">
 	  	<li><fmt:message key="mens.B.winter.training.1"/></li>
-	  	<li><fmt:message key="mens.B.winter.training.2"/></li>
 	  </ul>
     </article>

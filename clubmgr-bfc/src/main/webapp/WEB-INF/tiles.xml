@@ -79,10 +79,6 @@
         <put-attribute name="content" value="/WEB-INF/views/content/mensB.jsp"/>
     </definition>
     
-    <definition name="mensClassics"  extends="rightPanelTemplate">
-        <put-attribute name="content" value="/WEB-INF/views/content/mensClassics.jsp"/>
-    </definition>
-    
     <definition name="mensJurassic"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/mensJurassic.jsp"/>
     </definition>

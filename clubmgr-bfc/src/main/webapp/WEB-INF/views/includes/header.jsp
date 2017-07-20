@@ -43,7 +43,7 @@
 	        			<a href='<c:url value="/index.html"/>'><fmt:message key="menu.item1"/></a>
 	        			</li>
         			<c:choose>
-	      			<c:when test="${(page=='teams') || (page=='mens') || (page=='mensA') || (page=='mensB') || (page=='mensClassic') || (page=='mensJurassic') || (page=='womens') || (page=='womensA') || (page=='standings_fixtures')}">
+	      			<c:when test="${(page=='teams') || (page=='mens') || (page=='mensA') || (page=='mensB') || (page=='mensJurassic') || (page=='womens') || (page=='womensA') || (page=='standings_fixtures')}">
 	        			<li class="current">
 	        		</c:when>
 	        		<c:otherwise>
@@ -88,27 +88,20 @@
 	            						<li>
 	            							<a href='<c:url value="/mensB.html"/>'><fmt:message key="menu.mens.b2"/></a>
 	            							<ul>
-	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_B/WINTER_2016"/>'><fmt:message key="teams.season.winter2016"/></a></li>
-	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_B/WINTER_2015"/>'><fmt:message key="teams.season.winter2015"/></a></li>
-	            							</ul>
-	            						</li>
-	            						<li>
-	            							<a href='<c:url value="/mensClassics.html"/>'><fmt:message key="menu.mens.b3"/></a>
-	            							<ul>
 	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_CESL/SUMMER_2017"/>'><fmt:message key="teams.season.summer2017"/></a></li>
-	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/WINTER_2016"/>'><fmt:message key="teams.season.winter2016"/></a></li>
+	            								<li><a href='<c:url value="/season/BOMBASTIC_MENS_B/WINTER_2016"/>'><fmt:message key="teams.season.winter2016"/></a></li>
 	            								<li>
 	            									<a href="#"><fmt:message key="menu.archive"/></a>
 	            									<ul>
 	            										<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/SUMMER_2016"/>'><fmt:message key="teams.season.summer2016"/></a></li>
-	            										<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/WINTER_2015"/>'><fmt:message key="teams.season.winter2015"/></a></li>
+	            										<li><a href='<c:url value="/season/BOMBASTIC_MENS_B/WINTER_2015"/>'><fmt:message key="teams.season.winter2015"/></a></li>
 	            										<li><a href='<c:url value="/season/BOMBASTIC_MENS_CLASSICS/SUMMER_2015"/>'><fmt:message key="teams.season.summer2015"/></a></li>
 	            									</ul>
 	            								</li>
 	            							</ul>
 	            						</li>
 	            						<li>
-	            							<a href='<c:url value="/mensJurassic.html"/>'><fmt:message key="menu.mens.b4"/></a>
+	            							<a href='<c:url value="/mensJurassic.html"/>'><fmt:message key="menu.mens.b3"/></a>
 	            							<ul>
 	            								<li><a href='<c:url value="/fixtures/BOMBASTIC_MENS_JURASSIC/SUMMER_2017"/>'><fmt:message key="teams.season.summer2017"/></a></li>
 	            								<li>

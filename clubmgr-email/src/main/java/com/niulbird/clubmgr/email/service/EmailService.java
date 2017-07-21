@@ -68,12 +68,12 @@ public class EmailService {
 
 	@Async
 	@Transactional
-	public void sendFixtureEmailAsync(String uuid) {
-		sendFixtureEmail(uuid);
+	public void sendFixtureEmailAsync(String uuid, boolean today) {
+		sendFixtureEmail(uuid, today);
 	}
 	
 	@Transactional
-	public void sendFixtureEmail(String uuid) {
+	public void sendFixtureEmail(String uuid, boolean today) {
 		MailUtil mailUtil = new MailUtil();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE, MMM d");
 		SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
@@ -88,7 +88,8 @@ public class EmailService {
 		for (PlayerFixtureInfo playerFixtureInfo : playerFixtureInfoList) {
 			log.debug("Player: " + playerFixtureInfo.getPlayer().getFirstName() + " "
 					+ playerFixtureInfo.getPlayer().getLastName());
-			if (playerFixtureInfo.getStatus() == Status.PENDING) {
+			if ((playerFixtureInfo.getStatus() == Status.PENDING && !today) ||
+					(playerFixtureInfo.getStatus() == Status.MAYBE && today)) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("lang", messageSource);
 				String body = new String();
@@ -96,13 +97,23 @@ public class EmailService {
 					map.put("msg", new MessageResolverMethod(messageSource, null));
 					map.put("fixture", fixture);
 					map.put("playerFixtureInfo", playerFixtureInfo);
-					body = FreeMarkerTemplateUtils
-							.processTemplateIntoString(freeMarkerConfiguration.getTemplate("fixture.ftl"), map);
+					
+					if (today) {
+						body = FreeMarkerTemplateUtils
+								.processTemplateIntoString(freeMarkerConfiguration.getTemplate("fixture-final.ftl"), map);
+					} else {
+						body = FreeMarkerTemplateUtils
+								.processTemplateIntoString(freeMarkerConfiguration.getTemplate("fixture.ftl"), map);
+					}
 				} catch (IOException | TemplateException e) {
 					log.error("Error generating Fixture Email Template: " + e.getMessage(), e);
 				}
+				String subject = messageSource.getMessage("email.fixture.subject", null, null);
+				if (today) {
+					subject = messageSource.getMessage("email.fixture-final.subject", null, null);
+				}
 				boolean isSent = mailUtil.sendMail(mailSender, playerFixtureInfo.getPlayer().getEmail(),
-						messageSource.getMessage("email.fixture.subject", null, null) + " - "
+								subject + " - "
 								+ dateFormatter.format(fixture.getDate()) + " @ "
 								+ timeFormatter.format(fixture.getTime()) + " on " + fixture.getField(),
 						body, props);

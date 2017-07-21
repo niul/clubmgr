@@ -56,13 +56,23 @@ public class FixtureAvailabilityJob {
 	}
 	
 	private void send(String teamKey, String[] daysBefore) {
-		for (int i = 0; i < daysBefore.length; i++) {
-			Date date = getDaysFromCurrentDate(Integer.parseInt(daysBefore[i]));
+		for (int i = 0; i <= daysBefore.length; i++) {
+			Date date = null;
+			boolean today = false;
+			if (i == daysBefore.length) {
+				today = true;
+			}
+			
+			if (!today) {
+				date = getDaysFromCurrentDate(Integer.parseInt(daysBefore[i]));
+			} else {
+				date = getDaysFromCurrentDate(0);
+			}
 			log.debug("Finding fixtures for TEAM [" + teamKey + "] and DATE [" + date +"]");
 			List<Fixture> fixtures = fixtureService.findFixturesByTeamAndDate(teamKey, date);
 
 			for (Fixture fixture : fixtures) {
-				emailService.sendFixtureEmail(fixture.getUuid().toString());
+				emailService.sendFixtureEmail(fixture.getUuid().toString(), today);
 				
 				// Add a little bit of time between fixtures not to overload SMTP server.
 				try {

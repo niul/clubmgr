@@ -63,10 +63,10 @@ public class FixtureAvailabilityJob {
 				today = true;
 			}
 			
-			if (!today) {
-				date = getDaysFromCurrentDate(Integer.parseInt(daysBefore[i]));
-			} else {
+			if (today) {
 				date = getDaysFromCurrentDate(0);
+			} else {
+				date = getDaysFromCurrentDate(Integer.parseInt(daysBefore[i]));
 			}
 			log.debug("Finding fixtures for TEAM [" + teamKey + "] and DATE [" + date +"]");
 			List<Fixture> fixtures = fixtureService.findFixturesByTeamAndDate(teamKey, date);

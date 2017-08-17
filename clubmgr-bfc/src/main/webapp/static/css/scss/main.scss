@@ -375,6 +375,31 @@
 		}
 	}
 	
+	.previewPanel {
+    	position: fixed;
+    	display: none;
+    	position: absolute;
+  		width: 800px;
+  		height: 600px;
+  		top: 50%;
+  		left: 50%;
+  		margin: -300px 0 0 -400px;
+    	background-color: rgba(0,0,0,0.5);
+    	z-index: 2;
+    	border: #000 1px solid;
+    	border-radius: 5px;
+    	-webkit-border-radius: 5px;
+    	-moz-border-radius: 5px;
+    	box-shadow: 0 0 3px #999;
+    	-webkit-box-shadow: 0 0 3px #999;
+    	-moz-box-shadow: 0 0 3px #999;
+    	overflow: hidden;
+    	transition: box-shadow 0.4s, border 0.4s;
+    	-webkit-transition: -webkit-box-shadow 0.4s, border 0.4s;
+    	-moz-transition: -moz-box-shadow 0.4s, border 0.4s;
+    	-o-transition: -o-box-shadow 0.4s, border 0.4s;
+	}
+	
 /* Fixtures */
 	.football {
 	}

@@ -151,6 +151,10 @@
         <put-attribute name="content" value="/WEB-INF/views/content/admin/report.jsp"/>
    </definition>
   
+  <definition name="admin_email"  extends="onePanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/admin/email.jsp"/>
+   </definition>
+  
   <definition name="error"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/error.jsp"/>
     </definition>

@@ -131,7 +131,7 @@ public class FixtureController extends BaseController {
 			playerFixtureInfo = fixtureService.findByUuid(player);
 			if (playerFixtureInfo.getViewed() == null) {
 				Calendar calendar = Calendar.getInstance();
-				calendar.add(Calendar.HOUR_OF_DAY, -3);
+				calendar.add(Calendar.HOUR_OF_DAY, -7);
 				playerFixtureInfo.setViewed(new java.sql.Time(calendar.getTimeInMillis()));
 				fixtureService.updatePlayerInfo(playerFixtureInfo);
 			}

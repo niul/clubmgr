@@ -74,8 +74,10 @@ public class MWSLUtil extends BaseUtil {
 											Elements rowElements = fieldRow.getElementsByTag("td");
 											if (rowElements.get(0).text().equalsIgnoreCase("Map")) {
 												Elements mapElements = rowElements.get(2).getElementsByTag("a");
-												fieldMapUri = StringUtils.chomp(mapElements.get(0).attr("href"))
-														.replaceAll("[\n\r]", "").trim();
+												if (mapElements.size() > 0) {
+													fieldMapUri = StringUtils.chomp(mapElements.get(0).attr("href"))
+															.replaceAll("[\n\r]", "").trim();
+												}
 											}
 										}
 									} catch (IOException ioe) {
@@ -97,8 +99,9 @@ public class MWSLUtil extends BaseUtil {
 									fixture.setActive(true);
 								}
 
-								if (fixture.getHome().contains(teamRegExStr)
-										|| fixture.getAway().contains(teamRegExStr)) {
+								if ((fixture.getHome().contains(teamRegExStr)
+										|| fixture.getAway().contains(teamRegExStr))
+										&& !fixture.getField().equalsIgnoreCase("1 Bye")) {
 									fixtures.add(fixture);
 									logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t"
 											+ fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: "

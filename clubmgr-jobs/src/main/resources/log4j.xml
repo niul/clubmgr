@@ -3,7 +3,17 @@
   "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
-<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+<appender name="APP_LOGS" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="Append" value="true" />
+    <param name="File" value="${catalina.base}/logs/bfc-jobs.log" />
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%X{IPADDRESS}] [%X{SESSIONID}] [%c{1}] %m%n" />
+    </layout>
+</appender>
+
+<appender name="SPRING_LOGS" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="Append" value="true" />
+    <param name="File" value="${catalina.base}/logs/spring.log" />
     <layout class="org.apache.log4j.PatternLayout">
         <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%X{IPADDRESS}] [%X{SESSIONID}] [%c{1}] %m%n" />
     </layout>
@@ -11,15 +21,15 @@
 
 <category name="org.springframework" additivity="false">
     <priority value="DEBUG" />
-    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="SPRING_LOGS" />
 </category>
 <category name="net.sf.ehcache" additivity="false">
     <priority value="INFO" />
-    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="SPRING_LOGS" />
 </category>
 <category name="com.niulbird" additivity="false">
     <priority value="DEBUG" />
-    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="APP_LOGS" />
 </category>
 
 
@@ -29,6 +39,7 @@
     <!-- ======================= -->
     <root>
         <priority value="INFO"/>
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="APP_LOGS"/>
+        <appender-ref ref="SPRING_LOGS"/>
     </root>
 </log4j:configuration>

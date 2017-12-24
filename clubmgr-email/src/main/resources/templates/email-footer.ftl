@@ -30,6 +30,36 @@
    </table>
    <!-- End of preheader -->
 </div>
+<div class="block">
+
+   <table width="100%" bgcolor="#f7f7f7" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="header">
+      <tbody>
+         <tr>
+            <td>
+               <table width="580" bgcolor="#14074c" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" hlitebg="edit" shadow="edit">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <!-- menu -->
+                           <table cellpadding="0" cellspacing="0" border="0" align="right" class="devicewidth">
+                              <tbody>
+                                 <tr>
+                                    <td width="270" align="center" valign="middle" style="font-family: 'Open Sans', sans-serif;font-size: 14px; color: #ffffff;line-height: 24px; padding: 10px 0;" align="right" class="menu" st-content="menu">
+                                    &copy; <a href="bombasticfc.ca" style="text-decoration: none; color: #ffffff;">bombasticfc.ca</>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <!-- End of Menu -->
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
 
 </body>
 </html>

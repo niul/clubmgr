@@ -30,6 +30,23 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	public UUID addResetKey(String username) {
+		PasswordReset passwordReset = new PasswordReset();
+		User user = getUser(username);
+		
+		if (user != null) {
+			passwordReset.setUser(user);
+			passwordReset.setCreated(new Date());
+			passwordReset.setResetKey(UUID.randomUUID());
+			passwordReset.setComplete(false);
+			passwordResetRepository.save(passwordReset);
+		}
+		
+		return passwordReset.getResetKey();
+	}
+	
+	@Override
+	@Transactional
 	public PasswordReset findByResetKey(UUID resetKey) {
 		return passwordResetRepository.findByResetKey(resetKey);
 	}

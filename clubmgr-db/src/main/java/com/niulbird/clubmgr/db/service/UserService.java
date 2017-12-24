@@ -7,6 +7,7 @@ import com.niulbird.clubmgr.db.model.User;
 
 public interface UserService {
 	public User getUser(String username);
+	public UUID addResetKey(String username);
 	public PasswordReset findByResetKey(UUID resetKey);
 	public void updatePassword(UUID resetKey, String password);
 	public void updatePassword(User user, String password);

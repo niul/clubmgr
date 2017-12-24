@@ -119,17 +119,21 @@
         <put-attribute name="content" value="/WEB-INF/views/content/login.jsp"/>
     </definition>
   
+  <definition name="password_email"  extends="rightPanelTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/content/password_email.jsp"/>
+  </definition>
+  
   <definition name="password_reset"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/password_reset.jsp"/>
-    </definition>
+  </definition>
   
   <definition name="password_change"  extends="rightPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/admin/password_change.jsp"/>
-    </definition>
+  </definition>
   
   <definition name="admin_players"  extends="adminPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/admin/players.jsp"/>
-   </definition>
+  </definition>
   
   <definition name="admin_add_player"  extends="adminPanelTemplate">
         <put-attribute name="content" value="/WEB-INF/views/content/admin/add_player.jsp"/>

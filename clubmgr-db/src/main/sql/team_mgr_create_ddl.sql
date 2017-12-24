@@ -185,3 +185,36 @@ CREATE TABLE player_fixture_info (
     REFERENCES fixtures (fixture_id) MATCH SIMPLE
     ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+CREATE TABLE events (
+	event_id	serial PRIMARY KEY,
+	team_id	serial NOT NULL,
+	season_id	serial NOT NULL,
+	uuid		uuid,
+	name		varchar(40),
+	description		varchar(100),
+	location	varchar(80),
+	location_map_uri varchar(400),
+    created		timestamp,
+	CONSTRAINT FK_events_team_id FOREIGN KEY (team_id)
+    REFERENCES teams (team_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_events_season_id FOREIGN KEY (season_id)
+    REFERENCES seasons (season_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE event_schedules (
+	event_schedule_id	serial PRIMARY KEY,
+	event_id	serial NOT NULL,
+	schedule_type	int,
+	start_date	date,
+	start_time	time,
+	end_date	date,
+	end_time	time,
+	day_of_week	int,
+    created		timestamp,
+	CONSTRAINT FK_event_schedules_event_id FOREIGN KEY (event_id)
+    REFERENCES events (event_id) MATCH SIMPLE
+    ON UPDATE CASCADE ON DELETE CASCADE
+);

@@ -63,7 +63,26 @@ public class EmailService {
 					
 		String[] emailList = props.getProperty("email.toEmail.contact." + map.get("subject")).split("\\|");
 		
-		mailUtil.sendMail(mailSender, emailList, props.getProperty("email.subject"), body, props);
+		mailUtil.sendMail(mailSender, emailList, props.getProperty("email.subject.contact"), body, props);
+	}
+	
+	@Async
+	public void sendPasswordResetEmail(Map<String, Object> map) {
+		MailUtil mailUtil = new MailUtil();
+		
+		String body = new String();
+
+		try {
+			map.put("msg", new MessageResolverMethod(messageSource, null));
+			body = FreeMarkerTemplateUtils
+					.processTemplateIntoString(freeMarkerConfiguration.getTemplate("passwordReset.ftl"), map);
+		} catch (IOException | TemplateException e) {
+			log.error("Error generating freemarker template: " + e.getMessage(), e);
+		}
+					
+		String[] emailList = new String[]{(String) map.get("email")};
+		
+		mailUtil.sendMail(mailSender, emailList, props.getProperty("email.subject.password"), body, props);
 	}
 
 	@Async

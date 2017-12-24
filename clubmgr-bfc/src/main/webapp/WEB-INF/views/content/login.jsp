@@ -35,6 +35,7 @@
 						<button type="submit" class="button icon fa-envelope-o"><fmt:message key="login.login"/></button>
 					</li>
 				</ul>
+				<a href='<c:url value="/reset.html"/>'><fmt:message key="login.reset"/></a>?
 			</div>
 		</div>
 

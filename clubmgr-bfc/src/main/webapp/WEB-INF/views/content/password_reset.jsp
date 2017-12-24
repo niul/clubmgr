@@ -7,7 +7,7 @@
 	</header>
 	<p><fmt:message key="password_reset.p1"/></p>
 
-	<form:form action="${pageContext.request.contextPath}/reset.html"
+	<form:form action="${pageContext.request.contextPath}/resetPassword.html"
 		commandName="passwordResetData" method="POST">
 
 		<div class="row 50%">

@@ -50,8 +50,8 @@ public class FixtureServiceImpl implements FixtureService {
 	}
 	
 	@Override
-	public List<Fixture> findFixturesByTeamAndDate(String teamKey, Date date) {
-		return fixtureRepository.findByTeamTeamKeyAndDate(teamKey, date);
+	public List<Fixture> findFixturesByTeamAndDateAndActive(String teamKey, Date date, Boolean active) {
+		return fixtureRepository.findByTeamTeamKeyAndDateAndActive(teamKey, date, active);
 	}
 
 	@Override

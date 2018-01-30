@@ -40,7 +40,7 @@ public class FixtureAvailabilityService {
 				date = getDaysFromCurrentDate(Integer.parseInt(daysBefore[i]));
 			}
 			log.debug("Finding fixtures for TEAM [" + teamKey + "] and DATE [" + date +"]");
-			List<Fixture> fixtures = fixtureService.findFixturesByTeamAndDate(teamKey, date);
+			List<Fixture> fixtures = fixtureService.findFixturesByTeamAndDateAndActive(teamKey, date, true);
 
 			for (Fixture fixture : fixtures) {
 				emailService.sendFixtureEmail(fixture.getUuid().toString(), today);

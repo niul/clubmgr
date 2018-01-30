@@ -19,7 +19,7 @@ public interface FixtureRepository extends JpaRepository<Fixture, Integer> {
 	List<Fixture> deleteByTeamAndSeason(Team team, Season season);
 	List<Fixture> findByDate(Date date);
 	List<Fixture> findByDateAndTimeBetween(Date date, Time start, Time end);
-	List<Fixture> findByTeamTeamKeyAndDate(String teamKey, Date date);
+	List<Fixture> findByTeamTeamKeyAndDateAndActive(String teamKey, Date date, Boolean active);
 	List<Fixture> findByTeamAndSeasonAndHomeAndAway(Team team, Season season, String home, String away);
 	Fixture findByTeamAndSeasonAndHomeAndAwayAndDate(Team team, Season season, String home, String away, Date date);
 	Fixture findByUuid(UUID uuid);

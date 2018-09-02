@@ -17,7 +17,14 @@
 	    </thead>
 	    <tbody>
 	    <c:forEach var="fixture" items="${fixtures}">
-	      <tr>
+	      <c:choose>
+	        <c:when test="${fixture.active}">
+	      <tr  class="${vs.index % 2 == 1 ? 'odd' : 'even'}">
+	        </c:when>
+	        <c:otherwise>
+	      <tr class="strikethrough ${vs.index % 2 == 1 ? 'odd' : 'even'}">
+            </c:otherwise>
+          </c:choose>
 	  	    <td class="not-small"><fmt:formatDate value="${fixture.date}" pattern="E MMM d, YYYY" /> @ <fmt:formatDate value="${fixture.time}" pattern="h:mma" /></td>
 	  	    <td class="only-small">
 	  	    	<fmt:formatDate value="${fixture.date}" pattern="E MMM, d" /> <fmt:formatDate value="${fixture.time}" pattern="h:mma" />

@@ -52,6 +52,8 @@
 		
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		
+		<script src='https://www.google.com/recaptcha/api.js'></script>
+		
 		<!--[if lte IE 8]><script src='<c:url value="/static/js/ie/html5shiv.js"/>'/><![endif]-->
 		<link rel="stylesheet" href='<c:url value="/static/css/main.min.css"/>' />
 		<!--[if lte IE 8]><link rel="stylesheet" href='<c:url value="/static/css/ie8.css"/>'/><![endif]-->

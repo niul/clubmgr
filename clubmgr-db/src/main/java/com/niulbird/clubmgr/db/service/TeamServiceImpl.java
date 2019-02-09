@@ -3,6 +3,8 @@ package com.niulbird.clubmgr.db.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,11 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niulbird.clubmgr.db.model.Fixture;
+import com.niulbird.clubmgr.db.model.PlayerFixtureInfo;
 import com.niulbird.clubmgr.db.model.Season;
 import com.niulbird.clubmgr.db.model.Standing;
 import com.niulbird.clubmgr.db.model.Team;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.repository.FixtureRepository;
+import com.niulbird.clubmgr.db.repository.PlayerFixtureInfoRepository;
 import com.niulbird.clubmgr.db.repository.StandingRepository;
 import com.niulbird.clubmgr.db.repository.TeamRepository;
 import com.niulbird.clubmgr.db.repository.TeamSeasonMapRepository;
@@ -36,6 +40,9 @@ public class TeamServiceImpl implements TeamService {
 	
 	@Autowired
 	private StandingRepository standingRepository;
+	
+	@Autowired
+	private PlayerFixtureInfoRepository playerFixtureInfoRepository;
 	
 	@Override
 	@Transactional
@@ -154,6 +161,14 @@ public class TeamServiceImpl implements TeamService {
 				} else {
 					logger.debug("Updating Fixture: \tID: " + dbFixture.getFixtureId() + "\tDate: " + fixture.getDate() + "\tHome: " + fixture.getHome() + "\tAway: " + fixture.getAway() 
 					+ "\tHomeScore: " + fixture.getHomeScore() + "\tAwayScore: " + fixture.getAwayScore());
+					
+					// If this is a date change, then remove all Player Fixture Info if great than 5 days.
+					long daysBetween = ChronoUnit.DAYS.between(LocalDate.parse(dbFixture.getDate().toString()), LocalDate.parse(fixture.getDate().toString()));
+					if ( daysBetween > 5 ) {
+						logger.debug("New Fixture Date (" + daysBetween + " days). Clearing out player_fixture_info");
+						List<PlayerFixtureInfo> playerFixtureInfoList = playerFixtureInfoRepository.deleteByFixture(dbFixture);
+						logger.debug("# of player_fixture_info deleted: " + playerFixtureInfoList.size());
+					}
 					dbFixture.setAwayScore(fixture.getAwayScore());
 					dbFixture.setDate(fixture.getDate());
 					dbFixture.setField(fixture.getField());

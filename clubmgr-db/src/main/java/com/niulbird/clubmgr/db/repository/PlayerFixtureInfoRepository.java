@@ -15,4 +15,5 @@ public interface PlayerFixtureInfoRepository extends JpaRepository<PlayerFixture
 	PlayerFixtureInfo findByFixtureAndPlayer(Fixture fixture, Player player);
 	List<PlayerFixtureInfo> findByFixtureOrderByPlayerFirstNameAscPlayerLastNameAsc(Fixture fixture);
 	PlayerFixtureInfo findByUuid(UUID uuid);
+	List<PlayerFixtureInfo> deleteByFixture(Fixture fixture);
 }

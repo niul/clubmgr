@@ -22,7 +22,9 @@ public class MWSLUtil extends BaseUtil {
 	private final Log logger = LogFactory.getLog(getClass());
 
 	private final static String TIME_FORMAT = "EEE MM/d/yyyy h:mma";
+	private final static String TIME_FORMAT_2 = "EEE MM/d/yyyy h:mm:ss a";
 	private final static String DATE_FORMAT = "EEE MM/d/yyyy h:mma";
+	private final static String DATE_FORMAT_2 = "EEE MM/d/yyyy h:mm:ss a";
 
 	private static final String MWSL_URI = "http://mwsl.com";
 
@@ -50,8 +52,8 @@ public class MWSLUtil extends BaseUtil {
 							if (columns.size() > 1) {
 								Fixture fixture = new Fixture();
 								fixture.setUuid(UUID.randomUUID());
-								fixture.setDate(convertStringToDate(columns.get(0).text(), DATE_FORMAT));
-								fixture.setTime(convertStringToTime(columns.get(0).text(), TIME_FORMAT));
+								fixture.setDate(convertStringToDate(columns.get(0).text(), DATE_FORMAT, DATE_FORMAT_2));
+								fixture.setTime(convertStringToTime(columns.get(0).text(), TIME_FORMAT, TIME_FORMAT_2));
 								fixture.setHome(columns.get(1).text());
 								String[] score = columns.get(2).text().split("-");
 								if (score.length == 2) {

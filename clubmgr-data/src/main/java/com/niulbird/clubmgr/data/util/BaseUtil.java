@@ -23,8 +23,12 @@ public abstract class BaseUtil {
     	}
     	return i;
     }
-	
+    
 	protected Time convertStringToTime(String time, String format) {
+		return convertStringToTime(time, format, null);
+	}
+	
+	protected Time convertStringToTime(String time, String format, String format2) {
 		Time t = null;
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		long ms = 0;
@@ -33,7 +37,12 @@ public abstract class BaseUtil {
 			time = new String("0").concat(time);
 		
 		try {
-			ms = sdf.parse(time).getTime();
+			try {
+				ms = sdf.parse(time).getTime();
+			} catch (ParseException e) {
+				sdf = new SimpleDateFormat(format2);
+				ms = sdf.parse(time).getTime();
+			}
 		} catch (ParseException e) {
 			logger.error(e.getMessage(), e);
 			return null;
@@ -41,13 +50,22 @@ public abstract class BaseUtil {
 		t = new Time(ms);
 		return t;
 	}
-	
+
 	protected Date convertStringToDate(String date, String format) {
+		return convertStringToDate(date, format, null);
+	}
+	
+	protected Date convertStringToDate(String date, String format, String format2) {
 		Date d = null;
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		long ms = 0;
 		try {
-			ms = sdf.parse(date.replaceAll("(?:st|nd|rd|th)", "")).getTime();
+			try {
+				ms = sdf.parse(date.replaceAll("(?:st|nd|rd|th)", "")).getTime();
+			} catch(ParseException e) {
+				sdf = new SimpleDateFormat(format2);
+				ms = sdf.parse(date.replaceAll("(?:st|nd|rd|th)", "")).getTime();
+			}
 		} catch (ParseException e) {
 			logger.error(e.getMessage(), e);
 			return null;

@@ -96,11 +96,12 @@
 	            						<li>
 	            							<a href='<c:url value="/mensJurassic.html"/>'><fmt:message key="menu.mens.b3"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/fixtures/BOMBASTIC_MENS_JURASSIC/SUMMER_2019"/>'><fmt:message key="teams.season.summer2019"/></a></li>
 	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2018"/>'><fmt:message key="teams.season.winter2018"/></a></li>
-	            								<li><a href='<c:url value="/fixtures/BOMBASTIC_MENS_JURASSIC/SUMMER_2018"/>'><fmt:message key="teams.season.summer2018"/></a></li>
 	            								<li>
 	            									<a href="#"><fmt:message key="menu.archive"/></a>
 	            									<ul>
+	            										<li><a href='<c:url value="/fixtures/BOMBASTIC_MENS_JURASSIC/SUMMER_2018"/>'><fmt:message key="teams.season.summer2018"/></a></li>
 	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2017"/>'><fmt:message key="teams.season.winter2017"/></a></li>
 	            										<li><a href='<c:url value="/fixtures/BOMBASTIC_MENS_JURASSIC/SUMMER_2017"/>'><fmt:message key="teams.season.summer2017"/></a></li>
 	            										<li><a href='<c:url value="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2016"/>'><fmt:message key="teams.season.winter2016"/></a></li>
@@ -115,11 +116,12 @@
 	            				<li>
 	            					<a href='<c:url value="/womens.html"/>'><fmt:message key="menu.womens.b1"/></a>
 	            					<ul>
+	            						<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/SUMMER_2019"/>'><fmt:message key="teams.season.summer2019"/></a></li>
 	            						<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2018"/>'><fmt:message key="teams.season.winter2018"/></a></li>
-	            						<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/SUMMER_2018"/>'><fmt:message key="teams.season.summer2018"/></a></li>
 	            						<li>
 	            							<a href="#"><fmt:message key="menu.archive"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/SUMMER_2018"/>'><fmt:message key="teams.season.summer2018"/></a></li>
 	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2017"/>'><fmt:message key="teams.season.winter2017"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/SUMMER_2017"/>'><fmt:message key="teams.season.summer2017"/></a></li>
 	            								<li><a href='<c:url value="/season/BOMBASTIC_WOMENS/WINTER_2016"/>'><fmt:message key="teams.season.winter2016"/></a></li>

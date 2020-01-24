@@ -3,7 +3,8 @@ package com.niulbird.clubmgr.util.wordpress;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +15,7 @@ import com.niulbird.clubmgr.util.wordpress.dao.Post;
 import com.niulbird.clubmgr.util.wordpress.dao.Tag;
 
 public class PostUtil {
-	private static final Logger log = Logger.getLogger(PostUtil.class);
+	private static final Logger log = LogManager.getLogger();
 
 	public static Post getPost(JSONObject jsonObject) {
 		Post post = new Post();

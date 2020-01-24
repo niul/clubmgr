@@ -3,7 +3,8 @@ package com.niulbird.clubmgr.data;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.niulbird.clubmgr.data.util.CESLUtil;
@@ -13,7 +14,7 @@ import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.service.TeamService;
 
 public class CESLDataManager extends DataManager {
-	private static Logger logger = Logger.getLogger(CESLDataManager.class);
+	private static Logger logger = LogManager.getLogger();
 	private CESLUtil ceslUtil;
 	
 	protected CESLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, 

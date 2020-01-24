@@ -9,12 +9,13 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 public class MailUtil {
-	private final Logger log = Logger.getLogger(MailUtil.class);
+	private final Logger log = LogManager.getLogger();
 	
 	public boolean sendMail(JavaMailSenderImpl mailSender,
 			String[] emailList,

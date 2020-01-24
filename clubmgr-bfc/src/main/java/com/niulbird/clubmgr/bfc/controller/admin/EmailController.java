@@ -3,7 +3,8 @@ package com.niulbird.clubmgr.bfc.controller.admin;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ import com.niulbird.clubmgr.email.service.EmailService;
 
 @Controller
 public class EmailController extends AdminBaseController {
-	private static final Logger log = Logger.getLogger(EmailController.class);
+	private static final Logger log = LogManager.getLogger();
 
 	private static final String ADMIN_EMAIL = "admin_email";
     

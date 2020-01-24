@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.niulbird.clubmgr.db.dto.FixtureStatisticDTO;
 import com.niulbird.clubmgr.db.model.Fixture;
@@ -13,7 +14,7 @@ import com.niulbird.clubmgr.db.model.Player;
 import com.niulbird.clubmgr.db.model.PlayerFixtureInfo;
 
 public class TeamUtility {
-	private static Logger logger = Logger.getLogger(TeamUtility.class);
+	private static Logger logger = LogManager.getLogger();
 	
 	public static ArrayList<FixtureStatisticDTO> getFixtureStatistics(List<Fixture> fixtures, String teamRegex) {
 		ArrayList<FixtureStatisticDTO> fixtureStatisticDTOList = new ArrayList<FixtureStatisticDTO>();

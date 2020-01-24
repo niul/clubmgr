@@ -5,7 +5,8 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,7 +20,7 @@ import com.niulbird.clubmgr.db.model.User;
 import com.niulbird.clubmgr.db.repository.UserRepository;
 
 public class DomainUserDetailsServiceImpl implements UserDetailsService {
-	Logger logger = Logger.getLogger(DomainUserDetailsServiceImpl.class);
+	Logger logger = LogManager.getLogger();
 	
 	@Autowired
     private UserRepository userRepository;

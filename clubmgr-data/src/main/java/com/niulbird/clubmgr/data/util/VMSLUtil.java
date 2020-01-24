@@ -24,7 +24,7 @@ public class VMSLUtil extends BaseUtil {
     private final static String TIME_FORMAT = "EEE MM/d/yyyy h:mma";
     private final static String DATE_FORMAT = "EEE MM/d/yyyy h:mma";
     
-	private static final String VMSL_URI = "http://vmslsoccer.com";
+	private static final String VMSL_URI = "https://vmslsoccer.com";
     
     public VMSLUtil(Properties props) {
     	this.props = props;
@@ -66,7 +66,7 @@ public class VMSLUtil extends BaseUtil {
 									try {
 										Document fieldDoc = Jsoup.connect(vmslFieldLink).get();
 										Elements fieldElements = fieldDoc.getElementsByTag("table");
-										Element fieldElement = fieldElements.get(3); // 4th table with no ID or Class
+										Element fieldElement = fieldElements.get(2); // 3rd table with no ID or Class
 										Elements fieldRows = fieldElement.getElementsByTag("tr");
 
 										for (Element fieldRow : fieldRows) {

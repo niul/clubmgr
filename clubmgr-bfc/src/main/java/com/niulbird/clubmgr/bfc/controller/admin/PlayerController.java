@@ -8,7 +8,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -29,7 +30,7 @@ import com.niulbird.clubmgr.db.service.TeamService;
 
 @Controller
 public class PlayerController extends AdminBaseController {
-	private static final Logger log = Logger.getLogger(PlayerController.class);
+	private static final Logger log = LogManager.getLogger();
 
 	private static final String ADMIN_ADD_PLAYER = "admin_add_player";
 	private static final String ADMIN_EDIT_PLAYER = "admin_edit_player";

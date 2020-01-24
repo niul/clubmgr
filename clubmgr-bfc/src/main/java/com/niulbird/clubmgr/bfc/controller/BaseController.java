@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -16,7 +17,7 @@ import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 @Component
 public abstract class BaseController {
-	Logger log = Logger.getLogger(BaseController.class);
+	Logger log = LogManager.getLogger();
 	
 	protected static final String ERROR = "error";
 	protected static final String PAGE = "page";

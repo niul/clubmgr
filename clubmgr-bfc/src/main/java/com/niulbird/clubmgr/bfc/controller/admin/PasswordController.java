@@ -9,7 +9,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ import com.niulbird.clubmgr.email.service.EmailService;
 
 @Controller
 public class PasswordController extends BaseController {
-	private static final Logger log = Logger.getLogger(PasswordController.class);
+	private static final Logger log = LogManager.getLogger();
 
 	private static final String LOGIN = "login";
 	private static final String PASSWORD_CHANGE = "password_change";

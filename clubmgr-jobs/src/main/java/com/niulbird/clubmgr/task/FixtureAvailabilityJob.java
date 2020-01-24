@@ -5,14 +5,15 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FixtureAvailabilityJob {
-	private static final Logger log = Logger.getLogger(FixtureAvailabilityJob.class);
+	private static final Logger log = LogManager.getLogger(FixtureAvailabilityJob.class);
 
 	@Autowired
 	Properties props;

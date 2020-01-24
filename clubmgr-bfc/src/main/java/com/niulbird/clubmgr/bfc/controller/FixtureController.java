@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ import com.niulbird.clubmgr.db.service.FixtureService;
 
 @Controller
 public class FixtureController extends BaseController {
-	private static final Logger log = Logger.getLogger(FixtureController.class);
+	private static final Logger log = LogManager.getLogger();
 	
 	private static final String FIXTURE = "fixture";
 	private static final String FIXTURE_SUMMARY = "fixtureSummary";

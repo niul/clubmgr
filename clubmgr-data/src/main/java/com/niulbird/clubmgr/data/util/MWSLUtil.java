@@ -26,7 +26,7 @@ public class MWSLUtil extends BaseUtil {
 	private final static String DATE_FORMAT = "EEE MM/d/yyyy h:mma";
 	private final static String DATE_FORMAT_2 = "EEE MM/d/yyyy h:mm:ss a";
 
-	private static final String MWSL_URI = "http://mwsl.com";
+	private static final String MWSL_URI = "https://mwsl.com";
 
 	public MWSLUtil(Properties props) {
 		this.props = props;
@@ -69,7 +69,7 @@ public class MWSLUtil extends BaseUtil {
 									try {
 										Document fieldDoc = Jsoup.connect(mwslFieldLink).get();
 										Elements fieldElements = fieldDoc.getElementsByTag("table");
-										Element fieldElement = fieldElements.get(2); // 5th table with no ID or Class
+										Element fieldElement = fieldElements.get(1); // 2nd table with no ID or Class
 										Elements fieldRows = fieldElement.getElementsByTag("tr");
 
 										for (Element fieldRow : fieldRows) {

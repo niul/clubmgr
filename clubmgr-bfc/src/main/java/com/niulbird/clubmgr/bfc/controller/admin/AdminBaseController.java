@@ -7,7 +7,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +24,7 @@ import com.niulbird.clubmgr.db.service.UserService;
 
 @Component
 public abstract class AdminBaseController extends BaseController {
-	private static final Logger log = Logger.getLogger(AdminBaseController.class);
+	private static final Logger log = LogManager.getLogger();
 
 	protected static final String ADMIN = "ADMIN";
 	protected static final String ALL_UUID = "all_uuid";

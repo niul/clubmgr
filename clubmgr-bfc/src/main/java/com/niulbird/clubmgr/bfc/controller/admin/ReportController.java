@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +30,7 @@ import com.niulbird.clubmgr.email.service.EmailService;
 
 @Controller
 public class ReportController extends AdminBaseController {
-	private static final Logger log = Logger.getLogger(ReportController.class);
+	private static final Logger log = LogManager.getLogger();
 
 	private static final String ADMIN_REPORTS = "admin_reports";
 	private static final String ADMIN_REPORT = "admin_report";

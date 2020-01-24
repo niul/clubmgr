@@ -2,7 +2,8 @@ package com.niulbird.clubmgr.bfc.command;
 
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -13,7 +14,7 @@ import com.niulbird.clubmgr.db.model.PlayerFixtureInfo;
 
 @Component
 public class PlayerFixtureInfoListValidator implements Validator {
-	private static final Logger log = Logger.getLogger(PlayerFixtureInfoListValidator.class);
+	private static final Logger log = LogManager.getLogger();
 
 	@Autowired
 	Properties props;

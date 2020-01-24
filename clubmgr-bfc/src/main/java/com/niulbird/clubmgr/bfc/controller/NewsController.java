@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 @Controller
 public class NewsController extends BaseController {
-	private static final Logger log = Logger.getLogger(NewsController.class);
+	private static final Logger log = LogManager.getLogger();
 
 	private static final String NEWS = "news";
 	private static final String PAGE = "page";

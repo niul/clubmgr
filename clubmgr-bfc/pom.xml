@@ -103,13 +103,13 @@
     <dependency>
       <groupId>org.apache.tiles</groupId>
       <artifactId>tiles-core</artifactId>
-      <version>3.0.7</version>
+      <version>${tiles.version}</version>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.apache.tiles</groupId>
       <artifactId>tiles-jsp</artifactId>
-      <version>3.0.7</version>
+      <version>${tiles.version}</version>
       <type>jar</type>
     </dependency>
     <dependency>

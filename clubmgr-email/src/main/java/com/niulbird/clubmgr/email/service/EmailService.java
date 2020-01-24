@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -28,7 +29,7 @@ import freemarker.template.TemplateException;
 
 @Service
 public class EmailService {
-	Logger log = Logger.getLogger(EmailService.class);
+	Logger log = LogManager.getLogger();
 	
 	private static final int SECOND = 1000;
 

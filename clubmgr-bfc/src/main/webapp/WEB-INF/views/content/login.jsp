@@ -14,7 +14,7 @@
 	</c:if>
 
 	<form:form action="${pageContext.request.contextPath}/login"
-		commandName="loginData" method="POST">
+		modelAttribute="loginData" method="POST">
 
 		<div class="row 50%">
 			<div class="6u$ 12u(medium)">

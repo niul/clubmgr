@@ -8,7 +8,7 @@
 				<h4><fmt:message key="player.edit.title"/> - ${team.name}</h4>
 			</div>
 			<div class="box-content">
-				<form:form commandName="player" method="POST">
+				<form:form modelAttribute="player" method="POST">
 					<div class="row 50%">
 			<div class="8u$ 12u(medium)">
 				<fmt:message key="player.add.first_name" var="firstName"/> 

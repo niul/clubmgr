@@ -15,7 +15,7 @@
 				<!-- Filter -->
 				<div class="filter">
 				<c:if test="${fn:length(teams) gt 1}">
-				<form:form action="${requestScope['javax.servlet.forward.request_uri']}" commandName="team" method="POST">
+				<form:form action="${requestScope['javax.servlet.forward.request_uri']}" modelAttribute="team" method="POST">
 					<label><fmt:message key="admin.menu.filter.team"/>:</label>
 					<form:select class="field single" path="uuid" onchange="this.form.submit()">
 					<c:if test="${(page=='admin_players')}">
@@ -29,7 +29,7 @@
 				</c:if>
 					
 				<c:if test="${(page=='admin_squads') || (page=='admin_reports')}">
-				<form:form action="${requestScope['javax.servlet.forward.request_uri']}" commandName="season" method="POST">
+				<form:form action="${requestScope['javax.servlet.forward.request_uri']}" modelAttribute="season" method="POST">
 					<label><fmt:message key="admin.menu.filter.season"/>:</label>
 					<form:select class="field single" path="seasonKey" onchange="this.form.submit()">
 						<form:options items="${seasons}" itemValue="seasonKey" itemLabel="name"/>

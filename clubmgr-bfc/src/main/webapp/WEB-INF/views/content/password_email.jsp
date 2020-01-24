@@ -7,7 +7,7 @@
 	<p><fmt:message key="password_email.p1"/></p>
 
 	<form:form action="${pageContext.request.contextPath}/reset.html"
-		commandName="passwordEmailData" method="POST">
+		modelAttribute="passwordEmailData" method="POST">
 
 		<div class="row 50%">
 			<div class="6u$ 12u(medium)">

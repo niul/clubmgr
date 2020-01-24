@@ -61,7 +61,7 @@
 	    </div>
 	      <c:if test="${playerFixtureInfo.status eq 'NO' || playerFixtureInfo.status eq 'MAYBE'}">
 	    	  <form:form action="${pageContext.request.contextPath}/fixture.html" 
-				  commandName="fixtureData" 
+				  modelAttribute="fixtureData" 
 				  method="post">
 			  <div class="row">
 			    <div class="12u">

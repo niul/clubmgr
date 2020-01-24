@@ -15,7 +15,7 @@
 				<h4><fmt:message key="email.title"/></h4>
 			</div>
 			<div class="box-content">
-				<form:form commandName="email" method="POST">
+				<form:form modelAttribute="email" method="POST">
 					<div class="row 50%">
 			<div class="8u$ 12u(medium)">
 				<fmt:message key="email.subject" var="subject"/> 

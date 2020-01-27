@@ -6,8 +6,7 @@
              filePattern="${sys:catalina.home}/logs/bfc-jobs.log.%d{yyyy-MM-dd-hh-mm}.gz">
       <PatternLayout pattern="%d{ABSOLUTE} %-5p [%X{IPADDRESS}] [%X{SESSIONID}] [%c{1}] %m%n"/>
       <Policies>
-        <TimeBasedTriggeringPolicy/>
-        <SizeBasedTriggeringPolicy size="30 MB"/>
+        <TimeBasedTriggeringPolicy interval="1"/>
       </Policies>
       <DefaultRolloverStrategy max="30"/>
     </RollingFile>
@@ -16,8 +15,7 @@
              filePattern="${sys:catalina.home}/logs/bfc-jobs-spring.log.%d{yyyy-MM-dd-hh-mm}.gz">
       <PatternLayout pattern="%d{ABSOLUTE} %-5p [%X{IPADDRESS}] [%X{SESSIONID}] [%c{1}] %m%n"/>
       <Policies>
-        <TimeBasedTriggeringPolicy/>
-        <SizeBasedTriggeringPolicy size="30 MB"/>
+        <TimeBasedTriggeringPolicy interval="1"/>
       </Policies>
       <DefaultRolloverStrategy max="30"/>
     </RollingFile>

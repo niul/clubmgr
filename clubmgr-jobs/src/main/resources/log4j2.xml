@@ -3,7 +3,7 @@
   <Appenders>
   	<RollingFile name="APP_LOGS"
              fileName="${sys:catalina.home}/logs/bfc-jobs.log"
-             filePattern="${sys:catalina.home}/logs/bfc-jobs.log.%d{yyyy-MM-dd-hh-mm}.gz">
+             filePattern="${sys:catalina.home}/logs/bfc-jobs.log.%d{yyyy-MM-dd}.gz">
       <PatternLayout pattern="%d{ABSOLUTE} %-5p [%X{IPADDRESS}] [%X{SESSIONID}] [%c{1}] %m%n"/>
       <Policies>
         <TimeBasedTriggeringPolicy interval="1"/>
@@ -12,7 +12,7 @@
     </RollingFile>
   	<RollingFile name="SPRING_LOGS"
              fileName="${sys:catalina.home}/logs/bfc-jobs-spring.log"
-             filePattern="${sys:catalina.home}/logs/bfc-jobs-spring.log.%d{yyyy-MM-dd-hh-mm}.gz">
+             filePattern="${sys:catalina.home}/logs/bfc-jobs-spring.log.%d{yyyy-MM-dd}.gz">
       <PatternLayout pattern="%d{ABSOLUTE} %-5p [%X{IPADDRESS}] [%X{SESSIONID}] [%c{1}] %m%n"/>
       <Policies>
         <TimeBasedTriggeringPolicy interval="1"/>

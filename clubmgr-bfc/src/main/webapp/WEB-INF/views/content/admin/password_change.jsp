@@ -8,7 +8,7 @@
 	<p><fmt:message key="password_reset.p1"/></p>
 
 	<form:form action="${pageContext.request.contextPath}/admin/change.html"
-		commandName="passwordChangeData" method="POST">
+		modelAttribute="passwordChangeData" method="POST">
 
 		<div class="row 50%">
 			<div class="6u$ 12u(medium)">

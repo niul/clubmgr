@@ -32,7 +32,7 @@ public class DomainUserDetailsServiceImpl implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsernameAndClubDomain(username, request.getServerName());
-        logger.debug("Found user[" + username + "] in club[" + request.getServerName() + "] ID: " + user.getUserId());
+        logger.debug("Found user[" + username + "] in club [" + request.getServerName() + "] ID: " + user.getUserId());
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()){

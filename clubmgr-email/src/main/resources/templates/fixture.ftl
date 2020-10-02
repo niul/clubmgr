@@ -22,7 +22,7 @@
                                  <!-- Fixture Info -->                                 
                                  <tr>
                                     <td style="font-family: 'Open Sans', sans-serif; color: #14074c; text-align:left;" st-title="rightimage-title">
-											<h4>Upcoming Fixture</h4>
+											<h4>${playerFixtureInfo.player.firstName} - you have an upcoming fixture</h4>
 											<table>
 											  <tr><td align="right"><strong>${msg("email.fixture.home")}:</strong></td><td>${fixture.home}</td></tr>
 											  <tr><td align="right"><strong>${msg("email.fixture.away")}:</strong></td><td>${fixture.away}</td></tr>

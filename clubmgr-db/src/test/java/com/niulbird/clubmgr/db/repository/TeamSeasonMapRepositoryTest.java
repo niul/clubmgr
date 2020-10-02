@@ -79,7 +79,7 @@ public class TeamSeasonMapRepositoryTest {
 	
 	@Test
 	public void findOneTest() {
-		TeamSeasonMap testTeamSeasonMap = repository.findOne(teamSeasonMap.getTeamSeasonMapId());
+		TeamSeasonMap testTeamSeasonMap = repository.findById(teamSeasonMap.getTeamSeasonMapId()).get();
 		assertNotNull(testTeamSeasonMap);
 		assertNotNull(testTeamSeasonMap.getTeam());
 	}
@@ -87,7 +87,7 @@ public class TeamSeasonMapRepositoryTest {
 	@Test
 	@Rollback(false)
 	public void findSavedTeamById() {
-		assertEquals(teamSeasonMap, repository.findOne(teamSeasonMap.getTeamSeasonMapId()));
+		assertEquals(teamSeasonMap, repository.findById(teamSeasonMap.getTeamSeasonMapId()).get());
 	}
 	
 	@Test

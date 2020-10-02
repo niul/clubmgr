@@ -1,6 +1,6 @@
 <!DOCTYPE tiles-definitions PUBLIC
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+"https://raw.githubusercontent.com/apache/tiles/trunk/tiles-core/src/main/resources/org/apache/tiles/resources/tiles-config_3_0.dtd">
 <tiles-definitions>
 
     <!-- Main Page -->

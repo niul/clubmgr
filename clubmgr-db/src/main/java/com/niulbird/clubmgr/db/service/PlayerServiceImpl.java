@@ -28,7 +28,7 @@ public class PlayerServiceImpl implements PlayerService {
 	@Override
 	@Transactional
 	public Player findById(Integer id) {
-		return playerRepository.findOne(id);
+		return playerRepository.findById(id).get();
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class PlayerServiceImpl implements PlayerService {
 	@Override
 	@Transactional(rollbackFor=RecordNotFound.class)
 	public Player delete(Integer id) throws RecordNotFound {
-		Player deletedPlayer = playerRepository.findOne(id);
+		Player deletedPlayer = playerRepository.findById(id).get();
 
 		if (deletedPlayer == null)
 			throw new RecordNotFound();

@@ -31,6 +31,7 @@ public class DomainUserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    	logger.debug("Authenticating user [" + username + "] in Club [" + request.getServerName() + "]");
         User user = userRepository.findByUsernameAndClubDomain(username, request.getServerName());
         logger.debug("Found user[" + username + "] in club [" + request.getServerName() + "] ID: " + user.getUserId());
 

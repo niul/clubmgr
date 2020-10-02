@@ -20,7 +20,7 @@ public class SeasonServiceImpl implements SeasonService {
 	@Override
 	@Transactional
 	public List<Season> findAll() {
-		return seasonRepository.findAll(new Sort(Direction.DESC, "seasonId"));
+		return seasonRepository.findAll(Sort.by(Direction.DESC, "seasonId"));
 	}
 
 	@Override

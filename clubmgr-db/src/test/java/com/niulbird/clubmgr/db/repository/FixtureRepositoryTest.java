@@ -95,6 +95,7 @@ public class FixtureRepositoryTest {
 		player.setEnabled(true);
 		player.setPosition(position);
 		player.setTeams(teams);
+		player.setManager(false);
 		
 		playerFixtureInfo = new PlayerFixtureInfo();
 		playerFixtureInfo.setComment("FIXTURE_UNIT_TEST");
@@ -120,12 +121,12 @@ public class FixtureRepositoryTest {
 	public void teardown() {
 		seasonRepository.delete(seasonRepository.findBySeasonKey("FIXTURE_UNIT_TEST"));
 		clubRepository.delete(clubRepository.findByClubKey("FIXTURE_UNIT_TEST"));
-		repository.delete(repository.findByTeamTeamKeyAndSeasonSeasonKey("FIXTURE_UNIT_TEST", "FIXTURE_UNIT_TEST"));
+		repository.deleteAll(repository.findByTeamTeamKeyAndSeasonSeasonKey("FIXTURE_UNIT_TEST", "FIXTURE_UNIT_TEST"));
 	}
 	
 	@Test
 	public void findOneTest() {
-		Fixture testFixture = repository.findOne(fixture.getFixtureId());
+		Fixture testFixture = repository.findById(fixture.getFixtureId()).get();
 		assertNotNull(testFixture);
 		assertNotNull(testFixture.getTeam());
 		assertNotNull(testFixture.getSeason());
@@ -134,7 +135,7 @@ public class FixtureRepositoryTest {
 	@Test
 	@Rollback(false)
 	public void findSavedFixtureById() {
-		assertEquals(fixture, repository.findOne(fixture.getFixtureId()));
+		assertEquals(fixture, repository.findById(fixture.getFixtureId()).get());
 	}
 	
 	@Test

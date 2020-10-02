@@ -79,7 +79,7 @@ public class StandingRepositoryTest {
 	
 	@Test
 	public void findOneTest() {
-		Standing testStanding = repository.findOne(standing.getStandingId());
+		Standing testStanding = repository.findById(standing.getStandingId()).get();
 		assertNotNull(testStanding);
 		assertNotNull(testStanding.getTeam());
 		assertNotNull(testStanding.getSeason());
@@ -88,7 +88,7 @@ public class StandingRepositoryTest {
 	@Test
 	@Rollback(false)
 	public void findSavedStandingById() {
-		assertEquals(standing, repository.findOne(standing.getStandingId()));
+		assertEquals(standing, repository.findById(standing.getStandingId()).get());
 	}
 	
 	@Test

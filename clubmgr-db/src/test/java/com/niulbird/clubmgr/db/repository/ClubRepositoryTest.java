@@ -42,7 +42,7 @@ public class ClubRepositoryTest {
 	
 	@Test
 	public void findSavedClubById() {
-		assertEquals(club, repository.findOne(club.getClubId()));
+		assertEquals(club, repository.findById(club.getClubId()).get());
 	}
 	
 	@Test

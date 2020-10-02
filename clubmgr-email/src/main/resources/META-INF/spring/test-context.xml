@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:cache="http://www.springframework.org/schema/cache"
-       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:task="http://www.springframework.org/schema/task"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/cache 
-        http://www.springframework.org/schema/cache/spring-cache.xsd
-        http://www.springframework.org/schema/data/jpa
-    	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-    	http://www.springframework.org/schema/task
-		http://www.springframework.org/schema/task/spring-task.xsd
-    	http://www.springframework.org/schema/tx 
-    	http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/util 
-		http://www.springframework.org/schema/util/spring-util.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:repository="http://www.springframework.org/schema/data/repository"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+    	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 
 	<!-- Auto scan the components -->
 	<context:annotation-config />
 	<context:component-scan base-package="com.niulbird.clubmgr" />
 	<jpa:repositories base-package="com.niulbird.clubmgr.db.repository" />
-	
-	<!-- Setup Scheduled Tasks -->
-	<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
-	<task:executor id="myExecutor" pool-size="5"/>
-	<task:scheduler id="myScheduler" pool-size="10"/>
-  	<context:property-placeholder location="classpath:global.properties"/>
-	<util:properties id="props" location="classpath:global.properties" />
-  
+    
+    <context:property-placeholder location="classpath:global-test.properties"/>
+	<util:properties id="props" location="classpath:global-test.properties" />
+    
       <!-- Message Source -->
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
           <list>
-            <value>classpath:jobs-messages</value>
+            <value>classpath:email-messages</value>
           </list>
       </property>
     </bean>
@@ -69,11 +59,26 @@
     </bean>
     <bean id="freeMarkerConfiguration" class="freemarker.template.Configuration" factory-bean="freeMarkerConfigurationFactory" factory-method="createConfiguration" scope="prototype"/>
   
+    
+    <!-- Cache -->
+    <cache:annotation-driven />
+    <bean id="cacheManager"
+      class="org.springframework.cache.ehcache.EhCacheCacheManager" 
+      p:cache-manager-ref="ehcache"/>
+
+	<!-- EhCache library setup -->
+	<bean id="ehcache"
+      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" 
+      p:config-location="classpath:ehcache.xml"
+      p:shared="true"/>
+
 	<!-- Datasource -->
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/PostgreSQLDS" />
-		<property name="resourceRef" value="true" />
-	</bean>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
 		
 	<!-- session factory -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -86,7 +91,7 @@
         	<props>
             	<prop key="hibernate.hbm2ddl.auto">validate</prop>
             	<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
-				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.cache.use_second_level_cache">true</prop>
 				<prop key="hibernate.cache.use_query_cache">true</prop>
 				<prop key="hibernate.cache.provider_class">net.sf.ehcache.hibernate.SingletonEhCacheProvider</prop>
@@ -101,4 +106,5 @@
 	
 	<tx:annotation-driven transaction-manager="transactionManager"
         proxy-target-class="true" />
+    
 </beans>

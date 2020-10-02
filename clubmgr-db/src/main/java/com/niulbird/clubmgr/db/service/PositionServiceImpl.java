@@ -20,7 +20,7 @@ public class PositionServiceImpl implements PositionService {
 	@Override
 	@Transactional
 	public List<Position> findAll() {
-		return positionRepository.findAll(new Sort(Direction.ASC, "positionId"));
+		return positionRepository.findAll(Sort.by(Direction.ASC, "positionId"));
 	}
 
 	@Override

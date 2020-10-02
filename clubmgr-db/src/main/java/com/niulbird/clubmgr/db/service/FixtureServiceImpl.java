@@ -140,7 +140,7 @@ public class FixtureServiceImpl implements FixtureService {
 				playerFixtureInfo.setRedCard(false);
 				playerFixtureInfoesList.add(playerFixtureInfo);
 			}
-			playerFixtureInfoRepository.save(playerFixtureInfoesList);
+			playerFixtureInfoRepository.saveAll(playerFixtureInfoesList);
 		}
 		
 		return playerFixtureInfoesList;
@@ -179,7 +179,7 @@ public class FixtureServiceImpl implements FixtureService {
 	@Override
 	@Transactional(rollbackFor=RecordNotFound.class)
 	public PlayerFixtureInfo delete(Integer id) throws RecordNotFound {
-		PlayerFixtureInfo deletedPlayer = playerFixtureInfoRepository.findOne(id);
+		PlayerFixtureInfo deletedPlayer = playerFixtureInfoRepository.findById(id).get();
 
 		if (deletedPlayer == null)
 			throw new RecordNotFound();

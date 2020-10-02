@@ -38,7 +38,7 @@ public class SeasonRepositoryTest {
 	
 	@Test
 	public void findSavedSeasonById() {
-		assertEquals(season, repository.findOne(season.getSeasonId()));
+		assertEquals(season, repository.findById(season.getSeasonId()).get());
 	}
 	
 	@Test

@@ -53,7 +53,7 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	@Transactional
 	public Team findById(Integer id) {
-		return teamRepository.findOne(id);
+		return teamRepository.findById(id).get();
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	@Transactional(rollbackFor=RecordNotFound.class)
 	public Team delete(Integer id) throws RecordNotFound {
-		Team deletedTeam = teamRepository.findOne(id);
+		Team deletedTeam = teamRepository.findById(id).get();
 
 		if (deletedTeam == null)
 			throw new RecordNotFound();
@@ -94,7 +94,7 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	@Transactional(rollbackFor=RecordNotFound.class)
 	public Team update(Team team) throws RecordNotFound {
-		Team updatedTeam = teamRepository.findOne(team.getTeamId());
+		Team updatedTeam = teamRepository.findById(team.getTeamId()).get();
 
 		if (updatedTeam == null)
 			throw new RecordNotFound();
@@ -129,12 +129,12 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public List<Fixture> createFixtures(List<Fixture> fixtures) {
-		return fixtureRepository.save(fixtures);	
+		return fixtureRepository.saveAll(fixtures);	
 	}
 
 	@Override
 	public List<Standing> createStandings(List<Standing> standings) {
-		return standingRepository.save(standings);	
+		return standingRepository.saveAll(standings);	
 	}
 
 
@@ -188,6 +188,6 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public List<Standing> updateStandings(Team team, Season season, List<Standing> standings) {
 		standingRepository.deleteByTeamAndSeason(team, season);
-		return standingRepository.save(standings);	
+		return standingRepository.saveAll(standings);	
 	}
 }

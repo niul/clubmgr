@@ -49,7 +49,7 @@ public class TeamRepositoryTest {
 	@Test
 	public void findSavedTeamById() {
 		Team testTeam = repository.save(team);
-		assertEquals(testTeam, repository.findOne(team.getTeamId()));
+		assertEquals(testTeam, repository.findById(team.getTeamId()).get());
 	}
 	
 	@Test

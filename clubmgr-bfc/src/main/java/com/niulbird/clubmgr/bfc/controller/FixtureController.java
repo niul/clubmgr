@@ -105,6 +105,7 @@ public class FixtureController extends BaseController {
 			playerFixtureInfo = fixtureService.findByUuid(fixtureData.getPlayer());
 			playerFixtureInfo.setComment(fixtureData.getComment());
 			fixtureService.updatePlayerInfo(playerFixtureInfo);
+			log.debug("Updating Fixture Comment for [" + playerFixtureInfo.getPlayer().getEmail() + "][" + fixtureData.getComment() + "]");
 		}
 		
 		playerFixtureInfoList = fixtureService.findByFixture(fixture);
@@ -135,6 +136,7 @@ public class FixtureController extends BaseController {
 				calendar.add(Calendar.HOUR_OF_DAY, -7);
 				playerFixtureInfo.setViewed(new java.sql.Time(calendar.getTimeInMillis()));
 				fixtureService.updatePlayerInfo(playerFixtureInfo);
+				log.debug("Setting Email Viewed for [" + playerFixtureInfo.getPlayer().getEmail() + "][" + player + "]");
 			}
 		}
 		InputStream in = request.getSession().getServletContext().getResourceAsStream("/static/images/1by1.png");

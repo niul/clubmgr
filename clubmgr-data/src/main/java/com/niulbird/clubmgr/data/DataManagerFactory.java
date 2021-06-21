@@ -24,6 +24,8 @@ public class DataManagerFactory {
 			return new RRSLDataManager(teamService, teamSeasonMap, teamRegExStr, props);
 		} else if (teamSeasonMap.getDataKey().equals("CESL")) {
 			return new CESLDataManager(teamService, teamSeasonMap, teamRegExStr, props);
+		} else if (teamSeasonMap.getDataKey().equals("BCMSL")) {
+			return new BCMSLDataManager(teamService, teamSeasonMap, teamRegExStr, props);
 		} else {
 			return new VMSLDataManager(teamService, teamSeasonMap, teamRegExStr, props);
 		}

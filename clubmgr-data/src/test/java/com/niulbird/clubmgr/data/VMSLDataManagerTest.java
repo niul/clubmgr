@@ -48,8 +48,6 @@ public class VMSLDataManagerTest {
 		fixtures = dataManager.updateFixtures();
 		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "WINTER_2016", "Bombastic");
 		fixtures = dataManager.updateFixtures();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "WINTER_2016", "Bombastic");
-		fixtures = dataManager.updateFixtures();
 		assertNotNull(fixtures);
 	}
 

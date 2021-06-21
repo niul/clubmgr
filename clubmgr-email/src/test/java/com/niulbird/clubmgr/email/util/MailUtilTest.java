@@ -23,7 +23,7 @@ public class MailUtilTest extends BaseTestCase {
 	public void sendEmailTest() {
 		
 		MailUtil mailUtil = new MailUtil();
-		boolean retVal = mailUtil.sendMail(mailSender, "nbird@incomm.com", "TEST", "Testing 1 2 3", props);
+		boolean retVal = mailUtil.sendMail(mailSender, "niul.bird@gmail.com", "TEST", "Testing 1 2 3", props);
 		
 		Assert.assertTrue(retVal);
 	}

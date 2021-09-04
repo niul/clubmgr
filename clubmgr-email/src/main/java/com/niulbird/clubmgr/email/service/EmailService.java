@@ -132,11 +132,17 @@ public class EmailService {
 				if (today) {
 					subject = messageSource.getMessage("email.fixture-final.subject", null, null);
 				}
-				boolean isSent = mailUtil.sendMail(mailSender, playerFixtureInfo.getPlayer().getEmail(),
+				log.debug("Sending message to [" + playerFixtureInfo.getPlayer().getEmail() + "]");
+				boolean isSent = false;
+				try {
+					isSent = mailUtil.sendMail(mailSender, playerFixtureInfo.getPlayer().getEmail(),
 								subject + " - "
 								+ dateFormatter.format(fixture.getDate()) + " @ "
 								+ timeFormatter.format(fixture.getTime()) + " on " + fixture.getField(),
 						body, props);
+				} catch (Exception e) {
+					log.error("Error sending Email: " + e.getMessage(), e);
+				}
 				log.debug("Message sent to [" + playerFixtureInfo.getPlayer().getEmail() + "]: " + isSent);
 				
 				// Give some time between sending out emails not to overload SMTP server.

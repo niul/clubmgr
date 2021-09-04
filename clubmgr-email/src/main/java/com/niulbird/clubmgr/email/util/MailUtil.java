@@ -38,8 +38,7 @@ public class MailUtil {
 			}
 			mailSender.send(message);
 		} catch (UnsupportedEncodingException | MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error Sending Email: " + e.getMessage(), e);
 		}
 		
 		return retVal;

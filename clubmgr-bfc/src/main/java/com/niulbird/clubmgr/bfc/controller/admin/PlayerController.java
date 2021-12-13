@@ -138,7 +138,7 @@ public class PlayerController extends AdminBaseController {
 	}
 	
 	@RequestMapping(value = "/admin/editPlayer.html", method = RequestMethod.GET)
-	public ModelAndView addPlayer(@ModelAttribute("player") Player player,
+	public ModelAndView editPlayer(@ModelAttribute("player") Player player,
 			@RequestParam (required = false) String uuid, 
 			@RequestParam (required = false) String teamUuid, 
 			HttpServletRequest request) {
@@ -160,7 +160,7 @@ public class PlayerController extends AdminBaseController {
 			BindingResult result,
 			@RequestParam (required = false) String uuid, 
 			HttpServletRequest request) {
-		log.debug("Adding Players for [" + getPrincipal() + "][" + uuid + "]");
+		log.debug("Editing Players for [" + getPrincipal() + "][" + uuid + "][" + player.getFirstName() + " " + player.getLastName() + "][" + player.getEmail() + "]");
 
 		ModelAndView mav = new ModelAndView();
 		

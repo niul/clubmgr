@@ -17,16 +17,15 @@ public class CESLDataManager extends DataManager {
 	private static Logger logger = LogManager.getLogger();
 	private CESLUtil ceslUtil;
 	
-	protected CESLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, 
-			String teamRegExStr, Properties props) {
-		super(teamService, teamSeasonMap, teamRegExStr, props);
+	protected CESLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, Properties props) {
+		super(teamService, teamSeasonMap, props);
 		ceslUtil = new CESLUtil(props);
 	}
 
 	@Override
 	@Cacheable(value = "ceslFixturesCache")	
 	public List<Fixture> updateFixtures() {
-		List<Fixture> fixtures = ceslUtil.getFixtures(teamSeasonMap, teamRegExStr);
+		List<Fixture> fixtures = ceslUtil.getFixtures(teamSeasonMap);
 		logger.debug("Got fixtures for " + teamSeasonMap.getTeam().getName() + ": " + fixtures.size());
 		
 		if (fixtures != null && fixtures.size() != 0) {
@@ -38,7 +37,7 @@ public class CESLDataManager extends DataManager {
 	@Override
 	@Cacheable(value = "ceslStandingsCache")	
 	public List<Standing> updateStandings() {
-		List<Standing> standings = ceslUtil.getStandings(teamSeasonMap, teamRegExStr);
+		List<Standing> standings = ceslUtil.getStandings(teamSeasonMap);
 		logger.debug("Got standings for " + teamSeasonMap.getTeam().getName() + ": " + standings.size());
 
 		if (standings != null && standings.size() != 0) {

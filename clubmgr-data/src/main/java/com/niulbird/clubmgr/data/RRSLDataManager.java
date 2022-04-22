@@ -17,16 +17,15 @@ public class RRSLDataManager extends DataManager {
 	private static Logger logger = LogManager.getLogger();
 	private RRSLUtil rrslUtil;
 	
-	protected RRSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, 
-			String teamRegExStr, Properties props) {
-		super(teamService, teamSeasonMap, teamRegExStr, props);
+	protected RRSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, Properties props) {
+		super(teamService, teamSeasonMap, props);
 		rrslUtil = new RRSLUtil(props);
 	}
 
 	@Override
 	@Cacheable(value = "rrslFixturesCache")	
 	public List<Fixture> updateFixtures() {
-		List<Fixture> fixtures = rrslUtil.getFixtures(teamSeasonMap, teamRegExStr);
+		List<Fixture> fixtures = rrslUtil.getFixtures(teamSeasonMap);
 		logger.debug("Got fixtures for " + teamSeasonMap.getTeam().getName() + ": " + fixtures.size());
 		
 		if (fixtures != null && fixtures.size() != 0) {
@@ -38,7 +37,7 @@ public class RRSLDataManager extends DataManager {
 	@Override
 	@Cacheable(value = "rrslStandingsCache")	
 	public List<Standing> updateStandings() {
-		List<Standing> standings = rrslUtil.getStandings(teamSeasonMap, teamRegExStr);
+		List<Standing> standings = rrslUtil.getStandings(teamSeasonMap);
 		logger.debug("Got standings for " + teamSeasonMap.getTeam().getName() + ": " + standings.size());
 
 		if (standings != null && standings.size() != 0) {

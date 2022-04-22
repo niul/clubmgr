@@ -17,16 +17,15 @@ public class BCMSLDataManager extends DataManager {
 	private static Logger logger = LogManager.getLogger();
 	private BCMSLUtil bcmslUtil;
 	
-	protected BCMSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, 
-			String teamRegExStr, Properties props) {
-		super(teamService, teamSeasonMap, teamRegExStr, props);
+	protected BCMSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, Properties props) {
+		super(teamService, teamSeasonMap, props);
 		bcmslUtil = new BCMSLUtil(props);
 	}
 
 	@Override
 	@Cacheable(value = "bcmslFixturesCache")	
 	public List<Fixture> updateFixtures() {
-		List<Fixture> fixtures = bcmslUtil.getFixtures(teamSeasonMap, teamRegExStr);
+		List<Fixture> fixtures = bcmslUtil.getFixtures(teamSeasonMap);
 		logger.debug("Got fixtures for " + teamSeasonMap.getTeam().getName() + ": " + fixtures.size());
 		
 		if (fixtures != null && fixtures.size() != 0) {
@@ -38,7 +37,7 @@ public class BCMSLDataManager extends DataManager {
 	@Override
 	@Cacheable(value = "bcmslStandingsCache")	
 	public List<Standing> updateStandings() {
-		List<Standing> standings = bcmslUtil.getStandings(teamSeasonMap, teamRegExStr);
+		List<Standing> standings = bcmslUtil.getStandings(teamSeasonMap);
 		logger.debug("Got standings for " + teamSeasonMap.getTeam().getName() + ": " + standings.size());
 
 		if (standings != null && standings.size() != 0) {

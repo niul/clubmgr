@@ -9,14 +9,11 @@ public abstract class DataManager implements DataManagerInterface {
 	
 	protected TeamService teamService;
 	protected TeamSeasonMap teamSeasonMap;
-	protected String teamRegExStr;
 	protected Properties props;
 	
-	protected DataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, 
-			String teamRegExStr, Properties props) {
+	protected DataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, Properties props) {
 		this.teamService = teamService;
 		this.teamSeasonMap = teamSeasonMap;
-		this.teamRegExStr = teamRegExStr;
 		this.props = props;
 	}
 }

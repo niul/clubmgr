@@ -17,16 +17,15 @@ public class MWSLDataManager extends DataManager {
 	private static Logger logger = LogManager.getLogger();
 	private MWSLUtil mwslUtil;
 
-	protected MWSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, 
-			String teamRegExStr, Properties props) {
-		super(teamService, teamSeasonMap, teamRegExStr, props);
+	protected MWSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, Properties props) {
+		super(teamService, teamSeasonMap, props);
 		mwslUtil = new MWSLUtil(props);
 	}
 
 	@Override
 	@Cacheable(value = "mwslFixturesCache")	
 	public List<Fixture> updateFixtures() {
-		List<Fixture> fixtures = mwslUtil.getFixtures(teamSeasonMap, teamRegExStr);
+		List<Fixture> fixtures = mwslUtil.getFixtures(teamSeasonMap);
 		logger.debug("Got fixtures for " + teamSeasonMap.getTeam().getName() + ": " + fixtures.size());
 
 		if (fixtures != null && fixtures.size() != 0) {
@@ -38,7 +37,7 @@ public class MWSLDataManager extends DataManager {
 	@Override
 	@Cacheable(value = "mwslStandingsCache")	
 	public List<Standing> updateStandings() {
-		List<Standing> standings = mwslUtil.getStandings(teamSeasonMap, teamRegExStr);
+		List<Standing> standings = mwslUtil.getStandings(teamSeasonMap);
 		logger.debug("Got standings for " + teamSeasonMap.getTeam().getName() + ": " + standings.size());
 		
 		if (standings != null && standings.size() != 0) {

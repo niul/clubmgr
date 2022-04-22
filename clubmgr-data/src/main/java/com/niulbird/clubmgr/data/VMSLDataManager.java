@@ -17,16 +17,15 @@ public class VMSLDataManager extends DataManager {
 	private static Logger logger = LogManager.getLogger();
 	private VMSLUtil vmslUtil;
 	
-	protected VMSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, 
-			String teamRegExStr, Properties props) {
-		super(teamService, teamSeasonMap, teamRegExStr, props);
+	protected VMSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, Properties props) {
+		super(teamService, teamSeasonMap, props);
 		vmslUtil = new VMSLUtil(props);
 	}
 
 	@Override
 	@Cacheable(value = "vmslFixturesCache")	
 	public List<Fixture> updateFixtures() {
-		List<Fixture> fixtures = vmslUtil.getFixtures(teamSeasonMap, teamRegExStr);
+		List<Fixture> fixtures = vmslUtil.getFixtures(teamSeasonMap);
 		logger.debug("Got fixtures for " + teamSeasonMap.getTeam().getName() + ": " + fixtures.size());
 		
 		if (fixtures != null && fixtures.size() != 0) {
@@ -38,7 +37,7 @@ public class VMSLDataManager extends DataManager {
 	@Override
 	@Cacheable(value = "vmslStandingsCache")	
 	public List<Standing> updateStandings() {
-		List<Standing> standings = vmslUtil.getStandings(teamSeasonMap, teamRegExStr);
+		List<Standing> standings = vmslUtil.getStandings(teamSeasonMap);
 		logger.debug("Got standings for " + teamSeasonMap.getTeam().getName() + ": " + standings.size());
 
 		if (standings != null && standings.size() != 0) {

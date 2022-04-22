@@ -102,7 +102,7 @@ public class TeamController extends BaseController {
 		
 		if (standings.size() == 0) {
 				log.debug("Updating Standings: [" + teamKey + "|" + seasonKey +"]");
-				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
+				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap);
 				standings = dataManager.updateStandings();
 		}
 		
@@ -111,7 +111,7 @@ public class TeamController extends BaseController {
 		
 		if (fixtures.size() == 0) {
 					log.debug("Updating Fixtures: [" + teamKey + "|" + seasonKey +"]");
-				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
+				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap);
 				fixtures = dataManager.updateFixtures();
 		} else {
 			fixtureStatisticsList = TeamUtility.getFixtureStatistics(fixtures, props.getProperty("team.regex"));
@@ -142,7 +142,7 @@ public class TeamController extends BaseController {
 		
 		if (standings.size() == 0) {
 				log.debug("Updating Standings: [" + teamKey + "|" + seasonKey +"]");
-				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
+				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap);
 				standings = dataManager.updateStandings();
 		}
 		
@@ -150,7 +150,7 @@ public class TeamController extends BaseController {
 		
 		if (fixtures.size() == 0) {
 					log.debug("Updating Fixtures: [" + teamKey + "|" + seasonKey +"]");
-				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, "Bombastic");
+				DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap);
 				fixtures = dataManager.updateFixtures();
 		}
 

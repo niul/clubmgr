@@ -35,7 +35,7 @@ public class FixtureStandingsJob {
 		for(TeamSeasonMap teamSeasonMap : teamSeasonMapList) {
 			log.debug("Team: " + teamSeasonMap.getTeam().getName());
 			log.debug("Season: " + teamSeasonMap.getSeason().getName());
-			DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap, props.getProperty("team.regex"));
+			DataManager dataManager = dataManagerFactory.createDataManager(teamSeasonMap);
 			dataManager.updateFixtures();
 			dataManager.updateStandings();
 		}

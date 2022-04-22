@@ -38,7 +38,7 @@ public class BCMSLDataManagerTest {
 	@Rollback(false)
 	public void bcmslUpdateFixturesTest() {
 
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "SUMMER_2021", "Bombastic");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "SUMMER_2021");
 		List<Fixture> fixtures = dataManager.updateFixtures();
 		assertNotNull(fixtures);
 	}
@@ -46,7 +46,7 @@ public class BCMSLDataManagerTest {
 	@Test
 	@Rollback(false)
 	public void bcmslUpdateStandingsTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "SUMMER_2021", "Bombastic");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "SUMMER_2021");
 		List<Standing> fixtures = dataManager.updateStandings();
 		assertNotNull(fixtures);
 	}

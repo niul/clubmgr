@@ -29,7 +29,7 @@ public class RRSLUtil extends BaseUtil {
     	this.props = props;
     }
     
-	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
+	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap) {
 		
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
@@ -74,7 +74,7 @@ public class RRSLUtil extends BaseUtil {
 		return fixtures;
 	}
 	
-	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
+	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getStandingsUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();

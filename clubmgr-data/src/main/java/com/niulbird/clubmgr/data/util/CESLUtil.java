@@ -34,7 +34,7 @@ public class CESLUtil extends BaseUtil {
     	this.props = props;
     }
     
-	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
+	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap) {
 		Date date = null;
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
@@ -84,7 +84,7 @@ public class CESLUtil extends BaseUtil {
 				fixture.setSeason(teamSeasonMap.getSeason());
 				fixture.setTeam(teamSeasonMap.getTeam());
 
-				if (fixture.getHome().contains(teamRegExStr) || fixture.getAway().contains(teamRegExStr)) {
+				if (fixture.getHome().contains(teamSeasonMap.getNameRegex()) || fixture.getAway().contains(teamSeasonMap.getNameRegex())) {
 					fixtures.add(fixture);
 					logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t" + fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: " + fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: " + fixture.getTime() + "\tField: " + fixture.getFieldMapUri());
 				}
@@ -96,7 +96,7 @@ public class CESLUtil extends BaseUtil {
 		return fixtures;
 	}
 	
-	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
+	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getStandingsUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();

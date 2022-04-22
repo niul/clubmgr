@@ -43,6 +43,9 @@ public final class TeamSeasonMap {
 	private Date created;
 	private String description;
 	private Boolean scheduled;
+	
+	@Column(name = "name_regex")
+	private String nameRegex;
 
 	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "player_team_season_map", joinColumns = @JoinColumn(name = "team_season_map_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
@@ -123,6 +126,14 @@ public final class TeamSeasonMap {
 
 	public void setScheduled(Boolean scheduled) {
 		this.scheduled = scheduled;
+	}
+
+	public String getNameRegex() {
+		return nameRegex;
+	}
+
+	public void setNameRegex(String nameRegex) {
+		this.nameRegex = nameRegex;
 	}
 
     public List<Player> getPlayers() {

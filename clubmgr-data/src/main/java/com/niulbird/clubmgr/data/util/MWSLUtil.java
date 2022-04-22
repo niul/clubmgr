@@ -32,7 +32,7 @@ public class MWSLUtil extends BaseUtil {
 		this.props = props;
 	}
 
-	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
+	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap) {
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri())
@@ -101,8 +101,8 @@ public class MWSLUtil extends BaseUtil {
 									fixture.setActive(true);
 								}
 
-								if ((fixture.getHome().contains(teamRegExStr)
-										|| fixture.getAway().contains(teamRegExStr))
+								if ((fixture.getHome().contains(teamSeasonMap.getNameRegex())
+										|| fixture.getAway().contains(teamSeasonMap.getNameRegex()))
 										&& !fixture.getField().equalsIgnoreCase("1 Bye")) {
 									fixtures.add(fixture);
 									logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t"
@@ -122,7 +122,7 @@ public class MWSLUtil extends BaseUtil {
 		return fixtures;
 	}
 
-	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap, String teamRegExStr) {
+	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri())

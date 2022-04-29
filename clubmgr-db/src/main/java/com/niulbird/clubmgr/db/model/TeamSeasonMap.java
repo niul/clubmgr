@@ -46,6 +46,8 @@ public final class TeamSeasonMap {
 	
 	@Column(name = "name_regex")
 	private String nameRegex;
+	
+	private Boolean email;
 
 	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "player_team_season_map", joinColumns = @JoinColumn(name = "team_season_map_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
@@ -134,6 +136,14 @@ public final class TeamSeasonMap {
 
 	public void setNameRegex(String nameRegex) {
 		this.nameRegex = nameRegex;
+	}
+
+	public Boolean getEmail() {
+		return email;
+	}
+
+	public void setEmail(Boolean email) {
+		this.email = email;
 	}
 
     public List<Player> getPlayers() {

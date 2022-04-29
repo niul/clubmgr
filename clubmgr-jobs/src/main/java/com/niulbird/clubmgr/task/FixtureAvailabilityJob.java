@@ -1,15 +1,16 @@
 package com.niulbird.clubmgr.task;
 
+import java.util.List;
 import java.util.Properties;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import com.niulbird.clubmgr.db.model.TeamSeasonMap;
+import com.niulbird.clubmgr.db.service.TeamService;
 
 @Service
 public class FixtureAvailabilityJob {
@@ -20,25 +21,22 @@ public class FixtureAvailabilityJob {
 
 	@Autowired
 	FixtureAvailabilityService fixtureAvailabilityService;
+
+	@Autowired
+	TeamService teamService;
 	
 	@Scheduled(cron = "0 15 14 * * *")
 	public void sendFixturePlayerStatus() {
-    	Pattern pattern = Pattern.compile(".*\\.\\s*(.*)");
 		log.debug("Getting Fixtures to send Player Status Email.");
     	
-		Set<String> set = props.stringPropertyNames();
-
-        for(String name : set){
-            if(name.startsWith("fixture.days.before")) {
-            	Matcher m = pattern.matcher(name);
-
-            	if (m.find()) {
-            	    String teamKey = m.group(1);
-                	String[] daysBefore = props.getProperty(name).split("\\s*,\\s*");
-                	fixtureAvailabilityService.send(teamKey, daysBefore);
-            	}
-            }
+		List<TeamSeasonMap> teamSeasonMapList = teamService.findEmailTeamSeasonMap();
+		
+        String[] daysBefore = props.getProperty("fixture.days.before").split("\\s*,\\s*");
+        for (TeamSeasonMap teamSeasonMap : teamSeasonMapList) {
+        	log.debug("Finding Fixtures for " + teamSeasonMap.getTeam().getName() + " for " + teamSeasonMap.getSeason().getName());
+        	fixtureAvailabilityService.send(teamSeasonMap, daysBefore);
         }
-		log.debug("Updated Fixtures successfully");
+                	
+		log.debug("Sent Player Status Email successfully");
 	}
 }

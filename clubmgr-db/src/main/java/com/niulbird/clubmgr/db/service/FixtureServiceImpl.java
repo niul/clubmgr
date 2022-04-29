@@ -16,6 +16,7 @@ import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Player;
 import com.niulbird.clubmgr.db.model.PlayerFixtureInfo;
 import com.niulbird.clubmgr.db.model.Status;
+import com.niulbird.clubmgr.db.model.Team;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.repository.FixtureRepository;
 import com.niulbird.clubmgr.db.repository.PlayerFixtureInfoRepository;
@@ -50,8 +51,8 @@ public class FixtureServiceImpl implements FixtureService {
 	}
 	
 	@Override
-	public List<Fixture> findFixturesByTeamAndDateAndActive(String teamKey, Date date, Boolean active) {
-		return fixtureRepository.findByTeamTeamKeyAndDateAndActive(teamKey, date, active);
+	public List<Fixture> findFixturesByTeamAndDateAndActive(Team team, Date date, Boolean active) {
+		return fixtureRepository.findByTeamAndDateAndActive(team, date, active);
 	}
 
 	@Override

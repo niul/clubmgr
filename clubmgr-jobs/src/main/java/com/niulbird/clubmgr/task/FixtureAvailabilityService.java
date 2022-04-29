@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niulbird.clubmgr.db.model.Fixture;
+import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.service.FixtureService;
 import com.niulbird.clubmgr.email.service.EmailService;
 
@@ -27,7 +28,7 @@ public class FixtureAvailabilityService {
 	private EmailService emailService;
 
 	@Transactional
-	public void send(String teamKey, String[] daysBefore) {
+	public void send(TeamSeasonMap teamSeasonMap, String[] daysBefore) {
 		for (int i = 0; i <= daysBefore.length; i++) {
 			Date date = null;
 			boolean today = false;
@@ -40,12 +41,12 @@ public class FixtureAvailabilityService {
 			} else {
 				date = getDaysFromCurrentDate(Integer.parseInt(daysBefore[i]));
 			}
-			log.debug("Finding fixtures for TEAM [" + teamKey + "] and DATE [" + date +"]");
-			List<Fixture> fixtures = fixtureService.findFixturesByTeamAndDateAndActive(teamKey, date, true);
+			log.debug("Finding fixtures for TEAM [" + teamSeasonMap.getTeam().getTeamKey() + "] and DATE [" + date +"]");
+			List<Fixture> fixtures = fixtureService.findFixturesByTeamAndDateAndActive(teamSeasonMap.getTeam(), date, true);
 
 			for (Fixture fixture : fixtures) {
 				emailService.sendFixtureEmail(fixture.getUuid().toString(), today);
-				
+
 				// Add a little bit of time between fixtures not to overload SMTP server.
 				try {
 					Thread.sleep(30 * SECOND);

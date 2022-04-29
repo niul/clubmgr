@@ -5,11 +5,12 @@ import java.util.List;
 
 import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.PlayerFixtureInfo;
+import com.niulbird.clubmgr.db.model.Team;
 
 public interface FixtureService {
     public List<Fixture> findFixturesByDate(Date date);
     public List<Fixture> findFixturesByDateTime(Date date, int offsetStartHour, int offsetEndHour);
-	public List<Fixture> findFixturesByTeamAndDateAndActive(String teamKey, Date date, Boolean active);
+	public List<Fixture> findFixturesByTeamAndDateAndActive(Team team, Date date, Boolean active);
     public Fixture findFixtureByUuid(String uuid);
     public List<PlayerFixtureInfo> findPlayerInfoByFixture(Fixture fixture, String teamUuid, String seasonKey);
     public void updateFixtureReport(Fixture fixture, List<PlayerFixtureInfo> playerFixtureInfoList);

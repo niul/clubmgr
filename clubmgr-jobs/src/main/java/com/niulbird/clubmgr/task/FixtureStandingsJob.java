@@ -30,7 +30,7 @@ public class FixtureStandingsJob {
 	@Scheduled(cron="0 30 */3 * * *")
     public void cacheFixturesStandings() {
 		log.debug("Updating Fixtures and Standings");
-		List<TeamSeasonMap> teamSeasonMapList = teamService.findScheduledTeamSeason();
+		List<TeamSeasonMap> teamSeasonMapList = teamService.findScheduledTeamSeasonMap();
 		
 		for(TeamSeasonMap teamSeasonMap : teamSeasonMapList) {
 			log.debug("Team: " + teamSeasonMap.getTeam().getName());

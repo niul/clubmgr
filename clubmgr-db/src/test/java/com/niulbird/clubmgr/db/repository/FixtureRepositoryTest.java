@@ -79,6 +79,7 @@ public class FixtureRepositoryTest {
 		fixture.setField("FIXTURE_UNIT_TEST");
 		fixture.setHome("FIXTURE_UNIT_TEST");
 		fixture.setTime(new java.sql.Time(new java.util.Date().getTime()));
+		fixture.setActive(true);
 
 		position = new Position();
 		position.setDescription("UNIT_TEST");
@@ -130,6 +131,14 @@ public class FixtureRepositoryTest {
 		assertNotNull(testFixture);
 		assertNotNull(testFixture.getTeam());
 		assertNotNull(testFixture.getSeason());
+	}
+	
+
+	
+	@Test
+	public void findTeamDateActiveTest() {
+		List<Fixture> fixtures = repository.findByTeamAndDateAndActive(team, new java.sql.Date(new java.util.Date().getTime()), true);
+		assertNotNull(fixtures);
 	}
 	
 	@Test

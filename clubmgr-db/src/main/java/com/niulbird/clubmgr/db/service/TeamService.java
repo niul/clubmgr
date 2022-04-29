@@ -17,7 +17,9 @@ public interface TeamService {
 	public Team findByUuid(String uuid);
 	public List<Team> findByUuid(String[] uuid);
     public TeamSeasonMap findTeamSeasonMap(String teamKey, String seasonKey);
-    public List<TeamSeasonMap> findScheduledTeamSeason();
+    public TeamSeasonMap findTeamSeasonMap(Team team, Season season);
+    public List<TeamSeasonMap> findScheduledTeamSeasonMap();
+    public List<TeamSeasonMap> findEmailTeamSeasonMap();
     public List<Fixture> findFixtures(Team team, Season season);
     public List<Standing> findStandings(Team team, Season season);
     public List<Fixture> createFixtures(List<Fixture> fixtures);

@@ -31,7 +31,7 @@
       <artifactId>spring-security-core</artifactId>
       <version>${spring.security.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>javax.mail</groupId>
       <artifactId>mail</artifactId>
@@ -53,17 +53,16 @@
       <version>2.3.23</version>
     </dependency>
   </dependencies>
-  
 
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>3.1</version>
+        <version>3.8.1</version>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>11</source>
+          <target>11</target>
         </configuration>
       </plugin>
     </plugins>

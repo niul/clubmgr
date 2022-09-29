@@ -15,13 +15,15 @@
         http://www.springframework.org/schema/context/spring-context-4.1.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
-        http://www.springframework.org/schema/cache 
+        http://www.springframework.org/schema/context
+   		http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/cache
         http://www.springframework.org/schema/cache/spring-cache.xsd
         http://www.springframework.org/schema/data/jpa
     	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-    	http://www.springframework.org/schema/tx 
+    	http://www.springframework.org/schema/tx
     	http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util
 		http://www.springframework.org/schema/util/spring-util-4.1.xsd">
 
 
@@ -30,7 +32,7 @@
 	<context:component-scan base-package="com.niulbird.clubmgr" />
 	<jpa:repositories base-package="com.niulbird.clubmgr.db.repository" />
 	<mvc:annotation-driven />
-	
+
 	<!-- Message Source -->
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -40,7 +42,7 @@
       		</list>
     	</property>
     </bean>
-    
+
     <!-- Theme Change Interceptor and Resolver definition -->
 	<bean id="themeSource"
 		class="org.springframework.ui.context.support.ResourceBundleThemeSource">
@@ -52,10 +54,10 @@
 	<bean id="themeResolver" class="org.springframework.web.servlet.theme.CookieThemeResolver">
     	<property name="defaultThemeName" value="default" />
 	</bean>
-    
+
     <context:property-placeholder location="classpath:global-test.properties"/>
 	<util:properties id="props" location="classpath:global-test.properties" />
- 	
+
     <!-- Spring Mail configuration -->
  	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
     	<property name="host" value="${mail.smtp.host}" />
@@ -71,7 +73,7 @@
         	</props>
     	</property>
 	</bean>
-  
+
 	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
 		<property name="to">
         	<value><![CDATA[${email.toName} <${email.toEmail}>]]></value>
@@ -81,22 +83,22 @@
     	</property>
         <property name="subject" value="${email.subject}"/>
     </bean>
-    
+
     <!-- Wordpress Service -->
     <bean id="wordPressDao" class="com.niulbird.clubmgr.util.wordpress.DefaultWordPressDao">
     	<property name="baseUrl" value="${wordpress.site.baseUrl}"/>
     	<property name="siteName" value="${wordpress.site.name}"/>
     </bean>
-    
+
     <!-- Cache -->
     <cache:annotation-driven />
     <bean id="cacheManager"
-      class="org.springframework.cache.ehcache.EhCacheCacheManager" 
+      class="org.springframework.cache.ehcache.EhCacheCacheManager"
       p:cache-manager-ref="ehcache"/>
 
 	<!-- EhCache library setup -->
 	<bean id="ehcache"
-      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" 
+      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
       p:config-location="classpath:ehcache.xml"
       p:shared="true"/>
 
@@ -107,7 +109,7 @@
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
     </bean>
-		
+
 	<!-- session factory -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="dataSource" ref="dataSource" />
@@ -131,7 +133,7 @@
     	<property name="dataSource" ref="dataSource"/>
     	<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>
-	
+
 	<tx:annotation-driven transaction-manager="transactionManager"
         proxy-target-class="true" />
 </beans>

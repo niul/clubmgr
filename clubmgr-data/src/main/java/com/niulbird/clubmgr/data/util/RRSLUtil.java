@@ -21,16 +21,16 @@ import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 public class RRSLUtil extends BaseUtil {
 	// Logger for this class and subclasses
     private final Log logger = LogFactory.getLog(getClass());
-    
+
     private final static String TIME_FORMAT = "h:mma";
     private final static String DATE_FORMAT = "dd-MMM-yyyy";
-    
+
     public RRSLUtil(Properties props) {
     	this.props = props;
     }
-    
+
 	public List<Fixture> getFixtures(TeamSeasonMap teamSeasonMap) {
-		
+
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getFixturesUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
@@ -43,23 +43,23 @@ public class RRSLUtil extends BaseUtil {
 					Fixture fixture = new Fixture();
 					fixture.setUuid(UUID.randomUUID());
 					fixture.setActive(true);
-					
+
 					String strDate = columns.get(1).text().trim().split("\\s+")[1];
 					if (!strDate.isEmpty()) {
 						date = convertStringToDate(strDate, DATE_FORMAT);
 					}
 					fixture.setDate(date);
-					
+
 					String time = columns.get(2).text().trim().split("\\s+")[0] + "M";
 					fixture.setTime(convertStringToTime(time, TIME_FORMAT));
-					
+
 					fixture.setHome(columns.get(3).text().split("\\s\\(")[0].trim());
 					fixture.setHomeScore(columns.get(4).text().replaceAll("\u00a0", "").trim());
 					fixture.setAway(columns.get(5).text().split("\\s\\(")[0].trim());
 					fixture.setAwayScore(columns.get(6).text().replaceAll("\u00a0", "").trim());
 					fixture.setField(columns.get(7).text().trim());
 					fixture.setFieldMapUri(props.getProperty("field.url." + fixture.getField().replaceAll(" ", "")));
-					
+
 					fixture.setSeason(teamSeasonMap.getSeason());
 					fixture.setTeam(teamSeasonMap.getTeam());
 
@@ -73,13 +73,13 @@ public class RRSLUtil extends BaseUtil {
 
 		return fixtures;
 	}
-	
+
 	public List<Standing> getStandings(TeamSeasonMap teamSeasonMap) {
 		List<Standing> standings = new ArrayList<Standing>();
 		try {
 			Document doc = Jsoup.connect(teamSeasonMap.getStandingsUri()).timeout(Integer.parseInt(props.getProperty("jsoup.timeout"))).get();
 			Element element = doc.select("table#table1").first();
-			
+
 			Elements rows = element.getElementsByTag("tr");
 			for (int i = 1; i < rows.size(); i++) {
 				Element row = rows.get(i);
@@ -89,7 +89,7 @@ public class RRSLUtil extends BaseUtil {
 					standing.setUuid(UUID.randomUUID());
 					standing.setSeason(teamSeasonMap.getSeason());
 					standing.setTeam(teamSeasonMap.getTeam());
-					standing.setPosition(new Integer(i));
+					standing.setPosition(Integer.valueOf(i));
 					standing.setTeamName(columns.get(0).text());
 					try {
 						standing.setGamesPlayed(getStripedInt(columns.get(1).text()));
@@ -99,7 +99,7 @@ public class RRSLUtil extends BaseUtil {
 						standing.setPoints(getStripedInt(columns.get(5).text()));
 						standing.setGoalsFor(getStripedInt(columns.get(6).text()));
 						standing.setGoalsAgainst(getStripedInt(columns.get(7).text()));
-					
+
 						standings.add(standing);
 						logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
 					} catch (NumberFormatException nfe) {

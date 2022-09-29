@@ -1,7 +1,6 @@
 package com.niulbird.clubmgr.data;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -24,12 +23,12 @@ import com.niulbird.clubmgr.db.model.Standing;
 public class BCMSLDataManagerTest {
 	@Autowired
 	private DataManagerFactory dataManagerFactory;
-	
+
 	@Before
 	public void setUp() {
 	}
-	
-	@After 
+
+	@After
 	public void teardown() {
 	}
 

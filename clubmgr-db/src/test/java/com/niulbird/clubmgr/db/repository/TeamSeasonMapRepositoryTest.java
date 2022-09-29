@@ -21,7 +21,6 @@ import com.niulbird.clubmgr.db.model.Club;
 import com.niulbird.clubmgr.db.model.Season;
 import com.niulbird.clubmgr.db.model.Team;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
-import com.niulbird.clubmgr.db.repository.ClubRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -39,18 +38,18 @@ public class TeamSeasonMapRepositoryTest {
 	Team team;
 	Season season;
 	TeamSeasonMap teamSeasonMap;
-	
+
 	@Before
 	public void setUp() {
 		club = new Club();
 		club.setClubKey("TEAM_SEASON_MAP_UNIT_TEST");
 		club.setName("TEAM_SEASON_MAP_UNIT_TEST");
-		
+
 		team = new Team();
 		team.setTeamKey("TEAM_SEASON_MAP_UNIT_TEST");
 		team.setName("TEAM_SEASON_MAP_UNIT_TEST");
 		team.setClub(club);
-		
+
 		season = new Season();
 		season.setSeasonKey("TEAM_SEASON_MAP_UNIT_TEST");
 		season.setName("TEAM_SEASON_MAP_UNIT_TEST");
@@ -64,32 +63,32 @@ public class TeamSeasonMapRepositoryTest {
 		teamSeasonMap.setDataKey("UNIT_TEST");
 		teamSeasonMap.setDescription("TEAM_SEASON_MAP_UNIT_TEST");
 		teamSeasonMap.setScheduled(true);
-		
+
 		club = clubRepository.save(club);
 		team = teamRepository.save(team);
 		season = seasonRepository.save(season);
 		teamSeasonMap = repository.save(teamSeasonMap);
 	}
-	
+
 	@After
 	public void teardown() {
 		seasonRepository.delete(seasonRepository.findBySeasonKey("TEAM_SEASON_MAP_UNIT_TEST"));
 		clubRepository.delete(clubRepository.findByClubKey("TEAM_SEASON_MAP_UNIT_TEST"));
 	}
-	
+
 	@Test
 	public void findOneTest() {
 		TeamSeasonMap testTeamSeasonMap = repository.findById(teamSeasonMap.getTeamSeasonMapId()).get();
 		assertNotNull(testTeamSeasonMap);
 		assertNotNull(testTeamSeasonMap.getTeam());
 	}
-	
+
 	@Test
 	@Rollback(false)
 	public void findSavedTeamById() {
 		assertEquals(teamSeasonMap, repository.findById(teamSeasonMap.getTeamSeasonMapId()).get());
 	}
-	
+
 	@Test
 	@Rollback(false)
 	public void findByTeamTeamKeyAndSeasonSeasonKeyTest() {
@@ -97,7 +96,7 @@ public class TeamSeasonMapRepositoryTest {
 		assertNotNull(testTeamSeasonMap);
 		assertNotNull(testTeamSeasonMap.getTeam());
 	}
-	
+
 	@Test
 	@Rollback(false)
 	public void findByScheduledTest() {

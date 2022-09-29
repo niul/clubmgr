@@ -7,14 +7,13 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.niulbird.clubmgr.BaseTestCase;
-import com.niulbird.clubmgr.util.wordpress.WordPressDao;
 import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 public class WordPressServiceTest extends BaseTestCase {
 
-	@Autowired 
+	@Autowired
 	WordPressDao wordPressDao;
-	
+
 	@Test
 	public void getPosts() {
 		ArrayList<Post> posts = null;
@@ -23,7 +22,7 @@ public class WordPressServiceTest extends BaseTestCase {
 		posts = wordPressDao.getAllPosts();
 		Assert.assertNotNull(posts);
 	}
-	
+
 	@Test
 	public void getPost() {
 		Post post = null;

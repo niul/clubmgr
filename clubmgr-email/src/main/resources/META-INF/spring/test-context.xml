@@ -23,10 +23,10 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.niulbird.clubmgr" />
 	<jpa:repositories base-package="com.niulbird.clubmgr.db.repository" />
-    
+
     <context:property-placeholder location="classpath:global-test.properties"/>
 	<util:properties id="props" location="classpath:global-test.properties" />
-    
+
       <!-- Message Source -->
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -36,7 +36,7 @@
           </list>
       </property>
     </bean>
-    
+
         <!-- Spring Mail configuration -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="${mail.smtp.host}" />
@@ -49,26 +49,27 @@
               <prop key="mail.smtp.auth">true</prop>
               <!-- Use TLS to encrypt communication with SMTP server -->
               <prop key="mail.smtp.starttls.enable">true</prop>
+              <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
           </props>
       </property>
     </bean>
-    
+
     <bean id="freeMarkerConfigurationFactory" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
       <property name="templateLoaderPath" value="classpath:templates"/>
       <property name="preferFileSystemAccess" value="false"/>
     </bean>
     <bean id="freeMarkerConfiguration" class="freemarker.template.Configuration" factory-bean="freeMarkerConfigurationFactory" factory-method="createConfiguration" scope="prototype"/>
-  
-    
+
+
     <!-- Cache -->
     <cache:annotation-driven />
     <bean id="cacheManager"
-      class="org.springframework.cache.ehcache.EhCacheCacheManager" 
+      class="org.springframework.cache.ehcache.EhCacheCacheManager"
       p:cache-manager-ref="ehcache"/>
 
 	<!-- EhCache library setup -->
 	<bean id="ehcache"
-      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" 
+      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
       p:config-location="classpath:ehcache.xml"
       p:shared="true"/>
 
@@ -79,7 +80,7 @@
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
     </bean>
-		
+
 	<!-- session factory -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="dataSource" ref="dataSource" />
@@ -103,8 +104,8 @@
     	<property name="dataSource" ref="dataSource"/>
     	<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>
-	
+
 	<tx:annotation-driven transaction-manager="transactionManager"
         proxy-target-class="true" />
-    
+
 </beans>

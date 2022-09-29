@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niulbird.clubmgr.db.model.Season;
-import com.niulbird.clubmgr.db.repository.SeasonRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -22,7 +21,7 @@ public class SeasonRepositoryTest {
 	@Autowired
 	private SeasonRepository repository;
 	Season season;
-	
+
 	@Before
 	public void setUp() {
 		season = new Season();
@@ -30,17 +29,17 @@ public class SeasonRepositoryTest {
 		season.setName("SEASON_UNIT_TEST");
 		repository.save(season);
 	}
-	
+
 	@After
 	public void teardown() {
 		repository.delete(season);
 	}
-	
+
 	@Test
 	public void findSavedSeasonById() {
 		assertEquals(season, repository.findById(season.getSeasonId()).get());
 	}
-	
+
 	@Test
 	public void findSeasonByKeyTest() {
 		Season testSeason = repository.findBySeasonKey("SEASON_UNIT_TEST");

@@ -31,19 +31,19 @@ public class TeamServiceImpl implements TeamService {
     private final Log logger = LogFactory.getLog(getClass());
 	@Autowired
 	private TeamRepository teamRepository;
-	
+
 	@Autowired
 	private TeamSeasonMapRepository teamSeasonMapRepository;
-	
+
 	@Autowired
 	private FixtureRepository fixtureRepository;
-	
+
 	@Autowired
 	private StandingRepository standingRepository;
-	
+
 	@Autowired
 	private PlayerFixtureInfoRepository playerFixtureInfoRepository;
-	
+
 	@Override
 	@Transactional
 	public Team create(Team team) {
@@ -66,7 +66,7 @@ public class TeamServiceImpl implements TeamService {
 	@Transactional
 	public List<Team> findByUuid(String[] uuids) {
 		List<UUID> uuidList = new ArrayList<UUID>();
-		
+
 		for (String uuid : uuids) {
 			uuidList.add(UUID.fromString(uuid));
 		}
@@ -103,7 +103,7 @@ public class TeamServiceImpl implements TeamService {
 		updatedTeam.setClub(team.getClub());
 		updatedTeam.setTeamKey(team.getTeamKey());
 		updatedTeam.setCreated(team.getCreated());
-		
+
 		return updatedTeam;
 	}
 
@@ -116,15 +116,15 @@ public class TeamServiceImpl implements TeamService {
 	public TeamSeasonMap findTeamSeasonMap(Team team, Season season) {
 		return teamSeasonMapRepository.findByTeamAndSeason(team, season);
 	}
-	
+
 	@Override
 	public List<TeamSeasonMap> findScheduledTeamSeasonMap() {
 		return teamSeasonMapRepository.findByScheduled(true);
 	}
-	
+
 	@Override
-	public List<TeamSeasonMap> findEmailTeamSeasonMap() {
-		return teamSeasonMapRepository.findByEmail(true);
+	public List<TeamSeasonMap> findScheduledEmailTeamSeasonMap() {
+		return teamSeasonMapRepository.findByScheduledAndEmail(true, true);
 	}
 
 	@Override
@@ -139,12 +139,12 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public List<Fixture> createFixtures(List<Fixture> fixtures) {
-		return fixtureRepository.saveAll(fixtures);	
+		return fixtureRepository.saveAll(fixtures);
 	}
 
 	@Override
 	public List<Standing> createStandings(List<Standing> standings) {
-		return standingRepository.saveAll(standings);	
+		return standingRepository.saveAll(standings);
 	}
 
 
@@ -164,14 +164,14 @@ public class TeamServiceImpl implements TeamService {
 					dbFixture = dbFixtures.get(0);
 				}
 				if (dbFixture == null) {
-					logger.debug("Saving Fixture: \tDate: " + fixture.getDate() + "\tHome: " + fixture.getHome() + "\tAway: " + fixture.getAway() 
+					logger.debug("Saving Fixture: \tDate: " + fixture.getDate() + "\tHome: " + fixture.getHome() + "\tAway: " + fixture.getAway()
 					+ "\tHomeScore: " + fixture.getHomeScore() + "\tAwayScore: " + fixture.getAwayScore());
 					fixtureRepository.save(fixture);
 					allDbFixtures.add(fixture);
 				} else {
-					logger.debug("Updating Fixture: \tID: " + dbFixture.getFixtureId() + "\tDate: " + fixture.getDate() + "\tHome: " + fixture.getHome() + "\tAway: " + fixture.getAway() 
+					logger.debug("Updating Fixture: \tID: " + dbFixture.getFixtureId() + "\tDate: " + fixture.getDate() + "\tHome: " + fixture.getHome() + "\tAway: " + fixture.getAway()
 					+ "\tHomeScore: " + fixture.getHomeScore() + "\tAwayScore: " + fixture.getAwayScore());
-					
+
 					// If this is a date change, then remove all Player Fixture Info if great than 5 days.
 					long daysBetween = ChronoUnit.DAYS.between(LocalDate.parse(dbFixture.getDate().toString()), LocalDate.parse(fixture.getDate().toString()));
 					if ( daysBetween > 5 ) {
@@ -198,6 +198,6 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public List<Standing> updateStandings(Team team, Season season, List<Standing> standings) {
 		standingRepository.deleteByTeamAndSeason(team, season);
-		return standingRepository.saveAll(standings);	
+		return standingRepository.saveAll(standings);
 	}
 }

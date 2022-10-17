@@ -19,7 +19,7 @@ public interface TeamService {
     public TeamSeasonMap findTeamSeasonMap(String teamKey, String seasonKey);
     public TeamSeasonMap findTeamSeasonMap(Team team, Season season);
     public List<TeamSeasonMap> findScheduledTeamSeasonMap();
-    public List<TeamSeasonMap> findEmailTeamSeasonMap();
+    public List<TeamSeasonMap> findScheduledEmailTeamSeasonMap();
     public List<Fixture> findFixtures(Team team, Season season);
     public List<Standing> findStandings(Team team, Season season);
     public List<Fixture> createFixtures(List<Fixture> fixtures);

@@ -14,5 +14,5 @@ public interface TeamSeasonMapRepository extends JpaRepository<TeamSeasonMap, In
 	TeamSeasonMap findByTeamTeamKeyAndSeasonSeasonKey(String teamKey, String seasonKey);
 	TeamSeasonMap findByTeamAndSeason(Team team, Season season);
 	List<TeamSeasonMap> findByScheduled(Boolean scheduled);
-	List<TeamSeasonMap> findByEmail(Boolean scheduled);
+	List<TeamSeasonMap> findByScheduledAndEmail(Boolean scheduled, Boolean email);
 }

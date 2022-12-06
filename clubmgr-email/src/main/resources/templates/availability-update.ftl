@@ -27,12 +27,19 @@
 											  <tr><td>${playerFixtureInfo.player.firstName} ${playerFixtureInfo.player.lastName}</td></tr>
                                 			  <tr><td width="100%" height="20"></td></tr>
 											  <tr><td><strong>${msg("email.availability.update.date")}:</strong></td></tr>
-											  <!--tr><td>${playerFixtureInfo.fixture.date?string["EEE, MMM d"]} @ ${playerFixtureInfo.fixture.time?string["hh:mm a"]}</td></tr-->
-											  <tr><td>${playerFixtureInfo.fixture.date} @ ${playerFixtureInfo.fixture.time}</td></tr>
+											  <tr><td>${playerFixtureInfo.fixture.date?string["EEE, MMM d"]} @ ${playerFixtureInfo.fixture.time?string["hh:mm a"]}</td></tr>
                                 			  <tr><td width="100%" height="20"></td></tr>
-											  <tr><td><strong>${msg("email.fixture.home")}:</strong></td><td>${playerFixtureInfo.fixture.home}</td></tr>
+											  <tr><td><strong>${msg("email.fixture.home")}:</strong></td></tr>
+											  <tr><td>${playerFixtureInfo.fixture.home}</td></tr>
 											  <tr><td width="100%" height="20"></td></tr>
-											  <tr><td><strong>${msg("email.fixture.away")}:</strong></td><td>${playerFixtureInfo.fixture.away}</td></tr>
+											  <tr><td><strong>${msg("email.fixture.away")}:</strong></td></tr>
+											  <tr><td>${playerFixtureInfo.fixture.away}</td></tr>
+											  <tr><td width="100%" height="20"></td></tr>
+											  <tr><td><strong>${msg("email.availability.update.newStatus")}:</strong></td></tr>
+											  <tr><td>${playerFixtureInfo.status}</td></tr>
+											  <tr><td width="100%" height="20"></td></tr>
+											  <tr><td><strong>${msg("email.availability.update.oldStatus")}:</strong></td></tr>
+											  <tr><td>${oldStatus}</td></tr>
 											</table>
                                     </td>
                                  </tr>

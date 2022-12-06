@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/views/taglibs.jsp"%>
 
-<link type='text/css' rel='stylesheet' href='<c:url value="/static/css/jquery.te.css"/>' charset='utf-8' >
+<link type='text/css' rel='stylesheet' href='<c:url value="/static/css/jquery.te.css"/>' >
 <script type='text/javascript' src='<c:url value="/static/js/jquery.te.min.js"/>' charset='utf-8'></script>
 
 	<div id="previewPanel" class="previewPanel" style="display:none">

@@ -30,28 +30,28 @@ import freemarker.template.TemplateException;
 @Service
 public class EmailService {
 	Logger log = LogManager.getLogger();
-	
+
 	private static final int SECOND = 1000;
 
 	@Autowired
 	Properties props;
-	
+
 	@Autowired
 	private MessageSource messageSource;
 
 	@Autowired
 	private Configuration freeMarkerConfiguration;
-	
+
 	@Autowired
 	private JavaMailSenderImpl mailSender;
-	
+
 	@Autowired
 	private FixtureService fixtureService;
-	
+
 	@Async
 	public void sendContactEmail(Map<String, Object> map) {
 		MailUtil mailUtil = new MailUtil();
-		
+
 		String body = new String();
 
 		try {
@@ -61,16 +61,16 @@ public class EmailService {
 		} catch (IOException | TemplateException e) {
 			log.error("Error generating freemarker template: " + e.getMessage(), e);
 		}
-					
+
 		String[] emailList = props.getProperty("email.toEmail.contact." + map.get("subject")).split("\\|");
-		
+
 		mailUtil.sendMail(mailSender, emailList, props.getProperty("email.subject.contact"), body, props);
 	}
-	
+
 	@Async
 	public void sendPasswordResetEmail(Map<String, Object> map) {
 		MailUtil mailUtil = new MailUtil();
-		
+
 		String body = new String();
 
 		try {
@@ -80,9 +80,9 @@ public class EmailService {
 		} catch (IOException | TemplateException e) {
 			log.error("Error generating freemarker template: " + e.getMessage(), e);
 		}
-					
+
 		String[] emailList = new String[]{(String) map.get("email")};
-		
+
 		mailUtil.sendMail(mailSender, emailList, props.getProperty("email.subject.password"), body, props);
 	}
 
@@ -91,18 +91,18 @@ public class EmailService {
 	public void sendFixtureEmailAsync(String uuid, boolean today) {
 		sendFixtureEmail(uuid, today);
 	}
-	
+
 	@Transactional
 	public void sendFixtureEmail(String uuid, boolean today) {
 		MailUtil mailUtil = new MailUtil();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE, MMM d");
 		SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
-		
+
 		Fixture fixture = fixtureService.findFixtureByUuid(uuid);
-		
+
 		log.debug("Fixture: " + fixture.getFixtureId());
 		log.debug("Date: " + fixture.getDate());
-		
+
 		List<PlayerFixtureInfo> playerFixtureInfoList = fixtureService.findPlayerInfoByFixture(fixture);
 
 		for (PlayerFixtureInfo playerFixtureInfo : playerFixtureInfoList) {
@@ -117,7 +117,7 @@ public class EmailService {
 					map.put("msg", new MessageResolverMethod(messageSource, null));
 					map.put("fixture", fixture);
 					map.put("playerFixtureInfo", playerFixtureInfo);
-					
+
 					if (today) {
 						body = FreeMarkerTemplateUtils
 								.processTemplateIntoString(freeMarkerConfiguration.getTemplate("fixture-final.ftl"), map);
@@ -144,7 +144,7 @@ public class EmailService {
 					log.error("Error sending Email: " + e.getMessage(), e);
 				}
 				log.debug("Message sent to [" + playerFixtureInfo.getPlayer().getEmail() + "]: " + isSent);
-				
+
 				// Give some time between sending out emails not to overload SMTP server.
 				try {
 					Thread.sleep(3 * SECOND);
@@ -154,5 +154,26 @@ public class EmailService {
 			}
 		}
 	}
-	
+
+
+
+	@Async
+	public void sendAvailabilityUpdateEmail(Map<String, Object> map) {
+		MailUtil mailUtil = new MailUtil();
+
+		String body = new String();
+
+		try {
+			map.put("msg", new MessageResolverMethod(messageSource, null));
+			body = FreeMarkerTemplateUtils
+					.processTemplateIntoString(freeMarkerConfiguration.getTemplate("availability-update.ftl"), map);
+		} catch (IOException | TemplateException e) {
+			log.error("Error generating freemarker template: " + e.getMessage(), e);
+		}
+
+		String[] emailList = props.getProperty("email.toEmail.availability.update").split("\\|");
+
+		mailUtil.sendMail(mailSender, emailList, messageSource.getMessage("email.availability.update.subject", null, null), body, props);
+	}
+
 }

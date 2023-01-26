@@ -145,7 +145,7 @@ public class MWSLUtil extends BaseUtil {
 								standing.setSeason(teamSeasonMap.getSeason());
 								standing.setTeam(teamSeasonMap.getTeam());
 								standing.setPosition(Integer.valueOf(i));
-								standing.setTeamName(columns.get(0).text());
+								standing.setTeamName(columns.get(0).text().replaceAll("^[0-9]* ", ""));
 								standing.setGamesPlayed(getStripedInt(columns.get(1).text()));
 								standing.setWins(getStripedInt(columns.get(2).text()));
 								standing.setTies(getStripedInt(columns.get(3).text()));

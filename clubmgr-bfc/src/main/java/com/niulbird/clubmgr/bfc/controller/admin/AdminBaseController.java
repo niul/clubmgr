@@ -1,7 +1,7 @@
 package com.niulbird.clubmgr.bfc.controller.admin;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +53,7 @@ public abstract class AdminBaseController extends BaseController {
 		// Get the user and associate rule to determine Team list.
 		String username = getPrincipal();
 		User user = userService.getUser(username);
-		List<Team> teams = new ArrayList<Team>();
+		Set<Team> teams;
 		if (request.isUserInRole(ADMIN)) {
 			teams = user.getClub().getTeams();
 		} else {
@@ -72,7 +72,7 @@ public abstract class AdminBaseController extends BaseController {
 			selectedTeam.setUuid(allUuid);
 			selectedTeam.setName(messageSource.getMessage("admin.menu.filter.all", null, null));
 		} else {
-			selectedTeam = teams.get(0);
+			selectedTeam = teams.iterator().next();
 		}
 		
 		if (StringUtils.isNotEmpty(teamUuid)) {

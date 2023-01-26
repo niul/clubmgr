@@ -5,8 +5,9 @@ import static org.junit.Assert.assertNotNull;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.junit.After;
@@ -64,7 +65,7 @@ public class FixtureRepositoryTest {
 		team.setTeamKey("FIXTURE_UNIT_TEST");
 		team.setName("FIXTURE_UNIT_TEST");
 		team.setClub(club);
-		List<Team> teams = new ArrayList<Team>();
+		Set<Team> teams = new HashSet<Team>();
 		teams.add(team);
 		
 		season = new Season();

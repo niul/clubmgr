@@ -16,24 +16,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "standings")
 public final class Standing {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "standing_id", nullable = false)
     private Integer standingId;
 
 	private UUID uuid;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "team_id")
     private Team team;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "season_id")
     private Season season;
 
 	private Integer position;
 	
-	@Column(name = "team")
 	private String teamName;
 	
 	private Integer gamesPlayed;
@@ -49,7 +41,10 @@ public final class Standing {
 	public Standing() {
 		created = new Date();
 	}
-	
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "standing_id", nullable = false)
 	public Integer getStandingId() {
 		return standingId;
 	}
@@ -66,6 +61,8 @@ public final class Standing {
 		this.uuid = uuid;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "team_id")
 	public Team getTeam() {
 		return team;
 	}
@@ -74,6 +71,8 @@ public final class Standing {
 		this.team = team;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "season_id")
 	public Season getSeason() {
 		return season;
 	}
@@ -90,6 +89,7 @@ public final class Standing {
 		this.position = position;
 	}
 
+	@Column(name = "team")
 	public String getTeamName() {
 		return teamName;
 	}

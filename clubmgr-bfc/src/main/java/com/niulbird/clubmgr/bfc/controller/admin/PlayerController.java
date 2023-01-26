@@ -1,8 +1,8 @@
 package com.niulbird.clubmgr.bfc.controller.admin;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -124,7 +124,7 @@ public class PlayerController extends AdminBaseController {
 		if (player.getTeams().size() == 0 && teamUuid != null) {
 			Team team = teamService.findByUuid(teamUuid);
 			if (team != null) {
-				List<Team> teams = new ArrayList<Team>();
+				Set<Team> teams = new HashSet<Team>();
 				teams.add(team);
 				player.setTeams(teams);
 			}

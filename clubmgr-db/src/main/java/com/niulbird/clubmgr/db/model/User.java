@@ -1,7 +1,8 @@
 package com.niulbird.clubmgr.db.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -31,8 +33,8 @@ public final class User {
 	private Boolean changePassword;
 	private Date created;
 	
-	private List<Role> roles;
-	private List<Team> teams;
+	private Set<Role> roles = new HashSet<>();
+	private Set<Team> teams = new HashSet<>();
 
 	public User () {
 		created = new Date();
@@ -136,21 +138,23 @@ public final class User {
 	
 	@ManyToMany
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 	
+
+	@OrderBy("teamId")
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_teams", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
-    public List<Team> getTeams() {
+    public Set<Team> getTeams() {
         return teams;
     }
 
-    public void setTeams(List<Team> teams) {
+    public void setTeams(Set<Team> teams) {
         this.teams = teams;
     }
 }

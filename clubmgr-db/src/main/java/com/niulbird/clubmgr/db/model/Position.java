@@ -12,15 +12,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "positions")
 public final class Position {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "position_id")
     private Integer positionId;
 	
-	@Column(name = "position_key")
 	private String key;
-	
-	@Column(name = "position_desc")
 	private String description;
 	
 	private Date created;
@@ -28,7 +22,10 @@ public final class Position {
 	public Position () {
 		created = new Date();
 	}
-	
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "position_id")
 	public Integer getPositionId() {
 		return positionId;
 	}
@@ -37,6 +34,7 @@ public final class Position {
 		this.positionId = positionId;
 	}
 
+	@Column(name = "position_key")
 	public String getKey() {
 		return key;
 	}
@@ -44,7 +42,8 @@ public final class Position {
 	public void setKey(String key) {
 		this.key = key;
 	}
-
+	
+	@Column(name = "position_desc")
 	public String getDescription() {
 		return description;
 	}

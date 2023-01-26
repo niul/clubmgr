@@ -1,10 +1,10 @@
 package com.niulbird.clubmgr;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.junit.Test;
@@ -54,7 +54,7 @@ public class FixtureAvailabilityJobTest extends BaseTestCase {
 		team.setTeamKey("FIXTURE_UNIT_TEST");
 		team.setName("FIXTURE_UNIT_TEST");
 		team.setClub(club);
-		List<Team> teams = new ArrayList<Team>();
+		Set<Team> teams = new HashSet<Team>();
 		teams.add(team);
 
 		season = new Season();

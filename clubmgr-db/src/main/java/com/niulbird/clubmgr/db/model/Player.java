@@ -1,9 +1,11 @@
 package com.niulbird.clubmgr.db.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +28,9 @@ import org.hibernate.validator.constraints.Email;
 @Table(name = "players")
 public final class Player {
     private Integer playerId;
+	
 	private UUID uuid;
+	
     private Club club;
 
 	@NotNull @Size(min=2, max=40) @Pattern(regexp="[A-Z][a-z]+( [A-Z][a-z]+)?")
@@ -51,8 +55,11 @@ public final class Player {
 	private Boolean enabled;
 	private Date created;
 
-	private List<Team> teams;
-	private List<TeamSeasonMap> teamSeasonMaps;
+
+	private Set<Team> teams = new HashSet<>();
+	
+	private Set<TeamSeasonMap> teamSeasonMaps = new HashSet<>();
+	
 	private Position position;
 
 	public Player () {
@@ -201,24 +208,25 @@ public final class Player {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "player_teams", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
-    public List<Team> getTeams() {
+    public Set<Team> getTeams() {
         return teams;
     }
 
-    public void setTeams(List<Team> teams) {
+    public void setTeams(Set<Team> teams) {
         this.teams = teams;
     }
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "player_team_season_map", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "team_season_map_id"))
-    public List<TeamSeasonMap> getTeamSeasonMaps() {
-        return teamSeasonMaps;
-    }
 
-    public void setTeamSeasonMaps(List<TeamSeasonMap> teamSeasonMaps) {
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "player_team_season_map", joinColumns = {
+			@JoinColumn(name = "player_id") }, inverseJoinColumns = { @JoinColumn(name = "team_season_map_id") })
+	public Set<TeamSeasonMap> getTeamSeasonMaps() {
+		return teamSeasonMaps;
+	}
+
+    public void setTeamSeasonMaps(Set<TeamSeasonMap> teamSeasonMaps) {
         this.teamSeasonMaps = teamSeasonMaps;
     }
 

@@ -1,7 +1,8 @@
 package com.niulbird.clubmgr.db.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -11,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,32 +19,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "teams")
 public final class Team {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "team_id", nullable = false)
     private Integer teamId;
 
 	private UUID uuid;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "club_id")
     private Club club;
 	
 	private String name;
 	
-	@Column(name = "team_key", nullable = false)
 	private String teamKey;
 	
 	private Date created;
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "player_teams", joinColumns = @JoinColumn(name = "team_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
-	private List<Player> players;
+
+	private Set<Player> players = new HashSet<>();
 	
 	public Team() {
 		created = new Date();
 	}
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "team_id", nullable = false)
 	public Integer getTeamId() {
 		return teamId;
 	}
@@ -61,6 +56,8 @@ public final class Team {
 		this.uuid = uuid;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "club_id")
 	public Club getClub() {
 		return club;
 	}
@@ -77,6 +74,7 @@ public final class Team {
 		this.name = name;
 	}
 
+	@Column(name = "team_key", nullable = false)
 	public String getTeamKey() {
 		return teamKey;
 	}
@@ -93,12 +91,15 @@ public final class Team {
 		this.created = created;
 	}
 
-	
-    public List<Player> getPlayers() {
+
+	//@ManyToMany(fetch = FetchType.EAGER)
+    //@JoinTable(name = "player_teams", joinColumns = @JoinColumn(name = "team_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "teams")
+    public Set<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(Set<Player> players) {
         this.players = players;
     }
     

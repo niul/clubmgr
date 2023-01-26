@@ -12,14 +12,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "seasons")
 public final class Season {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "season_id")
     private Integer seasonId;
 	
 	private String name;
-	
-	@Column(name = "season_key", nullable = false)
 	private String seasonKey;
 	
 	private Date created;
@@ -27,7 +22,10 @@ public final class Season {
 	public Season () {
 		created = new Date();
 	}
-	
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "season_id")
 	public Integer getSeasonId() {
 		return seasonId;
 	}
@@ -44,6 +42,7 @@ public final class Season {
 		this.name = name;
 	}
 
+	@Column(name = "season_key", nullable = false)
 	public String getSeasonKey() {
 		return seasonKey;
 	}

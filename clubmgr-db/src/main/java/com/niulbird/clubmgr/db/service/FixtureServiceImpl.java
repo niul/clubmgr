@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.apache.commons.logging.Log;
@@ -79,7 +80,7 @@ public class FixtureServiceImpl implements FixtureService {
 		
 		if (playerFixtureStatisticList.size() == 0) {
 			TeamSeasonMap teamSeasonMap = teamSeasonMapRepository.findByTeamTeamKeyAndSeasonSeasonKey(teamRepository.findByUuid(UUID.fromString(teamUuid)).getTeamKey(), seasonKey);
-			List<Player> players = teamSeasonMap.getPlayers();
+			Set<Player> players = teamSeasonMap.getPlayers();
 			for (Player player : players) {
 				PlayerFixtureInfo playerFixtureStatistic = new PlayerFixtureInfo();
 				playerFixtureStatistic.setPlayer(player);
@@ -126,7 +127,7 @@ public class FixtureServiceImpl implements FixtureService {
 		
 		if (playerFixtureInfoesList.size() == 0) {
 			TeamSeasonMap teamSeasonMap = teamSeasonMapRepository.findByTeamAndSeason(fixture.getTeam(), fixture.getSeason());
-			List<Player> players = teamSeasonMap.getPlayers();
+			Set<Player> players = teamSeasonMap.getPlayers();
 			for (Player player : players) {
 				PlayerFixtureInfo playerFixtureInfo = new PlayerFixtureInfo();
 				playerFixtureInfo.setFixture(fixture);

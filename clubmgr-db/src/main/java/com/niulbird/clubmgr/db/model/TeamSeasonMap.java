@@ -1,8 +1,10 @@
 package com.niulbird.clubmgr.db.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,46 +19,35 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "team_season_map")
 public final class TeamSeasonMap {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "team_season_map_id")
     private Integer teamSeasonMapId;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "team_id")
     private Team team;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "season_id")
     private Season season;
 	
-	@Column(name = "data_key")
 	private String dataKey;
 	
-	@Column(name = "fixtures_uri")
 	private String fixturesUri;
 	
-	@Column(name = "standings_uri")
 	private String standingsUri;
 	
 	private Date created;
 	private String description;
 	private Boolean scheduled;
 	
-	@Column(name = "name_regex")
 	private String nameRegex;
 	
 	private Boolean email;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "player_team_season_map", joinColumns = @JoinColumn(name = "team_season_map_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
-	private List<Player> players;
-	
+   	private Set<Player> players = new HashSet<>();
 
 	public TeamSeasonMap () {
 		created = new Date();
 	}
-	
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "team_season_map_id")
 	public Integer getTeamSeasonMapId() {
 		return teamSeasonMapId;
 	}
@@ -66,6 +56,8 @@ public final class TeamSeasonMap {
 		this.teamSeasonMapId = teamSeasonMapId;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "team_id")
 	public Team getTeam() {
 		return team;
 	}
@@ -74,6 +66,8 @@ public final class TeamSeasonMap {
 		this.team = team;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "season_id")
 	public Season getSeason() {
 		return season;
 	}
@@ -82,6 +76,7 @@ public final class TeamSeasonMap {
 		this.season = season;
 	}
 
+	@Column(name = "data_key")
 	public String getDataKey() {
 		return dataKey;
 	}
@@ -90,6 +85,7 @@ public final class TeamSeasonMap {
 		this.dataKey = dataKey;
 	}
 
+	@Column(name = "fixtures_uri")
 	public String getFixturesUri() {
 		return fixturesUri;
 	}
@@ -98,6 +94,7 @@ public final class TeamSeasonMap {
 		this.fixturesUri = fixturesUri;
 	}
 
+	@Column(name = "standings_uri")
 	public String getStandingsUri() {
 		return standingsUri;
 	}
@@ -130,6 +127,7 @@ public final class TeamSeasonMap {
 		this.scheduled = scheduled;
 	}
 
+	@Column(name = "name_regex")
 	public String getNameRegex() {
 		return nameRegex;
 	}
@@ -146,11 +144,13 @@ public final class TeamSeasonMap {
 		this.email = email;
 	}
 
-    public List<Player> getPlayers() {
+	
+	@ManyToMany(mappedBy = "teamSeasonMaps", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    public Set<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(Set<Player> players) {
         this.players = players;
     }
 }

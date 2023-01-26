@@ -18,9 +18,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "player_fixture_info")
 public final class PlayerFixtureInfo {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "player_fixture_info_id", nullable = false)
     private Integer playerFixtureInfoId;
 
 	private Player player;
@@ -44,7 +41,7 @@ public final class PlayerFixtureInfo {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "player_fixture_info_id")
+	@Column(name = "player_fixture_info_id", nullable = false)
 	public Integer getPlayerFixtureInfoId() {
 		return playerFixtureInfoId;
 	}

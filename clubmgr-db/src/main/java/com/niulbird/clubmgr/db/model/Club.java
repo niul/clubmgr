@@ -1,7 +1,8 @@
 package com.niulbird.clubmgr.db.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -12,35 +13,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "clubs")
 public final class Club {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "club_id")
     private Integer clubId;
 	
 	private UUID uuid;
 	private String name;
 	
-	@Column(name = "club_key", nullable = false)
 	private String clubKey;
 	
 	private String domain;
 	private Date created;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "club", cascade = CascadeType.ALL)
-	private List<Team> teams;
+	private Set<Team> teams = new HashSet<>();
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "club", cascade = CascadeType.ALL)
-	private List<Player> players;
+	private Set<Player> players = new HashSet<>();
 
 	public Club () {
 		created = new Date();
 	}
-	
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "club_id")
 	public Integer getClubId() {
 		return clubId;
 	}
@@ -65,6 +64,7 @@ public final class Club {
 		this.name = name;
 	}
 
+	@Column(name = "club_key", nullable = false)
 	public String getClubKey() {
 		return clubKey;
 	}
@@ -89,19 +89,22 @@ public final class Club {
 		this.created = created;
 	}
 
-	public List<Team> getTeams() {
+	@OrderBy("teamId")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "club", cascade = CascadeType.ALL)
+	public Set<Team> getTeams() {
 		return teams;
 	}
 
-	public void setTeams(List<Team> teams) {
+	public void setTeams(Set<Team> teams) {
 		this.teams = teams;
 	}
 
-	public List<Player> getPlayers() {
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "club", cascade = CascadeType.ALL)
+	public Set<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(Set<Player> players) {
 		this.players = players;
 	}
 }

@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -56,7 +55,7 @@ public final class Team {
 		this.uuid = uuid;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "club_id")
 	public Club getClub() {
 		return club;
@@ -91,10 +90,7 @@ public final class Team {
 		this.created = created;
 	}
 
-
-	//@ManyToMany(fetch = FetchType.EAGER)
-    //@JoinTable(name = "player_teams", joinColumns = @JoinColumn(name = "team_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "teams")
+	@ManyToMany(mappedBy = "teams")
     public Set<Player> getPlayers() {
         return players;
     }

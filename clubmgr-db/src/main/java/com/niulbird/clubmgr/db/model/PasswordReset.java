@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,7 +37,7 @@ public final class PasswordReset {
 		this.passwordResetId = passwordResetId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	public User getUser() {
 		return user;

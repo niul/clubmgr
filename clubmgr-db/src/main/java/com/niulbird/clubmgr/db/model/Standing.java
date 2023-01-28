@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -61,7 +60,7 @@ public final class Standing {
 		this.uuid = uuid;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "team_id")
 	public Team getTeam() {
 		return team;
@@ -71,7 +70,7 @@ public final class Standing {
 		this.team = team;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "season_id")
 	public Season getSeason() {
 		return season;

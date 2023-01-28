@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -56,7 +55,7 @@ public final class TeamSeasonMap {
 		this.teamSeasonMapId = teamSeasonMapId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "team_id")
 	public Team getTeam() {
 		return team;
@@ -66,7 +65,7 @@ public final class TeamSeasonMap {
 		this.team = team;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "season_id")
 	public Season getSeason() {
 		return season;
@@ -145,7 +144,7 @@ public final class TeamSeasonMap {
 	}
 
 	
-	@ManyToMany(mappedBy = "teamSeasonMaps", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "teamSeasonMaps", cascade = CascadeType.PERSIST)
     public Set<Player> getPlayers() {
         return players;
     }

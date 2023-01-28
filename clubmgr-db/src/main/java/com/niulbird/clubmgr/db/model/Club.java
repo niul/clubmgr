@@ -8,7 +8,6 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -90,7 +89,7 @@ public final class Club {
 	}
 
 	@OrderBy("teamId")
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "club", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "club", cascade = CascadeType.ALL)
 	public Set<Team> getTeams() {
 		return teams;
 	}
@@ -99,7 +98,7 @@ public final class Club {
 		this.teams = teams;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "club", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "club", cascade = CascadeType.ALL)
 	public Set<Player> getPlayers() {
 		return players;
 	}

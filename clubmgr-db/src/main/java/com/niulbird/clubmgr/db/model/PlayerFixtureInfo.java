@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,7 +49,7 @@ public final class PlayerFixtureInfo {
 		this.playerFixtureInfoId = playerFixtureInfoId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "player_id")
 	public Player getPlayer() {
 		return player;
@@ -60,7 +59,7 @@ public final class PlayerFixtureInfo {
 		this.player = player;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "fixture_id")
 	public Fixture getFixture() {
 		return fixture;

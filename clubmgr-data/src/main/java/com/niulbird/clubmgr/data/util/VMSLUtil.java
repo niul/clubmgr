@@ -142,14 +142,14 @@ public class VMSLUtil extends BaseUtil {
 								standing.setSeason(teamSeasonMap.getSeason());
 								standing.setTeam(teamSeasonMap.getTeam());
 								standing.setPosition(Integer.valueOf(i));
-								standing.setTeamName(columns.get(0).text().replaceAll("^[0-9]* ", ""));
-								standing.setGamesPlayed(getStripedInt(columns.get(1).text()));
-								standing.setWins(getStripedInt(columns.get(2).text()));
-								standing.setTies(getStripedInt(columns.get(3).text()));
-								standing.setLosses(getStripedInt(columns.get(4).text()));
-								standing.setGoalsFor(getStripedInt(columns.get(5).text()));
-								standing.setGoalsAgainst(getStripedInt(columns.get(6).text()));
-								standing.setPoints(getStripedInt(columns.get(8).text()));
+								standing.setTeamName(columns.get(1).text().replaceAll("^[0-9]* ", ""));
+								standing.setGamesPlayed(getStripedInt(columns.get(2).text()));
+								standing.setWins(getStripedInt(columns.get(3).text()));
+								standing.setTies(getStripedInt(columns.get(4).text()));
+								standing.setLosses(getStripedInt(columns.get(5).text()));
+								standing.setGoalsFor(getStripedInt(columns.get(6).text()));
+								standing.setGoalsAgainst(getStripedInt(columns.get(7).text()));
+								standing.setPoints(getStripedInt(columns.get(9).text()));
 								standings.add(standing);
 								logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: "
 										+ standing.getPosition() + "\tPoints: " + standing.getPoints());

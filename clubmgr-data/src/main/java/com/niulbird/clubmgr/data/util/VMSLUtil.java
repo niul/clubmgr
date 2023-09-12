@@ -130,8 +130,8 @@ public class VMSLUtil extends BaseUtil {
 				Elements rows = element.getElementsByTag("tr");
 				if (rows != null && rows.size() > 0) {
 					Elements headerRow = rows.get(0).getElementsByTag("td");
-					if (headerRow != null && headerRow.size() > 0
-							&& headerRow.get(0).text().equalsIgnoreCase("Team")) {
+					if (headerRow != null && headerRow.size() > 1
+							&& headerRow.get(1).text().equalsIgnoreCase("Team")) {
 
 						for (int i = 1; i < rows.size(); i++) {
 							Element row = rows.get(i);

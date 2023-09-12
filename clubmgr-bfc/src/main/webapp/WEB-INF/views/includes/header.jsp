@@ -58,11 +58,12 @@
 	            						<li>
 	            							<a href='<c:url value="/mensA.html"/>'><fmt:message key="menu.mens.b1"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2023"/>'><fmt:message key="teams.season.winter2023"/></a></li>
 	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2022"/>'><fmt:message key="teams.season.winter2022"/></a></li>
-	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_A/SUMMER_2022"/>'><fmt:message key="teams.season.summer2022"/></a></li>
 	            								<li>
 	            									<a href="#"><fmt:message key="menu.archive"/></a>
 	            									<ul>
+	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_A/SUMMER_2022"/>'><fmt:message key="teams.season.summer2022"/></a></li>
 	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2021"/>'><fmt:message key="teams.season.winter2021"/></a></li>
 	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2020"/>'><fmt:message key="teams.season.winter2020"/></a></li>
 	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2019"/>'><fmt:message key="teams.season.winter2019"/></a></li>
@@ -82,11 +83,12 @@
 	            						<li>
 	            							<a href='<c:url value="/mensB.html"/>'><fmt:message key="menu.mens.b2"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2023"/>'><fmt:message key="teams.season.winter2023"/></a></li>
 	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2022"/>'><fmt:message key="teams.season.winter2022"/></a></li>
-	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_B/SUMMER_2022"/>'><fmt:message key="teams.season.summer2022"/></a></li>
 	            								<li>
 	            									<a href="#"><fmt:message key="menu.archive"/></a>
 	            									<ul>
+	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_B/SUMMER_2022"/>'><fmt:message key="teams.season.summer2022"/></a></li>
 	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2021"/>'><fmt:message key="teams.season.winter2021"/></a></li>
 	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2020"/>'><fmt:message key="teams.season.winter2020"/></a></li>
 	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2019"/>'><fmt:message key="teams.season.winter2019"/></a></li>
@@ -106,11 +108,12 @@
 	            						<li>
 	            							<a href='<c:url value="/mensJurassic.html"/>'><fmt:message key="menu.mens.b3"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2023"/>'><fmt:message key="teams.season.winter2023"/></a></li>
 	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2022"/>'><fmt:message key="teams.season.winter2022"/></a></li>
-	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_JURASSIC/SUMMER_2022"/>'><fmt:message key="teams.season.summer2022"/></a></li>
 	            								<li>
 	            									<a href="#"><fmt:message key="menu.archive"/></a>
 	            									<ul>
+	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2022"/>'><fmt:message key="teams.season.winter2022"/></a></li>
 	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2021"/>'><fmt:message key="teams.season.winter2021"/></a></li>
 	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_JURASSIC/SUMMER_2021"/>'><fmt:message key="teams.season.summer2021"/></a></li>
 	            										<li><a href='<c:url value="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2020"/>'><fmt:message key="teams.season.winter2020"/></a></li>
@@ -132,11 +135,12 @@
 	            				<li>
 	            					<a href='<c:url value="/womens.html"/>'><fmt:message key="menu.womens.b1"/></a>
 	            					<ul>
+	            						<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2023"/>'><fmt:message key="teams.season.winter2023"/></a></li>
 	            						<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2022"/>'><fmt:message key="teams.season.winter2022"/></a></li>
-	            						<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/SUMMER_2022"/>'><fmt:message key="teams.season.summer2022"/></a></li>
 	            						<li>
 	            							<a href="#"><fmt:message key="menu.archive"/></a>
 	            							<ul>
+	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/SUMMER_2022"/>'><fmt:message key="teams.season.summer2022"/></a></li>
 	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2021"/>'><fmt:message key="teams.season.winter2021"/></a></li>
 	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2020"/>'><fmt:message key="teams.season.winter2020"/></a></li>
 	            								<li><a href='<c:url value="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2019"/>'><fmt:message key="teams.season.winter2019"/></a></li>

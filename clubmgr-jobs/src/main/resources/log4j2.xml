@@ -27,13 +27,13 @@
     <Logger name="com.niulbird" level="debug">
     	<AppenderRef ref="APP_LOGS"/>
     </Logger>
-    <Logger name="org.springframework" level="debug">
+    <Logger name="org.springframework" level="error">
     	<AppenderRef ref="SPRING_LOGS"/>
     </Logger>
-    <Logger name="net.sf.ehcache" level="debug">
+    <Logger name="net.sf.ehcache" level="error">
     	<AppenderRef ref="SPRING_LOGS"/>
     </Logger>
-    <Root level="debug">
+    <Root level="error">
       <AppenderRef ref="STDOUT"/>
     </Root>
   </Loggers>

@@ -6,6 +6,7 @@
             http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
             http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
 
+	<!-- Wordpress Post Cache -->
     <cache alias="postsCache">
         <expiry>
             <ttl unit="minutes">60</ttl>
@@ -18,6 +19,28 @@
             <ttl unit="minutes">60</ttl>
         </expiry>
         <heap unit="entries">100</heap>
+    </cache>
+    
+    <!-- DB Level 2 Cache -->
+    <cache alias="entityCache">
+        <expiry>
+            <ttl unit="minutes">10</ttl>
+        </expiry>
+        <heap unit="entries">1000</heap>
+    </cache>
+
+    <cache alias="queryCache">
+        <expiry>
+            <ttl unit="minutes">5</ttl>
+        </expiry>
+        <heap unit="entries">500</heap>
+    </cache>
+
+    <cache alias="timestampsCache">
+        <expiry>
+            <ttl unit="minutes">60</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
     </cache>
 
 </config>

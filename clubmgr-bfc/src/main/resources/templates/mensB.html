@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+
+</head>
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="includes/header :: header"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+			<div class="container">
+				<div class="row 200%">
+					<div class="8u 12u$(medium)">
+						<div id="content">
+							<article>
+								<header>
+									<h1 th:text="#{mens.B.title}">mens.A.title</h1>
+								</header>
+      							<span class="image featured">
+      								<img src="/static/images/mens-a-2018.jpg" th:src="@{/static/images/mens-b.jpg}" alt="mens.B.image.alt" th:alt="#{mens.B.image.alt}"/>
+      							</span>
+	  							<p th:text="#{mens.B.main}">mens.B.main</p>
+	  							<h3 th:text="#{teams.leagues}">teams.leagues</h3>
+	  							<ul class="default">
+ 	  								<li th:utext="#{mens.B.winter}">mens.B.winter</li>
+ 	  								<li th:utext="#{mens.B.summer}">mens.B.summer</li>
+	  							</ul>
+	  							<h3 th:text="#{teams.training}">teams.training:</h3>
+	  								<ul class="default">
+	  									<li th:utext="#{mens.B.winter.training.1}">mens.B.winter.training.1</li>
+	  							</ul>
+							</article>
+						</div>
+					</div>
+					<div class="4u 12u$(medium)">
+						<div id="sidebar" th:replace="includes/rightPanel :: rightPanel"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="footer" th:replace="includes/footer :: footer"></div>
+	</div>
+</body>
+</html>

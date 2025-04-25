@@ -1,0 +1,107 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+
+</head>
+
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="includes/header :: header"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+				<div class="container">
+					<div class="row 200%">
+						<div class="12u">
+							<div id="content">
+			    				<article>
+      								<header>
+	    								<h1 th:text="${teamseasonmap.team.name} + ' / ' + ${teamseasonmap.season.name}">teamseasonmap.team.name</h1>
+        								<h3 th:utext="#{standings.title} + ' / <a href=\'' + ${teamseasonmap.standingsUri} + '\' target=\'_blank\'>' + ${teamseasonmap.description} + '</a>'"></h3>
+      								</header>
+
+									<table class="default standings">
+										<thead>
+											<tr>
+												<th class="not-small"><span	th:title="#{standings.headers.position.name}" th:text="#{standings.headers.position}">standings.headers.position</span></th>
+												<th><span th:title="#{standings.headers.team.name}"	th:text="#{standings.headers.team}">standings.headers.team</span></th>
+												<th><span th:title="#{standings.headers.games_played.name}"	th:text="#{standings.headers.games_played}">standings.headers.games_played</span></th>
+												<th><span th:title="#{standings.headers.wins.name}"	th:text="#{standings.headers.wins}">standings.headers.wins</span></th>
+												<th><span th:title="#{standings.headers.ties.name}"	th:text="#{standings.headers.ties}">standings.headers.ties</span></th>
+												<th><span th:title="#{standings.headers.losses.name}" th:text="#{standings.headers.losses}">standings.headers.losses</span></th>
+												<th class="not-small"><span	th:title="#{standings.headers.goals_for.name}" th:text="#{standings.headers.goals_for}">standings.headers.goals_for</span></th>
+												<th class="not-small"><span	th:title="#{standings.headers.goals_against.name}" th:text="#{standings.headers.goals_against}">standings.headers.goals_against</span></th>
+												<th><span th:title="#{standings.headers.points.name}" th:text="#{standings.headers.points}">standings.headers.points</span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="standing, iStat : ${standings}" th:class="${iStat.odd}? 'odd': 'even'">
+												<td class="not-small" th:text="${standing.position}">standing.position</td>
+												<td th:text="${standing.teamName}">standing.teamName</td>
+												<td th:text="${standing.gamesPlayed}">standing.gamesPlayed</td>
+												<td th:text="${standing.wins}">standing.wins</td>
+												<td th:text="${standing.ties}">standing.ties</td>
+												<td th:text="${standing.losses}">standing.losses</td>
+												<td class="not-small" th:text="${standing.goalsFor}">standing.goalsFor</td>
+												<td class="not-small" th:text="${standing.goalsAgainst}">standing.goalsAgainst</td>
+												<td th:text="${standing.points}">standing.points</td>
+											</tr>
+										</tbody>
+									</table>
+								</article>
+
+								<article>
+									<header>
+										<h3 th:utext="#{fixtures.title} + ' / <a href=\'' + ${teamseasonmap.fixturesUri} + '\' target=\'_blank\'>' + ${teamseasonmap.description} + '</a>'"></h3>
+									</header>
+  	    								<table class="default fixtures u-full-width">
+	    									<thead>
+	      									<tr>
+	    										<th th:text="#{fixtures.headers.date}">fixtures.headers.date</th>
+	    										<th class="home" th:text="#{fixtures.headers.home}">fixtures.headers.home</th>
+	    										<th th:text="#{fixtures.headers.result}">fixtures.headers.result</th>
+	    										<th th:text="#{fixtures.headers.away}">fixtures.headers.away</th>
+	    										<th class="not-small" th:text="#{fixtures.headers.field}">fixtures.headers.field</th>
+	      									</tr>
+	    								</thead>
+	    								<tbody>
+	      									<tr th:each="fixture, iStat : ${fixtures}"
+	      										th:class="${iStat.odd}? 'odd': 'even'"
+	      										th:style="${fixture.active}? '': 'text-decoration: line-through;'">
+	      										<td class="not-small" th:text="${#dates.format(fixture.date, 'MMM d (E)')} + ' @ ' + ${#dates.format(fixture.time, 'h:mma')}">fixture.date</td>
+	      										<td class="only-small" th:utext="${#dates.format(fixture.date, 'MMM d (E)')} + ' ' + ${#dates.format(fixture.time, 'h:mma')}
+	      											+ '<br/><div id=\'arrow' + ${fixture.fixtureId} + '\' class=\'expand icon\'></div>'
+	      											+ '<div class=\'field\'>'
+	      											+ '<a class=\'field\' onclick=&quot;expand_field(fixture' + ${fixture.fixtureId} + ', \'' + ${fixture.field} + '\', \'' + ${fixture.fieldMapUri} + '\', arrow' + ${fixture.fixtureId} + ')&quot;>Field</a>'
+	      											+ '</div>'
+	      											+ '<div id=\'fixture' + ${fixture.fixtureId} + '\'></div>'
+	      											">fixture.date</td>
+	      										<td align="right" th:text="${fixture.home}">fixture.home</td>
+	      										<td align="center" th:text="${fixture.homeScore} + '-' + ${fixture.awayScore}">fixture.homeScore</td>
+	      										<td th:text="${fixture.away}">fixture.away</td>
+	      										<td class="not-small" th:utext="'<a href=\'' + ${fixture.fieldMapUri} + '\' target=\'_blank\'>' + ${fixture.field} + '</a>'">Field</td>
+	      									</tr>
+										</tbody>
+	  								</table>
+      							</article>
+      							
+		<script type="text/javascript">
+    function expand_field(divField, field, fieldMapUri, divArrow) { 
+    	if (divField.innerHTML == "") 
+    		divField.innerHTML = "<a style='position: absolute;' class='field' href='" + fieldMapUri + "' target='_blank'>" + field + "</a><br>"; 
+    	else 
+    		divField.innerHTML = "";
+    	
+    	$(divArrow).toggleClass('expanded');
+    }
+    </script>
+			    			</div>
+			    		</div>
+			    	</div>
+				</div>
+			</div>
+		<div id="footer" th:replace="includes/footer :: footer"></div>
+	</div>
+</body>
+</html>
+
+    

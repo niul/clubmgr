@@ -1,0 +1,130 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+
+</head>
+
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="includes/header :: header"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+				<div class="container">
+					<div class="row 200%">
+						<div class="12u">
+							<div id="content">
+			    				<article>
+      								<header>
+	    								<h1 th:text="#{fixture.title}">fixture.title</h1>
+      								</header>
+      								<div class="row">
+      									<!-- Fixture Details -->
+										<div class="4u 12u(small)">
+											<table>
+												<tr>
+													<td><strong th:text="#{fixture.home} + ':'">fixture.home:</strong></td>
+													<td th:text="${fixture.home}">fixture.home</td>
+	  											</tr>
+												<tr>
+													<td><strong th:text="#{fixture.away} + ':'">fixture.away:</strong></td>
+													<td th:text="${fixture.away}">fixture.away</td>
+												</tr>
+												<tr>
+													<td><strong th:text="#{fixture.date} + ':'">fixture.date:</strong></td>
+													<td th:text="${#dates.format(fixture.date, 'MMM d (E)')} + ' @ ' + ${#dates.format(fixture.time, 'h:mma')}">fixture.date</td>
+												</tr>
+												<tr>
+													<td><strong th:text="#{fixture.field} + ':'">fixture.field:</strong></td>
+													<td><a th:href="${fixture.fieldMapUri}" target="_blank" th:text="${fixture.field}">fixture.field</a></td>
+												</tr>
+											</table>
+										</div>
+										<!-- Summary -->
+      									<div class="2u -6u 12u(small)">
+											<table>
+												<tr>
+													<td><span class="highlight-YES" th:text="#{fixture.yes}">fixture.yes</span> : </td>
+													<td th:text="${fixtureSummary.yes}">fixtureSummary.yes</td>
+												</tr>
+												<tr>
+													<td><span class="highlight-MAYBE" th:text="#{fixture.maybe}">fixture.maybe</span> : </td>
+													<td th:text="${fixtureSummary.maybe}">fixtureSummary.maybe</td>
+												</tr>
+												<tr>
+													<td><span class="highlight-NO" th:text="#{fixture.no}">fixture.no</span> : </td>
+													<td th:text="${fixtureSummary.no}">fixtureSummary.no</td>
+												</tr>
+												<tr>
+													<td><span class="highlight-PENDING" th:text="#{fixture.pending}">fixture.pending</span> : </td>
+													<td th:text="${fixtureSummary.pending}">fixtureSummary.pending</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<!-- Update Form -->
+									<div th:if="${playerFixtureInfo != null}">
+										<form action="#" th:action="@{/fixture.html}" th:object="${fixtureData}" method="post">
+											<div class="row">
+												<div class="12u">
+													<label th:text="#{fixture.comment} + ':'">fixture.comment</label>
+													<input type="text" th:field="*{comment}" class="red" />
+													<input type="hidden" th:field="*{uuid}" />
+													<input type="hidden" th:field="*{player}" />
+												</div>
+												<div class="12u">
+													<ul class="actions">
+														<li>
+															<button type="submit" class="button icon fa-envelope-o" th:text="#{form.submit}">form.submit</button>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</form>
+									</div>
+									<!-- Fixtures -->
+								<table class="default fixtures u-full-width">
+									<thead>
+										<tr>
+											<th th:text="#{fixture.headers.player}">fixtures.headers.players</th>
+											<th th:text="#{fixture.headers.status}">fixture.headers.status</th>
+											<th class="not-small" th:text="#{fixture.headers.viewed}">fixture.headers.viewed</th>
+											<th th:text="#{fixture.headers.comment}">fixture.headers.comment</th>
+											<!-- TODO -->
+											<!-- <th th:if="${playerFixtureInfo.player.manager || sessionScope.user != null}" th:text="#{fixture.headers.update}">fixture.headers.update</th>-->
+											<th th:if="${playerFixtureInfo != null and playerFixtureInfo.player.manager}"
+												th:text="#{fixture.headers.update}">fixture.headers.update</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr
+											th:each="playerFixtureInfoIter, iStat : ${playerFixtureInfoList}"
+											th:class="${iStat.odd}? 'odd': 'even'">
+											<td th:text="${playerFixtureInfoIter.player.firstName} + ' ' + ${playerFixtureInfoIter.player.lastName}">playerFixtureInfoIter.player.firstName</td>
+											<td><span th:class="'highlight-' + ${playerFixtureInfoIter.status}" th:text="${playerFixtureInfoIter.status}">playerFixtureInfoIter.status</span></td>
+											<td class="not-small" th:text="${#dates.format(playerFixtureInfoIter.viewed, 'E MMM, d @ h:mma')}">playerFixtureInfoIter.viewed</td>
+											<td th:text="${playerFixtureInfoIter.comment}">playerFixtureInfoIter.comment</td>
+											<!-- TODO -->
+											<!-- <td th:if="${playerFixtureInfo.player.manager || sessionScope.user != null}">-->
+											<td th:if="${playerFixtureInfo != null and playerFixtureInfo.player.manager}">
+												<a th:href="@{/fixture.html?uuid=' + ${fixture.uuid} + '&player=' + ${playerFixtureInfo.uuid} + '&updatePlayer=' + ${playerFixtureInfoIter.uuid} + '&status=YES'}"><span
+													class="highlight-YES" th:text="#{fixture.yes}">fixture.yes</span></a>
+												| <a th:href="/fixture.html?uuid=' + ${fixture.uuid} + '&player=' + ${playerFixtureInfo.uuid} + '&updatePlayer=' + ${playerFixtureInfoIter.uuid} + '&status=MAYBE}"><span
+													class="highlight-MAYBE" th:text="#{fixture.maybe}">fixture.maybe</span></a>
+												| <a th:href="/fixture.html?uuid=' + ${fixture.uuid} + '&player=' + ${playerFixtureInfo.uuid} + '&updatePlayer=' + ${playerFixtureInfoIter.uuid} + '&status=NO}"><span
+													class="highlight-NO" th:text="#{fixture.no}">fixture.no</span></a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</article>
+			    			</div>
+			    		</div>
+			    	</div>
+				</div>
+			</div>
+		<div id="footer" th:replace="includes/footer :: footer"></div>
+	</div>
+</body>
+</html>
+
+    

@@ -1,7 +1,7 @@
 package com.niulbird.clubmgr.bfc.controller.admin;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -35,8 +35,9 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/login.html", method = RequestMethod.GET)
 	public ModelAndView login(@ModelAttribute("loginData") LoginData loginData,
 			@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout) {
-		ModelAndView model = setView(LOGIN, null);
+			@RequestParam(value = "logout", required = false) String logout,
+			HttpServletRequest httpServletRequest) {
+		ModelAndView model = setView(LOGIN, null, httpServletRequest);
 		log.debug("Login page request: " + loginData.getUsername());
 		if (error != null) {
 			log.debug("Error: " + error);
@@ -62,8 +63,8 @@ public class LoginController extends BaseController {
 	}
 
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
-	public ModelAndView accesssDenied() {
-		ModelAndView mav = setView(ERROR, null);
+	public ModelAndView accesssDenied(HttpServletRequest httpServletRequest) {
+		ModelAndView mav = setView(ERROR, null, httpServletRequest);
 		mav.addObject("errMsg", messageSource.getMessage("error.access_denied", null, null));
 
 		// check if user is login

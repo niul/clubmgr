@@ -1,7 +1,7 @@
 package com.niulbird.clubmgr.bfc.controller.admin;
 
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -35,12 +35,12 @@ public class EmailController extends AdminBaseController {
 			@RequestParam (required = false) String uuid,
 			@RequestParam (required = false) String seasonKey,
 			@RequestParam (required = false) boolean sendEmail,
-			HttpServletRequest request) {
+			HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
 		
 		log.debug("Email: [" + email.getSubject() + "][" + email.getMessage() + "]");
 		
-		mav = getFilterObjects(ADMIN_EMAIL, uuid, false, seasonKey, request);
+		mav = getFilterObjects(ADMIN_EMAIL, uuid, false, seasonKey, httpServletRequest);
 		
 		return mav;
 	}

@@ -3,8 +3,8 @@ package com.niulbird.clubmgr.data;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.niulbird.clubmgr.data.util.VMSLUtil;
@@ -14,7 +14,7 @@ import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.service.TeamService;
 
 public class VMSLDataManager extends DataManager {
-	private static Logger logger = LogManager.getLogger();
+	private static Logger logger = LoggerFactory.getLogger(VMSLDataManager.class);
 	private VMSLUtil vmslUtil;
 	
 	protected VMSLDataManager(TeamService teamService, TeamSeasonMap teamSeasonMap, Properties props) {

@@ -4,20 +4,20 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 public class MailUtil {
-	private final Logger log = LogManager.getLogger();
+	private final Logger log = LoggerFactory.getLogger(MailUtil.class);
 	
-	public boolean sendMail(JavaMailSenderImpl mailSender,
+	public boolean sendMail(JavaMailSender mailSender,
 			String[] emailList,
 			String subject,
 			String body,

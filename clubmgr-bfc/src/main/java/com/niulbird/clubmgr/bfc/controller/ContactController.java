@@ -8,14 +8,15 @@ import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,10 +44,11 @@ public class ContactController extends BaseController {
 	Properties props;
 	
 	@RequestMapping(value = "/contact.html", method = RequestMethod.GET)
-	public ModelAndView contactView(@ModelAttribute("contactData") ContactData contactData) {
+	public ModelAndView contactView(@ModelAttribute("contactData") ContactData contactData,
+			HttpServletRequest httpServletRequest) {
 		log.info("Entering contactView(): " + contactData.getName() + "|" 
 				+ contactData.getEmail() + "|" + contactData.getMessage());
-		ModelAndView mav = setView(CONTACT, messageSource.getMessage("contact.title", null, null));
+		ModelAndView mav = setView(CONTACT, messageSource.getMessage("contact.title", null, null), httpServletRequest);
 		
 		mav.addObject("subjects", getSubjects());
 		mav.addObject("recaptchaKey", props.getProperty("recaptcha.public"));
@@ -58,30 +60,33 @@ public class ContactController extends BaseController {
 	public ModelAndView contactPost(@Valid ContactData contactData,
 			BindingResult result,
 			final @RequestParam(name = "g-recaptcha-response") String captchaResponse,
-			HttpServletRequest request) {
+			HttpServletRequest httpServletRequest) {
 		log.info("Entering contactPost(): " + contactData.getName() + "|" 
 				+ contactData.getEmail() + "|" + contactData.getSubject() + "|" + contactData.getMessage() + "|" + captchaResponse);
 		
-		String remoteAddr = request.getRemoteAddr();
+		String remoteAddr = httpServletRequest.getRemoteAddr();
 		
 		JSONTokener tokener = null;
 		try {
-			tokener = new JSONTokener(new URL(props.getProperty("recaptcha.baseUrl") + 
+			URI u = new URI(props.getProperty("recaptcha.baseUrl") + 
 					"?secret=" + props.getProperty("recaptcha.secret") + 
 					"&response=" + captchaResponse + 
-					"&remoteip=" + remoteAddr).openStream());
+					"&remoteip=" + remoteAddr);
+			tokener = new JSONTokener(u.toURL().openStream());
 		} catch (JSONException  e) {
 			log.error("Error with Google Captch: " + e.getMessage(), e);
 		} catch (MalformedURLException e) {
 			log.error("Error with Google Captch: " + e.getMessage(), e);
 		} catch (IOException e) {
 			log.error("Error with Google Captch: " + e.getMessage(), e);
+		} catch (URISyntaxException e) {
+			log.error("Error with Google Captch: " + e.getMessage(), e);
 		}
 		JSONObject jsonObject = new JSONObject(tokener);
 		log.debug("Google Captcha Response: " + jsonObject);
 		
 		if (result.hasErrors() || !jsonObject.getBoolean("success")) {
-			ModelAndView mav = setView(CONTACT, messageSource.getMessage("contact.title", null, null));
+			ModelAndView mav = setView(CONTACT, messageSource.getMessage("contact.title", null, null), httpServletRequest);
 			mav.addObject("subjects", getSubjects());
 			mav.addObject("recaptchaKey", props.getProperty("recaptcha.public"));
 			return mav;
@@ -94,7 +99,7 @@ public class ContactController extends BaseController {
 			
 			emailService.sendContactEmail(map);
 			
-			ModelAndView mav = setView(SUCCESS, messageSource.getMessage("contact.title", null, null));
+			ModelAndView mav = setView(SUCCESS, messageSource.getMessage("contact.title", null, null), httpServletRequest);
 			mav.addObject("contactData", contactData);
 			mav.addObject("subjects", getSubjects());
 			mav.addObject("recaptchaKey", props.getProperty("recaptcha.public"));

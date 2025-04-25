@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -49,23 +49,23 @@ public class PlayerController extends AdminBaseController {
 	
 	@RequestMapping(value = "/admin/players.html")
 	public ModelAndView players(@RequestParam (required = false) String uuid, 
-			HttpServletRequest request) {
+			HttpServletRequest httpServletRequest) {
 		log.debug("Getting Players for [" + getPrincipal() + "][" + uuid + "]");
 		
 		ModelAndView mav = new ModelAndView();
 		
 		String username = getPrincipal();
 		User user = userService.getUser(username);
-		request.getSession().setAttribute(USER, user);
+		httpServletRequest.getSession().setAttribute(USER, user);
 		
 		if (user.getChangePassword()) {
-			mav = setView(PASSWORD_CHANGE, messageSource.getMessage("password_reset.title", null, null));
+			mav = setView(PASSWORD_CHANGE, messageSource.getMessage("password_reset.title", null, null), httpServletRequest);
 			mav.addObject("passwordChangeData", new PasswordChangeData());
 			return mav;
 		}
 		
 
-		mav = getFilterObjects(ADMIN_PLAYERS, uuid, true, null, request);
+		mav = getFilterObjects(ADMIN_PLAYERS, uuid, true, null, httpServletRequest);
 		Team selectedTeam = (Team)mav.getModel().get(TEAM);
 		if (selectedTeam.getName().equalsIgnoreCase(messageSource.getMessage("admin.menu.filter.all", null, null))) {
 			mav.addObject(PLAYERS, playerService.findByClub(user.getClub()));
@@ -79,10 +79,10 @@ public class PlayerController extends AdminBaseController {
 	@RequestMapping(value = "/admin/addPlayer.html", method = RequestMethod.GET)
 	public ModelAndView addPlayer(@ModelAttribute("player") Player player,
 			@RequestParam (required = false) String uuid, 
-			HttpServletRequest request) {
+			HttpServletRequest httpServletRequest) {
 		log.debug("Adding Players for [" + getPrincipal() + "][" + uuid + "]");
 
-		ModelAndView mav = getFilterObjects(ADMIN_ADD_PLAYER, uuid, true, null, request);
+		ModelAndView mav = getFilterObjects(ADMIN_ADD_PLAYER, uuid, true, null, httpServletRequest);
 		mav.addObject(PLAYER, player);
 		mav.addObject(POSITIONS, positionService.findAll());
 		
@@ -93,23 +93,23 @@ public class PlayerController extends AdminBaseController {
 	public ModelAndView addPlayer(@Valid Player player,
 			BindingResult result,
 			@RequestParam (required = false) String teamUuid, 
-			HttpServletRequest request) {
+			HttpServletRequest httpServletRequest) {
 		log.debug("Adding Players for [" + getPrincipal() + "][" + teamUuid + "][" + player.getFirstName() + " " + player.getLastName() + "][" 
 			+ player.getEmail() + "][" + player.getPosition() + "]");
 
 		ModelAndView mav = new ModelAndView();
 		
 		if (result.hasErrors()) {
-			mav = getFilterObjects(ADMIN_ADD_PLAYER, teamUuid, true, null, request);
+			mav = getFilterObjects(ADMIN_ADD_PLAYER, teamUuid, true, null, httpServletRequest);
 			mav.addObject(PLAYER, player);
 			mav.addObject(POSITIONS, positionService.findAll());
 			return mav;
 		}
 		
-		User user = (User) request.getSession().getAttribute(USER);
+		User user = (User) httpServletRequest.getSession().getAttribute(USER);
 		
 		if (playerService.findByClubAndEmail(user.getClub(), player.getEmail()) != null) {
-			mav = getFilterObjects(ADMIN_ADD_PLAYER, teamUuid, true, null, request);
+			mav = getFilterObjects(ADMIN_ADD_PLAYER, teamUuid, true, null, httpServletRequest);
 			mav.addObject(PLAYER, player);
 			result.rejectValue("email", "error.player", messageSource.getMessage("Email.player.exists", null, null));
 			return mav;

@@ -1,6 +1,6 @@
 package com.niulbird.clubmgr.bfc.command;
 
-import org.hibernate.validator.constraints.Email;
+import jakarta.validation.constraints.Email;
 
 public class PasswordEmailData {
 	@Email

@@ -1,0 +1,264 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+
+</head>
+
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="includes/header :: header"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+				<div class="container">
+					<div class="row 200%">
+						<div class="12u">
+							<div id="content">
+			    				<article>
+      								<header>
+	    								<h1 th:text="${teamseasonmap.team.name} + ' / ' + ${teamseasonmap.season.name}">teamseasonmap.team.name</h1>
+      								</header>
+      								<div class="outline">
+        								<div class="tab_header">
+	      									<ul class='tabs'>
+		    									<li><a href='#tab1' th:text="#{season.header.standings}">season.header.standings</a></li>
+		    									<li><a href='#tab2' th:text="#{season.header.fixtures}">season.header.fixtures</a></li>
+		    									<li><a href='#tab3' th:text="#{season.header.statistics}">season.header.statistics</a></li>
+	      									</ul>
+	    								</div>
+	    								
+	  									<div id='tab1'>
+        									<h3 th:utext="#{standings.title} + ' / <a href=\'' + ${teamseasonmap.standingsUri} + '\' target=\'_blank\'>' + ${teamseasonmap.description} + '</a>'"></h3>
+											<table class="default standings">
+	    										<thead>
+	      											<tr>
+	    												<th class="not-small"><span th:title="#{standings.headers.position.name}" th:text="#{standings.headers.position}">standings.headers.position</span></th>
+	    												<th><span th:title="#{standings.headers.team.name}" th:text="#{standings.headers.team}">standings.headers.team</span></th>
+	    												<th><span th:title="#{standings.headers.games_played.name}" th:text="#{standings.headers.games_played}">standings.headers.games_played</span></th>
+	    												<th><span th:title="#{standings.headers.wins.name}" th:text="#{standings.headers.wins}">standings.headers.wins</span></th>
+	    												<th><span th:title="#{standings.headers.ties.name}" th:text="#{standings.headers.ties}">standings.headers.ties</span></th>
+	    												<th><span th:title="#{standings.headers.losses.name}" th:text="#{standings.headers.losses}">standings.headers.losses</span></th>
+	    												<th class="not-small"><span th:title="#{standings.headers.goals_for.name}" th:text="#{standings.headers.goals_for}">standings.headers.goals_for</span></th>
+	    												<th class="not-small"><span th:title="#{standings.headers.goals_against.name}" th:text="#{standings.headers.goals_against}">standings.headers.goals_against</span></th>
+	    												<th><span th:title="#{standings.headers.points.name}" th:text="#{standings.headers.points}">standings.headers.points</span></th>
+	      											</tr>
+	    										</thead>
+	    										<tbody>
+	      											<tr th:each="standing, iStat : ${standings}" 
+	      												th:class="${iStat.odd}? 'odd': 'even'">
+	  	    											<td class="not-small" th:text="${standing.position}">standing.position</td>
+	  	    											<td th:text="${standing.teamName}">standing.teamName</td>
+	  	    											<td th:text="${standing.gamesPlayed}">standing.gamesPlayed</td>
+	  	    											<td th:text="${standing.wins}">standing.wins</td>
+	  	    											<td th:text="${standing.ties}">standing.ties</td>
+	  	    											<td th:text="${standing.losses}">standing.losses</td>
+	  	    											<td class="not-small" th:text="${standing.goalsFor}">standing.goalsFor</td>
+	  	    											<td class="not-small" th:text="${standing.goalsAgainst}">standing.goalsAgainst</td>
+	  	    											<td th:text="${standing.points}">standing.points</td>
+	  	  											</tr>
+	    										</tbody>
+ 	  										</table>
+ 	  									</div>
+ 	  																	
+	  									<div id='tab2'>
+        									<h3 th:utext="#{fixtures.title} + ' / <a href=\'' + ${teamseasonmap.fixturesUri} + '\' target=\'_blank\'>' + ${teamseasonmap.description} + '</a>'"></h3>
+  	    									<table class="default fixtures u-full-width">
+	    										<thead>
+	      											<tr>
+	    												<th th:text="#{fixtures.headers.date}">fixtures.headers.date</th>
+	    												<th class="home" th:text="#{fixtures.headers.home}">fixtures.headers.home</th>
+	    												<th th:text="#{fixtures.headers.result}">fixtures.headers.result</th>
+	    												<th th:text="#{fixtures.headers.away}">fixtures.headers.away</th>
+	    												<th class="not-small" th:text="#{fixtures.headers.field}">fixtures.headers.field</th>
+	      											</tr>
+	    										</thead>
+	    										<tbody>
+	      											<tr th:each="fixtureStatistic, iStat : ${fixture_statistics}"
+	      												th:class="${iStat.odd}? 'odd': 'even'"
+	      												th:style="${fixtureStatistic.fixture.active}? '': 'text-decoration: line-through;'">
+	      												<td class="not-small" th:text="${#dates.format(fixtureStatistic.fixture.date, 'MMM d (E)')} + ' @ ' + ${#dates.format(fixtureStatistic.fixture.time, 'h:mma')}">fixtureStatistic.fixture.date</td>
+	      												<td class="only-small" th:utext="${#dates.format(fixtureStatistic.fixture.date, 'MMM d (E)')} + ' ' + ${#dates.format(fixtureStatistic.fixture.time, 'h:mma')}
+	      													+ '<br/><div id=\'arrow' + ${fixtureStatistic.fixture.fixtureId} + '\' class=\'expand icon\'></div>'
+	      													+ '<div class=\'field\'>'
+	      													+ '<a class=\'field\' onclick=&quot;expand_field(fixture' + ${fixtureStatistic.fixture.fixtureId} + ', \'' + ${fixtureStatistic.fixture.field} + '\', \'' + ${fixtureStatistic.fixture.fieldMapUri} + '\', arrow' + ${fixtureStatistic.fixture.fixtureId} + ')&quot;>Field</a>'
+	      													+ '</div>'
+	      													+ '<div id=\'fixture' + ${fixtureStatistic.fixture.fixtureId} + '\'></div>'
+	      												">fixtureStatistic.fixture.date</td>
+	      												<td align="right" th:text="${fixtureStatistic.fixture.home}">fixtureStatistic.fixture.home</td>
+	      												<td align="center" th:text="${fixtureStatistic.fixture.homeScore} ? ${fixtureStatistic.fixture.homeScore} + '-' + ${fixtureStatistic.fixture.awayScore} : '-'">fixtureStatistic.fixture.homeScore</td>
+	      												<td th:text="${fixtureStatistic.fixture.away}">fixtureStatistic.fixture.away</td>
+	      												<td class="not-small" th:utext="'<a href=\'' + ${fixtureStatistic.fixture.fieldMapUri} + '\' target=\'_blank\'>' + ${fixtureStatistic.fixture.field} + '</a>'">Field</td>
+	      											</tr>
+<!-- 	  	    <td align="right"> -->
+<!-- 	  	    	${fixtureStatistic.fixture.home} -->
+<!-- 	  	    	<c:if test="${fixtureStatistic.home}"> -->
+<!-- 	  	    	<br> -->
+<!-- 	  	    	<div class="not-small" style="font-size: xx-small; white-space: nowrap; line-height: 150%"> -->
+<!-- 	  	    		<small> -->
+<!-- 	  	    		<c:if test="${fn:length(fixtureStatistic.goals) > 0}"> -->
+<!-- 	  	    			<span class="fa fa-soccer-ball-o"></span> -->
+<!-- 	  	    		<c:forEach var="entry" items="${fixtureStatistic.goals}"> -->
+<!-- 	  	    			${entry.key.firstName} ${entry.key.lastName} (${entry.value}) -->
+<!-- 	  	    		</c:forEach> -->
+<!-- 	  	    			<br/> -->
+<!-- 	  	    		</c:if> -->
+<!-- 	  	    		<c:if test="${fn:length(fixtureStatistic.assists) > 0}"> -->
+<!-- 	  	    			<span class="fa fa-handshake-o"></span> -->
+<!-- 	  	    		<c:forEach var="entry" items="${fixtureStatistic.assists}"> -->
+<!-- 	  	    			${entry.key.firstName} ${entry.key.lastName} (${entry.value}) -->
+<!-- 	  	    		</c:forEach> -->
+<!-- 	  	    			<br/> -->
+<!-- 	  	    		</c:if> -->
+<!-- 	  	    		<c:if test="${fn:length(fixtureStatistic.yellowCards) > 0}"> -->
+<!-- 	  	    			<i class="card yellow"></i> -->
+<!-- 	  	    		<c:forEach var="entry" items="${fixtureStatistic.yellowCards}"> -->
+<!-- 	  	    			${entry.key.firstName} ${entry.key.lastName} -->
+<!-- 	  	    		</c:forEach> -->
+<!-- 						<br/> -->
+<!-- 	  	    		</c:if> -->
+<!-- 	  	    		<c:if test="${fn:length(fixtureStatistic.redCards) > 0}"> -->
+<!-- 	  	    			<i class="card red"></i> -->
+<!-- 	  	    		<c:forEach var="entry" items="${fixtureStatistic.redCards}"> -->
+<!-- 	  	    			${entry.key.firstName} ${entry.key.lastName} -->
+<!-- 	  	    		</c:forEach> -->
+<!-- 	  	    		</c:if> -->
+<!-- 	  	    		</small> -->
+<!-- 	  	    	</div> -->
+<!-- 	  	    	</c:if> -->
+<!-- 	  	    </td> -->
+<!-- 	  	    <td> -->
+<!-- 	  	    	${fixtureStatistic.fixture.away} -->
+<!-- 	  	    	<c:if test="${fixtureStatistic.home == false}"> -->
+<!-- 	  	    	<br> -->
+<!-- 	  	    	<div class="not-small" style="font-size: xx-small; white-space: nowrap; line-height: 150%"> -->
+<!-- 	  	    		<small> -->
+<!-- 	  	    		<c:if test="${fn:length(fixtureStatistic.goals) > 0}"> -->
+<!-- 	  	    			<span class="fa fa-soccer-ball-o"></span> -->
+<!-- 	  	    		<c:forEach var="entry" items="${fixtureStatistic.goals}"> -->
+<!-- 	  	    			${entry.key.firstName} ${entry.key.lastName} (${entry.value}) -->
+<!-- 	  	    		</c:forEach> -->
+<!-- 	  	    			<br/> -->
+<!-- 	  	    		</c:if> -->
+<!-- 	  	    		<c:if test="${fn:length(fixtureStatistic.assists) > 0}"> -->
+<!-- 	  	    			<span class="fa fa-handshake-o"></span> -->
+<!-- 	  	    		<c:forEach var="entry" items="${fixtureStatistic.assists}"> -->
+<!-- 	  	    			${entry.key.firstName} ${entry.key.lastName} (${entry.value}) -->
+<!-- 	  	    		</c:forEach> -->
+<!-- 	  	    			<br/> -->
+<!-- 	  	    		</c:if> -->
+<!-- 	  	    		<c:if test="${fn:length(fixtureStatistic.yellowCards) > 0}"> -->
+<!-- 	  	    			<i class="card yellow"></i> -->
+<!-- 	  	    		<c:forEach var="entry" items="${fixtureStatistic.yellowCards}"> -->
+<!-- 	  	    			${entry.key.firstName} ${entry.key.lastName} -->
+<!-- 	  	    		</c:forEach> -->
+<!-- 						<br/> -->
+<!-- 	  	    		</c:if> -->
+<!-- 	  	    		<c:if test="${fn:length(fixtureStatistic.redCards) > 0}"> -->
+<!-- 	  	    			<i class="card red"></i> -->
+<!-- 	  	    		<c:forEach var="entry" items="${fixtureStatistic.redCards}"> -->
+<!-- 	  	    			${entry.key.firstName} ${entry.key.lastName} -->
+<!-- 	  	    		</c:forEach> -->
+<!-- 	  	    		</c:if> -->
+<!-- 	  	    		</small> -->
+<!-- 	  	    	</div> -->
+<!-- 	  	    	</c:if> -->
+<!-- 	  	    </td> -->
+<!-- 	    </c:forEach> -->
+												</tbody>
+	  										</table>
+	  									</div>
+	  									<div>		
+	  											
+	  									<div id='tab3'>
+	  										<h3 th:text="#{statistics.title} + ' / ' + ${teamseasonmap.description}">statistics.title</h3>
+  	    									<table id="statsTable" class="default fixtures u-full-width tablesorter">
+	    										<thead>
+	      											<tr>
+	    												<th th:text="#{statistics.headers.name}">statistics.headers.name</th>
+	    												<th th:text="#{statistics.headers.games_played}">statistics.headers.games_played</th>
+	    												<th th:text="#{statistics.headers.yellow}">statistics.headers.yellow</th>
+	    												<th th:text="#{statistics.headers.red}">statistics.headers.red</th>
+	    												<th th:text="#{statistics.headers.assists}">statistics.headers.assists</th>
+	    												<th th:text="#{statistics.headers.goals}">goals</th>
+	      											</tr>
+	    										</thead>
+	    										<tbody>
+	      											<tr th:each="playerStatistic, iStat : ${player_stats}"
+	      												th:class="${iStat.odd}? 'odd': 'even'">
+	      												<td th:text="${playerStatistic.firstName} + ' ' + ${playerStatistic.lastName}">playerStatistic.firstName</td>
+	      												<th:block th:with="total=${playerStatistic.started + playerStatistic.substitute}">
+	  	    											<td th:text="${total}">playerStatistic.started</td>
+	  	    											</th:block>
+	  	    											<td th:text="${playerStatistic.yellowCards}">playerStatistic.yellowCards</td>
+	  	    											<td th:text="${playerStatistic.redCards}">playerStatistic.redCards</td>
+	  	    											<td th:text="${playerStatistic.assists}">playerStatistic.assists</td>
+	  	    											<td th:text="${playerStatistic.goals}">playerStatistic.goals</td>
+	      											</tr>
+	    										</tbody>
+	    									</table>
+	  									</div>
+	  									</div>
+	    							</div>
+      							</article>
+      							
+		<script type="text/javascript">
+    function expand_field(divField, field, fieldMapUri, divArrow) { 
+    	if (divField.innerHTML == "") 
+    		divField.innerHTML = "<a style='position: absolute;' class='field' href='" + fieldMapUri + "' target='_blank'>" + field + "</a><br>"; 
+    	else 
+    		divField.innerHTML = "";
+    	
+    	$(divArrow).toggleClass('expanded');
+    }
+    </script>
+    <script>
+    $(document).ready(function() {
+    	$("#statsTable").tablesorter({widgets: ['zebra']});
+    	
+    	$('ul.tabs').each(function() {
+    	  // For each set of tabs, we want to keep track of
+    	  // which tab is active and its associated content
+    	  var $active, $content, $links = $(this).find('a');
+
+    	  // If the location.hash matches one of the links, use that as the active tab.
+    	  // If no match is found, use the first link as the initial active tab.
+    	  $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+    	  $active.addClass('active');
+
+    	  $content = $($active[0].hash);
+
+    	  // Hide the remaining content
+    	  $links.not($active).each(function () {
+    	    $(this.hash).hide();
+    	  });
+
+    	  // Bind the click event handler
+    	  $(this).on('click', 'a', function(e){
+    	    // Make the old tab inactive.
+    	    $active.removeClass('active');
+    	    $content.hide();
+
+    	    // Update the variables with the new link and content
+    	    $active = $(this);
+    	    $content = $(this.hash);
+
+    	    // Make the tab active.
+    	    $active.addClass('active');
+    	    $content.show();
+
+    	    // Prevent the anchor's default click action
+    	    e.preventDefault();
+    	  });
+    	});
+    });
+    </script>
+			    			</div>
+			    		</div>
+			    	</div>
+				</div>
+			</div>
+		<div id="footer" th:replace="includes/footer :: footer"></div>
+	</div>
+</body>
+</html>
+
+    

@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -52,10 +52,11 @@ public class FixtureController extends BaseController {
 
 	@Transactional
 	@RequestMapping(value = "/fixture.html", method = RequestMethod.GET)
-	public ModelAndView fixture(@RequestParam (required = true) String uuid,
+	public ModelAndView fixture(@RequestParam (name = "uuid", required = true) String uuid,
 			@RequestParam (required = false) String player,
 			@RequestParam (required = false) String updatePlayer,
-			@RequestParam (required = false) String status) {
+			@RequestParam (required = false) String status,
+			HttpServletRequest httpServletRequest) {
 		List<PlayerFixtureInfo> playerFixtureInfoList = new ArrayList<PlayerFixtureInfo>();
 		PlayerFixtureInfo playerFixtureInfo = null;
 		boolean statusUpdated = false;
@@ -97,7 +98,7 @@ public class FixtureController extends BaseController {
 
 		FixtureSummary fixtureSummary = getFixtureSummary(playerFixtureInfoList);
 
-		ModelAndView mav = setView(FIXTURE, messageSource.getMessage("fixture.title", null, null));
+		ModelAndView mav = setView(FIXTURE, messageSource.getMessage("fixture.title", null, null), httpServletRequest);
 		mav.addObject(FIXTURE, fixture);
 		mav.addObject(FIXTURE_SUMMARY, fixtureSummary);
 		mav.addObject(PLAYER_FIXTURE_INFO, playerFixtureInfo);
@@ -112,7 +113,8 @@ public class FixtureController extends BaseController {
 
 	@Transactional
 	@RequestMapping(value = "/fixture.html", method = RequestMethod.POST)
-	public ModelAndView fixtureComment(@ModelAttribute("fixtureData") FixtureData fixtureData) {
+	public ModelAndView fixtureComment(@ModelAttribute("fixtureData") FixtureData fixtureData,
+			HttpServletRequest httpServletRequest) {
 		List<PlayerFixtureInfo> playerFixtureInfoList = new ArrayList<PlayerFixtureInfo>();
 		PlayerFixtureInfo playerFixtureInfo = null;
 		log.debug("Viewing Fixture for [fixture=" + fixtureData.getUuid() + "][playerFixtureInfo=" + fixtureData.getPlayer() + "][" + fixtureData.getComment() + "]");
@@ -130,7 +132,7 @@ public class FixtureController extends BaseController {
 
 		FixtureSummary fixtureSummary = getFixtureSummary(playerFixtureInfoList);
 
-		ModelAndView mav = setView(FIXTURE, messageSource.getMessage("fixture.title", null, null));
+		ModelAndView mav = setView(FIXTURE, messageSource.getMessage("fixture.title", null, null), httpServletRequest);
 		mav.addObject(FIXTURE, fixture);
 		mav.addObject(FIXTURE_SUMMARY, fixtureSummary);
 		mav.addObject(PLAYER_FIXTURE_INFO, playerFixtureInfo);

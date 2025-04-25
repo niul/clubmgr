@@ -3,7 +3,7 @@ package com.niulbird.clubmgr.bfc.controller.admin;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
@@ -41,7 +41,7 @@ public class SquadController extends AdminBaseController {
 	@RequestMapping(value = "/admin/squads.html")
 	public ModelAndView players(@RequestParam (required = false) String uuid,
 			@RequestParam (required = false) String seasonKey,
-			HttpServletRequest request) {
+			HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
 		Team team;
 		List<Player> activePlayers = new ArrayList<Player>();
@@ -49,7 +49,7 @@ public class SquadController extends AdminBaseController {
 		
 		log.debug("Getting Squad for [" + getPrincipal() + "][" + uuid + "][" + seasonKey + "]");
 		
-		mav = getFilterObjects(ADMIN_SQUADS, uuid, false, seasonKey, request);
+		mav = getFilterObjects(ADMIN_SQUADS, uuid, false, seasonKey, httpServletRequest);
 		
 		if (StringUtils.isNotBlank(uuid)) {
 			team = teamService.findByUuid(uuid);
@@ -72,7 +72,7 @@ public class SquadController extends AdminBaseController {
 			}
 		}
 
-		mav = getFilterObjects(ADMIN_SQUADS, uuid, false, seasonKey, request);
+		mav = getFilterObjects(ADMIN_SQUADS, uuid, false, seasonKey, httpServletRequest);
 		mav.addObject(PLAYERS_ACTIVE, activePlayers);
 		mav.addObject(PLAYERS_INACTIVE, inactivePlayers);
 		
@@ -84,7 +84,7 @@ public class SquadController extends AdminBaseController {
 	public ModelAndView addSquad(@RequestParam (required = false) String uuid,
 			@RequestParam (required = false) String teamUuid,
 			@RequestParam (required = false) String seasonKey,
-			HttpServletRequest request) {
+			HttpServletRequest httpServletRequest) {
 		log.debug("Adding to Squad for [" + getPrincipal() + "][" + teamUuid + "][" + uuid + "]");
 		ModelAndView mav = new ModelAndView();
 		
@@ -109,7 +109,7 @@ public class SquadController extends AdminBaseController {
 	public ModelAndView removeSquad(@RequestParam (required = false) String uuid,
 			@RequestParam (required = false) String teamUuid,
 			@RequestParam (required = false) String seasonKey,
-			HttpServletRequest request) {
+			HttpServletRequest httpServletRequest) {
 
 		log.debug("Removing from Squad [" + getPrincipal() + "][" + teamUuid + "][" + uuid + "]");
 		ModelAndView mav = new ModelAndView();

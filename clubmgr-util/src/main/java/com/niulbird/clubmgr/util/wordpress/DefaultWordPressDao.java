@@ -1,12 +1,14 @@
 package com.niulbird.clubmgr.util.wordpress;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
+import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,7 +21,7 @@ import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 @Component
 public class DefaultWordPressDao  implements WordPressDao {
-	private static final Logger log = LogManager.getLogger();
+	private static final Logger log = LoggerFactory.getLogger(DefaultWordPressDao.class);
 	
 	private static String GET_POSTS = "/posts/{0}";
 	private static String GET_POSTS_ALL = "/posts";
@@ -37,7 +39,8 @@ public class DefaultWordPressDao  implements WordPressDao {
 		log.debug("WordPress URL: " + uri);
 		
 		try {
-			JSONTokener tokener = new JSONTokener(new URL(uri).openStream());
+			URI u = new URI(uri);
+			JSONTokener tokener = new JSONTokener(u.toURL().openStream());
 			JSONObject jsonObject = new JSONObject(tokener);
 		
 			post = PostUtil.getPost(jsonObject);
@@ -50,6 +53,8 @@ public class DefaultWordPressDao  implements WordPressDao {
 			log.debug("URL: " + post.getUrl());
 		} catch (IOException ioe) {
 			log.error("IOException: " + ioe.getMessage(), ioe);
+		} catch (URISyntaxException use) {
+			log.error("URISytnaxException: " + use.getMessage(), use);
 		}
 		return post;
 	}
@@ -68,7 +73,8 @@ public class DefaultWordPressDao  implements WordPressDao {
 			}
 					
 			log.debug("WordPress URL: " + uri);
-			JSONTokener tokener = new JSONTokener(new URL(uri).openStream());
+			URI u = new URI(uri);
+			JSONTokener tokener = new JSONTokener(u.toURL().openStream());
 			JSONObject jsonObject = new JSONObject(tokener);
 			
 			posts = PostUtil.getPosts(jsonObject);
@@ -87,6 +93,8 @@ public class DefaultWordPressDao  implements WordPressDao {
 			}
 		} catch (IOException ioe) {
 			log.error("IOException: " + ioe.getMessage(), ioe);
+		} catch (URISyntaxException use) {
+			log.error("URISytnaxException: " + use.getMessage(), use);
 		}
 		return posts;
 	}

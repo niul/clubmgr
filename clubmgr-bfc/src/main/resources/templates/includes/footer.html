@@ -1,0 +1,107 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<div id="footer-wrapper" th:fragment="footer">
+	<div>
+		<footer id="footer" class="container">
+			<div class="row">
+				<div class="4u 6u(medium) 12u$(small)">
+					<section class="widget links">
+						<h3 th:text="#{footer.list1.title}">footer.list1.title</h3>
+						<ul class="style2" th:each="post : ${footerPosts}">
+      							<li>
+      								<a th:href="'/post/' + ${post.id}" th:text="${post.title}">${post.title}</a><br>
+      								<sup th:text="${#dates.format(post.createDate, 'MMMM dd, yyyy')} + ' ' + #{footer.list1.in} + ' ' + ${post.categories[0].name}">
+      								</sup>
+      							</li>
+						</ul>
+					</section>
+				</div>
+				<div class="4u 6u$(medium) 12u$(small)">
+					<!-- Links -->
+					<section class="widget links">
+						<h3 th:text="#{footer.list2.title}">footer.list2.title</h3>
+						<ul class="style2">
+							<li><a th:href="footer.list2.item1.url" target="_blank" th:text="#{footer.list2.item1.name}">footer.list2.item1.name</a></li>
+							<li><a th:href="footer.list2.item2.url" target="_blank" th:text="#{footer.list2.item2.name}">footer.list2.item2.name</a></li>
+							<li><a th:href="footer.list2.item3.url" target="_blank" th:text="#{footer.list2.item3.name}">footer.list2.item3.name</a></li>
+							<li><a th:href="footer.list2.item4.url" target="_blank" th:text="#{footer.list2.item4.name}">footer.list2.item4.name</a></li>
+							<li><a th:href="footer.list2.item5.url" target="_blank" th:text="#{footer.list2.item5.name}">footer.list2.item5.name</a></li>
+							<li><a th:href="footer.list2.item6.url" target="_blank" th:text="#{footer.list2.item6.name}">footer.list2.item6.name</a></li>
+							<li><a th:href="footer.list2.item7.url" target="_blank" th:text="#{footer.list2.item7.name}">footer.list2.item7.name</a></li>
+						</ul>
+					</section>
+				</div>
+				<div class="4u 12u$(medium) 12u$(small)">
+					<!-- Contact -->
+					<section class="widget contact last">
+						<h3 th:text="#{footer.contact}">footer.contact</h3>
+						<ul>
+  							<li>
+  								<a th:href="#{footer.social.facebook.url}" th:title="#{footer.social.facebook.url}" target="_blank">
+  									<span class="fa-stack fa-2x">
+										<i class="fa fa-square fa-stack-2x"></i>
+  										<i class="fa fa-facebook fa-stack-1x fa-inverse" aria-hidden="true" ></i>
+  									</span>
+  								</a>
+  							</li>
+  							<li>
+  								<a th:href="#{footer.social.twitter.url}"  th:title="#{footer.social.twitter.url}" target="_blank">
+  									<span class="fa-stack fa-2x">
+										<i class="fa fa-square fa-stack-2x"></i>
+  										<i class="fa fa-twitter fa-stack-1x fa-inverse" aria-hidden="true"></i>
+  									</span>
+  								</a>
+  							</li>
+  							<li>
+  								<a th:href="#{footer.social.google_plus.url}" th:title="#{footer.social.google_plus.url}" target="_blank">
+  									<span class="fa-stack fa-2x">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-google-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
+									</span>
+  								</a>
+  							</li>
+  							<li>
+  								<a th:href="#{footer.social.wordpress.url}" th:title="#{footer.social.wordpress.url}" target="_blank">
+  									<span class="fa-stack fa-2x">
+  										<i class="fa fa-square fa-stack-2x" aria-hidden="true"></i>
+  										<i class="fa fa-wordpress fa-stack-1x fa-inverse" aria-hidden="true"></i>
+  									</span>
+  								</a>
+  							</li>
+						</ul>
+					</section>
+				</div>
+			</div>
+			<div class="row">
+				<div class="12u">
+					<div id="map_wrapper">
+    					<div id="map_canvas" class="mapping"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="12u">
+	  				<!-- Copyright -->
+	  				<div id="copyright">
+	    				<ul class="menu">
+		  					<li th:text="'&copy ' + ${#dates.year(date)} + ' ' + #{footer.copyright}" >&copy; ${year} footer.copyright</li><li th:utext="#{footer.design}">footer.design</li>
+						</ul>
+	 				</div>
+	 			</div>
+	 		</div>
+		</footer>
+	</div>
+    
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-P85YC76TCL"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-P85YC76TCL');
+	</script>
+	</div>
+	</body>
+</html>

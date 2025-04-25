@@ -91,8 +91,8 @@ public class FixtureRepositoryTest {
 		player.setAddress1("FIXTURE_UNIT_TEST");
 		player.setCity("FIXTURE_UNIT_TEST");
 		player.setClub(club);
-		player.setFirstName("FIXTURE_UNIT_TEST");
-		player.setLastName("FIXTURE_UNIT_TEST");
+		player.setFirstName("Firstname");
+		player.setLastName("FixtureUnitTest");
 		player.setEmail("test@test.com");
 		player.setEnabled(true);
 		player.setPosition(position);

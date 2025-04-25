@@ -10,7 +10,7 @@
 </appender>
 
 <category name="org.springframework" additivity="false">
-    <priority value="TRACE" />
+    <priority value="INFO" />
     <appender-ref ref="CONSOLE" />
 </category>
 <category name="net.sf.ehcache" additivity="false">

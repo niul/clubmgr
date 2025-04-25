@@ -55,7 +55,7 @@
     </bean>
 
     <bean id="freeMarkerConfigurationFactory" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
-      <property name="templateLoaderPath" value="classpath:templates"/>
+      <property name="templateLoaderPath" value="classpath:fmtemplates"/>
       <property name="preferFileSystemAccess" value="false"/>
     </bean>
     <bean id="freeMarkerConfiguration" class="freemarker.template.Configuration" factory-bean="freeMarkerConfigurationFactory" factory-method="createConfiguration" scope="prototype"/>
@@ -63,15 +63,13 @@
 
     <!-- Cache -->
     <cache:annotation-driven />
-    <bean id="cacheManager"
-      class="org.springframework.cache.ehcache.EhCacheCacheManager"
-      p:cache-manager-ref="ehcache"/>
-
-	<!-- EhCache library setup -->
-	<bean id="ehcache"
-      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
-      p:config-location="classpath:ehcache.xml"
-      p:shared="true"/>
+  <bean id="jCacheManager" class="org.springframework.cache.jcache.JCacheManagerFactoryBean">
+		<property name="cacheManagerUri" value="classpath:ehcache.xml" />
+	</bean>
+	
+	<bean id="cacheManager" class="org.springframework.cache.jcache.JCacheCacheManager">
+		<property name="cacheManager" ref="jCacheManager" />
+	</bean>
 
 	<!-- Datasource -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -95,8 +93,9 @@
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.cache.use_second_level_cache">true</prop>
 				<prop key="hibernate.cache.use_query_cache">true</prop>
-				<prop key="hibernate.cache.provider_class">net.sf.ehcache.hibernate.SingletonEhCacheProvider</prop>
-				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.jcache.JCacheRegionFactory</prop>
+				<prop key="hibernate.javax.cache.uri">ehcache.xml</prop>
+				<prop key="javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</prop>
          	</props>
       	</property>
    	</bean>

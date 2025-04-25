@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -48,8 +48,8 @@ public class PasswordController extends BaseController {
 	
 	@RequestMapping(value = "/reset.html", method = RequestMethod.GET)
 	public ModelAndView reset(@ModelAttribute("passwordEmailData") PasswordEmailData passwordEmailData,
-			HttpServletRequest request) {
-		ModelAndView mav = setView(PASSWORD_EMAIL, null);
+			HttpServletRequest httpServletRequest) {
+		ModelAndView mav = setView(PASSWORD_EMAIL, null, httpServletRequest);
 		
 		mav.setViewName(PASSWORD_EMAIL);
 		
@@ -59,13 +59,13 @@ public class PasswordController extends BaseController {
 	@RequestMapping(value = "/reset.html", method = RequestMethod.POST)
 	public ModelAndView reset(@Valid PasswordEmailData passwordEmailData,
 			BindingResult result,
-			HttpServletRequest request) {
-		ModelAndView mav = setView(LOGIN, null);
+			HttpServletRequest httpServletRequest) {
+		ModelAndView mav = setView(LOGIN, null, httpServletRequest);
 		
 		log.debug("Sending Reset Email: " + passwordEmailData.getEmail());
 		
 		if (result.hasErrors()) {
-			return setView(PASSWORD_EMAIL, null);
+			return setView(PASSWORD_EMAIL, null, httpServletRequest);
 		}
 		
 		UUID resetKey = userService.addResetKey(passwordEmailData.getEmail());
@@ -73,7 +73,7 @@ public class PasswordController extends BaseController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("email", passwordEmailData.getEmail());
-		map.put("url", request.getScheme() + "://" + request.getHeader("Host") + "/resetPassword.html?key=" + resetKey);
+		map.put("url", httpServletRequest.getScheme() + "://" + httpServletRequest.getHeader("Host") + "/resetPassword.html?key=" + resetKey);
 		
 		emailService.sendPasswordResetEmail(map);
 				
@@ -85,8 +85,8 @@ public class PasswordController extends BaseController {
 	
 	@RequestMapping(value = "/resetPassword.html", method = RequestMethod.GET)
 	public ModelAndView resetPassword(@ModelAttribute("passwordResetData") PasswordResetData passwordResetData,
-			@RequestParam String key, HttpServletRequest request) {
-		ModelAndView mav = setView(PASSWORD_RESET, null);
+			@RequestParam String key, HttpServletRequest httpServletRequest) {
+		ModelAndView mav = setView(PASSWORD_RESET, null, httpServletRequest);
 		Calendar expiryDate = new GregorianCalendar();
 		expiryDate.add(Calendar.DAY_OF_MONTH, -3);
 		
@@ -105,7 +105,7 @@ public class PasswordController extends BaseController {
 				mav.setViewName(ERROR);
 				mav.addObject("errMsg", messageSource.getMessage("error.password_reset.expired", null, null));
 			} else {
-				request.getSession().setAttribute("resetKey", key);
+				httpServletRequest.getSession().setAttribute("resetKey", key);
 			}
 		}
 		
@@ -115,19 +115,19 @@ public class PasswordController extends BaseController {
 	@RequestMapping(value = "/resetPassword.html", method = RequestMethod.POST)
 	public ModelAndView resetPassword(@Valid PasswordResetData passwordResetData,
 			BindingResult result,
-			HttpServletRequest request) {
-		ModelAndView mav = setView(LOGIN, null);
+			HttpServletRequest httpServletRequest) {
+		ModelAndView mav = setView(LOGIN, null, httpServletRequest);
 		
 		if (!passwordResetData.getPassword().equalsIgnoreCase(passwordResetData.getPasswordRepeat())) {
 			result.rejectValue("password", "error.password_reset.mismatch");
 		}
 		
 		if (result.hasErrors()) {
-			return setView(PASSWORD_RESET, null);
+			return setView(PASSWORD_RESET, null, httpServletRequest);
 		}
 		
 		try {
-			userService.updatePassword(UUID.fromString((String)request.getSession().getAttribute("resetKey")), 
+			userService.updatePassword(UUID.fromString((String)httpServletRequest.getSession().getAttribute("resetKey")), 
 					new BCryptPasswordEncoder().encode(passwordResetData.getPassword()));
 		} catch (Exception e) {
 			log.error("Error saving new password: " + e.getMessage(), e);
@@ -141,8 +141,8 @@ public class PasswordController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/admin/change.html", method = RequestMethod.GET)
-	public ModelAndView change(HttpServletRequest request) {
-		ModelAndView mav = setView(PASSWORD_CHANGE, messageSource.getMessage("password_reset.title", null, null));
+	public ModelAndView change(HttpServletRequest httpServletRequest) {
+		ModelAndView mav = setView(PASSWORD_CHANGE, messageSource.getMessage("password_reset.title", null, null), httpServletRequest);
 		mav.addObject("passwordChangeData", new PasswordChangeData());
 		return mav;
 	}
@@ -150,10 +150,10 @@ public class PasswordController extends BaseController {
 	@RequestMapping(value = "/admin/change.html", method = RequestMethod.POST)
 	public ModelAndView change(@Valid PasswordChangeData passwordChangeData,
 			BindingResult result,
-			HttpServletRequest request) {
-		ModelAndView mav = setView(LOGIN, null);
+			HttpServletRequest httpServletRequest) {
+		ModelAndView mav = setView(LOGIN, null, httpServletRequest);
 		
-		User user = (User)request.getSession().getAttribute(USER);
+		User user = (User)httpServletRequest.getSession().getAttribute(USER);
 		
 		if (!passwordChangeData.getPassword().equalsIgnoreCase(passwordChangeData.getPasswordRepeat())) {
 			result.rejectValue("passwordRepeat", "error.password_change.mismatch");
@@ -164,7 +164,7 @@ public class PasswordController extends BaseController {
 		}
 		
 		if (result.hasErrors()) {
-			return setView(PASSWORD_CHANGE, null);
+			return setView(PASSWORD_CHANGE, null, httpServletRequest);
 		}
 		
 		try {

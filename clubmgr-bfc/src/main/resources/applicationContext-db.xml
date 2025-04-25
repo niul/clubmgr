@@ -18,12 +18,10 @@
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName"
-			value="org.postgresql.Driver" />
-		<property name="url"
-			value="jdbc:postgresql://localhost:5431/clubmgr" />
-		<property name="username" value="USERNAME" />
-		<property name="password" value="PASSWORD" />
+		<property name="driverClassName" value="${spring.datasource.driver-class-name}" />
+		<property name="url" value="${spring.datasource.url}" />
+		<property name="username" value="${spring.datasource.username}" />
+		<property name="password" value="${spring.datasource.password}" />
 	</bean>
 
 	<!-- session factory -->

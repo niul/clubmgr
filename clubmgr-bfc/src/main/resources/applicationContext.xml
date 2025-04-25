@@ -34,21 +34,6 @@
       		</list>
     	</property>
     </bean>
-    
-    <!-- Themeleaf -->
-    <!-- bean id="templateResolver"
-       class="org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver">
-		<property name="prefix" value="templates/" />
-		<property name="suffix" value=".html" />
-		<property name="templateMode" value="HTML" />
-  		<property name="cacheable" value="true" />
-	</bean>
-    
-	<bean id="templateEngine"
-      class="org.thymeleaf.spring6.SpringTemplateEngine">
-  		<property name="templateResolver" ref="templateResolver" />
-  		<property name="enableSpringELCompiler" value="true" />
-	</bean-->
 
     <!-- Locale support -->
     <bean id="localeResolver"
@@ -77,18 +62,6 @@
 		</bean>
         <bean id="logInterceptor" class="com.niulbird.clubmgr.bfc.interceptors.LogInterceptor"/>
     </mvc:interceptors>
-    
-    <!-- Theme Change Interceptor and Resolver definition -->
-	<!-- bean id="themeSource"
-		class="org.springframework.ui.context.support.ResourceBundleThemeSource">
-			<property name="basenamePrefix" value="theme-" />
-	</bean>
-	<bean id="themeChangeInterceptor" class="org.springframework.web.servlet.theme.ThemeChangeInterceptor">
-    	<property name="paramName" value="theme" />
-	</bean>
-	<bean id="themeResolver" class="org.springframework.web.servlet.theme.CookieThemeResolver">
-    	<property name="defaultThemeName" value="default" />
-	</bean-->
   
   
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
@@ -135,13 +108,6 @@
     
       <!-- Cache -->
   	<cache:annotation-driven />
-  	<!-- bean id="jCacheManager" class="org.springframework.cache.jcache.JCacheManagerFactoryBean">
-		<property name="cacheManagerUri" value="classpath:ehcache.xml" />
-	</bean>
-	
-	<bean id="cacheManager" class="org.springframework.cache.jcache.JCacheCacheManager">
-		<property name="cacheManager" ref="jCacheManager" />
-	</bean-->
       
     <task:annotation-driven executor="myExecutor"/>
     <task:executor id="myExecutor" pool-size="5"/>

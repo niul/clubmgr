@@ -2,7 +2,6 @@ package com.niulbird.clubmgr.util.wordpress;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -35,7 +34,8 @@ public class DefaultWordPressDao  implements WordPressDao {
 	public Post getPost(int id) {
 		Post post = null;
 		String uri = baseUrl + siteName + MessageFormat.format(GET_POSTS, String.valueOf(id));
-		
+
+		log.debug("Entering getPost(): " + id);
 		log.debug("WordPress URL: " + uri);
 		
 		try {

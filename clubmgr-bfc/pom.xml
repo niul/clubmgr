@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.niulbird.clubmgr</groupId>
-        <artifactId>clubmgr</artifactId>
+        <artifactId>clubmgrnew</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>clubmgrnew-bfc</artifactId>
@@ -13,17 +13,17 @@
     <dependencies>
         <dependency>
             <groupId>com.niulbird.clubmgr</groupId>
-            <artifactId>clubmgr-data</artifactId>
+            <artifactId>clubmgrnew-data</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.niulbird.clubmgr</groupId>
-            <artifactId>clubmgr-email</artifactId>
+            <artifactId>clubmgrnew-email</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.niulbird.clubmgr</groupId>
-            <artifactId>clubmgr-util</artifactId>
+            <artifactId>clubmgrnew-util</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -157,4 +157,3 @@
     </build>
 
 </project>
-

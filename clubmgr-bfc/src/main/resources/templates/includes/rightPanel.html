@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+  <div id="right-panel-wrapper" th:fragment="rightPanel">
+
+		
+  <h3 th:text="#{panel.facebook.title}">panel.facebook.title</h3>
+  <div id="fb-root"></div>
+  <div class="fb-page" data-href="https://www.facebook.com/BombasticFC" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false">
+  	<div class="fb-xfbml-parse-ignore">
+  		<blockquote cite="https://www.facebook.com/BombasticFC">
+  			<a href="https://www.facebook.com/BombasticFC" th:text="#{panel.facebook.name}">
+  				panel.facebook.name
+  			</a>
+  		</blockquote>
+  	</div>
+  </div>
+  <p>
+  <h3 th:text="#{panel.twitter.title}">panel.twitter.title</h3>
+  <a class="twitter-timeline" data-tweet-limit="3" href="https://twitter.com/bombasticfc" data-widget-id="658700167512637440"  th:text="#{panel.twitter.name}">
+  	panel.twitter.name
+  </a>
+  
+  </div>
+</body>

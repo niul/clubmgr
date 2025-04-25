@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class UIController extends BaseController {
 
@@ -18,58 +20,58 @@ public class UIController extends BaseController {
 	private static final String SPONSORS = "sponsors";
 	
 	@RequestMapping(value = "/about.html")
-	public ModelAndView about() {
-		return setView(ABOUT, messageSource.getMessage("about.title", null, null));
+	public ModelAndView about(HttpServletRequest httpServletRequest) {
+		return setView(ABOUT, messageSource.getMessage("about.title", null, null), httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/calendar.html")
-	public ModelAndView calendar() {
-		return setView(CALENDAR, null);
+	public ModelAndView calendar(HttpServletRequest httpServletRequest) {
+		return setView(CALENDAR, null, httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/")
-	public ModelAndView root() {
-		return setView(HOME, null);
+	public ModelAndView root(HttpServletRequest httpServletRequest) {
+		return setView(HOME, null, httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/index.html")
-	public ModelAndView home() {
-		return setView(HOME, null);
+	public ModelAndView home(HttpServletRequest httpServletRequest) {
+		return setView(HOME, null, httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/mens.html")
-	public ModelAndView mens() {
-		return setView(BOMBASTIC_MENS, messageSource.getMessage("mens.title", null, null));
+	public ModelAndView mens(HttpServletRequest httpServletRequest) {
+		return setView(BOMBASTIC_MENS, messageSource.getMessage("mens.title", null, null), httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/mensA.html")
-	public ModelAndView mensA() {
-		return setView(BOMBASTIC_MENS_A, messageSource.getMessage("mens.A.title", null, null));
+	public ModelAndView mensA(HttpServletRequest httpServletRequest) {
+		return setView(BOMBASTIC_MENS_A, messageSource.getMessage("mens.A.title", null, null), httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/mensB.html")
-	public ModelAndView mensB() {
-		return setView(BOMBASTIC_MENS_B, messageSource.getMessage("mens.B.title", null, null));
+	public ModelAndView mensB(HttpServletRequest httpServletRequest) {
+		return setView(BOMBASTIC_MENS_B, messageSource.getMessage("mens.B.title", null, null), httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/mensJurassic.html")
-	public ModelAndView mensJurassic() {
-		return setView(BOMBASTIC_MENS_JURASSIC, messageSource.getMessage("mens.jurassic.title", null, null));
+	public ModelAndView mensJurassic(HttpServletRequest httpServletRequest) {
+		return setView(BOMBASTIC_MENS_JURASSIC, messageSource.getMessage("mens.jurassic.title", null, null), httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/womens.html")
-	public ModelAndView womens() {
-		return setView(BOMBASTIC_WOMENS, messageSource.getMessage("womens.title", null, null));
+	public ModelAndView womens(HttpServletRequest httpServletRequest) {
+		return setView(BOMBASTIC_WOMENS, messageSource.getMessage("womens.title", null, null), httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/sponsors.html")
-	public ModelAndView sponsors() {
-		return setView(SPONSORS, messageSource.getMessage("sponsors.title", null, null));
+	public ModelAndView sponsors(HttpServletRequest httpServletRequest) {
+		return setView(SPONSORS, messageSource.getMessage("sponsors.title", null, null), httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/404.html")
-	public ModelAndView pageNotFound() {
-		ModelAndView mav = setView(ERROR, null);
+	public ModelAndView pageNotFound(HttpServletRequest httpServletRequest) {
+		ModelAndView mav = setView(ERROR, null, httpServletRequest);
 		mav.addObject("errMsg", messageSource.getMessage("error.page_not_found", null, null));
 		return mav;
 	}

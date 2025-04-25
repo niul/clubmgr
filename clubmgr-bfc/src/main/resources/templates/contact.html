@@ -1,0 +1,73 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+
+</head>
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="includes/header :: header"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+			<div class="container">
+				<div class="row 200%">
+					<div class="8u 12u$(medium)">
+						<div id="content">
+							<article>
+								<header>
+									<h1 th:text="#{contact.title}">contact.title</h1>
+								</header>
+            					<p th:text="#{contact.description}">contact.description</p>
+			
+								<form action="#" th:action="@{/contact.html}" th:object="${contactData}" method="post">
+								<div class="row 50%">
+			  						<div class="6u 12u(small)">
+										<label for="name" th:text="#{contact.name} + ':'">:</label>
+										<input type="text" th:field="*{name}"/>
+			  						</div>
+			  						<div class="6u 12u(small)">
+										<label for="email" th:text="#{contact.email} + ':'">:</label>
+										<input type="email" th:field="*{email}"/>
+			  						</div>
+								</div>
+								<div class="row 50%">
+									<div class="12u">
+										<label for="subject" th:text="#{contact.subject} + ':'">:</label>
+										<select th:field="*{subject}" class="single">
+											<option th:each="s : ${subjects}" th:value="${s.key}" th:text="${s.value}"></option>
+										</select>
+									</div>
+								</div>
+								<div class="row 50%">
+			  						<div class="12u">
+										<label for="message" th:text="#{contact.message} + ':'">:</label>
+										<textarea rows="8" cols="50" class="contact" th:field="*{message}">message</textarea>
+			  						</div>
+								</div>
+								<div class="row 50%">
+			  						<div class="g-recaptcha" th:data-sitekey="${recaptchaKey}"></div>
+								</div>
+								<div class="row 50%">
+			  						<div class="12u">
+			    						<ul class="actions">
+			      							<li>
+			      								<button type="submit" class="button icon fa-envelope-o" th:text="#{form.submit}"></button>
+			      							</li>
+										</ul>
+			  						</div>
+			  					</div>
+          						</form>
+							</article>
+						</div>
+					</div>
+					<div class="4u 12u$(medium)">
+						<div id="sidebar" th:replace="includes/rightPanel :: rightPanel"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="footer" th:replace="includes/footer :: footer"></div>
+	</div>
+</body>
+</html>

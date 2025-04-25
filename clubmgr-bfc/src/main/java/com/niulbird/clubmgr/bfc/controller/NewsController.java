@@ -2,10 +2,10 @@ package com.niulbird.clubmgr.bfc.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.ContactData;
+import com.niulbird.clubmgr.bfc.config.SecurityConfig;
 import com.niulbird.clubmgr.util.wordpress.dao.Post;
 
 @Controller
 public class NewsController extends BaseController {
-	private static final Logger log = LogManager.getLogger();
+	private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
 	private static final String NEWS = "news";
 	private static final String PAGE = "page";
@@ -26,9 +27,9 @@ public class NewsController extends BaseController {
 	
 	@RequestMapping(value = "/news.html")
 	public ModelAndView news(@RequestParam(value = "start", defaultValue = "0") int start,
-			HttpServletRequest request) {
+			HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
-		log.debug("Getting News from start: " + start + " |" + request.getRequestURL().append("?").append(request.getQueryString()));
+		log.debug("Getting News from start: " + start + " |" + httpServletRequest.getRequestURL().append("?").append(httpServletRequest.getQueryString()));
 		
 		mav.setViewName(NEWS);
 		mav.addObject(PAGE, NEWS);

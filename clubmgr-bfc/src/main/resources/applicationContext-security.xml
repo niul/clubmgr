@@ -9,7 +9,7 @@
     <!-- enable use-expressions -->
 	<http auto-config="true" use-expressions="true">
 
-    <intercept-url pattern="/admin/**" access="hasAnyRole('ADMIN','CLUB_MGR','TEAM_MGR')" />
+    	<intercept-url pattern="/admin/**" access="hasAnyRole('ADMIN','CLUB_MGR','TEAM_MGR')" />
 
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403" />

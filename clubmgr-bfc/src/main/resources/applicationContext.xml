@@ -35,17 +35,20 @@
     	</property>
     </bean>
     
-        <!-- Tiles support -->
-    <bean id="tilesConfigurer"
-          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-        <property name="definitions">
-            <value>/WEB-INF/tiles.xml</value>
-        </property>
-    </bean>
-
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
-    </bean>
+    <!-- Themeleaf -->
+    <!-- bean id="templateResolver"
+       class="org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver">
+		<property name="prefix" value="templates/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML" />
+  		<property name="cacheable" value="true" />
+	</bean>
+    
+	<bean id="templateEngine"
+      class="org.thymeleaf.spring6.SpringTemplateEngine">
+  		<property name="templateResolver" ref="templateResolver" />
+  		<property name="enableSpringELCompiler" value="true" />
+	</bean-->
 
     <!-- Locale support -->
     <bean id="localeResolver"
@@ -76,7 +79,7 @@
     </mvc:interceptors>
     
     <!-- Theme Change Interceptor and Resolver definition -->
-	<bean id="themeSource"
+	<!-- bean id="themeSource"
 		class="org.springframework.ui.context.support.ResourceBundleThemeSource">
 			<property name="basenamePrefix" value="theme-" />
 	</bean>
@@ -85,7 +88,7 @@
 	</bean>
 	<bean id="themeResolver" class="org.springframework.web.servlet.theme.CookieThemeResolver">
     	<property name="defaultThemeName" value="default" />
-	</bean>
+	</bean-->
   
   
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
@@ -124,29 +127,29 @@
   
     <!-- Freemarker -->  
     <bean id="freeMarkerConfigurationFactory" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
-      <property name="templateLoaderPath" value="classpath:templates"/>
+      <property name="templateLoaderPath" value="classpath:fmtemplates"/>
       <property name="preferFileSystemAccess" value="false"/>
     </bean>
     <bean id="freeMarkerConfiguration" class="freemarker.template.Configuration" factory-bean="freeMarkerConfigurationFactory" factory-method="createConfiguration" scope="prototype"/>
   
     
-    <!-- Cache -->
-    <cache:annotation-driven />
-    <bean id="cacheManager"
-      class="org.springframework.cache.ehcache.EhCacheCacheManager" 
-      p:cache-manager-ref="ehcache"/>
-
-	<!-- EhCache library setup -->
-	<bean id="ehcache"
-      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" 
-      p:config-location="classpath:ehcache.xml"
-      p:shared="true"/>
+      <!-- Cache -->
+  	<cache:annotation-driven />
+  	<!-- bean id="jCacheManager" class="org.springframework.cache.jcache.JCacheManagerFactoryBean">
+		<property name="cacheManagerUri" value="classpath:ehcache.xml" />
+	</bean>
+	
+	<bean id="cacheManager" class="org.springframework.cache.jcache.JCacheCacheManager">
+		<property name="cacheManager" ref="jCacheManager" />
+	</bean-->
       
     <task:annotation-driven executor="myExecutor"/>
     <task:executor id="myExecutor" pool-size="5"/>
     
     <!-- security configuration -->
-    <import resource="applicationContext-security.xml"/>
+    <!-- import resource="applicationContext-security.xml"/-->
+    
+  <bean id="userDetailsServiceImpl" class="com.niulbird.clubmgr.bfc.auth.DomainUserDetailsServiceImpl"/>
     
     
     <!-- db configuration -->

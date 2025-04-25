@@ -3,7 +3,7 @@ package com.niulbird.clubmgr.bfc.auth;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;

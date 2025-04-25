@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +29,7 @@ import freemarker.template.TemplateException;
 
 @Service
 public class EmailService {
-	Logger log = LogManager.getLogger();
+	Logger log = LoggerFactory.getLogger(EmailService.class);
 
 	private static final int SECOND = 1000;
 
@@ -43,11 +43,11 @@ public class EmailService {
 	private Configuration freeMarkerConfiguration;
 
 	@Autowired
-	private JavaMailSenderImpl mailSender;
+	private JavaMailSender mailSender;
 
 	@Autowired
 	private FixtureService fixtureService;
-
+	
 	@Async
 	public void sendContactEmail(Map<String, Object> map) {
 		MailUtil mailUtil = new MailUtil();
@@ -135,7 +135,8 @@ public class EmailService {
 				log.debug("Sending message to [" + playerFixtureInfo.getPlayer().getEmail() + "]");
 				boolean isSent = false;
 				try {
-					isSent = mailUtil.sendMail(mailSender, playerFixtureInfo.getPlayer().getEmail(),
+					String[] emailList = {playerFixtureInfo.getPlayer().getEmail()};
+					isSent = mailUtil.sendMail(mailSender, emailList,
 								subject + " - "
 								+ dateFormatter.format(fixture.getDate()) + " @ "
 								+ timeFormatter.format(fixture.getTime()) + " on " + fixture.getField(),

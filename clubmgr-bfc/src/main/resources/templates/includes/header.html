@@ -1,0 +1,188 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<div id="header-wrapper" th:fragment="header">
+		<header id="header" class="container">
+		
+			<div class="row">
+
+			<div id="logout" th:text="*{user != null}? #{admin.welcome} + ' ' + *{user.firstName} + ' ' ">
+				<fmt:message key="admin.welcome"/> ${user.firstName} <a href="<c:url value="/logout.html" />"><fmt:message key="login.logout"></a>
+			</div>
+
+			<!-- Logo -->
+			<div id="logo" class="9u 12u$(medium)">
+				<a href="/index.html" th:href="@{/index.html}"><img id="header_logo" src="/static/images/bombasticfc_logo.png" alt="ALT" th:alt="#{header.logo.image.alt}" width="160" height="160"></a>
+				<span th:text="#{header.title}">HEADER.TITLE</span>
+			</div>
+			<!-- Navigation Bar -->
+			<nav id="nav">
+	   			<ul>
+	   			<!-- 
+	   			<sec:authorize access="hasAnyRole('ADMIN','CLUB_MGR','TEAM_MGR')">
+	    			<c:choose>
+	      			<c:when test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], 'admin')}">
+	        			<li class="current">
+	      			</c:when>
+	      			<c:otherwise>
+	        			<li>
+	      			</c:otherwise>
+	    			</c:choose>
+	        				<a href="#"><fmt:message key="menu.item0"></a>
+	        				<ul>
+	        					<li><a href="/admin/change.html" th:text="password_change.title"></a></li>
+	        					<li><a href="/admin/players.html" th:text="admin.title"></a></li>
+	        				</ul>
+		</sec:authorize>
+		-->
+						<!-- Home -->
+	        			<li class="" th:class="*{page == 'home'}? 'current'">
+	        				<a href="/index.html" th:text="#{menu.item1}">Menu Item 1</a>
+	        			</li>
+	        			
+	        			<!-- Teams -->
+						<li th:classappend="${page == 'teams' or page == 'mens' or page == 'mensA' or page == 'mensB' or page == 'mensJurassic' or page == 'womens' or page == 'womensA' or page == 'standings_fixtures' or page == 'season_details' ? 'current' : ''}">
+	          				<a href="#" th:text="#{menu.item4}">menu.item4</a>
+	          				<ul>
+	            				<li>
+	            					<a href="/mens.html" th:text="#{teams.section.main.b1}">teams.section.main.b1</a>
+	          						<ul>
+	            						<li>
+	            							<a href="/mensA.html" th:text="#{menu.mens.b1}">menu.mens.b1</a>
+	            							<ul>
+	            								<li><a href="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2024" th:text="#{teams.season.winter2024}">teams.season.winter2024</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2023" th:text="#{teams.season.winter2023}">teams.season.winter2023</a></li>
+	            								<li>
+	            									<a href="#" th:text="#{menu.archive}">menu.archive</a>
+	            									<ul>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2022" th:text="#{teams.season.winter2022}">teams.season.winter2022</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_A/SUMMER_2022" th:text="#{teams.season.summer2022}">teams.season.summer2022</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2021" th:text="#{teams.season.winter2021}">teams.season.winter2021</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2020" th:text="#{teams.season.winter2020}">teams.season.winter2020</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2019" th:text="#{teams.season.winter2019}">teams.season.winter2019</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_A/SUMMER_2019" th:text="#{teams.season.summer2019}">teams.season.summer2019</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2018" th:text="#{teams.season.winter2018}">teams.season.winter2018</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_A/SUMMER_2018" th:text="#{teams.season.summer2018}">teams.season.summer2018</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_A/WINTER_2017" th:text="#{teams.season.winter2017}">teams.season.winter2017</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_RRSL/SUMMER_2017" th:text="#{teams.season.summer2017}">teams.season.summer2017</a></li>
+	            										<li><a href="/season/BOMBASTIC_MENS_A/WINTER_2016" th:text="#{teams.season.winter2016}">teams.season.winter2016</a></li>
+	            										<li><a href="/season/BOMBASTIC_MENS_A/SUMMER_2016" th:text="#{teams.season.summer2016}">teams.season.summer2016</a></li>
+	            										<li><a href="/season/BOMBASTIC_MENS_A/WINTER_2015" th:text="#{teams.season.winter2015}">teams.season.winter2015</a></li>
+	            										<li><a href="/season/BOMBASTIC_MENS_A/SUMMER_2015" th:text="#{teams.season.summer2015}">teams.season.summer2015</a></li>
+	            									</ul>
+	            								</li>
+	            							</ul>
+	            						</li>
+	            						<li>
+	            							<a href="/mensB.html" th:text="#{menu.mens.b2}">menu.mens.b2</a>
+	            							<ul>
+	            								<li><a href="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2024" th:text="#{teams.season.winter2024}">teams.season.winter2024</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2023" th:text="#{teams.season.winter2023}">teams.season.winter2023</a></li>
+	            								<li>
+	            									<a href="#" th:text="#{menu.archive}">menu.archive</a>
+	            									<ul>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2022" th:text="#{teams.season.winter2022}">teams.season.winter2022</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_B/SUMMER_2022" th:text="#{teams.season.summer2022}">teams.season.summer2022</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2021" th:text="#{teams.season.winter2021}">teams.season.winter2021</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2020" th:text="#{teams.season.winter2020}">teams.season.winter2020</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2019" th:text="#{teams.season.winter2019}">teams.season.winter2019</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_B/SUMMER_2019" th:text="#{teams.season.summer2019}">teams.season.summer2019</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2018" th:text="#{teams.season.winter2018}">teams.season.winter2018</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_B/SUMMER_2018" th:text="#{teams.season.summer2018}">teams.season.summer2018</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_B/WINTER_2017" th:text="#{teams.season.winter2017}">teams.season.winter2017</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_CESL/SUMMER_2017" th:text="#{teams.season.summer2017}">teams.season.summer2017</a></li>
+	            										<li><a href="/season/BOMBASTIC_MENS_B/WINTER_2016" th:text="#{teams.season.winter2016}">teams.season.winter2016</a></li>
+	            										<li><a href="/season/BOMBASTIC_MENS_CLASSICS/SUMMER_2016" th:text="#{teams.season.summer2016}">teams.season.summer2016</a></li>
+	            										<li><a href="/season/BOMBASTIC_MENS_B/WINTER_2015" th:text="#{teams.season.winter2015}">teams.season.winter2015</a></li>
+	            										<li><a href="/season/BOMBASTIC_MENS_CLASSICS/SUMMER_2015" th:text="#{teams.season.summer2015}">teams.season.summer2015</a></li>
+	            									</ul>
+	            								</li>
+	            							</ul>
+	            						</li>
+	            						<li>
+	            							<a href="/mensJurassic.html" th:text="#{menu.mens.b3}">menu.mens.b3</a>
+	            							<ul>
+	            								<li><a href="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2024" th:text="#{teams.season.winter2024}">teams.season.winter2024</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2023" th:text="#{teams.season.winter2023}">teams.season.winter2023</a></li>
+	            								<li>
+	            									<a href="#" th:text="#{menu.archive}">menu.archive</a>
+	            									<ul>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2022" th:text="#{teams.season.winter2022}">teams.season.winter2022</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2021" th:text="#{teams.season.winter2021}">teams.season.winter2021</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_JURASSIC/SUMMER_2021" th:text="#{teams.season.summer2021}">teams.season.summer2021</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2020" th:text="#{teams.season.winter2020}">teams.season.winter2020</a></li>
+	            								        <li><a href="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2019" th:text="#{teams.season.winter2019}">teams.season.winter2019</a></li>
+	            										<li><a href="/fixtures/BOMBASTIC_MENS_JURASSIC/SUMMER_2019" th:text="#{teams.season.summer2019}">teams.season.summer2019</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2018" th:text="#{teams.season.winter2018}">teams.season.winter2018</a></li>
+	            										<li><a href="/fixtures/BOMBASTIC_MENS_JURASSIC/SUMMER_2018" th:text="#{teams.season.summer2018}">teams.season.summer2018</a></li>
+	            										<li><a href="/seasonDetail/BOMBASTIC_MENS_JURASSIC/WINTER_2017" th:text="#{teams.season.winter2017}">teams.season.winter2017</a></li>
+	            										<li><a href="/fixtures/BOMBASTIC_MENS_JURASSIC/SUMMER_2017" th:text="#{teams.season.summer2017}">teams.season.summer2017</a></li>
+	            										<li><a href="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2016" th:text="#{teams.season.winter2016}">teams.season.winter2016</a></li>
+	            										<li><a href="/season/BOMBASTIC_MENS_JURASSIC/WINTER_2015" th:text="#{teams.season.winter2015}">teams.season.winter2015</a></li>
+	            									</ul>
+	            								</li>
+	            							</ul>
+	            						</li>
+	          						</ul>
+	          					</li>
+	          					
+	            				<li>
+	            					<a href="/womens.html" th:text="#{menu.womens.b1}">menu.womens.b1</a>
+	            					<ul>
+	            						<li><a href="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2024" th:text="#{teams.season.winter2024}">teams.season.winter2024</a></li>
+	            						<li><a href="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2023" th:text="#{teams.season.winter2023}">teams.season.winter2023</a></li>
+	            						<li>
+	            							<a href="#" th:text="#{menu.archive}">menu.archive</a>
+	            							<ul>
+	            								<li><a href="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2022" th:text="#{teams.season.winter2022}">teams.season.winter2022</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_WOMENS/SUMMER_2022" th:text="#{teams.season.summer2022}">teams.season.summer2022</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2021" th:text="#{teams.season.winter2021}">teams.season.winter2021</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2020" th:text="#{teams.season.winter2020}">teams.season.winter2020</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2019" th:text="#{teams.season.winter2019}">teams.season.winter2019</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_WOMENS/SUMMER_2019" th:text="#{teams.season.summer2019}">teams.season.summer2019</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2018" th:text="#{teams.season.winter2018}">teams.season.winter2018</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_WOMENS/SUMMER_2018" th:text="#{teams.season.summer2018}">teams.season.summer2018</a></li>
+	            								<li><a href="/seasonDetail/BOMBASTIC_WOMENS/WINTER_2017" th:text="#{teams.season.winter2017}">teams.season.winter2017</a></li>
+	            								<li><a href="/season/BOMBASTIC_WOMENS/SUMMER_2017" th:text="#{teams.season.summer2017}">teams.season.summer2017</a></li>
+	            								<li><a href="/season/BOMBASTIC_WOMENS/WINTER_2016" th:text="#{teams.season.winter2016}">teams.season.winter2016</a></li>
+	            								<li><a href="/season/BOMBASTIC_WOMENS/SUMMER_2016" th:text="#{teams.season.summer2016}">teams.season.summer2016</a></li>
+	            								<li><a href="/season/BOMBASTIC_WOMENS/WINTER_2015" th:text="#{teams.season.winter2015}">teams.season.winter2015</a></li>
+	            								<li><a href="/season/BOMBASTIC_WOMENS/SUMMER_2015" th:text="#{teams.season.summer2015}">teams.season.summer2015</a></li>
+	            							</ul>
+	            						</li>
+	            					</ul>
+	            				</li>
+	          				</ul>
+	        			</li>
+	        			<!-- News -->
+	        			
+						<li th:classappend="${page == 'news' or page == 'post' ? 'current' : ''}">
+	       					<a href="/news.html" th:text="#{menu.item3}">menu.item3"</a>
+	       				</li>
+						<!-- Contact -->
+	        			<li class="" th:class="*{page == 'contact'}? 'current'">
+	        				<a href="/contact.html" th:text="#{menu.item5}">menu.item5</a>
+	        			</li>
+	        			<!-- Sponsors -->
+	        			<li class="" th:class="*{page == 'sponsors'}? 'current'">
+	        				<a href="/sponsors.html" th:text="#{menu.item6}">menu.item6</a>
+	        			</li>
+						<!-- About -->
+	        			<li class="" th:class="*{page == 'about'}? 'current'">
+	        				<a href="/about.html" th:text="#{menu.item2}">menu.item2</a>
+	        			</li>
+        		</ul>
+      		</nav>
+      			<div class="social-buttons 3u 12u$(medium) 12u$(small)">
+					<ul class="share-buttons">
+  						<li><a th:href="'https://www.facebook.com/sharer/sharer.php?u=' + ${eUrl} + '&t='" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('${url}') + '&t=' + encodeURIComponent('${url}')); return false;"><img src="/static/images/social/share/Facebook.png" th:alt="#{footer.social.facebook.image.alt}"></a></li>
+  						<li><a th:href="'https://twitter.com/intent/tweet?url=' + ${eUrl} + '&text=' + ${eUrl} + '&via=bombasticfc'" target="_blank" title="Tweet" th:onclick="'window.open('https://twitter.com/intent/tweet?text=' + ${eUrl} + '&url=' + ${url}'); return false;"><img src="/static/images/social/share/Twitter.png" th:alt="#{footer.social.twitter.image.alt}"></a></li>
+  						<li><a th:href="'https://plus.google.com/share?url=' + ${eUrl}" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent('${url}')); return false;"><img src="/static/images/social/share/Google+.png" th:alt="#{footer.social.google.image.alt}"></a></li>
+  						<li><a th:href="'http://wordpress.com/press-this.php?u=' + ${eUrl} + '&t=&s='" target="_blank" title="Publish on WordPress" onclick="window.open('http://wordpress.com/press-this.php?u=' + encodeURIComponent('${url}') + '&t=' +  encodeURIComponent(document.title)); return false;"><img src="/static/images/social/share/Wordpress.png" th:alt="#{footer.social.wordpress.image.alt}"></a></li>
+					</ul>
+				</div>
+			</div>
+		</header>
+	</div>
+</body>
+</html>

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
@@ -46,15 +46,15 @@ public abstract class AdminBaseController extends BaseController {
 			String teamUuid,
 			boolean addAllTeam,
 			String seasonKey,
-			HttpServletRequest request) {
-		ModelAndView model = setView(page, messageSource.getMessage("admin.title", null, null));
+			HttpServletRequest httpServletRequest) {
+		ModelAndView model = setView(page, messageSource.getMessage("admin.title", null, null), httpServletRequest);
 		log.debug("Getting page[" + page + "] and team[" + teamUuid +"]");
 		
 		// Get the user and associate rule to determine Team list.
 		String username = getPrincipal();
 		User user = userService.getUser(username);
 		Set<Team> teams;
-		if (request.isUserInRole(ADMIN)) {
+		if (httpServletRequest.isUserInRole(ADMIN)) {
 			teams = user.getClub().getTeams();
 		} else {
 			teams = user.getTeams();
@@ -101,7 +101,7 @@ public abstract class AdminBaseController extends BaseController {
 		model.addObject(SEASON, selectedSeason);
 		log.debug("Season: " + selectedSeason.getName());
 		
-		request.getSession().setAttribute(USER, user);
+		httpServletRequest.getSession().setAttribute(USER, user);
 		
 		return model;
 	}

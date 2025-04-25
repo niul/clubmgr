@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+
+</head>
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="includes/header :: header"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+			<div class="container">
+				<div class="row 200%">
+					<div class="8u 12u$(medium)">
+						<div id="content">
+							<article>
+								<header>
+									<h1 th:text="${post.title}">post.title</h1>
+								</header>
+								<sup>
+									<span th:text="#{news.posted.on}">news.posted.on</span>:
+									<span th:text="${#dates.format(post.createDate, 'MMMM d, yyyy')}">post.createDate</span>
+									<span th:text="#{news.posted.in}">news.posted.in</span>
+									<a th:each="category: ${post.categories}" th:href="${post.author.url} + '/category/' + ${category.slug}" th:text="${category.name}" target="_blank">category.name</a>
+								</sup>
+								<p th:utext="${post.content}">post.content</p>
+							</article>
+	  						<a th:if="${post.previousId} ne -1" th:href="'/post/' + ${post.previousId}" class="button icon fa-files-o" th:text="#{post.previous}">post.previous</a>
+	  						<a th:if="${post.nextId} != null" th:href="'/post/' + ${post.nextId}" class="button icon fa-files-o" th:text="#{post.next}">post.next</a>
+						</div>
+					</div>
+					<div class="4u 12u$(medium)">
+						<div id="sidebar" th:replace="includes/rightPanel :: rightPanel"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="footer" th:replace="includes/footer :: footer"></div>
+	</div>
+</body>
+</html>

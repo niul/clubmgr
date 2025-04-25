@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+
+</head>
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="includes/header :: header"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+			<div class="container">
+				<div class="row 200%">
+					<div class="8u 12u$(medium)">
+						<div id="content">
+							<h1 th:text="#{news.title}">news.title</h1>
+							<article th:each="post: ${posts}">
+								<header>
+									<h3><a th:href="'/post/' + ${post.id}" th:text="${post.title}">${post.title}</a></h3>
+								</header>
+								<sup>
+									<span th:text="#{news.posted.on}">news.posted.on</span>:
+									<span th:text="${#dates.format(post.createDate, 'MMMM d, yyyy')}">post.createDate</span>
+									<span th:text="#{news.posted.in}">news.posted.in</span>
+									<a th:each="category: ${post.categories}" th:href="${post.author.url} + '/category/' + ${category.slug}" th:text="${category.name}" target="_blank">category.name</a>
+								</sup>
+								<p th:utext="${post.excerpt}">post.excerpt</p>
+								<a th:href="'/post/' + ${post.id}" th:text="#{news.posted.more}" class="button icon fa-file-text-o">news.posted.more</a>
+							</article>
+	  						<a th:if="${previous} >= 0" th:href="'news.html?start=' + ${previous}" class="button icon fa-files-o" th:text="#{news.previous}">news.previous</a>
+	  						<a th:if="${next} ne 0" th:href="'news.html?start=' + ${next}" class="button icon fa-files-o" th:text="#{news.next}">news.next</a>
+						</div>
+					</div>
+					<div class="4u 12u$(medium)">
+						<div id="sidebar" th:replace="includes/rightPanel :: rightPanel"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="footer" th:replace="includes/footer :: footer"></div>
+	</div>
+</body>
+</html>

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.support.RequestContextUtils;
 

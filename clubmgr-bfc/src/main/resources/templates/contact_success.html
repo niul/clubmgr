@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+
+</head>
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="includes/header :: header"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+			<div class="container">
+				<div class="row 200%">
+					<div class="8u 12u$(medium)">
+						<div id="content">
+							<article>
+								<header>
+									<h1 th:text="#{contact_success.title}">contact_success.title</h1>
+								</header>
+								<p th:utext="#{contact_success.section.main.p1} + ' <b>' + ${contactData.name} + '</b> ' + #{contact_success.section.main.p2}">contact_success.section.main.p1</p>
+							</article>
+						</div>
+					</div>
+					<div class="4u 12u$(medium)">
+						<div id="sidebar" th:replace="includes/rightPanel :: rightPanel"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="footer" th:replace="includes/footer :: footer"></div>
+	</div>
+</body>
+</html>

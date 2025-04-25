@@ -1,6 +1,7 @@
 package com.niulbird.clubmgr.bfc.command;
 
-import javax.validation.constraints.Size;
+
+import jakarta.validation.constraints.Size;
 
 public class LoginData {
 	@Size(min=8, max=30)

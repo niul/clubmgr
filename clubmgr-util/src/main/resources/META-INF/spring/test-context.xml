@@ -52,11 +52,11 @@
 
   <!-- Cache -->
   <cache:annotation-driven />
-  <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
-    p:cache-manager-ref="ehcache" />
-
-  <!-- EhCache library setup -->
-  <bean id="ehcache"
-    class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
-    p:config-location="classpath:ehcache.xml" p:shared="true" />
+  <bean id="jCacheManager" class="org.springframework.cache.jcache.JCacheManagerFactoryBean">
+		<property name="cacheManagerUri" value="classpath:ehcache.xml" />
+	</bean>
+	
+	<bean id="cacheManager" class="org.springframework.cache.jcache.JCacheCacheManager">
+		<property name="cacheManager" ref="jCacheManager" />
+	</bean>
 </beans>

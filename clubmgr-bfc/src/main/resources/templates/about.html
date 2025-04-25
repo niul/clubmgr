@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+
+</head>
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="includes/header :: header"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+			<div class="container">
+				<div class="row 200%">
+					<div class="8u 12u$(medium)">
+						<div id="content">
+							<article>
+								<header>
+									<h1 th:text="#{about.title}">about.title</h1>
+								</header>
+								<span class="image featured"><img
+									src="/static/images/football_grass_banner.png" /></span>
+								<h3 th:text="#{about.section.main.p1}">about.section.main.p1</h3>
+								<p th:text="#{about.section.main.p2}">about.section.main.p2</p>
+								<p th:text="#{about.section.main.p3}">about.section.main.p3</p>
+								<p th:text="#{about.section.main.p4}">about.section.main.p4</p>
+								<p th:utext="#{about.section.main.p5}">about.section.main.p5</p>
+								<p th:utext="#{about.section.main.p6}">about.section.main.p6</p>
+							</article>
+						</div>
+					</div>
+					<div class="4u 12u$(medium)">
+						<div id="sidebar" th:replace="includes/rightPanel :: rightPanel"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="footer" th:replace="includes/footer :: footer"></div>
+	</div>
+</body>
+</html>

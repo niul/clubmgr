@@ -1,11 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="includes/head :: head">
+<head th:replace="~{includes/head :: head}">
 
 </head>
 
 <body class="right-sidebar">
 	<div id="page-wrapper">
-		<div id="header" th:replace="includes/header :: header"></div>
+		<div id="header" th:replace="~{includes/header :: header}"></div>
 		<!-- Main -->
 		<div id="main-wrapper">
 			<div class="container">
@@ -26,14 +26,14 @@
 						</div>
 					</div>
 					<div class="4u 12u$(medium)">
-						<div id="sidebar" th:replace="includes/rightPanel :: rightPanel"></div>
+						<div id="sidebar" th:replace="~{includes/rightPanel :: rightPanel}"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 
 
-		<div id="footer" th:replace="includes/footer :: footer"></div>
+		<div id="footer" th:replace="~{includes/footer :: footer}"></div>
 	</div>
 </body>
 </html>

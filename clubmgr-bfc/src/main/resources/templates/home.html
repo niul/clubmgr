@@ -1,12 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
- <head th:replace="includes/head :: head">
+ <head th:replace="~{includes/head :: head}">
  	
  </head>
 <body>
-<div id="header" th:replace="includes/header :: header"></div>
+<div id="header" th:replace="~{includes/header :: header}"></div>
 	<!-- Main -->
 	<div id=main-wrapper>
-<div id="banner" th:replace="includes/banner :: banner"></div>
+<div id="banner" th:replace="~{includes/banner :: banner}"></div>
 
 <!-- Gigantic Heading -->
 <section class="wrapper style2">
@@ -30,6 +30,6 @@
   </div>
 </section>
 </div>
-<div id="footer" th:replace="includes/footer :: footer"></div>
+<div id="footer" th:replace="~{includes/footer :: footer}"></div>
 </body>
 </html>

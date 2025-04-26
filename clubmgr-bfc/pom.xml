@@ -4,26 +4,26 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.niulbird.clubmgr</groupId>
-        <artifactId>clubmgrnew</artifactId>
+        <artifactId>clubmgr</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>clubmgrnew-bfc</artifactId>
+    <artifactId>clubmgr-bfc</artifactId>
     <name>Bombastic FC Web</name>
 
     <dependencies>
         <dependency>
             <groupId>com.niulbird.clubmgr</groupId>
-            <artifactId>clubmgrnew-data</artifactId>
+            <artifactId>clubmgr-data</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.niulbird.clubmgr</groupId>
-            <artifactId>clubmgrnew-email</artifactId>
+            <artifactId>clubmgr-email</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.niulbird.clubmgr</groupId>
-            <artifactId>clubmgrnew-util</artifactId>
+            <artifactId>clubmgr-util</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -129,7 +129,8 @@
 					<jsTargetDir>static/js</jsTargetDir>
 					<skipMerge>true</skipMerge>
 					<verbose>true</verbose>
-					<webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
+					<webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+					<webappTargetDir>${basedir}/src/main/resources</webappTargetDir>
 				</configuration>
 			</plugin>
 			<plugin>

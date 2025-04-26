@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.niulbird.clubmgr</groupId>
-            <artifactId>clubmgrnew-db</artifactId>
+            <artifactId>clubmgr-db</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 		<dependency>

@@ -12,7 +12,7 @@
 
 			<!-- Logo -->
 			<div id="logo" class="9u 12u$(medium)">
-				<a href="/index.html" th:href="@{/index.html}"><img id="header_logo" src="/static/images/bombasticfc_logo.png" alt="ALT" th:alt="#{header.logo.image.alt}" width="160" height="160"></a>
+				<a href="/index.html" th:href="@{/index.html}"><img id="header_logo" src="/images/bombasticfc_logo.png" alt="ALT" th:alt="#{header.logo.image.alt}" width="160" height="160"></a>
 				<span th:text="#{header.title}">HEADER.TITLE</span>
 			</div>
 			<!-- Navigation Bar -->
@@ -175,10 +175,10 @@
       		</nav>
       			<div class="social-buttons 3u 12u$(medium) 12u$(small)">
 					<ul class="share-buttons">
-  						<li><a th:href="'https://www.facebook.com/sharer/sharer.php?u=' + ${eUrl} + '&t='" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('${url}') + '&t=' + encodeURIComponent('${url}')); return false;"><img src="/static/images/social/share/Facebook.png" th:alt="#{footer.social.facebook.image.alt}"></a></li>
-  						<li><a th:href="'https://twitter.com/intent/tweet?url=' + ${eUrl} + '&text=' + ${eUrl} + '&via=bombasticfc'" target="_blank" title="Tweet" th:onclick="'window.open('https://twitter.com/intent/tweet?text=' + ${eUrl} + '&url=' + ${url}'); return false;"><img src="/static/images/social/share/Twitter.png" th:alt="#{footer.social.twitter.image.alt}"></a></li>
-  						<li><a th:href="'https://plus.google.com/share?url=' + ${eUrl}" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent('${url}')); return false;"><img src="/static/images/social/share/Google+.png" th:alt="#{footer.social.google.image.alt}"></a></li>
-  						<li><a th:href="'http://wordpress.com/press-this.php?u=' + ${eUrl} + '&t=&s='" target="_blank" title="Publish on WordPress" onclick="window.open('http://wordpress.com/press-this.php?u=' + encodeURIComponent('${url}') + '&t=' +  encodeURIComponent(document.title)); return false;"><img src="/static/images/social/share/Wordpress.png" th:alt="#{footer.social.wordpress.image.alt}"></a></li>
+  						<li><a th:href="'https://www.facebook.com/sharer/sharer.php?u=' + ${eUrl} + '&t='" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('${url}') + '&t=' + encodeURIComponent('${url}')); return false;"><img src="/images/social/share/Facebook.png" th:alt="#{footer.social.facebook.image.alt}"></a></li>
+  						<li><a th:href="'https://twitter.com/intent/tweet?url=' + ${eUrl} + '&text=' + ${eUrl} + '&via=bombasticfc'" target="_blank" title="Tweet" th:onclick="'window.open('https://twitter.com/intent/tweet?text=' + ${eUrl} + '&url=' + ${url}'); return false;"><img src="/images/social/share/Twitter.png" th:alt="#{footer.social.twitter.image.alt}"></a></li>
+  						<li><a th:href="'https://plus.google.com/share?url=' + ${eUrl}" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent('${url}')); return false;"><img src="/images/social/share/Google+.png" th:alt="#{footer.social.google.image.alt}"></a></li>
+  						<li><a th:href="'http://wordpress.com/press-this.php?u=' + ${eUrl} + '&t=&s='" target="_blank" title="Publish on WordPress" onclick="window.open('http://wordpress.com/press-this.php?u=' + encodeURIComponent('${url}') + '&t=' +  encodeURIComponent(document.title)); return false;"><img src="/images/social/share/Wordpress.png" th:alt="#{footer.social.wordpress.image.alt}"></a></li>
 					</ul>
 				</div>
 			</div>

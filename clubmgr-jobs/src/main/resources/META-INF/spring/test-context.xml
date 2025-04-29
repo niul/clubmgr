@@ -7,22 +7,19 @@
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:task="http://www.springframework.org/schema/task"
        xmlns:tx="http://www.springframework.org/schema/tx"
-	   xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/cache 
         http://www.springframework.org/schema/cache/spring-cache.xsd
         http://www.springframework.org/schema/data/jpa
     	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
     	http://www.springframework.org/schema/task
-		http://www.springframework.org/schema/task/spring-task-4.1.xsd
+		http://www.springframework.org/schema/task/spring-task.xsd
     	http://www.springframework.org/schema/tx 
-    	http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/util
-        http://www.springframework.org/schema/util/spring-util-4.1.xsd">
+    	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
 	<!-- Auto scan the components -->
@@ -34,7 +31,6 @@
 	<task:scheduler id="myScheduler" pool-size="10"/>
     
     <context:property-placeholder location="classpath:global-test.properties"/>
-	<util:properties id="props" location="classpath:global-test.properties" />
     
       <!-- Message Source -->
     <bean id="messageSource"
@@ -47,23 +43,23 @@
     </bean>
     
         <!-- Spring Mail configuration -->
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-      <property name="host" value="${mail.smtp.host}" />
-      <property name="port" value="${mail.smtp.port}" />
-      <property name="username" value="${mail.smtp.user}" />
-      <property name="password" value="${mail.smtp.pass}" />
-      <property name="javaMailProperties">
-          <props>
-              <!-- Use SMTP-AUTH to authenticate to SMTP server -->
-              <prop key="mail.smtp.auth">true</prop>
-              <!-- Use TLS to encrypt communication with SMTP server -->
-              <prop key="mail.smtp.starttls.enable">true</prop>
-          </props>
-      </property>
-    </bean>
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="${mail.smtp.host}" />
+    <property name="port" value="${mail.smtp.port}" />
+    <property name="username" value="${mail.smtp.user}" />
+    <property name="password" value="${mail.smtp.pass}" />
+    <property name="javaMailProperties">
+      <props>
+        <!-- Use SMTP-AUTH to authenticate to SMTP server -->
+        <prop key="mail.smtp.auth">true</prop>
+        <!-- Use TLS to encrypt communication with SMTP server -->
+        <prop key="mail.smtp.starttls.enable">true</prop>
+      </props>
+    </property>
+  </bean>
     
     <bean id="freeMarkerConfigurationFactory" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
-      <property name="templateLoaderPath" value="classpath:templates"/>
+      <property name="templateLoaderPath" value="classpath:fmtemplates"/>
       <property name="preferFileSystemAccess" value="false"/>
     </bean>
     <bean id="freeMarkerConfiguration" class="freemarker.template.Configuration" factory-bean="freeMarkerConfigurationFactory" factory-method="createConfiguration" scope="prototype"/>
@@ -71,43 +67,40 @@
     
     <!-- Cache -->
     <cache:annotation-driven />
-    <bean id="cacheManager"
-      class="org.springframework.cache.ehcache.EhCacheCacheManager" 
-      p:cache-manager-ref="ehcache"/>
 
-	<!-- EhCache library setup -->
-	<bean id="ehcache"
-      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" 
-      p:config-location="classpath:ehcache.xml"
-      p:shared="true"/>
+	<!-- PostgreSQL DataSource -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${spring.datasource.driver-class-name}" />
+		<property name="url" value="${spring.datasource.url}" />
+		<property name="username" value="${spring.datasource.username}" />
+		<property name="password" value="${spring.datasource.password}" />
+	</bean>
 
-	<!-- Datasource -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
-    </bean>
-		
 	<!-- session factory -->
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-    	<property name="dataSource" ref="dataSource" />
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="com.niulbird.clubmgr.db" />
 		<property name="jpaVendorAdapter">
-        	<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-      	</property>
-      	<property name="jpaProperties">
-        	<props>
-            	<prop key="hibernate.hbm2ddl.auto">validate</prop>
-            	<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+			<bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
 				<prop key="hibernate.cache.use_second_level_cache">true</prop>
 				<prop key="hibernate.cache.use_query_cache">true</prop>
-				<prop key="hibernate.cache.provider_class">net.sf.ehcache.hibernate.SingletonEhCacheProvider</prop>
-				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
-         	</props>
-      	</property>
-   	</bean>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.jcache.JCacheRegionFactory</prop>
+				<prop key="hibernate.javax.cache.uri">ehcache.xml</prop>
+				<prop key="javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</prop>
+			</props>
+		</property>
+	</bean>
    	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     	<property name="dataSource" ref="dataSource"/>
     	<property name="entityManagerFactory" ref="entityManagerFactory"/>

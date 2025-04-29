@@ -7,14 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.niulbird.clubmgr.data.DataManager;
 import com.niulbird.clubmgr.data.DataManagerFactory;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.service.TeamService;
 
-@Service
+@Component
 public class FixtureStandingsJob {
 	private static final Logger log = LoggerFactory.getLogger(FixtureStandingsJob.class);
 

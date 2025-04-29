@@ -10,6 +10,7 @@
 
     <modules>
         <module>clubmgr-bfc</module>
+        <module>clubmgr-jobs</module>
         <module>clubmgr-data</module>
         <module>clubmgr-email</module>
         <module>clubmgr-db</module>

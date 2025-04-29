@@ -9,6 +9,9 @@ import java.util.UUID;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.MessageSource;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
@@ -28,6 +31,8 @@ import freemarker.template.TemplateException;
 import org.junit.Assert;
 import org.junit.Before;
 
+@EnableCaching
+@EnableAutoConfiguration(exclude = { FreeMarkerAutoConfiguration.class })
 public class FixtureAvailabilityJobTest extends BaseTestCase {
 
 	@Autowired

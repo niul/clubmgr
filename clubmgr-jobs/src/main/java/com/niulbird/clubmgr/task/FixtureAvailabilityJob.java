@@ -7,12 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.service.TeamService;
 
-@Service
+@Component
 public class FixtureAvailabilityJob {
 	private static final Logger log = LoggerFactory.getLogger(FixtureAvailabilityJob.class);
 
@@ -25,7 +25,7 @@ public class FixtureAvailabilityJob {
 	@Autowired
 	TeamService teamService;
 
-	@Scheduled(cron = "0 15 14 * * *")
+	@Scheduled(cron = "0 15 6 * * *")
 	public void sendFixturePlayerStatus() {
 		log.debug("Getting Fixtures to send Player Status Email.");
 

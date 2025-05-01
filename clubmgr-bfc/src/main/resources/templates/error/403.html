@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{includes/head :: head}">
+
+</head>
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="~{includes/header :: header}"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+			<div class="container">
+				<div class="row 200%">
+					<div class="8u 12u$(medium)">
+						<div id="content">
+							<article>
+								<h1 th:text="#{error.title}">error.title</h1>
+								<p th:text="#{error.access_denied}"></p>
+    							<a th:href="@{/login.html}" th:text="#{login.error.return}">login.error.return</a>
+							</article>
+						</div>
+					</div>
+					<div class="4u 12u$(medium)">
+						<div id="sidebar" th:replace="~{includes/rightPanel :: rightPanel}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="footer" th:replace="~{includes/footer :: footer}"></div>
+	</div>
+</body>
+</html>

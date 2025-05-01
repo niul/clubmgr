@@ -34,7 +34,7 @@ public class PlayerController extends AdminBaseController {
 
 	private static final String ADMIN_ADD_PLAYER = "admin_add_player";
 	private static final String ADMIN_EDIT_PLAYER = "admin_edit_player";
-	private static final String ADMIN_PLAYERS = "admin_players";
+	private static final String ADMIN_PLAYERS = "admin/players";
 	private static final String PASSWORD_CHANGE = "password_change";
 	private static final String POSITIONS = "positions";
 
@@ -48,7 +48,7 @@ public class PlayerController extends AdminBaseController {
 	TeamService teamService;
 	
 	@RequestMapping(value = "/admin/players.html")
-	public ModelAndView players(@RequestParam (required = false) String uuid, 
+	public ModelAndView players(@RequestParam (name = "uuid", required = false) String uuid, 
 			HttpServletRequest httpServletRequest) {
 		log.debug("Getting Players for [" + getPrincipal() + "][" + uuid + "]");
 		
@@ -78,7 +78,7 @@ public class PlayerController extends AdminBaseController {
 	
 	@RequestMapping(value = "/admin/addPlayer.html", method = RequestMethod.GET)
 	public ModelAndView addPlayer(@ModelAttribute("player") Player player,
-			@RequestParam (required = false) String uuid, 
+			@RequestParam (name = "uuid", required = false) String uuid, 
 			HttpServletRequest httpServletRequest) {
 		log.debug("Adding Players for [" + getPrincipal() + "][" + uuid + "]");
 
@@ -92,7 +92,7 @@ public class PlayerController extends AdminBaseController {
 	@RequestMapping(value = "/admin/addPlayer.html", method = RequestMethod.POST)
 	public ModelAndView addPlayer(@Valid Player player,
 			BindingResult result,
-			@RequestParam (required = false) String teamUuid, 
+			@RequestParam (name = "teamUuid", required = false) String teamUuid, 
 			HttpServletRequest httpServletRequest) {
 		log.debug("Adding Players for [" + getPrincipal() + "][" + teamUuid + "][" + player.getFirstName() + " " + player.getLastName() + "][" 
 			+ player.getEmail() + "][" + player.getPosition() + "]");
@@ -139,8 +139,8 @@ public class PlayerController extends AdminBaseController {
 	
 	@RequestMapping(value = "/admin/editPlayer.html", method = RequestMethod.GET)
 	public ModelAndView editPlayer(@ModelAttribute("player") Player player,
-			@RequestParam (required = false) String uuid, 
-			@RequestParam (required = false) String teamUuid, 
+			@RequestParam (name = "uuid", required = false) String uuid, 
+			@RequestParam (name = "teamUuid", required = false) String teamUuid, 
 			HttpServletRequest request) {
 		log.debug("Editing Players for [" + getPrincipal() + "][" + uuid + "]");
 
@@ -158,7 +158,7 @@ public class PlayerController extends AdminBaseController {
 	@RequestMapping(value = "/admin/editPlayer.html", method = RequestMethod.POST)
 	public ModelAndView editPlayer(@Valid Player player,
 			BindingResult result,
-			@RequestParam (required = false) String uuid, 
+			@RequestParam (name = "uuid", required = false) String uuid, 
 			HttpServletRequest request) {
 		log.debug("Editing Players for [" + getPrincipal() + "][" + uuid + "][" + player.getFirstName() + " " + player.getLastName() + "][" + player.getEmail() + "]");
 
@@ -184,7 +184,7 @@ public class PlayerController extends AdminBaseController {
 	
 	@RequestMapping(value = "/admin/deletePlayer.html")
 	public ModelAndView deletePlayer(@RequestParam (required = false) String uuid, 
-			@RequestParam (required = false) String teamUuid, 
+			@RequestParam (name = "teamUuid", required = false) String teamUuid, 
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		log.debug("Deleting Player for [" + getPrincipal() + "][" + uuid + "]");

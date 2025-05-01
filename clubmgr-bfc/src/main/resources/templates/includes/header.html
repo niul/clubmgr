@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head></head>
 <body>
 	<div id="header-wrapper" th:fragment="header">
@@ -6,8 +6,8 @@
 		
 			<div class="row">
 
-			<div id="logout" th:text="*{user != null}? #{admin.welcome} + ' ' + *{user.firstName} + ' ' ">
-				<fmt:message key="admin.welcome"/> ${user.firstName} <a href="<c:url value="/logout.html" />"><fmt:message key="login.logout"></a>
+			<div id="logout" th:if="*{user != null}">
+				<span th:text="#{admin.welcome} + ' ' + ${user.firstName} + ' '">user.firstName</span><a th:href="@{/logout.html}" th:text="#{login.logout}">login.logout</a>
 			</div>
 
 			<!-- Logo -->
@@ -18,23 +18,16 @@
 			<!-- Navigation Bar -->
 			<nav id="nav">
 	   			<ul>
-	   			<!-- 
-	   			<sec:authorize access="hasAnyRole('ADMIN','CLUB_MGR','TEAM_MGR')">
-	    			<c:choose>
-	      			<c:when test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], 'admin')}">
-	        			<li class="current">
-	      			</c:when>
-	      			<c:otherwise>
-	        			<li>
-	      			</c:otherwise>
-	    			</c:choose>
-	        				<a href="#"><fmt:message key="menu.item0"></a>
+	   				<!-- <sec:authorize access="hasAnyRole('ADMIN','CLUB_MGR','TEAM_MGR')">-->
+	    				<li sec:authorize="isAuthenticated()" th:class="${page.contains('admin')} ? 'current' : null">
+	        				<a href="#" th:text="#{menu.item0}">menu.item0</a>
 	        				<ul>
-	        					<li><a href="/admin/change.html" th:text="password_change.title"></a></li>
-	        					<li><a href="/admin/players.html" th:text="admin.title"></a></li>
+	        					<li><a th:href="@{/admin/change.html}" th:text="#{password_change.title}"></a></li>
+	        					<li><a th:href="@{/admin/players.html}" th:text="#{admin.title}"></a></li>
 	        				</ul>
-		</sec:authorize>
-		-->
+	        			</li>
+					<!-- </sec:authorize>-->
+	
 						<!-- Home -->
 	        			<li class="" th:class="*{page == 'home'}? 'current'">
 	        				<a href="/index.html" th:text="#{menu.item1}">Menu Item 1</a>

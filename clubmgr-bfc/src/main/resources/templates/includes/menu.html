@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<!-- Sidebar -->
+	<div id="menu" th:fragment="menu" class="3u 12u$(small)">
+		<!-- Panel -->
+		<div class="panel">
+			<!-- Panel Head -->
+			<div class="panel-head">
+				<h4 th:text="#{admin.menu.header}">admin.menu.header</h4>
+			</div>
+			<!-- End Box Head-->
+
+			<div class="box-content">
+				<!-- Filter -->
+				<div class="filter">
+					<form th:if="${teams.size() > 1}" th:action="@{/admin/players.html}" th:object="${team}" method="POST">
+						<label th:text="#{admin.menu.filter.team} + ':'">admin.menu.filter.team:</label>
+						<select class="field single" th:field="*{uuid}" id="uuid" onchange="this.form.submit()">
+							<option th:if="${viewName == 'admin_players'}" th:value="${all_uuid}" th:text="#{admin.menu.filter.all}">admin.menu.filter.all</option>
+							<option th:each="team : ${teams}" th:value="${team.uuid}" th:text="${team.name}"></option>
+						</select>
+						<input type="hidden" name="seasonKey" th:value="${season.seasonKey}" />
+					</form>
+
+					<form th:if="${viewName == 'admin_squads' or viewName == 'admin_reports'}"
+							action="${requestScope['javax.servlet.forward.request_uri']}"
+							th:object="${season}" method="POST">
+						<label th:text="#{admin.menu.filter.season} ':'">admin.menu.filter.season</label>
+						<select class="field single" th:field="*{seasonKey}" id="seasonKey"	onchange="this.form.submit()">
+							<option th:each="season : ${seasons}" th:value="${season.seasonKey}" th:text="${season.name}"></option>
+						</select>
+						<input type="hidden" name="uuid" value="${team.uuid}" />
+					</form>
+				</div>
+				<!-- End Filter -->
+
+				<a th:href="@{/admin/players.html}" class="button action small icon fa-user"><span th:text="#{admin.menu.player}">admin.menu.player</span></a>
+				<a th:href="@{/admin/squads.html}" class="button action small icon fa-users"><span th:text="#{admin.menu.squad}">admin.menu.squad</span></a>
+				<a th:href="@{/admin/reports.html}"	class="button action small icon fa-file-text-o"><span th:text="#{admin.menu.match}">admin.menu.match</span></a>
+			</div>
+		</div>
+		<!-- End Box -->
+	</div>
+	<!-- End Sidebar -->
+</body>

@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{includes/head :: head}">
+
+</head>
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="~{includes/header :: header}"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+			<div class="container">
+				<h1 th:text="#{admin.title}">admin.title</h1>
+				<div class="row 200%">
+					<!-- Side Menu -->
+					<div id="menu" th:replace="~{includes/menu :: menu}"></div>
+					
+					<!-- Main Content -->
+			   	</div>
+			</div>
+		</div>	
+
+
+		<div id="footer" th:replace="~{includes/footer :: footer}"></div>
+	</div>
+</body>
+</html>

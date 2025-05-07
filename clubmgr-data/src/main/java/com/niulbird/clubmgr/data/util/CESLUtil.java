@@ -123,7 +123,7 @@ public class CESLUtil extends BaseUtil {
 						standing.setGoalsFor(getStripedInt(columns.get(6).text()));
 						standing.setGoalsAgainst(getStripedInt(columns.get(7).text()));
 						
-						if (!standing.getTeamName().isBlank()) {
+						if (standing.getTeamName() != null && !standing.getTeamName().isBlank()) {
 							standings.add(standing);
 							logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
 						}

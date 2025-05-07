@@ -50,13 +50,13 @@ public class SquadController extends AdminBaseController {
 		
 		mav = getFilterObjects(ADMIN_SQUADS, uuid, false, seasonKey, httpServletRequest);
 		
-		if (!uuid.isBlank()) {
+		if (uuid != null && !uuid.isBlank()) {
 			team = teamService.findByUuid(uuid);
 		} else {
 			team = (Team)mav.getModel().get(TEAM);
 		}
 		
-		if (!seasonKey.isBlank()) {
+		if (seasonKey != null && !seasonKey.isBlank()) {
 			seasonKey = ((Season)mav.getModel().get(SEASON)).getSeasonKey();
 		}
 		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(team.getTeamKey(), seasonKey);

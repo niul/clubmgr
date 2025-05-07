@@ -74,7 +74,7 @@ public abstract class AdminBaseController extends BaseController {
 			selectedTeam = teams.iterator().next();
 		}
 		
-		if (!teamUuid.isEmpty()) {
+		if (teamUuid != null && !teamUuid.isEmpty()) {
 			for (Team team : teams) {
 				if (teamUuid.equalsIgnoreCase(team.getUuid().toString())) {
 					selectedTeam = team;
@@ -90,7 +90,7 @@ public abstract class AdminBaseController extends BaseController {
 		
 		Season selectedSeason = seasons.get(0);
 		
-		if (!seasonKey.isEmpty()) {
+		if (seasonKey != null && !seasonKey.isEmpty()) {
 			for (Season season : seasons) {
 				if (seasonKey.equalsIgnoreCase(season.getSeasonKey())) {
 					selectedSeason = season;

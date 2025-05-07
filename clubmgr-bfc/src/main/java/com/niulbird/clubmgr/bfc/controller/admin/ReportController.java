@@ -77,13 +77,13 @@ public class ReportController extends AdminBaseController {
 		
 		mav = getFilterObjects(ADMIN_REPORTS, uuid, false, seasonKey, request);
 		
-		if (!uuid.isBlank()) {
+		if (uuid != null && !uuid.isBlank()) {
 			team = teamService.findByUuid(uuid);
 		} else {
 			team = (Team)mav.getModel().get(TEAM);
 		}
 		
-		if (!seasonKey.isBlank()) {
+		if (seasonKey != null && !seasonKey.isBlank()) {
 			seasonKey = ((Season)mav.getModel().get(SEASON)).getSeasonKey();
 		}
 		fixtures = teamService.findFixtures(team, (Season)mav.getModel().get(SEASON));

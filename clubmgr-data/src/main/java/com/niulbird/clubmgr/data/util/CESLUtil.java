@@ -9,7 +9,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
@@ -124,7 +123,7 @@ public class CESLUtil extends BaseUtil {
 						standing.setGoalsFor(getStripedInt(columns.get(6).text()));
 						standing.setGoalsAgainst(getStripedInt(columns.get(7).text()));
 						
-						if (StringUtils.isNotBlank(standing.getTeamName())) {
+						if (!standing.getTeamName().isBlank()) {
 							standings.add(standing);
 							logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
 						}

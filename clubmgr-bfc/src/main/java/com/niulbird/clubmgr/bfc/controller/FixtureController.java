@@ -1,7 +1,6 @@
 package com.niulbird.clubmgr.bfc.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -9,15 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,6 +40,7 @@ public class FixtureController extends BaseController {
 	private static final String PLAYER_FIXTURE_INFO = "playerFixtureInfo";
 	private static final String PLAYER_FIXTURE_INFO_LIST = "playerFixtureInfoList";
 	private static final String STATUS_UPDATED = "statusUpdated";
+	private static final String IMAGE_PATH = "/images/1by1.png";
 
 	@Autowired
 	EmailService emailService;
@@ -64,10 +62,10 @@ public class FixtureController extends BaseController {
 
 		Fixture fixture = fixtureService.findFixtureByUuid(uuid);
 
-		if (StringUtils.isNotEmpty(player)) {
+		if (!player.isEmpty()) {
 			playerFixtureInfo = fixtureService.findByUuid(player);
-			if (StringUtils.isNotEmpty(status)) {
-				if (StringUtils.isNotEmpty(updatePlayer)) {
+			if (!status.isEmpty()) {
+				if (!updatePlayer.isEmpty()) {
 					PlayerFixtureInfo updatePlayerFixtureInfo = fixtureService.findByUuid(updatePlayer);
 					updatePlayerFixtureInfo.setStatus(Status.valueOf(status));
 					fixtureService.updatePlayerInfo(updatePlayerFixtureInfo);
@@ -121,7 +119,7 @@ public class FixtureController extends BaseController {
 
 		Fixture fixture = fixtureService.findFixtureByUuid(fixtureData.getUuid());
 
-		if (StringUtils.isNotEmpty(fixtureData.getPlayer()) && StringUtils.isNotEmpty(fixtureData.getComment())) {
+		if (!fixtureData.getPlayer().isEmpty() && !fixtureData.getComment().isEmpty()) {
 			playerFixtureInfo = fixtureService.findByUuid(fixtureData.getPlayer());
 			playerFixtureInfo.setComment(fixtureData.getComment());
 			fixtureService.updatePlayerInfo(playerFixtureInfo);
@@ -149,7 +147,7 @@ public class FixtureController extends BaseController {
 		PlayerFixtureInfo playerFixtureInfo = null;
 		log.debug("Viewing Fixture Email Tracker for [playerFixtureInfo=" + player + "]");
 
-		if (StringUtils.isNoneEmpty(player)) {
+		if (!player.isEmpty()) {
 			playerFixtureInfo = fixtureService.findByUuid(player);
 			if (playerFixtureInfo.getViewed() == null) {
 				Calendar calendar = Calendar.getInstance();
@@ -159,9 +157,11 @@ public class FixtureController extends BaseController {
 				log.debug("Setting Email Viewed for [" + playerFixtureInfo.getPlayer().getEmail() + "][" + player + "]");
 			}
 		}
-		InputStream in = request.getSession().getServletContext().getResourceAsStream("/static/images/1by1.png");
-	    response.setContentType(MediaType.IMAGE_PNG_VALUE);
-	    IOUtils.copy(in, response.getOutputStream());
+		try {
+			request.getRequestDispatcher(IMAGE_PATH).forward(request, response);
+		} catch (ServletException | IOException e) {
+			log.error("Error forwarding to image path.", e);
+		}
 	}
 
 	private FixtureSummary getFixtureSummary(List<PlayerFixtureInfo> playerFixtureInfoList) {

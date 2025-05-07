@@ -6,7 +6,6 @@ import java.util.UUID;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +74,7 @@ public abstract class AdminBaseController extends BaseController {
 			selectedTeam = teams.iterator().next();
 		}
 		
-		if (StringUtils.isNotEmpty(teamUuid)) {
+		if (!teamUuid.isEmpty()) {
 			for (Team team : teams) {
 				if (teamUuid.equalsIgnoreCase(team.getUuid().toString())) {
 					selectedTeam = team;
@@ -91,7 +90,7 @@ public abstract class AdminBaseController extends BaseController {
 		
 		Season selectedSeason = seasons.get(0);
 		
-		if (StringUtils.isNotEmpty(seasonKey)) {
+		if (!seasonKey.isEmpty()) {
 			for (Season season : seasons) {
 				if (seasonKey.equalsIgnoreCase(season.getSeasonKey())) {
 					selectedSeason = season;

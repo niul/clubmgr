@@ -6,7 +6,6 @@ import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,13 +77,13 @@ public class ReportController extends AdminBaseController {
 		
 		mav = getFilterObjects(ADMIN_REPORTS, uuid, false, seasonKey, request);
 		
-		if (StringUtils.isNotBlank(uuid)) {
+		if (!uuid.isBlank()) {
 			team = teamService.findByUuid(uuid);
 		} else {
 			team = (Team)mav.getModel().get(TEAM);
 		}
 		
-		if (StringUtils.isBlank(seasonKey)) {
+		if (!seasonKey.isBlank()) {
 			seasonKey = ((Season)mav.getModel().get(SEASON)).getSeasonKey();
 		}
 		fixtures = teamService.findFixtures(team, (Season)mav.getModel().get(SEASON));

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
@@ -74,8 +73,7 @@ public class BCMSLUtil extends BaseUtil {
 											if (rowElements.get(0).text().equalsIgnoreCase("Map")) {
 												Elements mapElements = rowElements.get(2).getElementsByTag("a");
 												if (mapElements.size() > 0) {
-													fieldMapUri = StringUtils.chomp(mapElements.get(0).attr("href"))
-															.replaceAll("[\n\r]", "").trim();
+													fieldMapUri = mapElements.get(0).attr("href").stripTrailing();
 												}
 											}
 										}

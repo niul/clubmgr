@@ -33,6 +33,10 @@ public class DomainUserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     	logger.debug("Authenticating user [" + username + "] in Club [" + request.getServerName() + "]");
         User user = userRepository.findByUsernameAndClubDomain(username, request.getServerName());
+        if (user == null) {
+        	logger.debug("Failed to find user[" + username + "] in club[" + request.getServerName() + "]");
+        	return null;
+        }
         logger.debug("Found user[" + username + "] in club [" + request.getServerName() + "] ID: " + user.getUserId());
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();

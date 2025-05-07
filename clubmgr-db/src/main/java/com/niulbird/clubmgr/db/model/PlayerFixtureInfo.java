@@ -109,19 +109,19 @@ public final class PlayerFixtureInfo {
 		this.viewed = viewed;
 	}
 
-	public boolean getStarted() {
+	public Boolean getStarted() {
 		return started;
 	}
 
-	public void setStarted(boolean started) {
+	public void setStarted(Boolean started) {
 		this.started = started;
 	}
 
-	public boolean getSubstitute() {
+	public Boolean getSubstitute() {
 		return substitute;
 	}
 
-	public void setSubstitute(boolean substitute) {
+	public void setSubstitute(Boolean substitute) {
 		this.substitute = substitute;
 	}
 

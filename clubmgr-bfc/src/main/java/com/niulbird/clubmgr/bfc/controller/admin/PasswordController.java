@@ -36,7 +36,7 @@ public class PasswordController extends BaseController {
 	private static final Logger log = LogManager.getLogger();
 
 	private static final String LOGIN = "login";
-	private static final String PASSWORD_CHANGE = "password_change";
+	private static final String PASSWORD_CHANGE = "admin/password_change";
 	private static final String PASSWORD_EMAIL = "password_email";
 	private static final String PASSWORD_RESET = "password_reset";
 

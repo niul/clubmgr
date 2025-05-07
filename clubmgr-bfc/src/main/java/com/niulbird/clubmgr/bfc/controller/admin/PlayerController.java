@@ -32,8 +32,8 @@ import com.niulbird.clubmgr.db.service.TeamService;
 public class PlayerController extends AdminBaseController {
 	private static final Logger log = LogManager.getLogger();
 
-	private static final String ADMIN_ADD_PLAYER = "admin_add_player";
-	private static final String ADMIN_EDIT_PLAYER = "admin_edit_player";
+	private static final String ADMIN_ADD_PLAYER = "admin/add_player";
+	private static final String ADMIN_EDIT_PLAYER = "admin/edit_player";
 	private static final String ADMIN_PLAYERS = "admin/players";
 	private static final String PASSWORD_CHANGE = "password_change";
 	private static final String POSITIONS = "positions";

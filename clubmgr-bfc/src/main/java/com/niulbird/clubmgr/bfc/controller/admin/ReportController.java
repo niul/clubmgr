@@ -32,8 +32,8 @@ import com.niulbird.clubmgr.email.service.EmailService;
 public class ReportController extends AdminBaseController {
 	private static final Logger log = LogManager.getLogger();
 
-	private static final String ADMIN_REPORTS = "admin_reports";
-	private static final String ADMIN_REPORT = "admin_report";
+	private static final String ADMIN_REPORTS = "admin/reports";
+	private static final String ADMIN_REPORT = "admin/report";
 	private static final String FIXTURES = "fixtures";
 	private static final String FIXTURE = "fixture";
 	

@@ -27,7 +27,7 @@ import com.niulbird.clubmgr.db.service.TeamService;
 public class SquadController extends AdminBaseController {
 	private static final Logger log = LogManager.getLogger();
 
-	private static final String ADMIN_SQUADS = "admin_squads";
+	private static final String ADMIN_SQUADS = "admin/squads";
 	private static final String PLAYERS_ACTIVE = "players_active";
 	private static final String PLAYERS_INACTIVE = "players_inactive";
 	

@@ -17,23 +17,20 @@
 									<h1 th:text="#{admin.title}">admin.title"</h1>
 									<h3 th:text="#{login.header}">login.header</h3>
 								</header>
-<!-- 
-								<c:if test="${not empty error}">
-									<div class="error form_error">${error}</div>
-								</c:if>
-								<c:if test="${not empty msg}">
-									<div class="msg form_error">${msg}</div>
-								</c:if>
--->
+ 
+								<div th:if="${error}" class="error form_error" th:text="${error}">error</div>
+								
+								<div th:if="${msg}" class="msg form_error" th:text="${msg}">msg</div>
+
 								<form th:action="@{/login}" th:object="${loginData}" method="POST">
 									<div class="row 50%">
 										<div class="6u$ 12u(medium)">
 											<input type="text" th:field="*{username}" th:placeholder="#{login.username}"/>
-											<!-- <form:errors path="username" class="form_error" />-->
+											<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="form_error"></p>
 										</div>
 										<div class="6u$ 12u(medium)">
 											<input type="password" th:field="*{password}" th:placeholder="#{login.password}"/>
-											<!-- <form:errors path="password" cssClass="form_error" />-->
+											<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="form_error"></p>
 										</div>
 									</div>
 									<div class="row 50%">

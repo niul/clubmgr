@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{includes/head :: head}">
+
+</head>
+
+<body class="right-sidebar">
+	<div id="page-wrapper">
+		<div id="header" th:replace="~{includes/header :: header}"></div>
+		<!-- Main -->
+		<div id="main-wrapper">
+			<div class="container">
+				<h1 th:text="#{admin.title}">admin.title</h1>
+				<div class="row 200%">
+					<!-- Side Menu -->
+					<div id="menu" th:replace="~{includes/menu :: menu}"></div>
+					
+					<!-- Main Content -->
+					<div class="9u 12u(small)">				
+						<!-- Panel -->
+						<div class="panel">
+							<div class="panel-head">
+								<h4 th:text="#{admin.menu.squad} + ' - ' + ${team.name} + ' - ' + ${season.name}">admin.menu.squad</h4>
+							</div>
+							<div class="box-content">
+								<h3 th:text="#{squad.active.title}">squad.active.title</h3>
+									<table class="default">
+										<thead>
+											<tr>
+												<th th:text="#{squad.active.headers.name}">squad.active.headers.name</th>
+												<th th:text="#{squad.active.headers.email}">squad.active.headers.email</th>
+												<th th:text="#{squad.active.headers.actions}">squad.active.headers.actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="player, iStat : ${players_active}" th:class="${iStat.odd}? 'odd': 'even'">
+												<td th:text="${player.firstName} + ' ' + ${player.lastName}">player.firstName</td>
+												<td th:text="${player.email}">player.email</td>
+												<td>
+													<a th:href="@{/admin/removeSquad.html} + '?uuid=' + ${player.uuid} + '&teamUuid=' + ${team.uuid} + '&seasonKey=' + ${season.seasonKey}" class="button small icon fa-edit">
+														<span th:text="#{squad.active.headers.actions.remove}">squad.active.headers.actions.remove</span>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<div th:if="${players_active.isEmpty()}" class="msg form_error">
+										<span th:text="#{squad.active.error.no_players(${season.name})}">squad.active.error.no_players</span>
+									</div>
+			
+									<h3 th:text="#{squad.inactive.title}">squad.inactive.title</h3>
+									<table class="default">
+										<thead>
+											<tr>
+												<th th:text="#{squad.inactive.headers.name}">squad.inactive.headers.name</th>
+												<th th:text="#{squad.inactive.headers.email}">squad.inactive.headers.email</th>
+												<th th:text="#{squad.inactive.headers.actions}">squad.inactive.headers.actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="player, iStat : ${players_inactive}" th:class="${iStat.odd}? 'odd': 'even'">
+												<td th:text="${player.firstName} + ' ' + ${player.lastName}">player.firstName</td>
+												<td th:text="${player.email}">player.email</td>
+												<td>
+													<a th:href="@{/admin/addSquad.html} + '?uuid=' + ${player.uuid} + '&teamUuid=' + ${team.uuid} + '&seasonKey=' + ${season.seasonKey}" class="button small icon fa-edit">
+														<span th:text="#{squad.inactive.headers.actions.add}">squad.inactive.headers.actions.add</span>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+			   	</div>
+			</div>
+		</div>	
+
+
+		<div id="footer" th:replace="~{includes/footer :: footer}"></div>
+	</div>
+</body>
+</html>

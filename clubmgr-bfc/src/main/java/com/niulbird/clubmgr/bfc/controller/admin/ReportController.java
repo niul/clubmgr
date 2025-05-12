@@ -65,9 +65,9 @@ public class ReportController extends AdminBaseController {
 
 	@Transactional
 	@RequestMapping(value = "/admin/reports.html")
-	public ModelAndView players(@RequestParam (required = false) String uuid,
-			@RequestParam (required = false) String seasonKey,
-			@RequestParam (required = false) boolean sendEmail,
+	public ModelAndView players(@RequestParam (name = "uuid", required = false) String uuid,
+			@RequestParam (name = "seasonKey", required = false) String seasonKey,
+			@RequestParam (name = "sendEmail", required = false) boolean sendEmail,
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		Team team;
@@ -96,10 +96,10 @@ public class ReportController extends AdminBaseController {
 	
 	@Transactional
 	@RequestMapping(value = "/admin/editReport.html", method = RequestMethod.GET)
-	public ModelAndView editReport(@RequestParam (required = false) String uuid,
+	public ModelAndView editReport(@RequestParam (name = "uuid", required = false) String uuid,
 			@ModelAttribute("playerFixtureInfoList") PlayerFixtureInfoList playerFixtureInfoList,
-			@RequestParam (required = false) String teamUuid,
-			@RequestParam (required = false) String seasonKey,
+			@RequestParam (name = "teamUuid", required = false) String teamUuid,
+			@RequestParam (name = "seasonKey", required = false) String seasonKey,
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		log.debug("Editing Players for [" + getPrincipal() + "][" + uuid + "]");
@@ -118,11 +118,11 @@ public class ReportController extends AdminBaseController {
 	
 	@Transactional
 	@RequestMapping(value = "/admin/editReport.html", method = RequestMethod.POST)
-	public ModelAndView editReport(@RequestParam (required = false) String uuid,
+	public ModelAndView editReport(@RequestParam (name = "uuid", required = false) String uuid,
 			@Valid PlayerFixtureInfoList playerFixtureInfoList,
 			BindingResult result,
-			@RequestParam (required = false) String teamUuid,
-			@RequestParam (required = false) String seasonKey,
+			@RequestParam (name = "teamUuid", required = false) String teamUuid,
+			@RequestParam (name = "seasonKey", required = false) String seasonKey,
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		log.debug("Editing Report for [" + getPrincipal() + "][" + uuid + "]");
@@ -149,9 +149,9 @@ public class ReportController extends AdminBaseController {
 	
 	@Transactional
 	@RequestMapping(value = "/admin/sendFixtureEmail.html", method = RequestMethod.GET)
-	public ModelAndView sendFixtureEmail(@RequestParam (required = false) String uuid,
-			@RequestParam (required = false) String teamUuid,
-			@RequestParam (required = false) String seasonKey,
+	public ModelAndView sendFixtureEmail(@RequestParam (name = "uuid", required = false) String uuid,
+			@RequestParam (name = "teamUuid", required = false) String teamUuid,
+			@RequestParam (name = "seasonKey", required = false) String seasonKey,
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		log.debug("Sending Fixture Email for [" + getPrincipal() + "][" + uuid + "]");

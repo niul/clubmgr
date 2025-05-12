@@ -183,7 +183,7 @@ public class PlayerController extends AdminBaseController {
 	}
 	
 	@RequestMapping(value = "/admin/deletePlayer.html")
-	public ModelAndView deletePlayer(@RequestParam (required = false) String uuid, 
+	public ModelAndView deletePlayer(@RequestParam (name = "uuid", required = false) String uuid, 
 			@RequestParam (name = "teamUuid", required = false) String teamUuid, 
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();

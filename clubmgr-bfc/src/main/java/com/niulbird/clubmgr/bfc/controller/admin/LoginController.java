@@ -34,8 +34,8 @@ public class LoginController extends BaseController {
 
 	@RequestMapping(value = "/login.html", method = RequestMethod.GET)
 	public ModelAndView login(@ModelAttribute("loginData") LoginData loginData,
-			@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout,
+			@RequestParam(name = "error", required = false) String error,
+			@RequestParam(name = "logout", required = false) String logout,
 			HttpServletRequest httpServletRequest) {
 		ModelAndView model = setView(LOGIN, null, httpServletRequest);
 		log.debug("Login page request: " + loginData.getUsername());

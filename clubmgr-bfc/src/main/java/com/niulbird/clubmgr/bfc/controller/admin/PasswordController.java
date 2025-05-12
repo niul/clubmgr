@@ -85,7 +85,7 @@ public class PasswordController extends BaseController {
 	
 	@RequestMapping(value = "/resetPassword.html", method = RequestMethod.GET)
 	public ModelAndView resetPassword(@ModelAttribute("passwordResetData") PasswordResetData passwordResetData,
-			@RequestParam String key, HttpServletRequest httpServletRequest) {
+			@RequestParam (name = "key") String key, HttpServletRequest httpServletRequest) {
 		ModelAndView mav = setView(PASSWORD_RESET, null, httpServletRequest);
 		Calendar expiryDate = new GregorianCalendar();
 		expiryDate.add(Calendar.DAY_OF_MONTH, -3);

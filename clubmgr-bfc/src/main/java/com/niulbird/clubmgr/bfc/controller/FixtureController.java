@@ -51,9 +51,9 @@ public class FixtureController extends BaseController {
 	@Transactional
 	@RequestMapping(value = "/fixture.html", method = RequestMethod.GET)
 	public ModelAndView fixture(@RequestParam (name = "uuid", required = true) String uuid,
-			@RequestParam (required = false) String player,
-			@RequestParam (required = false) String updatePlayer,
-			@RequestParam (required = false) String status,
+			@RequestParam (name = "player", required = false) String player,
+			@RequestParam (name = "updatePlayer", required = false) String updatePlayer,
+			@RequestParam (name = "status", required = false) String status,
 			HttpServletRequest httpServletRequest) {
 		List<PlayerFixtureInfo> playerFixtureInfoList = new ArrayList<PlayerFixtureInfo>();
 		PlayerFixtureInfo playerFixtureInfo = null;
@@ -141,7 +141,7 @@ public class FixtureController extends BaseController {
 
 	@Transactional
 	@RequestMapping(value = "/fixture.png", method = RequestMethod.GET)
-	public void fixturePng(@RequestParam (required = false) String player,
+	public void fixturePng(@RequestParam (name = "player", required = false) String player,
 			HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		PlayerFixtureInfo playerFixtureInfo = null;

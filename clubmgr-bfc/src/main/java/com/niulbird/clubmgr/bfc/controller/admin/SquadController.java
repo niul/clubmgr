@@ -38,8 +38,8 @@ public class SquadController extends AdminBaseController {
 
 	@Transactional
 	@RequestMapping(value = "/admin/squads.html")
-	public ModelAndView players(@RequestParam (required = false) String uuid,
-			@RequestParam (required = false) String seasonKey,
+	public ModelAndView players(@RequestParam (name = "uuid", required = false) String uuid,
+			@RequestParam (name = "seasonKey", required = false) String seasonKey,
 			HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
 		Team team;
@@ -80,9 +80,9 @@ public class SquadController extends AdminBaseController {
 	
 	@Transactional
 	@RequestMapping(value = "/admin/addSquad.html")
-	public ModelAndView addSquad(@RequestParam (required = false) String uuid,
-			@RequestParam (required = false) String teamUuid,
-			@RequestParam (required = false) String seasonKey,
+	public ModelAndView addSquad(@RequestParam (name = "uuid", required = false) String uuid,
+			@RequestParam (name = "teamUuid", required = false) String teamUuid,
+			@RequestParam (name = "seasonKey", required = false) String seasonKey,
 			HttpServletRequest httpServletRequest) {
 		log.debug("Adding to Squad for [" + getPrincipal() + "][" + teamUuid + "][" + uuid + "]");
 		ModelAndView mav = new ModelAndView();
@@ -105,9 +105,9 @@ public class SquadController extends AdminBaseController {
 	
 	@Transactional
 	@RequestMapping(value = "/admin/removeSquad.html")
-	public ModelAndView removeSquad(@RequestParam (required = false) String uuid,
-			@RequestParam (required = false) String teamUuid,
-			@RequestParam (required = false) String seasonKey,
+	public ModelAndView removeSquad(@RequestParam (name = "uuid", required = false) String uuid,
+			@RequestParam (name = "teamUuid", required = false) String teamUuid,
+			@RequestParam (name = "seasonKey", required = false) String seasonKey,
 			HttpServletRequest httpServletRequest) {
 
 		log.debug("Removing from Squad [" + getPrincipal() + "][" + teamUuid + "][" + uuid + "]");

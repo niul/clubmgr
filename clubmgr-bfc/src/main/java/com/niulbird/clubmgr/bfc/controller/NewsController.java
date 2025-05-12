@@ -26,7 +26,7 @@ public class NewsController extends BaseController {
 	private static final String TITLE = "title";
 	
 	@RequestMapping(value = "/news.html")
-	public ModelAndView news(@RequestParam(value = "start", defaultValue = "0") int start,
+	public ModelAndView news(@RequestParam(name = "start", defaultValue = "0") int start,
 			HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
 		log.debug("Getting News from start: " + start + " |" + httpServletRequest.getRequestURL().append("?").append(httpServletRequest.getQueryString()));

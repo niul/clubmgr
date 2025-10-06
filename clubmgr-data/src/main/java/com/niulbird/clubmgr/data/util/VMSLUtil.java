@@ -20,8 +20,8 @@ import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 public class VMSLUtil extends BaseUtil {
     private final Log logger = LogFactory.getLog(getClass());
     
-    private final static String TIME_FORMAT = "EEE MM/d/yyyy h:mma";
-    private final static String DATE_FORMAT = "EEE MM/d/yyyy h:mma";
+    private final static String TIME_FORMAT = "EEE M/d/yyyy h:mma";
+    private final static String DATE_FORMAT = "EEE M/d/yyyy h:mma";
     
 	private static final String VMSL_URI = "https://vmslsoccer.com";
     

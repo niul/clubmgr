@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
@@ -30,7 +31,7 @@ public abstract class BaseUtil {
 
 	protected Time convertStringToTime(String time, String format, String format2) {
 		Time t = null;
-		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.ENGLISH);
 		long ms = 0;
 
 		if (time.length() == 5)
@@ -57,7 +58,7 @@ public abstract class BaseUtil {
 
 	protected Date convertStringToDate(String date, String format, String format2) {
 		Date d = null;
-		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.ENGLISH);
 		long ms = 0;
 		try {
 			try {

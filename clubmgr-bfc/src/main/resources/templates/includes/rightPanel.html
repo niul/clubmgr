@@ -17,9 +17,13 @@
   </div>
   <p>
   <h3 th:text="#{panel.twitter.title}">panel.twitter.title</h3>
-  <a class="twitter-timeline" data-tweet-limit="3" href="https://twitter.com/bombasticfc" data-widget-id="658700167512637440"  th:text="#{panel.twitter.name}">
+  <!-- <a class="twitter-timeline" data-tweet-limit="3" href="https://twitter.com/bombasticfc" data-widget-id="658700167512637440"  th:text="#{panel.twitter.name}">
   	panel.twitter.name
-  </a>
+  </a>-->
+  
+  <a class="twitter-timeline" href="https://twitter.com/bombasticfc?ref_src=twsrc%5Etfw" th:text="#{panel.twitter.name}">panel.twitter.name</a>
+  
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   
   </div>
 </body>

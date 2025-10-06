@@ -42,11 +42,11 @@ public class VMSLDataManagerTest {
 	@Test
 	@Rollback(false)
 	public void vmslUpdateFixturesTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "WINTER_2024");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "WINTER_2025");
 		List<Fixture> fixtures = dataManager.updateFixtures();
 		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_B", "WINTER_2024");
 		fixtures = dataManager.updateFixtures();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "WINTER_2024");
+		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "WINTER_2024");
 		fixtures = dataManager.updateFixtures();
 		assertNotNull(fixtures);
 	}
@@ -57,8 +57,6 @@ public class VMSLDataManagerTest {
 		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_A", "WINTER_2024");
 		List<Standing> fixtures = dataManager.updateStandings();
 		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_B", "WINTER_2024");
-		fixtures = dataManager.updateStandings();
-		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_CLASSICS", "WINTER_2024");
 		fixtures = dataManager.updateStandings();
 		dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_JURASSIC", "WINTER_2024");
 		fixtures = dataManager.updateStandings();

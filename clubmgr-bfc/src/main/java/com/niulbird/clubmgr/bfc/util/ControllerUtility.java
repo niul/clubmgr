@@ -11,7 +11,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 public final class ControllerUtility {
 	
 	// Static Literals
-	private static final String HEADER_X_FORWARDED_FOR = "HTTP_X_FORWARDED_FOR";
+	private static final String HEADER_X_FORWARDED_FOR = "X-Forwarded-For";
 	private static final int RAND_MAX = 9;
 	
 	/* Never called */

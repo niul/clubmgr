@@ -4,12 +4,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.niulbird.clubmgr.bfc.util.ControllerUtility;
 
 import org.apache.logging.log4j.ThreadContext;
 
+@Component
 public class LogInterceptor implements HandlerInterceptor {
 
 	@Override

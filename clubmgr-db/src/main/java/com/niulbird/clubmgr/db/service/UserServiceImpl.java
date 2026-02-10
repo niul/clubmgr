@@ -1,9 +1,11 @@
 package com.niulbird.clubmgr.db.service;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,13 +25,14 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public User getUser(String username) {
 		return userRepository.findByUsername(username);
 	}
 
 	@Override
 	@Transactional
+	@Nullable
 	public UUID addResetKey(String username) {
 		PasswordReset passwordReset = new PasswordReset();
 		User user = getUser(username);
@@ -40,13 +43,14 @@ public class UserServiceImpl implements UserService {
 			passwordReset.setResetKey(UUID.randomUUID());
 			passwordReset.setComplete(false);
 			passwordResetRepository.save(passwordReset);
+			return passwordReset.getResetKey();
 		}
 		
-		return passwordReset.getResetKey();
+		return null;
 	}
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public PasswordReset findByResetKey(UUID resetKey) {
 		return passwordResetRepository.findByResetKey(resetKey);
 	}
@@ -55,20 +59,25 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void updatePassword(UUID resetKey, String password) {
 		PasswordReset passwordReset = passwordResetRepository.findByResetKey(resetKey);
-		User user = passwordReset.getUser();
-		user.setPassword(password);
-		user.setChangePassword(false);
-		userRepository.save(user);
-		
-		passwordReset.setComplete(true);
-		passwordReset.setUpdated(new Date());
-		passwordResetRepository.save(passwordReset);
+		if (passwordReset != null && passwordReset.getUser() != null) {
+			User user = passwordReset.getUser();
+			user.setPassword(password);
+			user.setChangePassword(false);
+			userRepository.save(user);
+			
+			passwordReset.setComplete(true);
+			passwordReset.setUpdated(new Date());
+			passwordResetRepository.save(passwordReset);
+		}
 	}
 
 	@Override
+	@Transactional
 	public void updatePassword(User user, String password) {
-		user.setPassword(password);
-		user.setChangePassword(false);
-		userRepository.save(user);
+		if (user != null) {
+			user.setPassword(password);
+			user.setChangePassword(false);
+			userRepository.save(user);
+		}
 	}
 }

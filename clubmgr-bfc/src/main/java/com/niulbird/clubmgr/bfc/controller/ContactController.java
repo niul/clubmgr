@@ -10,10 +10,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -36,6 +38,12 @@ public class ContactController extends BaseController {
 	
 	private static final String CONTACT = "contact";
 	private static final String SUCCESS = "contact_success";
+	
+	// Whitelist of valid contact subjects to prevent injection attacks
+	// Must match keys from bfc-messages.properties: contact.subjects=GA=General|MO=Mens Open|M45=Mens Over 45s|WO=Womens
+	private static final Set<String> VALID_SUBJECTS = Collections.unmodifiableSet(
+		Set.of("GA", "MO", "M45", "WO")
+	);
 
 	@Autowired
 	EmailService emailService;
@@ -64,6 +72,12 @@ public class ContactController extends BaseController {
 		log.info("Entering contactPost(): " + contactData.getName() + "|" 
 				+ contactData.getEmail() + "|" + contactData.getSubject() + "|" + contactData.getMessage() + "|" + captchaResponse);
 		
+		// Validate subject against whitelist to prevent injection attacks
+		if (contactData.getSubject() == null || !VALID_SUBJECTS.contains(contactData.getSubject())) {
+			log.warn("Invalid contact subject submitted: " + contactData.getSubject());
+			result.rejectValue("subject", "error.contact.invalid_subject");
+		}
+		
 		String remoteAddr = httpServletRequest.getRemoteAddr();
 		
 		JSONTokener tokener = null;
@@ -74,13 +88,13 @@ public class ContactController extends BaseController {
 					"&remoteip=" + remoteAddr);
 			tokener = new JSONTokener(u.toURL().openStream());
 		} catch (JSONException  e) {
-			log.error("Error with Google Captch: " + e.getMessage(), e);
+			log.error("Error with Google Captcha: " + e.getMessage(), e);
 		} catch (MalformedURLException e) {
-			log.error("Error with Google Captch: " + e.getMessage(), e);
+			log.error("Error with Google Captcha: " + e.getMessage(), e);
 		} catch (IOException e) {
-			log.error("Error with Google Captch: " + e.getMessage(), e);
+			log.error("Error with Google Captcha: " + e.getMessage(), e);
 		} catch (URISyntaxException e) {
-			log.error("Error with Google Captch: " + e.getMessage(), e);
+			log.error("Error with Google Captcha: " + e.getMessage(), e);
 		}
 		JSONObject jsonObject = new JSONObject(tokener);
 		log.debug("Google Captcha Response: " + jsonObject);

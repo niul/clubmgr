@@ -62,10 +62,10 @@ public class FixtureController extends BaseController {
 
 		Fixture fixture = fixtureService.findFixtureByUuid(uuid);
 
-		if (!player.isEmpty()) {
+		if (player != null && !player.isEmpty()) {
 			playerFixtureInfo = fixtureService.findByUuid(player);
-			if (!status.isEmpty()) {
-				if (!updatePlayer.isEmpty()) {
+			if (status != null && !status.isEmpty()) {
+				if (updatePlayer != null && !updatePlayer.isEmpty()) {
 					PlayerFixtureInfo updatePlayerFixtureInfo = fixtureService.findByUuid(updatePlayer);
 					updatePlayerFixtureInfo.setStatus(Status.valueOf(status));
 					fixtureService.updatePlayerInfo(updatePlayerFixtureInfo);

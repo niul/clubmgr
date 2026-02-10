@@ -12,7 +12,7 @@ import jakarta.validation.Valid;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,6 +45,9 @@ public class PasswordController extends BaseController {
 	
 	@Autowired
 	EmailService emailService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@RequestMapping(value = "/reset.html", method = RequestMethod.GET)
 	public ModelAndView reset(@ModelAttribute("passwordEmailData") PasswordEmailData passwordEmailData,
@@ -127,8 +130,9 @@ public class PasswordController extends BaseController {
 		}
 		
 		try {
+			String encodedPassword = passwordEncoder.encode(passwordResetData.getPassword());
 			userService.updatePassword(UUID.fromString((String)httpServletRequest.getSession().getAttribute("resetKey")), 
-					new BCryptPasswordEncoder().encode(passwordResetData.getPassword()));
+					encodedPassword);
 		} catch (Exception e) {
 			log.error("Error saving new password: " + e.getMessage(), e);
 			mav.setViewName(ERROR);
@@ -159,7 +163,7 @@ public class PasswordController extends BaseController {
 			result.rejectValue("passwordRepeat", "error.password_change.mismatch");
 		}
 		
-		if (user == null || !new BCryptPasswordEncoder().matches(passwordChangeData.getOldPassword(), user.getPassword())) {
+		if (user == null || !passwordEncoder.matches(passwordChangeData.getOldPassword(), user.getPassword())) {
 			result.rejectValue("oldPassword", "error.password_change.mismatch.old");
 		}
 		
@@ -168,7 +172,8 @@ public class PasswordController extends BaseController {
 		}
 		
 		try {
-			userService.updatePassword(user, new BCryptPasswordEncoder().encode(passwordChangeData.getPassword()));
+			String encodedPassword = passwordEncoder.encode(passwordChangeData.getPassword());
+			userService.updatePassword(user, encodedPassword);
 		} catch (Exception e) {
 			log.error("Error saving new password: " + e.getMessage(), e);
 			mav.setViewName(ERROR);

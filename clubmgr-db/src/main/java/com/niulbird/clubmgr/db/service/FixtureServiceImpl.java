@@ -1,4 +1,6 @@
 package com.niulbird.clubmgr.db.service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -7,8 +9,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +29,7 @@ import com.niulbird.clubmgr.db.repository.TeamSeasonMapRepository;
 @Transactional
 public class FixtureServiceImpl implements FixtureService {
 
-    private final Log logger = LogFactory.getLog(getClass());
+    private static final Logger log = LoggerFactory.getLogger(FixtureServiceImpl.class);
     
 	@Autowired
 	private FixtureRepository fixtureRepository;
@@ -152,7 +152,7 @@ public class FixtureServiceImpl implements FixtureService {
 	@Transactional
 	public void updatePlayerInfo(List<PlayerFixtureInfo> playerFixtureInfoList) {
 		for (PlayerFixtureInfo playerFixtureInfo : playerFixtureInfoList) {
-			logger.debug("Saving: [" + playerFixtureInfo.getPlayerFixtureInfoId() + "][" + playerFixtureInfo.getPlayer().getFirstName() 
+			log.debug("Saving: [" + playerFixtureInfo.getPlayerFixtureInfoId() + "][" + playerFixtureInfo.getPlayer().getFirstName() 
 					+ " " + playerFixtureInfo.getPlayer().getLastName() + "]");
 			playerFixtureInfoRepository.save(playerFixtureInfo);
 		}
@@ -161,7 +161,7 @@ public class FixtureServiceImpl implements FixtureService {
 	@Override
 	@Transactional
 	public void updatePlayerInfo(PlayerFixtureInfo playerFixtureInfo) {
-		logger.debug("Saving: [" + playerFixtureInfo.getPlayerFixtureInfoId() + "][" + playerFixtureInfo.getPlayer().getFirstName() 
+		log.debug("Saving: [" + playerFixtureInfo.getPlayerFixtureInfoId() + "][" + playerFixtureInfo.getPlayer().getFirstName() 
 					+ " " + playerFixtureInfo.getPlayer().getLastName() + "]");
 		playerFixtureInfoRepository.save(playerFixtureInfo);
 	}

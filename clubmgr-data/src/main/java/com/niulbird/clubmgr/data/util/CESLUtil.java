@@ -1,4 +1,6 @@
 package com.niulbird.clubmgr.data.util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -9,8 +11,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,7 +22,7 @@ import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 
 public class CESLUtil extends BaseUtil {
 	// Logger for this class and subclasses
-    private final Log logger = LogFactory.getLog(getClass());
+    private static final Logger log = LoggerFactory.getLogger(CESLUtil.class);
     
     private final static String TIME_FORMAT = "hhmma";
     private final static String DATE_FORMAT = "d-MMMMM-yyyy";
@@ -85,11 +85,11 @@ public class CESLUtil extends BaseUtil {
 
 				if (fixture.getHome().contains(teamSeasonMap.getNameRegex()) || fixture.getAway().contains(teamSeasonMap.getNameRegex())) {
 					fixtures.add(fixture);
-					logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t" + fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: " + fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: " + fixture.getTime() + "\tField: " + fixture.getFieldMapUri());
+					log.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t" + fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: " + fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: " + fixture.getTime() + "\tField: " + fixture.getFieldMapUri());
 				}
 			}
 		} catch (IOException e) {
-			logger.error("Error getting Fixtures: " + e.getMessage(), e);
+			log.error("Error getting Fixtures: " + e.getMessage(), e);
 		}
 
 		return fixtures;
@@ -125,15 +125,15 @@ public class CESLUtil extends BaseUtil {
 						
 						if (standing.getTeamName() != null && !standing.getTeamName().isBlank()) {
 							standings.add(standing);
-							logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
+							log.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: " + standing.getPosition() + "\tPoints: " + standing.getPoints());
 						}
 					} catch (NumberFormatException nfe) {
-						logger.error("Number Format issue: " + nfe.getMessage());
+						log.error("Number Format issue: " + nfe.getMessage());
 					}
 				}
 			}
 		} catch (IOException e) {
-			logger.error("Error getting Fixtures: " + e.getMessage(), e);
+			log.error("Error getting Fixtures: " + e.getMessage(), e);
 		}
 		return standings;
 	}

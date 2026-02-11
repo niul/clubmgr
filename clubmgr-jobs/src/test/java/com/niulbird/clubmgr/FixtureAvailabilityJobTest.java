@@ -119,7 +119,7 @@ public class FixtureAvailabilityJobTest extends BaseTestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		logger.debug("Body: " + body);
+		log.debug("Body: " + body);
 		Assert.assertTrue(body.length() > 0);
 	}
 }

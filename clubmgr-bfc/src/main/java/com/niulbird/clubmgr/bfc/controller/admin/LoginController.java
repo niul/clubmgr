@@ -1,10 +1,10 @@
 package com.niulbird.clubmgr.bfc.controller.admin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,7 +24,7 @@ import com.niulbird.clubmgr.db.service.UserService;
 
 @Controller
 public class LoginController extends BaseController {
-	private static final Logger log = LogManager.getLogger();
+	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
 	private static final String LOGIN = "login";
 

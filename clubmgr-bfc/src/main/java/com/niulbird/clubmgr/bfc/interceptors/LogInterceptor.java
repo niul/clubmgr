@@ -6,10 +6,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.slf4j.MDC;
 
 import com.niulbird.clubmgr.bfc.util.ControllerUtility;
-
-import org.apache.logging.log4j.ThreadContext;
 
 @Component
 public class LogInterceptor implements HandlerInterceptor {
@@ -19,9 +18,9 @@ public class LogInterceptor implements HandlerInterceptor {
 			throws Exception {
 		boolean proceedFlag = true;
 
-		// Add local thread info to logging context
-		ThreadContext.put("SESSIONID", request.getSession().getId());
-		ThreadContext.put("IPADDRESS", ControllerUtility.remoteAddr(request));
+		// Add local thread info to logging context using SLF4J MDC
+		MDC.put("SESSIONID", request.getSession().getId());
+		MDC.put("IPADDRESS", ControllerUtility.remoteAddr(request));
 
 		return proceedFlag;
 	}

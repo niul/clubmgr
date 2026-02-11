@@ -18,7 +18,7 @@ public class WordPressServiceTest extends BaseTestCase {
 	public void getPosts() {
 		ArrayList<Post> posts = null;
 		posts = wordPressDao.getAllPosts();
-		logger.debug("Testing the cache...");
+		log.debug("Testing the cache...");
 		posts = wordPressDao.getAllPosts();
 		Assert.assertNotNull(posts);
 	}
@@ -27,7 +27,7 @@ public class WordPressServiceTest extends BaseTestCase {
 	public void getPost() {
 		Post post = null;
 		post = wordPressDao.getPost(1056);
-		logger.debug("Testing the cache...");
+		log.debug("Testing the cache...");
 		post = wordPressDao.getPost(1056);
 		Assert.assertNotNull(post);
 	}

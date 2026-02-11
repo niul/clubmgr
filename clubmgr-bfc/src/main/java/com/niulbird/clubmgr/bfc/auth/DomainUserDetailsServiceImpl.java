@@ -1,12 +1,12 @@
 package com.niulbird.clubmgr.bfc.auth;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +20,7 @@ import com.niulbird.clubmgr.db.model.User;
 import com.niulbird.clubmgr.db.repository.UserRepository;
 
 public class DomainUserDetailsServiceImpl implements UserDetailsService {
-	Logger logger = LogManager.getLogger();
+	private static final Logger log = LoggerFactory.getLogger(DomainUserDetailsServiceImpl.class);
 	
 	@Autowired
     private UserRepository userRepository;
@@ -31,18 +31,18 @@ public class DomainUserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    	logger.debug("Authenticating user [" + username + "] in Club [" + request.getServerName() + "]");
+    	log.debug("Authenticating user [" + username + "] in Club [" + request.getServerName() + "]");
         User user = userRepository.findByUsernameAndClubDomain(username, request.getServerName());
         if (user == null) {
-        	logger.debug("Failed to find user[" + username + "] in club[" + request.getServerName() + "]");
+        	log.debug("Failed to find user[" + username + "] in club[" + request.getServerName() + "]");
         	return null;
         }
-        logger.debug("Found user[" + username + "] in club [" + request.getServerName() + "] ID: " + user.getUserId());
+        log.debug("Found user[" + username + "] in club [" + request.getServerName() + "] ID: " + user.getUserId());
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()){
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleKey()));
-            logger.debug("Adding Role: " + role.getRoleKey());
+            log.debug("Adding Role: " + role.getRoleKey());
         }
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);

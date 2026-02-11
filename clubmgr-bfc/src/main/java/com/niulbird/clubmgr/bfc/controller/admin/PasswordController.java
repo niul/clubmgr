@@ -1,4 +1,6 @@
 package com.niulbird.clubmgr.bfc.controller.admin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -9,8 +11,6 @@ import java.util.UUID;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -33,7 +33,7 @@ import com.niulbird.clubmgr.email.service.EmailService;
 
 @Controller
 public class PasswordController extends BaseController {
-	private static final Logger log = LogManager.getLogger();
+	private static final Logger log = LoggerFactory.getLogger(PasswordController.class);
 
 	private static final String LOGIN = "login";
 	private static final String PASSWORD_CHANGE = "admin/password_change";

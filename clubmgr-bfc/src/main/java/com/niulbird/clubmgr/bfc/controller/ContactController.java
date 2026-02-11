@@ -1,7 +1,7 @@
 package com.niulbird.clubmgr.bfc.controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -34,7 +34,7 @@ import com.niulbird.clubmgr.email.service.EmailService;
 
 @Controller
 public class ContactController extends BaseController {
-	private static final Logger log = LogManager.getLogger();
+	private static final Logger log = LoggerFactory.getLogger(ContactController.class);
 	
 	private static final String CONTACT = "contact";
 	private static final String SUCCESS = "contact_success";

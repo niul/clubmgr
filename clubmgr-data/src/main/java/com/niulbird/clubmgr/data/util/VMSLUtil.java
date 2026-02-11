@@ -1,4 +1,6 @@
 		package com.niulbird.clubmgr.data.util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,8 +8,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,7 +18,7 @@ import com.niulbird.clubmgr.db.model.Standing;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 
 public class VMSLUtil extends BaseUtil {
-    private final Log logger = LogFactory.getLog(getClass());
+    private static final Logger log = LoggerFactory.getLogger(VMSLUtil.class);
     
     private final static String TIME_FORMAT = "EEE M/d/yyyy h:mma";
     private final static String DATE_FORMAT = "EEE M/d/yyyy h:mma";
@@ -78,7 +78,7 @@ public class VMSLUtil extends BaseUtil {
 											}
 										}
 									} catch (IOException ioe) {
-										logger.error("Error getting field URL: " + ioe, ioe);
+										log.error("Error getting field URL: " + ioe, ioe);
 									}
 
 									if (fieldMapUri == null) {
@@ -100,7 +100,7 @@ public class VMSLUtil extends BaseUtil {
 										|| fixture.getAway().contains(teamSeasonMap.getNameRegex()))
 										&& !fixture.getField().equalsIgnoreCase("BYE")) {
 									fixtures.add(fixture);
-									logger.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t"
+									log.debug("Added Fixture: " + i + "\tHome: " + fixture.getHome() + "\t"
 											+ fixture.getHomeScore() + ":" + fixture.getAwayScore() + " \tAway: "
 											+ fixture.getAway() + "\tDate: " + fixture.getDate() + "\tTime: "
 											+ fixture.getTime());
@@ -111,7 +111,7 @@ public class VMSLUtil extends BaseUtil {
 				}
 			}
 		} catch (IOException e) {
-			logger.error("Error getting Fixtures: " + e.getMessage(), e);
+			log.error("Error getting Fixtures: " + e.getMessage(), e);
 		}
 
 		return fixtures;
@@ -149,7 +149,7 @@ public class VMSLUtil extends BaseUtil {
 								standing.setGoalsAgainst(getStripedInt(columns.get(7).text()));
 								standing.setPoints(getStripedInt(columns.get(9).text()));
 								standings.add(standing);
-								logger.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: "
+								log.debug("Adding Standing: " + "Team: " + standing.getTeamName() + "\tPosition: "
 										+ standing.getPosition() + "\tPoints: " + standing.getPoints());
 							}
 						}
@@ -157,7 +157,7 @@ public class VMSLUtil extends BaseUtil {
 				}
 			}
 		} catch (IOException e) {
-			logger.error("Error getting Fixtures: " + e.getMessage(), e);
+			log.error("Error getting Fixtures: " + e.getMessage(), e);
 		}
 		return standings;
 	}

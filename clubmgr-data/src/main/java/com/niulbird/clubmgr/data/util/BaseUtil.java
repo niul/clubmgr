@@ -1,4 +1,6 @@
 package com.niulbird.clubmgr.data.util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -7,11 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public abstract class BaseUtil {
-    private final Log logger = LogFactory.getLog(getClass());
+    private static final Logger log = LoggerFactory.getLogger(BaseUtil.class);
 
     protected Properties props;
 
@@ -20,7 +20,7 @@ public abstract class BaseUtil {
     	try {
     		i = Integer.valueOf(input.trim().replaceAll("[^0-9]", ""));
     	} catch (NumberFormatException nfe) {
-    		logger.error("Error parsing: " + input);
+    		log.error("Error parsing: " + input);
     	}
     	return i;
     }
@@ -45,7 +45,7 @@ public abstract class BaseUtil {
 				ms = sdf.parse(time).getTime();
 			}
 		} catch (ParseException e) {
-			logger.error(e.getMessage(), e);
+			log.error(e.getMessage(), e);
 			return null;
 		}
 		t = new Time(ms);
@@ -68,7 +68,7 @@ public abstract class BaseUtil {
 				ms = sdf.parse(date.replaceAll("(?:st|nd|rd|th)", "")).getTime();
 			}
 		} catch (ParseException e) {
-			logger.error(e.getMessage(), e);
+			log.error(e.getMessage(), e);
 			return null;
 		}
 		d = new Date(ms);

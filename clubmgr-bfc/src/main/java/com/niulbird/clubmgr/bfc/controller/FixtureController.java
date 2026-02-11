@@ -1,4 +1,6 @@
 package com.niulbird.clubmgr.bfc.controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,8 +14,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +33,7 @@ import com.niulbird.clubmgr.email.service.EmailService;
 
 @Controller
 public class FixtureController extends BaseController {
-	private static final Logger log = LogManager.getLogger();
+	private static final Logger log = LoggerFactory.getLogger(FixtureController.class);
 
 	private static final String FIXTURE = "fixture";
 	private static final String FIXTURE_SUMMARY = "fixtureSummary";

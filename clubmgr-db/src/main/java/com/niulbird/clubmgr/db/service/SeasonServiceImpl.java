@@ -12,18 +12,18 @@ import com.niulbird.clubmgr.db.model.Season;
 import com.niulbird.clubmgr.db.repository.SeasonRepository;
 
 @Service
-@Transactional
 public class SeasonServiceImpl implements SeasonService {
 	@Autowired
 	SeasonRepository seasonRepository;
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Season> findAll() {
 		return seasonRepository.findAll(Sort.by(Direction.DESC, "seasonId"));
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Season findBySeasonKey(String seasonKey) {
 		return seasonRepository.findBySeasonKey(seasonKey);
 	}

@@ -12,18 +12,18 @@ import com.niulbird.clubmgr.db.model.Position;
 import com.niulbird.clubmgr.db.repository.PositionRepository;
 
 @Service
-@Transactional
 public class PositionServiceImpl implements PositionService {
 	@Autowired
 	PositionRepository positionRepository;
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Position> findAll() {
 		return positionRepository.findAll(Sort.by(Direction.ASC, "positionId"));
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Position findByKey(String key) {
 		return positionRepository.findByKey(key);
 	}

@@ -26,7 +26,6 @@ import com.niulbird.clubmgr.db.repository.TeamRepository;
 import com.niulbird.clubmgr.db.repository.TeamSeasonMapRepository;
 
 @Service
-@Transactional
 public class FixtureServiceImpl implements FixtureService {
 
     private static final Logger log = LoggerFactory.getLogger(FixtureServiceImpl.class);
@@ -47,16 +46,19 @@ public class FixtureServiceImpl implements FixtureService {
 	private TeamSeasonMapRepository teamSeasonMapRepository;
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Fixture> findFixturesByDate(Date date) {
 		return fixtureRepository.findByDate(date);
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<Fixture> findFixturesByTeamAndDateAndActive(Team team, Date date, Boolean active) {
 		return fixtureRepository.findByTeamAndDateAndActive(team, date, active);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Fixture> findFixturesByDateTime(Date date, int offsetStartHour, int offsetEndHour) {
 		Calendar startCal = Calendar.getInstance();
 		Calendar endCal = Calendar.getInstance();
@@ -69,11 +71,13 @@ public class FixtureServiceImpl implements FixtureService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Fixture findFixtureByUuid(String uuid) {
 		return fixtureRepository.findByUuid(UUID.fromString(uuid));
 	}
 
 	@Override
+	@Transactional
 	public List<PlayerFixtureInfo> findPlayerInfoByFixture(Fixture fixture,
 			String teamUuid, String seasonKey) {
 		List<PlayerFixtureInfo> playerFixtureStatisticList = playerFixtureInfoRepository.findByFixtureOrderByPlayerFirstNameAscPlayerLastNameAsc(fixture);
@@ -95,6 +99,7 @@ public class FixtureServiceImpl implements FixtureService {
 	}
 	
 	@Override
+	@Transactional
 	public void updateFixtureReport(Fixture fixture, List<PlayerFixtureInfo> playerFixtureStatisticList) {
 		Fixture dbFixture = fixtureRepository.findByUuid(fixture.getUuid());
 		
@@ -122,6 +127,7 @@ public class FixtureServiceImpl implements FixtureService {
 	}
 
 	@Override
+	@Transactional
 	public List<PlayerFixtureInfo> findPlayerInfoByFixture(Fixture fixture) {
 		List<PlayerFixtureInfo> playerFixtureInfoesList = fixture.getPlayerFixtureInfo();
 		
@@ -173,7 +179,7 @@ public class FixtureServiceImpl implements FixtureService {
 	}
 
 	@Override
-	@Transactional(rollbackFor=RecordNotFound.class)
+	@Transactional(readOnly = true)
 	public PlayerFixtureInfo findByUuid(String uuid) {
 		return playerFixtureInfoRepository.findByUuid(UUID.fromString(uuid));
 	}
@@ -191,13 +197,13 @@ public class FixtureServiceImpl implements FixtureService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<PlayerFixtureInfo> findAll() {
 		return playerFixtureInfoRepository.findAll();
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<PlayerFixtureInfo> findByFixture(Fixture fixture) {
 		return playerFixtureInfoRepository.findByFixtureOrderByPlayerFirstNameAscPlayerLastNameAsc(fixture);
 	}

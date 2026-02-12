@@ -25,7 +25,6 @@ import com.niulbird.clubmgr.db.repository.TeamRepository;
 import com.niulbird.clubmgr.db.repository.TeamSeasonMapRepository;
 
 @Service
-@Transactional
 public class TeamServiceImpl implements TeamService {
 
 	private static final Logger log = LoggerFactory.getLogger(TeamServiceImpl.class);
@@ -51,19 +50,19 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Team findById(Integer id) {
 		return teamRepository.findById(id).get();
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Team findByUuid(String uuid) {
 		return teamRepository.findByUuid(UUID.fromString(uuid));
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Team> findByUuid(String[] uuids) {
 		List<UUID> uuidList = new ArrayList<UUID>();
 
@@ -86,7 +85,7 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Team> findAll() {
 		return teamRepository.findAll();
 	}
@@ -108,47 +107,56 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public TeamSeasonMap findTeamSeasonMap(String teamKey, String seasonKey) {
 		return teamSeasonMapRepository.findByTeamTeamKeyAndSeasonSeasonKey(teamKey, seasonKey);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public TeamSeasonMap findTeamSeasonMap(Team team, Season season) {
 		return teamSeasonMapRepository.findByTeamAndSeason(team, season);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<TeamSeasonMap> findScheduledTeamSeasonMap() {
 		return teamSeasonMapRepository.findByScheduled(true);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<TeamSeasonMap> findScheduledEmailTeamSeasonMap() {
 		return teamSeasonMapRepository.findByScheduledAndEmail(true, true);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Fixture> findFixtures(Team team, Season season) {
 		return fixtureRepository.findByTeamAndSeasonOrderByDateAsc(team, season);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Standing> findStandings(Team team, Season season) {
 		return standingRepository.findByTeamAndSeason(team, season);
 	}
 
 	@Override
+	@Transactional
 	public List<Fixture> createFixtures(List<Fixture> fixtures) {
 		return fixtureRepository.saveAll(fixtures);
 	}
 
 	@Override
+	@Transactional
 	public List<Standing> createStandings(List<Standing> standings) {
 		return standingRepository.saveAll(standings);
 	}
 
 
 	@Override
+	@Transactional
 	public List<Fixture> updateFixtures(Team team, Season season, List<Fixture> fixtures) {
 		List<Fixture> allDbFixtures = new ArrayList<Fixture>();
 		for (Fixture fixture : fixtures) {
@@ -196,6 +204,7 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
+	@Transactional
 	public List<Standing> updateStandings(Team team, Season season, List<Standing> standings) {
 		standingRepository.deleteByTeamAndSeason(team, season);
 		return standingRepository.saveAll(standings);

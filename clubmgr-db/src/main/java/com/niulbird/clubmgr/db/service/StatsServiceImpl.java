@@ -8,6 +8,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.niulbird.clubmgr.db.dto.PlayerStatisticDTO;
 
@@ -18,6 +19,7 @@ public class StatsServiceImpl implements StatsService {
 	private EntityManager em;
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<PlayerStatisticDTO> getTeamSeasonStats(String teamKey, String seasonKey) {
 		List<PlayerStatisticDTO> playerStatisticList = new ArrayList<PlayerStatisticDTO>(); 
 		Query query = em.createQuery(

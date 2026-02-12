@@ -13,7 +13,6 @@ import com.niulbird.clubmgr.db.model.Team;
 import com.niulbird.clubmgr.db.repository.PlayerRepository;
 
 @Service
-@Transactional
 public class PlayerServiceImpl implements PlayerService {
 	
 	@Autowired
@@ -26,13 +25,13 @@ public class PlayerServiceImpl implements PlayerService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Player findById(Integer id) {
 		return playerRepository.findById(id).get();
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Player findByUuid(String uuid) {
 		return playerRepository.findByUuid(UUID.fromString(uuid));
 	}
@@ -50,7 +49,7 @@ public class PlayerServiceImpl implements PlayerService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Player> findAll() {
 		return playerRepository.findAll();
 	}
@@ -78,18 +77,19 @@ public class PlayerServiceImpl implements PlayerService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Player findByClubAndEmail(Club club, String email) {
 		return playerRepository.findByClubAndEmail(club, email);
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Player> findByClub(Club club) {
 		return playerRepository.findByClubAndEnabledOrderByFirstNameAsc(club, true);
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Player> findByTeam(Team team) {
 		return playerRepository.findByTeamsAndEnabledOrderByFirstNameAsc(team, true);
 	}

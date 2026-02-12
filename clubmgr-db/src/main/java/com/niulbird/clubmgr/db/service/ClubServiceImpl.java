@@ -25,7 +25,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Optional<Club> findById(Integer id) {
 		return clubRepository.findById(id);
 	}
@@ -43,7 +43,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Club> findAll() {
 		return clubRepository.findAll();
 	}

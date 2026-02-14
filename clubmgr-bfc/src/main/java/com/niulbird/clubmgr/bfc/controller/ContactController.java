@@ -10,12 +10,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -30,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.command.ContactData;
+import com.niulbird.clubmgr.bfc.util.ContactSubjectUtil;
 import com.niulbird.clubmgr.email.service.EmailService;
 
 @Controller
@@ -38,18 +36,15 @@ public class ContactController extends BaseController {
 	
 	private static final String CONTACT = "contact";
 	private static final String SUCCESS = "contact_success";
-	
-	// Whitelist of valid contact subjects to prevent injection attacks
-	// Must match keys from bfc-messages.properties: contact.subjects=GA=General|MO=Mens Open|M45=Mens Over 45s|WO=Womens
-	private static final Set<String> VALID_SUBJECTS = Collections.unmodifiableSet(
-		Set.of("GA", "MO", "M45", "WO")
-	);
 
 	@Autowired
 	EmailService emailService;
 	
 	@Autowired
 	Properties props;
+	
+	@Autowired
+	ContactSubjectUtil contactSubjectUtil;
 	
 	@RequestMapping(value = "/contact.html", method = RequestMethod.GET)
 	public ModelAndView contactView(@ModelAttribute("contactData") ContactData contactData,
@@ -58,7 +53,7 @@ public class ContactController extends BaseController {
 				+ contactData.getEmail() + "|" + contactData.getMessage());
 		ModelAndView mav = setView(CONTACT, messageSource.getMessage("contact.title", null, null), httpServletRequest);
 		
-		mav.addObject("subjects", getSubjects());
+		mav.addObject("subjects", contactSubjectUtil.getSubjects());
 		mav.addObject("recaptchaKey", props.getProperty("recaptcha.public"));
 		
 		return mav;
@@ -73,7 +68,7 @@ public class ContactController extends BaseController {
 				+ contactData.getEmail() + "|" + contactData.getSubject() + "|" + contactData.getMessage() + "|" + captchaResponse);
 		
 		// Validate subject against whitelist to prevent injection attacks
-		if (contactData.getSubject() == null || !VALID_SUBJECTS.contains(contactData.getSubject())) {
+		if (!contactSubjectUtil.isValidSubject(contactData.getSubject())) {
 			log.warn("Invalid contact subject submitted: " + contactData.getSubject());
 			result.rejectValue("subject", "error.contact.invalid_subject");
 		}
@@ -101,7 +96,7 @@ public class ContactController extends BaseController {
 		
 		if (result.hasErrors() || !jsonObject.getBoolean("success")) {
 			ModelAndView mav = setView(CONTACT, messageSource.getMessage("contact.title", null, null), httpServletRequest);
-			mav.addObject("subjects", getSubjects());
+			mav.addObject("subjects", contactSubjectUtil.getSubjects());
 			mav.addObject("recaptchaKey", props.getProperty("recaptcha.public"));
 			return mav;
 		} else {
@@ -115,21 +110,9 @@ public class ContactController extends BaseController {
 			
 			ModelAndView mav = setView(SUCCESS, messageSource.getMessage("contact.title", null, null), httpServletRequest);
 			mav.addObject("contactData", contactData);
-			mav.addObject("subjects", getSubjects());
+			mav.addObject("subjects", contactSubjectUtil.getSubjects());
 			mav.addObject("recaptchaKey", props.getProperty("recaptcha.public"));
 			return mav;
 		}
-	}
-	
-	private Map<String, String> getSubjects () {
-		String subjectsStr = messageSource.getMessage("contact.subjects", null, null);
-		Map<String, String> subjects = new LinkedHashMap<String,String>();
-		
-		for (String subject : subjectsStr.split("\\|")) {
-			String[] subjectArr = subject.split("=");
-			subjects.put(subjectArr[0], subjectArr[1]);
-		}
-		
-		return subjects;
 	}
 }

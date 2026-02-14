@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niulbird.clubmgr.bfc.controller.BaseController;
@@ -21,7 +21,7 @@ import com.niulbird.clubmgr.db.model.User;
 import com.niulbird.clubmgr.db.service.SeasonService;
 import com.niulbird.clubmgr.db.service.UserService;
 
-@Component
+@Controller
 public abstract class AdminBaseController extends BaseController {
 	private static final Logger log = LoggerFactory.getLogger(AdminBaseController.class);
 

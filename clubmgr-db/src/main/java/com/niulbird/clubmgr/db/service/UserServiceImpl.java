@@ -15,7 +15,6 @@ import com.niulbird.clubmgr.db.repository.PasswordResetRepository;
 import com.niulbird.clubmgr.db.repository.UserRepository;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 	
 	@Autowired

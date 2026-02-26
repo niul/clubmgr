@@ -5,8 +5,8 @@
     xsi:schemaLocation="
             http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
             http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
-
-	<!-- Wordpress Post Cache -->
+            
+    <!-- Wordpress Cache -->
     <cache alias="postsCache">
         <expiry>
             <ttl unit="minutes">60</ttl>

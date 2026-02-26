@@ -26,10 +26,6 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.niulbird.clubmgr" />
 	
-	<!-- Setup Scheduled Tasks -->
-	<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
-	<task:executor id="myExecutor" pool-size="5"/>
-	<task:scheduler id="myScheduler" pool-size="10"/>
   	<context:property-placeholder location="classpath:global.properties"/>
 	<util:properties id="props" location="classpath:global.properties" />
   

@@ -13,19 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 import com.niulbird.clubmgr.db.service.FixtureService;
-import com.niulbird.clubmgr.email.service.EmailService;
 
 @Service
 public class FixtureAvailabilityService {
 	private static final Logger log = LoggerFactory.getLogger(FixtureAvailabilityService.class);
 
-	private static final int SECOND = 1000;
-
 	@Autowired
 	private FixtureService fixtureService;
 	
 	@Autowired
-	private EmailService emailService;
+	private ScheduledFixtureProcessor scheduledFixtureProcessor;
 
 	@Transactional
 	public void send(TeamSeasonMap teamSeasonMap, String[] daysBefore) {
@@ -45,14 +42,7 @@ public class FixtureAvailabilityService {
 			List<Fixture> fixtures = fixtureService.findFixturesByTeamAndDateAndActive(teamSeasonMap.getTeam(), date, true);
 
 			for (Fixture fixture : fixtures) {
-				emailService.sendFixtureEmail(fixture.getUuid().toString(), today);
-
-				// Add a little bit of time between fixtures not to overload SMTP server.
-				try {
-					Thread.sleep(30 * SECOND);
-				} catch (InterruptedException e) {
-					log.error("Sleep interupted: " + e.getMessage());
-				}
+				scheduledFixtureProcessor.queueFixtureForEmail(fixture.getUuid().toString(), today);
 			}
 		}
 	}

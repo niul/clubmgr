@@ -108,9 +108,6 @@
     
       <!-- Cache -->
   	<cache:annotation-driven />
-      
-    <task:annotation-driven executor="myExecutor"/>
-    <task:executor id="myExecutor" pool-size="5"/>
     
     <!-- security configuration -->
     <!-- import resource="applicationContext-security.xml"/-->

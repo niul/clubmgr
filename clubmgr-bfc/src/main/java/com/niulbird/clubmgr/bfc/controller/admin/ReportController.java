@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -65,26 +66,26 @@ public class ReportController extends AdminBaseController {
 
 	@Transactional
 	@RequestMapping(value = "/admin/reports.html")
-	public ModelAndView players(@RequestParam (name = "uuid", required = false) String uuid,
-			@RequestParam (name = "seasonKey", required = false) String seasonKey,
+	public ModelAndView players(@RequestParam (name = "uuid", required = false) Optional<String> uuid,
+			@RequestParam (name = "seasonKey", required = false) Optional<String> seasonKey,
 			@RequestParam (name = "sendEmail", required = false) boolean sendEmail,
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		Team team;
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		
-		log.debug("Getting Match Report List for [" + getPrincipal() + "][" + uuid + "][" + seasonKey + "]");
+		log.debug("Getting Match Report List for [" + getPrincipal() + "][" + uuid.orElse(null) + "][" + seasonKey.orElse(null) + "]");
 		
-		mav = getFilterObjects(ADMIN_REPORTS, uuid, false, seasonKey, request);
+		mav = getFilterObjects(ADMIN_REPORTS, uuid.orElse(null), false, seasonKey.orElse(null), request);
 		
-		if (uuid != null && !uuid.isBlank()) {
-			team = teamService.findByUuid(uuid);
+		if (uuid.filter(u -> !u.isBlank()).isPresent()) {
+			team = teamService.findByUuid(uuid.get());
 		} else {
 			team = (Team)mav.getModel().get(TEAM);
 		}
 		
-		if (seasonKey != null && !seasonKey.isBlank()) {
-			seasonKey = ((Season)mav.getModel().get(SEASON)).getSeasonKey();
+		if (seasonKey.filter(sk -> !sk.isBlank()).isPresent()) {
+			seasonKey = Optional.of(((Season)mav.getModel().get(SEASON)).getSeasonKey());
 		}
 		fixtures = teamService.findFixtures(team, (Season)mav.getModel().get(SEASON));
 
@@ -96,18 +97,18 @@ public class ReportController extends AdminBaseController {
 	
 	@Transactional
 	@RequestMapping(value = "/admin/editReport.html", method = RequestMethod.GET)
-	public ModelAndView editReport(@RequestParam (name = "uuid", required = false) String uuid,
+	public ModelAndView editReport(@RequestParam (name = "uuid", required = false) Optional<String> uuid,
 			@ModelAttribute("playerFixtureInfoList") PlayerFixtureInfoList playerFixtureInfoList,
-			@RequestParam (name = "teamUuid", required = false) String teamUuid,
-			@RequestParam (name = "seasonKey", required = false) String seasonKey,
+			@RequestParam (name = "teamUuid", required = false) Optional<String> teamUuid,
+			@RequestParam (name = "seasonKey", required = false) Optional<String> seasonKey,
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		log.debug("Editing Players for [" + getPrincipal() + "][" + uuid + "]");
+		log.debug("Editing Players for [" + getPrincipal() + "][" + uuid.orElse(null) + "]");
 
-		mav = getFilterObjects(ADMIN_REPORT, teamUuid, false, seasonKey, request);
+		mav = getFilterObjects(ADMIN_REPORT, teamUuid.orElse(null), false, seasonKey.orElse(null), request);
 		
-		Fixture fixture = fixtureService.findFixtureByUuid(uuid);
-		playerFixtureInfoList.setPlayerFixtureInfoList(fixtureService.findPlayerInfoByFixture(fixture, teamUuid, seasonKey));
+		Fixture fixture = fixtureService.findFixtureByUuid(uuid.orElse(null));
+		playerFixtureInfoList.setPlayerFixtureInfoList(fixtureService.findPlayerInfoByFixture(fixture, teamUuid.orElse(null), seasonKey.orElse(null)));
 		
 		mav.addObject(FIXTURE, fixture);
 		mav.addObject("playerFixtureInfoList", playerFixtureInfoList);
@@ -118,23 +119,23 @@ public class ReportController extends AdminBaseController {
 	
 	@Transactional
 	@RequestMapping(value = "/admin/editReport.html", method = RequestMethod.POST)
-	public ModelAndView editReport(@RequestParam (name = "uuid", required = false) String uuid,
+	public ModelAndView editReport(@RequestParam (name = "uuid", required = false) Optional<String> uuid,
 			@Valid PlayerFixtureInfoList playerFixtureInfoList,
 			BindingResult result,
-			@RequestParam (name = "teamUuid", required = false) String teamUuid,
-			@RequestParam (name = "seasonKey", required = false) String seasonKey,
+			@RequestParam (name = "teamUuid", required = false) Optional<String> teamUuid,
+			@RequestParam (name = "seasonKey", required = false) Optional<String> seasonKey,
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		log.debug("Editing Report for [" + getPrincipal() + "][" + uuid + "]");
+		log.debug("Editing Report for [" + getPrincipal() + "][" + uuid.orElse(null) + "]");
 
-		mav = getFilterObjects(ADMIN_REPORT, teamUuid, false, seasonKey, request);
+		mav = getFilterObjects(ADMIN_REPORT, teamUuid.orElse(null), false, seasonKey.orElse(null), request);
 
-		Fixture fixture = fixtureService.findFixtureByUuid(uuid);
+		Fixture fixture = fixtureService.findFixtureByUuid(uuid.orElse(null));
 		playerFixtureInfoList.setFixture(fixture);
 		playerFixtureInfoListValidator.validate(playerFixtureInfoList, result);
 		
 		if (result.hasErrors()) {
-			mav = getFilterObjects(ADMIN_REPORT, teamUuid, false, seasonKey, request);
+			mav = getFilterObjects(ADMIN_REPORT, teamUuid.orElse(null), false, seasonKey.orElse(null), request);
 			
 			mav.addObject(FIXTURE, fixture);
 			mav.addObject("playerFixtureInfoList", playerFixtureInfoList);

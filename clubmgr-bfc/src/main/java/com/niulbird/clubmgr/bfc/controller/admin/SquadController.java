@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -38,28 +39,28 @@ public class SquadController extends AdminBaseController {
 
 	@Transactional
 	@RequestMapping(value = "/admin/squads.html")
-	public ModelAndView players(@RequestParam (name = "uuid", required = false) String uuid,
-			@RequestParam (name = "seasonKey", required = false) String seasonKey,
+	public ModelAndView players(@RequestParam (name = "uuid", required = false) Optional<String> uuid,
+			@RequestParam (name = "seasonKey", required = false) Optional<String> seasonKey,
 			HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
 		Team team;
 		List<Player> activePlayers = new ArrayList<Player>();
 		List<Player> inactivePlayers = new ArrayList<Player>();
 		
-		log.debug("Getting Squad for [" + getPrincipal() + "][" + uuid + "][" + seasonKey + "]");
+		log.debug("Getting Squad for [" + getPrincipal() + "][" + uuid.orElse(null) + "][" + seasonKey.orElse(null) + "]");
 		
-		mav = getFilterObjects(ADMIN_SQUADS, uuid, false, seasonKey, httpServletRequest);
+		mav = getFilterObjects(ADMIN_SQUADS, uuid.orElse(null), false, seasonKey.orElse(null), httpServletRequest);
 		
-		if (uuid != null && !uuid.isBlank()) {
-			team = teamService.findByUuid(uuid);
+		if (uuid.filter(u -> !u.isBlank()).isPresent()) {
+			team = teamService.findByUuid(uuid.get());
 		} else {
 			team = (Team)mav.getModel().get(TEAM);
 		}
 		
-		if (seasonKey != null && !seasonKey.isBlank()) {
-			seasonKey = ((Season)mav.getModel().get(SEASON)).getSeasonKey();
+		if (seasonKey.filter(sk -> !sk.isBlank()).isPresent()) {
+			seasonKey = Optional.of(((Season)mav.getModel().get(SEASON)).getSeasonKey());
 		}
-		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(team.getTeamKey(), seasonKey);
+		TeamSeasonMap teamSeasonMap = teamService.findTeamSeasonMap(team.getTeamKey(), seasonKey.orElse(null));
 		List<Player> teamPlayers = playerService.findByTeam(team);
 		
 		
@@ -71,7 +72,7 @@ public class SquadController extends AdminBaseController {
 			}
 		}
 
-		mav = getFilterObjects(ADMIN_SQUADS, uuid, false, seasonKey, httpServletRequest);
+		mav = getFilterObjects(ADMIN_SQUADS, uuid.orElse(null), false, seasonKey.orElse(null), httpServletRequest);
 		mav.addObject(PLAYERS_ACTIVE, activePlayers);
 		mav.addObject(PLAYERS_INACTIVE, inactivePlayers);
 		

@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import jakarta.servlet.ServletException;
@@ -51,36 +52,36 @@ public class FixtureController extends BaseController {
 	@Transactional
 	@RequestMapping(value = "/fixture.html", method = RequestMethod.GET)
 	public ModelAndView fixture(@RequestParam (name = "uuid", required = true) String uuid,
-			@RequestParam (name = "player", required = false) String player,
-			@RequestParam (name = "updatePlayer", required = false) String updatePlayer,
-			@RequestParam (name = "status", required = false) String status,
+			@RequestParam (name = "player", required = false) Optional<String> player,
+			@RequestParam (name = "updatePlayer", required = false) Optional<String> updatePlayer,
+			@RequestParam (name = "status", required = false) Optional<String> status,
 			HttpServletRequest httpServletRequest) {
 		List<PlayerFixtureInfo> playerFixtureInfoList = new ArrayList<PlayerFixtureInfo>();
 		PlayerFixtureInfo playerFixtureInfo = null;
 		boolean statusUpdated = false;
-		log.debug("Viewing Fixture for [fixture=" + uuid + "][playerFixtureInfo=" + player + "][" + status + "]");
+		log.debug("Viewing Fixture for [fixture=" + uuid + "][playerFixtureInfo=" + player.orElse(null) + "][" + status.orElse(null) + "]");
 
 		Fixture fixture = fixtureService.findFixtureByUuid(uuid);
 
-		if (player != null && !player.isEmpty()) {
-			playerFixtureInfo = fixtureService.findByUuid(player);
-			if (status != null && !status.isEmpty()) {
-				if (updatePlayer != null && !updatePlayer.isEmpty()) {
-					PlayerFixtureInfo updatePlayerFixtureInfo = fixtureService.findByUuid(updatePlayer);
-					updatePlayerFixtureInfo.setStatus(Status.valueOf(status));
+		if (player.filter(p -> !p.isEmpty()).isPresent()) {
+			playerFixtureInfo = fixtureService.findByUuid(player.get());
+			if (status.filter(s -> !s.isEmpty()).isPresent()) {
+				if (updatePlayer.filter(up -> !up.isEmpty()).isPresent()) {
+					PlayerFixtureInfo updatePlayerFixtureInfo = fixtureService.findByUuid(updatePlayer.get());
+					updatePlayerFixtureInfo.setStatus(Status.valueOf(status.get()));
 					fixtureService.updatePlayerInfo(updatePlayerFixtureInfo);
 					log.debug("Updated Fixture [" + fixture.getTeam() + "][" + updatePlayerFixtureInfo.getPlayer().getFirstName() + " "
 							+ updatePlayerFixtureInfo.getPlayer().getLastName() + "]");
 				} else {
 					Status oldStatus = playerFixtureInfo.getStatus();
-					playerFixtureInfo.setStatus(Status.valueOf(status));
+					playerFixtureInfo.setStatus(Status.valueOf(status.get()));
 					fixtureService.updatePlayerInfo(playerFixtureInfo);
 					statusUpdated = true;
 					log.debug("Updated Fixture [" + fixture.getTeam() + "][" + playerFixtureInfo.getPlayer().getFirstName() + " "
 							+ playerFixtureInfo.getPlayer().getLastName() + "]");
 
 					// Check if Status has changed and within 1 Day of Fixture Date.
-					if (oldStatus != Status.valueOf(status) &&
+					if (oldStatus != Status.valueOf(status.get()) &&
 							System.currentTimeMillis() >= (fixture.getDate().getTime() - (TimeUnit.DAYS.toMillis(1)))) {
 						// Send email to manager
 						log.debug("Sending late availability message: " + System.currentTimeMillis() + "|" + (fixture.getDate().getTime() - (24 * 60 * 60 * 1000)));
@@ -103,7 +104,7 @@ public class FixtureController extends BaseController {
 		mav.addObject(PLAYER_FIXTURE_INFO_LIST, playerFixtureInfoList);
 		mav.addObject(STATUS_UPDATED, statusUpdated);
 
-		FixtureData fixtureData = new FixtureData(uuid, player, null);
+		FixtureData fixtureData = new FixtureData(uuid, player.orElse(null), null);
 		mav.addObject("fixtureData", fixtureData);
 
 		return mav;
@@ -141,20 +142,20 @@ public class FixtureController extends BaseController {
 
 	@Transactional
 	@RequestMapping(value = "/fixture.png", method = RequestMethod.GET)
-	public void fixturePng(@RequestParam (name = "player", required = false) String player,
+	public void fixturePng(@RequestParam (name = "player", required = false) Optional<String> player,
 			HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		PlayerFixtureInfo playerFixtureInfo = null;
-		log.debug("Viewing Fixture Email Tracker for [playerFixtureInfo=" + player + "]");
+		log.debug("Viewing Fixture Email Tracker for [playerFixtureInfo=" + player.orElse(null) + "]");
 
-		if (!player.isEmpty()) {
-			playerFixtureInfo = fixtureService.findByUuid(player);
+		if (player.filter(p -> !p.isEmpty()).isPresent()) {
+			playerFixtureInfo = fixtureService.findByUuid(player.get());
 			if (playerFixtureInfo.getViewed() == null) {
 				Calendar calendar = Calendar.getInstance();
 				calendar.add(Calendar.HOUR_OF_DAY, -7);
 				playerFixtureInfo.setViewed(new java.sql.Time(calendar.getTimeInMillis()));
 				fixtureService.updatePlayerInfo(playerFixtureInfo);
-				log.debug("Setting Email Viewed for [" + playerFixtureInfo.getPlayer().getEmail() + "][" + player + "]");
+				log.debug("Setting Email Viewed for [" + playerFixtureInfo.getPlayer().getEmail() + "][" + player.get() + "]");
 			}
 		}
 		try {

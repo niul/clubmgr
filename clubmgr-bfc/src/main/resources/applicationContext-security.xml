@@ -12,7 +12,7 @@
     	<intercept-url pattern="/admin/**" access="hasAnyRole('ADMIN','CLUB_MGR','TEAM_MGR')" />
 
 		<!-- access denied page -->
-		<access-denied-handler error-page="/403" />
+		<access-denied-handler error-page="/error/403" />
 
 		<form-login
 		    login-page="/login.html"

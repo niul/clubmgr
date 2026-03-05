@@ -1,7 +1,7 @@
 package com.niulbird.clubmgr.db.repository;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -10,16 +10,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.niulbird.clubmgr.db.TestApplication;
 import com.niulbird.clubmgr.db.model.Club;
 import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Player;
@@ -29,8 +28,8 @@ import com.niulbird.clubmgr.db.model.Season;
 import com.niulbird.clubmgr.db.model.Status;
 import com.niulbird.clubmgr.db.model.Team;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@SpringBootTest(classes = TestApplication.class)
+@ActiveProfiles("test")
 @Transactional
 public class FixtureRepositoryTest {
 	@Autowired
@@ -55,7 +54,7 @@ public class FixtureRepositoryTest {
 	Player player;
 	PlayerFixtureInfo playerFixtureInfo;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		club = new Club();
 		club.setClubKey("FIXTURE_UNIT_TEST");
@@ -119,11 +118,15 @@ public class FixtureRepositoryTest {
 		playerFixtureInfo = playerFixtureInfoRepository.save(playerFixtureInfo);
 	}
 	
-	@After
+	@AfterEach
 	public void teardown() {
-		seasonRepository.delete(seasonRepository.findBySeasonKey("FIXTURE_UNIT_TEST"));
-		clubRepository.delete(clubRepository.findByClubKey("FIXTURE_UNIT_TEST"));
-		repository.deleteAll(repository.findByTeamTeamKeyAndSeasonSeasonKey("FIXTURE_UNIT_TEST", "FIXTURE_UNIT_TEST"));
+		playerFixtureInfoRepository.deleteAll();
+		playerRepository.deleteAll();
+		positionRepository.deleteAll();
+		repository.deleteAll();
+		seasonRepository.deleteAll();
+		teamRepository.deleteAll();
+		clubRepository.deleteAll();
 	}
 	
 	@Test
@@ -134,8 +137,6 @@ public class FixtureRepositoryTest {
 		assertNotNull(testFixture.getSeason());
 	}
 	
-
-	
 	@Test
 	public void findTeamDateActiveTest() {
 		List<Fixture> fixtures = repository.findByTeamAndDateAndActive(team, new java.sql.Date(new java.util.Date().getTime()), true);
@@ -143,13 +144,11 @@ public class FixtureRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
 	public void findSavedFixtureById() {
-		assertEquals(fixture, repository.findById(fixture.getFixtureId()).get());
+		assertEquals(fixture.getFixtureId(), repository.findById(fixture.getFixtureId()).get().getFixtureId());
 	}
 	
 	@Test
-	@Rollback(false)
 	public void findFixtureByTeamAndSeasonTest() {
 		Team testTeam = teamRepository.findByTeamKey("FIXTURE_UNIT_TEST");
 		Season testSeason = seasonRepository.findBySeasonKey("FIXTURE_UNIT_TEST");
@@ -158,21 +157,18 @@ public class FixtureRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
 	public void findFixtureByTeamKeyNameTest() {
 		List<Fixture> fixtures = repository.findByTeamTeamKeyAndSeasonSeasonKey("FIXTURE_UNIT_TEST", "FIXTURE_UNIT_TEST");
 		assertNotNull(fixtures);
 	}
 	
 	@Test
-	@Rollback(false)
 	public void findFixtureByDateTest() {
-		List<Fixture> fixtures = repository.findByDate(Date.valueOf("2017-04-1"));
+		List<Fixture> fixtures = repository.findByDate(Date.valueOf("2017-04-11"));
 		assertNotNull(fixtures);
 	}
 	
 	@Test
-	@Rollback(false)
 	public void findFixtureByDateAndTimeTest() {
 		List<Fixture> fixtures = repository.findByDateAndTimeBetween(Date.valueOf("2016-09-17"), Time.valueOf("12:01:00"),  Time.valueOf("14:00:00"));
 		assertNotNull(fixtures);

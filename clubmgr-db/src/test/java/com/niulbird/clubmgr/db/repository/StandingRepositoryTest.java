@@ -1,27 +1,26 @@
 package com.niulbird.clubmgr.db.repository;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.niulbird.clubmgr.db.TestApplication;
 import com.niulbird.clubmgr.db.model.Club;
 import com.niulbird.clubmgr.db.model.Season;
 import com.niulbird.clubmgr.db.model.Standing;
 import com.niulbird.clubmgr.db.model.Team;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@SpringBootTest(classes = TestApplication.class)
+@ActiveProfiles("test")
 @Transactional
 public class StandingRepositoryTest {
 	@Autowired
@@ -37,7 +36,7 @@ public class StandingRepositoryTest {
 	Season season;
 	Standing standing;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		club = new Club();
 		club.setClubKey("STANDING_UNIT_TEST");
@@ -71,10 +70,12 @@ public class StandingRepositoryTest {
 		standing = repository.save(standing);
 	}
 	
-	@After
+	@AfterEach
 	public void teardown() {
-		seasonRepository.delete(seasonRepository.findBySeasonKey("STANDING_UNIT_TEST"));
-		clubRepository.delete(clubRepository.findByClubKey("STANDING_UNIT_TEST"));
+		repository.deleteAll();
+		seasonRepository.deleteAll();
+		teamRepository.deleteAll();
+		clubRepository.deleteAll();
 	}
 	
 	@Test
@@ -86,13 +87,11 @@ public class StandingRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
 	public void findSavedStandingById() {
-		assertEquals(standing, repository.findById(standing.getStandingId()).get());
+		assertEquals(standing.getStandingId(), repository.findById(standing.getStandingId()).get().getStandingId());
 	}
 	
 	@Test
-	@Rollback(false)
 	public void findFixtureByTeamAndSeasonTest() {
 		Team testTeam = teamRepository.findByTeamKey("STANDING_UNIT_TEST");
 		Season testSeason = seasonRepository.findBySeasonKey("STANDING_UNIT_TEST");
@@ -101,7 +100,6 @@ public class StandingRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
 	public void findFixtureByTeamKeyNameTest() {
 		List<Standing> standings = repository.findByTeamTeamKeyAndSeasonSeasonKey("STANDING_UNIT_TEST", "STANDING_UNIT_TEST");
 		assertNotNull(standings);

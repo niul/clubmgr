@@ -1,34 +1,33 @@
 package com.niulbird.clubmgr.db.service;
 
-import org.junit.Assert;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@SpringBootTest
+@ActiveProfiles("test")
 @Transactional
 public class StatsServiceTest {
 	@Autowired
 	private StatsService statsService;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 	}
 	
-	@After 
+	@AfterEach 
 	public void teardown() {
 	}
 	
 	@Test
 	public void findSavedClubById() {
-		Object o = statsService.getTeamSeasonStats("BOMBASTIC_MENS_A", "WINTER_2016");
-		Assert.assertNotNull(o);
+		Object o = statsService.getTeamSeasonStats("BOMBASTIC_MENS_A", "WINTER_2026");
+		assertNotNull(o);
 	}
 }

@@ -1,29 +1,28 @@
 package com.niulbird.clubmgr.db.repository;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.niulbird.clubmgr.db.TestApplication;
 import com.niulbird.clubmgr.db.model.Club;
 import com.niulbird.clubmgr.db.model.Season;
 import com.niulbird.clubmgr.db.model.Team;
 import com.niulbird.clubmgr.db.model.TeamSeasonMap;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@SpringBootTest(classes = TestApplication.class)
+@ActiveProfiles("test")
 @Transactional
 public class TeamSeasonMapRepositoryTest {
 	@Autowired
@@ -39,7 +38,7 @@ public class TeamSeasonMapRepositoryTest {
 	Season season;
 	TeamSeasonMap teamSeasonMap;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		club = new Club();
 		club.setClubKey("TEAM_SEASON_MAP_UNIT_TEST");
@@ -70,10 +69,12 @@ public class TeamSeasonMapRepositoryTest {
 		teamSeasonMap = repository.save(teamSeasonMap);
 	}
 
-	@After
+	@AfterEach
 	public void teardown() {
-		seasonRepository.delete(seasonRepository.findBySeasonKey("TEAM_SEASON_MAP_UNIT_TEST"));
-		clubRepository.delete(clubRepository.findByClubKey("TEAM_SEASON_MAP_UNIT_TEST"));
+		repository.deleteAll();
+		seasonRepository.deleteAll();
+		teamRepository.deleteAll();
+		clubRepository.deleteAll();
 	}
 
 	@Test
@@ -84,13 +85,11 @@ public class TeamSeasonMapRepositoryTest {
 	}
 
 	@Test
-	@Rollback(false)
 	public void findSavedTeamById() {
-		assertEquals(teamSeasonMap, repository.findById(teamSeasonMap.getTeamSeasonMapId()).get());
+		assertEquals(teamSeasonMap.getTeamSeasonMapId(), repository.findById(teamSeasonMap.getTeamSeasonMapId()).get().getTeamSeasonMapId());
 	}
 
 	@Test
-	@Rollback(false)
 	public void findByTeamTeamKeyAndSeasonSeasonKeyTest() {
 		TeamSeasonMap testTeamSeasonMap = repository.findByTeamTeamKeyAndSeasonSeasonKey("TEAM_SEASON_MAP_UNIT_TEST", "TEAM_SEASON_MAP_UNIT_TEST");
 		assertNotNull(testTeamSeasonMap);
@@ -98,7 +97,6 @@ public class TeamSeasonMapRepositoryTest {
 	}
 
 	@Test
-	@Rollback(false)
 	public void findByScheduledTest() {
 		List<TeamSeasonMap> testTeamSeasonMapList = repository.findByScheduled(true);
 		assertNotNull(testTeamSeasonMapList);

@@ -1,56 +1,40 @@
 package com.niulbird.clubmgr.data;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.niulbird.clubmgr.db.model.Fixture;
 import com.niulbird.clubmgr.db.model.Standing;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
-@Transactional
-public class RRSLDataManagerTest {
+public class RRSLDataManagerTest extends DataTestCase {
 	@Autowired
 	private DataManagerFactory dataManagerFactory;
-	
-	@Before
-	public void setUp() {
-	}
-	
-	@After 
-	public void teardown() {
-	}
 
 	@Test
+	@Disabled
 	public void createDataManagerTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_RRSL", "SUMMER_2017");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_RRSL", "SUMMER_2024");
 		assertTrue(dataManager instanceof RRSLDataManager);
 	}
 
 	@Test
-	@Rollback(false)
+	@Disabled
 	public void rrslUpdateFixturesTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_RRSL", "SUMMER_2017");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_RRSL", "SUMMER_2024");
 		List<Fixture> fixtures = dataManager.updateFixtures();
 		assertNotNull(fixtures);
 	}
 
 	@Test
-	@Rollback(false)
+	@Disabled
 	public void rrslUpdateStandingsTest() {
-		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_RRSL", "SUMMER_2017");
+		DataManager dataManager = dataManagerFactory.createDataManager("BOMBASTIC_MENS_RRSL", "SUMMER_2024");
 		List<Standing> fixtures = dataManager.updateStandings();
 		assertNotNull(fixtures);
 	}

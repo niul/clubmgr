@@ -34,6 +34,7 @@ public final class Season {
 		this.seasonId = seasonId;
 	}
 
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -51,6 +52,7 @@ public final class Season {
 		this.seasonKey = seasonKey;
 	}
 
+	@Column(name = "created")
 	public Date getCreated() {
 		return created;
 	}

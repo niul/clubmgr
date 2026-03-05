@@ -52,6 +52,7 @@ public final class Standing {
 		this.standingId = standingId;
 	}
 	
+	@Column(name = "uuid")
 	public UUID getUuid() {
 		return uuid;
 	}
@@ -80,6 +81,7 @@ public final class Standing {
 		this.season = season;
 	}
 
+	@Column(name = "position")
 	public Integer getPosition() {
 		return position;
 	}
@@ -97,6 +99,7 @@ public final class Standing {
 		this.teamName = teamName;
 	}
 
+	@Column(name = "gamesplayed")
 	public Integer getGamesPlayed() {
 		return gamesPlayed;
 	}
@@ -105,6 +108,7 @@ public final class Standing {
 		this.gamesPlayed = gamesPlayed;
 	}
 
+	@Column(name = "wins")
 	public Integer getWins() {
 		return wins;
 	}
@@ -113,6 +117,7 @@ public final class Standing {
 		this.wins = wins;
 	}
 
+	@Column(name = "ties")
 	public Integer getTies() {
 		return ties;
 	}
@@ -121,6 +126,7 @@ public final class Standing {
 		this.ties = ties;
 	}
 
+	@Column(name = "losses")
 	public Integer getLosses() {
 		return losses;
 	}
@@ -129,6 +135,7 @@ public final class Standing {
 		this.losses = losses;
 	}
 
+	@Column(name = "goalsfor")
 	public Integer getGoalsFor() {
 		return goalsFor;
 	}
@@ -137,6 +144,7 @@ public final class Standing {
 		this.goalsFor = goalsFor;
 	}
 
+	@Column(name = "goalsagainst")
 	public Integer getGoalsAgainst() {
 		return goalsAgainst;
 	}
@@ -145,6 +153,7 @@ public final class Standing {
 		this.goalsAgainst = goalsAgainst;
 	}
 
+	@Column(name = "points")
 	public Integer getPoints() {
 		return points;
 	}
@@ -153,6 +162,7 @@ public final class Standing {
 		this.points = points;
 	}
 
+	@Column(name = "created")
 	public Date getCreated() {
 		return created;
 	}

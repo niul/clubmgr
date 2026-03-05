@@ -47,6 +47,7 @@ public final class Team {
 		this.teamId = teamId;
 	}
 	
+	@Column(name = "uuid")
 	public UUID getUuid() {
 		return uuid;
 	}
@@ -65,6 +66,7 @@ public final class Team {
 		this.club = club;
 	}
 
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -82,6 +84,7 @@ public final class Team {
 		this.teamKey = teamKey;
 	}
 
+	@Column(name = "created")
 	public Date getCreated() {
 		return created;
 	}

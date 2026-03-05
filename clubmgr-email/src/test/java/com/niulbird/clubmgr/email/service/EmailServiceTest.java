@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.niulbird.clubmgr.db.model.Fixture;
@@ -18,16 +18,13 @@ import com.niulbird.clubmgr.email.BaseTestCase;
 
 public class EmailServiceTest extends BaseTestCase {
 	@Autowired
-	private EmailService emailService;
-
-//	@Test
-//	public void sendEmailTest() {
-//
-//		emailService.sendFixtureEmail("5afa1b20-3e45-4dae-a313-9cceb6647c48", false);
-//
-//		Assert.assertTrue(true);
-//	}
-
+	EmailService emailService;
+	
+	@Test
+	public void testEmailService() {
+		Assertions.assertNotNull(emailService);
+	}
+	
 	@Test
 	public void sendAvailabilityUpdateTest() {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -52,6 +49,6 @@ public class EmailServiceTest extends BaseTestCase {
 		map.put("oldStatus", Status.NO);
 		emailService.sendAvailabilityUpdateEmail(map);
 
-		Assert.assertTrue(true);
+		Assertions.assertTrue(true);
 	}
 }

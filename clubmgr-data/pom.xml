@@ -59,7 +59,6 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
                     <skipTests>false</skipTests>
                 </configuration>
             </plugin>
